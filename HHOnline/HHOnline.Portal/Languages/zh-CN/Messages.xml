@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--错误消息-->
+<root>
+  <message id="0"> 
+    <!--DataProvider-->
+    <title>无法连接到数据库</title>
+    <body>抱歉，发送请求时发生了异常，请确认您的电脑已正确连接互联网并可用。</body>
+  </message>
+  <message id="1">           
+    <!--AccessDenied-->
+    <title>访问被拒绝</title>
+    <body>抱歉，您无法访问此页面，请确认您具备相应的权限。</body>
+  </message>
+  <message id="2">
+    <!--ProductDuplicate-->
+    <title>商品信息重复</title>
+    <body>抱歉，此商品已存在，请勿重复添加。</body>
+  </message>
+  <message id="3">
+    <!--ProductNotFound-->
+    <title>商品未找到</title>
+    <body>抱歉，您所查看的商品信息不存在。</body>
+  </message>
+  <message id="4">
+    <!--ProductCategoryNotFound-->
+    <title>商品分类未找到</title>
+    <body>抱歉，您所查看的商品分类信息不存在。</body>
+  </message>
+  <message id="5">
+    <!--NewNotFound-->
+    <title>资讯未找到</title>
+    <body>抱歉，您所查看的咨询信息不存在。</body>
+  </message>
+  <message id="6">
+    <!--FileNotFound-->
+    <title>文件未找到</title>
+    <body>抱歉，您所查看的文件不存在。</body>
+  </message>
+  <message id="7">
+    <!--SearchNoResults-->
+    <title>查找无结果</title>
+    <body>抱歉，没有查找到您所请求的信息。</body>
+  </message>
+  <message id="8">
+    <!--SearchUnknownError-->
+    <title>查找未知错误</title>
+    <body>抱歉，查找过程中发生了未知的错误。</body>
+  </message>
+
+  <message id="32">
+    <!--UserAccountCreated-->
+    <title>用户账号已存在</title>
+    <body>抱歉，此用户账号已存在，请勿重复。</body>
+  </message>
+  <message id="33">
+    <!--UserAccountPending-->
+    <title>用户账号正在审核</title>
+    <body>抱歉，此用户账号正在审核，暂时无法使用。</body>
+  </message>
+  <message id="34">
+    <!--UserAccountCreatedAuto-->
+    <title>用户账号自动激活</title>
+    <body>此账号在创建时被自动激活。</body>
+  </message>
+  <message id="35">
+    <!--UserAccountDisapproved-->
+    <title>用户账号未通过审核</title>
+    <body>抱歉，此用户账号未通过审核，可能存在非法信息或信息不完整。</body>
+  </message>
+  <message id="36">
+    <!--UserAccountBanned-->
+    <title>用户账号被禁止</title>
+    <body>抱歉，此用户账号被禁止，无法使用。</body>
+  </message>
+  <message id="38">
+    <!--UserPasswordChangeFailed-->
+    <title>用户密码修改失败</title>
+    <body>抱歉，用户密码修改失败，请重新尝试，将保持原密码不变更。</body>
+  </message>
+  <message id="39">
+    <!--UserInvalidCredentials-->
+    <title>用户登录失败</title>
+    <body>抱歉，用户登录失败，请重新尝试，并确认您的网络连接正常。</body>
+  </message>
+  <message id="40">
+    <!--UserAccountInvalid-->
+    <title>用户账号非法</title>
+    <body>抱歉，出现此错误的原因可能是您输入的账号由于某些原因被禁止使用。</body>
+  </message>
+  <message id="41">
+    <!--UserNotFound-->
+    <title>用户未找到</title>
+    <body>抱歉，您所请求的用户信息未被找到。</body>
+  </message>
+  <message id="42">
+    <!--UserUnAuthenticated-->
+    <title>用户未登录</title>
+    <body>抱歉，用户未登录，无法完成此操作，请返回首页登录或浏览其他页面。</body>
+  </message>
+  
+  <message id="64">
+    <!--EmailUnableToSend-->
+    <title>Email发送失败</title>
+    <body>抱歉，Email发送过程中发生了错误，请检查Email配置及网络连接是否正常。</body>
+  </message>
+  <message id="65">
+    <!--EmailTemplateNotFound-->
+    <title>Email模板未找到</title>
+    <body>抱歉，无法读取Email模板，请检查配置。</body>
+  </message>
+  
+  <message id="128">
+    <!--ModuleNotFount-->
+    <title>Module 未找到</title>
+    <body>抱歉，您所请求的模块未找到，请检查配置。</body>
+  </message>
+  <message id="129">
+    <!--ModuleInitFail-->
+    <title>模块初始化异常</title>
+    <body>抱歉，模块初始化发生异常，请检查配置。</body>
+  </message>
+
+
+  <message id="512">
+    <!--Success-->
+    <title>操作成功</title>
+    <body>恭喜，您所请求的操作已经成功完成。</body>
+  </message>
+  <message id="513">
+    <!--Failed-->
+    <title>操作失败</title>
+    <body>抱歉，您所请求的操作无法完成。</body>
+  </message>
+  <message id="514">
+    <!--Abored-->
+    <title>操作被终止</title>
+    <body>抱歉，您所请求的操作由于某些原因已经被终止。</body>
+  </message>
+  <message id="515">
+    <!--UserPasswordChangeSuccess-->
+    <title>用户密码修改成功</title>
+    <body>恭喜，用户密码已经被成功修改。</body>
+  </message>
+  <message id="516">
+    <!--UserPasswordChangeSuccess-->
+    <title>用户密码修改成功</title>
+    <body>恭喜，用户密码已经被成功修改。</body>
+  </message>
+
+  <message id="1024">
+    <!--ApplicationStart-->
+    <title>ApplicationStart</title>
+    <body>ApplicationStart</body>
+  </message>
+  <message id="1025">
+    <!--ApplicationStop-->
+    <title>ApplicationStop</title>
+    <body>ApplicationStop</body>
+  </message>
+  <message id="1026">
+    <!--UnknownError-->
+    <title>未知错误</title>
+    <body>抱歉，程序运行中发生了未知的错误！</body>
+  </message>
+</root>

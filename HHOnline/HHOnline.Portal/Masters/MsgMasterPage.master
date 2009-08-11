@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MsgMasterPage.master.cs" Inherits="Masters_MsgMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Represents for messages.</title>
+</head>
+<body style="background:#1D3647">
+    <form id="form1" runat="server" method="post" action="">
+    <div class="page-top">&nbsp;</div>
+    <div class="page-bg">
+        <div class="messageBox">
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="box-r1c1 box">&nbsp;</td>
+                    <td class="box-r1c2">&nbsp;</td>
+                    <td class="box-r1c3 box">&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td class="box-r2c1">&nbsp;</td>
+                    <td class="box-r2c2" valign="top">
+                        <div class="box-r2c2cell1">                        
+                            <asp:ContentPlaceHolder id="ContentPlaceHolderMsg" runat="server">
+                            
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </td>
+                    <td class="box-r2c3">&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td class="box-r3c1 box">&nbsp;</td>
+                    <td class="box-r3c2">&nbsp;</td>
+                    <td class="box-r3c3 box">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="page-bottom"> <%= this.CopyRight %></div>
+    <script type="text/javascript">
+        window.onload = function() {
+            if (parent != undefined && window != parent) {
+                document.getElementById('buttonholder').style.display = 'none';
+            }
+        }
+    </script>
+    </form>
+</body>
+</html>

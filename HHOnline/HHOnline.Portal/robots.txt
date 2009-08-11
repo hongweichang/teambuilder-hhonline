@@ -1,0 +1,8 @@
+﻿#
+# robots.txt for HHOnline
+#
+# exclude some access-controlled areas
+User-agent: *
+Disallow: /ControlPanel
+Disallow: /Utility
+Disallow: /Languages

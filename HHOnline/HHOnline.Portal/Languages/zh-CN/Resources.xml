@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--文本资源-->
+<root>
+  <resource name = "Exception_ResourceManagerStringNotFound">未能在 "resouces.xml" 文件中找到: '{0}' 。</resource>
+  <resource name = "AddAComment">添加评论</resource>
+</root>

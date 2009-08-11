@@ -1,0 +1,22 @@
+﻿<asp:TextBox runat="server" CssClass="text-box normalbg" />
+<asp:Button runat="server" CssClass="normalbutton" />
+<asp:LinkButton CssClass="linkbutton" runat="server" SkinID="lnkopts" />
+<asp:LinkButton runat="server" CssClass="delete opts" SkinID="lnkdelete" Text=" " ToolTip="删除"></asp:LinkButton>
+<asp:LinkButton runat="server" CssClass="edit opts" SkinID="lnkedit" Text=" " ToolTip="编辑"></asp:LinkButton>
+<asp:LinkButton runat="server" CssClass="view opts" SkinID="lnkview" Text=" " ToolTip="查看详细"></asp:LinkButton>
+<asp:LinkButton runat="server" CssClass="add opts" SkinID="lnkadd" Text=" " ToolTip="新增"></asp:LinkButton>
+<hc:MsgBox CssClass="labelmessage" runat="server" SkinID="msgBox" Visible="false"></hc:MsgBox>
+
+<%-- 设置ExtensionGridView的样式--%>
+<hc:ExtensionGridView SkinID="DefaultView" runat="server" BackColor="White"  AlternatingRowStyle-BackColor="AliceBlue" 
+ BorderStyle="solid" BorderWidth="1px" BorderColor="#C1DAD7" CssClass="mytable" AllowPaging="true" 
+ PagerText="第{0}页/共{1}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共{2}条记录, 本页{3}条">
+    <PagerSettings Mode="NextPreviousFirstLast" FirstPageText="首页" PreviousPageText="上一页" NextPageText="下一页" LastPageText="尾页" />
+    <PagerStyle HorizontalAlign="Right" CssClass="mytablefoot"  />
+    <RowStyle HorizontalAlign="Left" CssClass="mytabletd" />
+    <HeaderStyle HorizontalAlign="Left" />
+    <EmptyDataRowStyle CssClass="mytableempty" />
+    <EmptyDataTemplate>
+       无法获取相关信息，信息可能不存在或已经被删除！
+    </EmptyDataTemplate>
+</hc:ExtensionGridView>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tasks>
+  <Modules>
+    <!--
+    <clear />
+    <remove name=""/>
+    <add name="" type="" enable=""/>
+    -->
+    <add name="" type="" />
+  </Modules>
+  <Threads>
+    <!--时间间隔 firstRun seconds minutes  -->
+    <Thread minutes="15">
+      <!-- 可以自己定义 name type enabled enableShutDown-->
+      <task name = "" type = "" enabled = "" enableShutDown = "" expiresAfterHours=""/>
+      <task />
+    </Thread>
+    <Thread>
+      <task/>
+    </Thread>
+  </Threads>
+</Tasks>

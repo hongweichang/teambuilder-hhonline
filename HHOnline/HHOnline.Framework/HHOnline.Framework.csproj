@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6A7F2A2A-6788-4F11-B3B6-F4799CCA77AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HHOnline.Framework</RootNamespace>
+    <AssemblyName>HHOnline.Framework</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithm\FastRelaceAlgorithm\FastReplace.cs" />
+    <Compile Include="Algorithm\FastRelaceAlgorithm\FastReplaceResult.cs" />
+    <Compile Include="Algorithm\FastRelaceAlgorithm\IFastRelace.cs" />
+    <Compile Include="Algorithm\FastRelaceAlgorithm\ReplaceKeyValue.cs" />
+    <Compile Include="Components\ActivityItem.cs" />
+    <Compile Include="Components\Area.cs" />
+    <Compile Include="Components\CompanyQualification.cs" />
+    <Compile Include="Components\Favorite.cs" />
+    <Compile Include="Components\FavoriteQuery.cs" />
+    <Compile Include="Components\FileSystemStorageFile.cs" />
+    <Compile Include="Components\ImageInfo.cs" />
+    <Compile Include="Components\KeyValue.cs" />
+    <Compile Include="Components\ShoppingCart.cs" />
+    <Compile Include="Components\SiteFile.cs" />
+    <Compile Include="Components\TemporaryAttachment.cs" />
+    <Compile Include="Components\UserActivity.cs" />
+    <Compile Include="Components\UserActivityQuery.cs" />
+    <Compile Include="Components\UserGrade.cs" />
+    <Compile Include="Components\View.cs" />
+    <Compile Include="Core\BaseApplication.cs" />
+    <Compile Include="Core\HHCookie.cs" />
+    <Compile Include="Core\HHEventArgs.cs" />
+    <Compile Include="Core\ViewsFactory.cs" />
+    <Compile Include="Enums\AttachmentType.cs" />
+    <Compile Include="Enums\DataActionStatus.cs" />
+    <Compile Include="Enums\AreaType.cs" />
+    <Compile Include="Enums\CompanyStauts.cs" />
+    <Compile Include="Enums\ComponentStatus.cs" />
+    <Compile Include="Enums\CreateCompanyStatus.cs" />
+    <Compile Include="Enums\CreateUserStatus.cs" />
+    <Compile Include="Enums\DataProviderAction.cs" />
+    <Compile Include="Enums\FavoriteType.cs" />
+    <Compile Include="Enums\ObjectState.cs" />
+    <Compile Include="Enums\OperateType.cs" />
+    <Compile Include="Enums\PasswordFormat.cs" />
+    <Compile Include="Enums\PathSearchOption.cs" />
+    <Compile Include="Enums\SortOrder.cs" />
+    <Compile Include="Enums\SortUsersBy.cs" />
+    <Compile Include="Enums\UserLevel.cs" />
+    <Compile Include="GradeStrategy\GeneralStrategy.cs" />
+    <Compile Include="GradeStrategy\RegionStrategy.cs" />
+    <Compile Include="GradeStrategy\StrategyFactory.cs" />
+    <Compile Include="GradeStrategy\StrategySet.cs" />
+    <Compile Include="Interface\IGradeStrategy.cs" />
+    <Compile Include="Interface\IStorageFile.cs" />
+    <Compile Include="Components\Menu.cs" />
+    <Compile Include="Services\ActivityManager.cs" />
+    <Compile Include="Services\Areas.cs" />
+    <Compile Include="Services\CacheManager.cs" />
+    <Compile Include="Services\CustomerGradeManager.cs" />
+    <Compile Include="Services\Favorites.cs" />
+    <Compile Include="Services\MenuManager.cs" />
+    <Compile Include="Services\CacheKeyManager.cs" />
+    <Compile Include="Components\Company.cs" />
+    <Compile Include="Components\ExtendedAttributes.cs" />
+    <Compile Include="Components\HHException.cs" />
+    <Compile Include="Components\Tag.cs" />
+    <Compile Include="Interface\ITag.cs" />
+    <Compile Include="Components\Organization.cs" />
+    <Compile Include="Components\PagingDataSet.cs" />
+    <Compile Include="Components\Template.cs" />
+    <Compile Include="Components\User.cs" />
+    <Compile Include="Components\UserQuery.cs" />
+    <Compile Include="Core\GlobalSettings.cs" />
+    <Compile Include="Core\GlobalApplication.cs" />
+    <Compile Include="Core\HHConfiguration.cs" />
+    <Compile Include="Core\HHContainer.cs" />
+    <Compile Include="Core\HHContext.cs" />
+    <Compile Include="Components\HHCopy.cs" />
+    <Compile Include="Core\GlobalEvents.cs" />
+    <Compile Include="Enums\CompanyType.cs" />
+    <Compile Include="Enums\AccountStatus.cs" />
+    <Compile Include="Enums\ExceptionType.cs" />
+    <Compile Include="Enums\LoginUserStatus.cs" />
+    <Compile Include="Enums\UserType.cs" />
+    <Compile Include="Interface\IGlobalModule.cs" />
+    <Compile Include="Services\CompanyQualifications.cs" />
+    <Compile Include="Services\Companys.cs" />
+    <Compile Include="Services\DisallowedNames.cs" />
+    <Compile Include="Services\FileStorageProvider.cs" />
+    <Compile Include="Services\MimeTypeManager.cs" />
+    <Compile Include="Services\Organizations.cs" />
+    <Compile Include="Services\ResourceManager.cs" />
+    <Compile Include="Components\SiteSettings.cs" />
+    <Compile Include="Components\SerializerData.cs" />
+    <Compile Include="Enums\EventType.cs" />
+    <Compile Include="Enums\StyleRelativePosition.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\CommonDataProvider.cs" />
+    <Compile Include="Services\SiteFiles.cs" />
+    <Compile Include="Services\SiteSettingsManager.cs" />
+    <Compile Include="Services\SiteUrlManager.cs" />
+    <Compile Include="Services\Tags.cs" />
+    <Compile Include="Services\TemporaryAttachments.cs" />
+    <Compile Include="Services\UserGradeManager.cs" />
+    <Compile Include="Services\Users.cs" />
+    <Compile Include="Core\BaseViews.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HHOnline.Cache\HHOnline.Cache.csproj">
+      <Project>{70B33E8B-FBF0-4D75-8593-79AEDBEA30DF}</Project>
+      <Name>HHOnline.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HHOnline.Common\HHOnline.Common.csproj">
+      <Project>{E5A9D582-07DF-4AA2-AC86-A461B187AF2F}</Project>
+      <Name>HHOnline.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="DetailMasterPage.master.cs" Inherits="Masters_DetailMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Details</title>
+    <script type="text/javascript">
+        function iframeAutoFit() {
+            var ex;
+            try {
+                if (window != parent) {
+                    var a = parent.document.getElementsByTagName("IFRAME");
+                    for (var i = 0; i < a.length; i++) {
+                        if (a[i].contentWindow == window) {
+                            var h1 = 0, h2 = 0;
+                            if (document.documentElement && document.documentElement.scrollHeight) {
+                                h1 = document.documentElement.scrollHeight;
+                            }
+                            if (document.body) h2 = document.body.scrollHeight;
+                            var h = Math.max(h1, h2);
+                            if (window.ActiveXObject) { h += 4; }
+                            else { h += 4; }
+                            a[i].style.height = h + "px";
+                        }
+                    }
+                }
+            }
+            catch (ex) { }
+        }
+        function cancel() {
+            parent.window.$ohj();
+            return false;
+        }
+        function msg(msg, refresh) {
+            if (refresh) {
+                parent.document.location.href = parent.document.location.href;
+                alert(msg)
+            }
+            else {
+                parent.window.$ohj(function() {
+                    alert(msg);
+
+                });
+            }
+            return false;
+        }
+        window.onload = iframeAutoFit;
+    </script>
+    <style type="text/css">
+    body{margin:0;}
+    html{padding:0;margin:0}
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="detail-r1c1">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderDetail" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

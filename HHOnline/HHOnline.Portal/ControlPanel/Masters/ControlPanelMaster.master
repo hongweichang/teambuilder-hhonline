@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ControlPanelMaster.master.cs"
+    Inherits="ControlPanel_Masters_ControlPanelMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>华宏在线</title>
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="background-color:#EEF2FB">
+    <form id="form1" runat="server" action="#">
+        <div>
+            <div class="cp-head">
+                <div class="head-r1c1">&nbsp;</div>
+                    <asp:LoginView ID="lvUser" runat="server">
+                        <LoggedInTemplate>  
+                        <div class="head-r1c2">                      
+                            欢迎您，<%= Profile.AccountInfo.DisplayName %>！
+                            <a href='<%= ResolveUrl("~") %>main.aspx'>[返回首页]</a>
+                        </div>
+                        <div class="head-r1c3">
+                           <a href='<%= ResolveUrl("~") %>controlpanel/logout.aspx'></a>
+                        </div>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+            </div>
+            <table cellpadding="0" cellspacing="0" class="cp-content">
+                <tr>
+                    <td class="cp-content-r1c1" valign="top">                    
+                      <hc:Menu id="menuMain" runat="server"></hc:Menu>                   
+                    </td>
+                    <td class="cp-content-r1c2" valign="top">
+                        <table cellpadding="0" cellspacing="0" class="cp-content-frame">
+                        <tr>
+                            <td class="frame-r1c1">&nbsp;</td>
+                            <td class="frame-r1c2"><div class="frame-r1c2cell1"><asp:Literal ID="ltPageName" runat="server"></asp:Literal></div></td>
+                            <td class="frame-r1c2plus">                                  
+                                    <asp:ContentPlaceHolder id="cphOpts" runat="server">
+                                    
+                                    </asp:ContentPlaceHolder>
+                            </td>
+                            <td class="frame-r1c3">&nbsp;</td>
+                        </tr>
+                         <tr>
+                            <td class="frame-r2c1">&nbsp;</td>
+                            <td class="frame-r2c2" valign="top" colspan="2">         
+                                <div class="frame-r2c2cell1">                         
+                                    <asp:ContentPlaceHolder id="cphContent" runat="server">
+                                    
+                                    </asp:ContentPlaceHolder>                                
+                                </div>       
+                            </td>
+                            <td class="frame-r2c3">&nbsp;</td>
+                        </tr>
+                         <tr>
+                            <td class="frame-r3c1">&nbsp;</td>
+                            <td class="frame-r3c2" colspan="2">&nbsp;</td>
+                            <td class="frame-r3c3">&nbsp;</td>
+                        </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>

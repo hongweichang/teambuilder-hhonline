@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--邮件模板-->
+<!--body textbody htmlbody-->
+<emails emailType="NewUserAccountCreated" priority="High">
+  <subject>账号注册成功([SiteName])</subject>
+  <fromName>[Name]</fromName>
+  <fromAddress>[AdminEmail]</fromAddress>
+  <body>
+    [UserName],
+
+    您在 [SiteName] 成功注册了一个新账户。
+
+    您的用户名和密码:
+
+    用户名: [UserName]
+    密  码: [Password]
+
+    您可以通过这里进行登录:
+    <a href="[LoginUrl]" target="_blank">[LoginUrl]</a>
+
+    登录后您可以在这里修改您的密码:
+    [PasswordChange]
+
+
+    谢谢,
+    [SiteName]
+  </body>
+</emails>
