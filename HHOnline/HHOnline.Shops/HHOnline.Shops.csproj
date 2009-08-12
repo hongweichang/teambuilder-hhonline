@@ -50,6 +50,7 @@
     <Compile Include="Components\ProductPrice.cs" />
     <Compile Include="Components\ProductProperty.cs" />
     <Compile Include="Components\ProductQuery.cs" />
+    <Compile Include="Enums\PriceIncludeType.cs" />
     <Compile Include="Enums\ProductOrderBy.cs" />
     <Compile Include="GradeStrategy\BrandStrategy.cs" />
     <Compile Include="GradeStrategy\CategoryStrategy.cs" />

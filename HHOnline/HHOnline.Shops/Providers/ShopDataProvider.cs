@@ -273,8 +273,8 @@ namespace HHOnline.Shops.Providers
             productPrice.ModelID = DataRecordHelper.GetInt32(dr, "ModelID");
             productPrice.DeliverySpan = DataRecordHelper.GetString(dr, "DeliverySpan");
             productPrice.WarrantySpan = DataRecordHelper.GetString(dr, "WarrantySpan");
-            productPrice.IncludeFreight = DataRecordHelper.GetInt32(dr, "IncludeFreight");
-            productPrice.IncludeTax = DataRecordHelper.GetInt32(dr, "IncludeTax");
+            productPrice.IncludeFreight = (PriceIncludeType)DataRecordHelper.GetInt32(dr, "IncludeFreight");
+            productPrice.IncludeTax = (PriceIncludeType)DataRecordHelper.GetInt32(dr, "IncludeTax");
             productPrice.ApplyTaxRate = DataRecordHelper.GetDecimal(dr, "ApplyTaxRate");
             productPrice.QuoteMOQ = DataRecordHelper.GetInt32(dr, "QuoteMOQ");
             productPrice.PriceMarket = DataRecordHelper.GetDecimal(dr, "PriceMarket");

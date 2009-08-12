@@ -51,6 +51,7 @@
     <Compile Include="HHLoginView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="IncludeTypeList.cs" />
     <Compile Include="Menu.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

@@ -14,8 +14,8 @@ namespace HHOnline.Shops
         private int _modelID;
         private string _deliverySpan;
         private string _warrantySpan;
-        private int _includeFreight;
-        private int _includeTax;
+        private PriceIncludeType _includeFreight = PriceIncludeType.Include;
+        private PriceIncludeType _includeTax = PriceIncludeType.Include;
         private decimal _applyTaxRate;
         private int _quoteMOQ;
         private decimal _priceMarket;
@@ -93,7 +93,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///是否包含运费，1包含、2不包含
         ///</summary>
-        public int IncludeFreight
+        public PriceIncludeType IncludeFreight
         {
             get { return _includeFreight; }
             set { _includeFreight = value; }
@@ -102,7 +102,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///是否包含税，1包含、2不包含
         ///</summary>
-        public int IncludeTax
+        public PriceIncludeType IncludeTax
         {
             get { return _includeTax; }
             set { _includeTax = value; }
