@@ -7,6 +7,9 @@ using HHOnline.Shops.Providers;
 
 namespace HHOnline.Shops
 {
+    /// <summary>
+    /// 产品价格管理
+    /// </summary>
     public class ProductPrices
     {
         /// <summary>

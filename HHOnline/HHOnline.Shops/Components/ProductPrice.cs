@@ -3,6 +3,9 @@ using HHOnline.Framework;
 
 namespace HHOnline.Shops
 {
+    /// <summary>
+    /// 产品价格
+    /// </summary>
     public class ProductPrice : ExtendedAttributes
     {
         #region --Private Members--
