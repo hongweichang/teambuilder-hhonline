@@ -21,6 +21,7 @@
                 最短供货时间
             </th>
             <td>
+                <hc:DateSpan runat="server" ID="piDeliverySpan" />
             </td>
         </tr>
         <tr>
@@ -28,6 +29,7 @@
                 产品保修期
             </th>
             <td>
+                <hc:DateSpan runat="server" ID="piWarrantySpan" />
             </td>
         </tr>
         <tr>
@@ -35,7 +37,8 @@
                 包含运费
             </th>
             <td>
-                <hc:IncludeTypeList runat="server" ID="piFreight"></hc:IncludeTypeList>
+                <hc:IncludeTypeList runat="server" ID="piFreight">
+                </hc:IncludeTypeList>
             </td>
         </tr>
         <tr>
@@ -43,7 +46,8 @@
                 包含税
             </th>
             <td>
-                <hc:IncludeTypeList runat="server" ID="piTax"></hc:IncludeTypeList>
+                <hc:IncludeTypeList runat="server" ID="piTax">
+                </hc:IncludeTypeList>
             </td>
         </tr>
         <tr>

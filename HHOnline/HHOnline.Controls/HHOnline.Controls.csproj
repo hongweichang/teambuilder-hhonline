@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AccountStatusList.cs" />
     <Compile Include="ComponentStatusList.cs" />
+    <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\HtmlEditorMode.cs" />
     <Compile Include="ExtensionGridView.cs" />
