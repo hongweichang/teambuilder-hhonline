@@ -150,11 +150,8 @@
                     <div class="title-right"></div>
                 </div>
                 <div class="list-content">
-                    <ul>
-                        <li><a href="#" runat="server">日本AND</a></li>
-                        <li><a id="A1" href="#" runat="server">泰华塑胶</a></li>
-                        <li><a id="A2" href="#" runat="server">台湾Spped</a></li>
-                    </ul>
+                
+                    <hc:VarietyList ID="vlProduct" runat="server" ></hc:VarietyList>
                     <div class="list-more">
                         <a href="#" title="查看更多。。。">&nbsp;</a>
                     </div>
@@ -166,11 +163,7 @@
                     <div class="title-right"></div>
                 </div>
                 <div class="list-content">
-                    <ul>
-                        <li><a id="A6" href="#" runat="server">AND</a></li>
-                        <li><a id="A7" href="#" runat="server">Speedo</a></li>
-                        <li><a id="A8" href="#" runat="server">Jacko</a></li>
-                    </ul>
+                    <hc:IndustryList id="ilProduct" runat="server" runat="server"></hc:IndustryList>
                     <div class="list-more">
                         <a href="#" title="查看更多。。。">&nbsp;</a>
                     </div>
@@ -182,11 +175,7 @@
                     <div class="title-right"></div>
                 </div>
                 <div class="list-content">
-                    <ul>
-                        <li><a id="A3" href="#" runat="server">中央。。。</a></li>
-                        <li><a id="A4" href="#" runat="server">这是一次。。</a></li>
-                        <li><a id="A5" href="#" runat="server">革命性的成功。</a></li>
-                    </ul>
+                   <hc:ArticleList ID="alProduct" runat="server" ></hc:ArticleList>
                     <div class="list-more">
                         <a href="#" title="查看更多。。。">&nbsp;</a>
                     </div>

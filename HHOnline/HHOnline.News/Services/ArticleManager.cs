@@ -48,6 +48,7 @@ namespace HHOnline.News.Services
 			if (result == DataActionStatus.Success)
 			{
 				HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
+                OnUpdated();
 			}
 
 			return result;
@@ -64,6 +65,7 @@ namespace HHOnline.News.Services
 			if (result == DataActionStatus.Success)
 			{
 				HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
+                OnUpdated();
 			}
 
 			return result;
@@ -118,7 +120,7 @@ namespace HHOnline.News.Services
 		{
 			Article result = ArticleProvider.Instance.CreateUpdateArticle(info, DataProviderAction.Create, out status);
 			HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
-
+            OnUpdated();
 			return result;
 		}
 
@@ -135,6 +137,7 @@ namespace HHOnline.News.Services
 			if (result == DataActionStatus.Success)
 			{
 				HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
+                OnUpdated();
 			}
 
 			return result;
@@ -268,5 +271,17 @@ namespace HHOnline.News.Services
 
 			return articles;
 		}
+
+
+        #region -EventHandler-
+        public static EventHandler<EventArgs> Updated;
+        protected static void OnUpdated()
+        {
+            if (Updated != null)
+            {
+                Updated(null, EventArgs.Empty);
+            }
+        }
+        #endregion
 	}
 }

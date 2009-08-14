@@ -34,6 +34,7 @@ namespace HHOnline.Shops
                     fs.AddUpdateFile(MakePath(brand.BrandID), brand.BrandLogo, contentStream);
                 }
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductBrandXpath);
+                OnUpdated();
                 //HHCache.Instance.Remove(CacheKeyManager.ProductBrandKey);
             }
             return status;
@@ -64,6 +65,7 @@ namespace HHOnline.Shops
                 }
                 HHCache.Instance.Remove(CacheKeyManager.GetProductBrandKey(brand.BrandID));
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductBrandXpath);
+                OnUpdated();
                 //HHCache.Instance.Remove(CacheKeyManager.ProductBrandKey);
             }
             return status;
@@ -76,6 +78,7 @@ namespace HHOnline.Shops
             DataActionStatus status = ShopDataProvider.Instance.DeleteBrand(brandID);
             HHCache.Instance.Remove(CacheKeyManager.GetProductBrandKey(brandID));
             HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductBrandXpath);
+            OnUpdated();
             return status;
         }
         #endregion
@@ -140,6 +143,17 @@ namespace HHOnline.Shops
                     brandGroups.Add(brand.BrandGroup);
             }
             return brandGroups;
+        }
+        #endregion
+
+        #region -EventHandler-
+        public static EventHandler<EventArgs> Updated;
+        protected static void OnUpdated()
+        {
+            if (Updated != null)
+            {
+                Updated(null, EventArgs.Empty);
+            }
         }
         #endregion
     }

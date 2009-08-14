@@ -35,6 +35,7 @@ namespace HHOnline.Shops
                 }
 
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductIndustryXpath);
+                OnUpdated();
             }
             return status;
         }
@@ -63,6 +64,7 @@ namespace HHOnline.Shops
                     fs.AddUpdateFile(MakePath(industry.IndustryID), industry.IndustryLogo, contentStream);
                 }
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductIndustryXpath);
+                OnUpdated();
             }
             return status;
         }
@@ -77,7 +79,10 @@ namespace HHOnline.Shops
         {
             DataActionStatus status = ShopDataProvider.Instance.DeleteIndustry(industryID);
             if (status == DataActionStatus.Success)
+            {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductIndustryXpath);
+                OnUpdated();
+            }
             return status;
         }
         #endregion
@@ -204,6 +209,18 @@ namespace HHOnline.Shops
                     industries.Add(industryCopy);
                     GetChildIndustires(child, deps + 1, ref industries);
                 }
+            }
+        }
+        #endregion
+
+
+        #region -EventHandler-
+        public static EventHandler<EventArgs> Updated;
+        protected static void OnUpdated()
+        {
+            if (Updated != null)
+            {
+                Updated(null, EventArgs.Empty);
             }
         }
         #endregion

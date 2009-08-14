@@ -21,6 +21,7 @@ namespace HHOnline.Framework
     {
         public static readonly string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private static readonly string encryptKey = HHConfiguration.GetConfig()["encryptKey"].ToString();
+
         #region -Helper Method-
         /// <summary>
         /// 判断文本是否为空
@@ -644,6 +645,27 @@ namespace HHOnline.Framework
         public static bool IsImage(string fileName)
         {
             return MimeTypeManager.GetMimeType(fileName).IndexOf("image") > -1;
+        }
+        #endregion
+
+        #region SubString
+        public static string SubString(string RawString, Int32 Length)
+        {
+            if (RawString.Length <= Length)
+            {
+                return RawString;
+            }
+            else
+            {
+                for (Int32 i = RawString.Length - 1; i >= 0; i--)
+                {
+                    if (System.Text.Encoding.GetEncoding("GB2312").GetByteCount(RawString.Substring(0, i)) < Length)
+                    {
+                        return RawString.Substring(0, i) + "...";
+                    }
+                }
+                return "...";
+            }
         }
         #endregion
     }
