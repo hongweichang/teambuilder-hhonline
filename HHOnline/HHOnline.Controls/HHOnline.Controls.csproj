@@ -51,6 +51,7 @@
     <Compile Include="Controls\ArticleList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\HtmlEditorMode.cs" />
     <Compile Include="ExtensionGridView.cs" />
