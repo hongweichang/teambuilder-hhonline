@@ -6,8 +6,12 @@ using System.Data.Common;
 
 namespace HHOnline.Common
 {
+    /// <summary>
+    /// DateRecord Help Class
+    /// </summary>
     public static class DataRecordHelper
     {
+        #region GetBoolean
         public static bool GetBoolean(IDataRecord dr, int ordinal)
         {
             return dr.GetBoolean(ordinal);
@@ -31,7 +35,9 @@ namespace HHOnline.Common
         {
             return GetBoolean(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetByte
         public static byte GetByte(IDataRecord dr, int ordinal)
         {
             return GetByte(dr, ordinal, 0);
@@ -55,7 +61,9 @@ namespace HHOnline.Common
         {
             return GetByte(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetByteArray
         public static byte[] GetByteArray(IDataRecord dr, int ordinal)
         {
             int length = Convert.ToInt32(dr.GetBytes(ordinal, 0L, null, 0, 0));
@@ -85,7 +93,9 @@ namespace HHOnline.Common
         {
             return GetByteArray(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetChar
         public static char GetChar(IDataRecord dr, int ordinal)
         {
             return GetChar(dr, ordinal, ' ');
@@ -109,7 +119,9 @@ namespace HHOnline.Common
         {
             return GetChar(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetDateTime
         public static DateTime GetDateTime(IDataRecord dr, int ordinal)
         {
             return GetDateTime(dr, ordinal, new DateTime(2000, 1, 1));
@@ -133,7 +145,9 @@ namespace HHOnline.Common
         {
             return GetDateTime(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetDecimal
         public static decimal GetDecimal(IDataRecord dr, int ordinal)
         {
             return GetDecimal(dr, ordinal, 0);
@@ -157,7 +171,9 @@ namespace HHOnline.Common
         {
             return GetDecimal(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetDouble
         public static double GetDouble(IDataRecord dr, int ordinal)
         {
             return GetDouble(dr, ordinal, 0);
@@ -181,7 +197,9 @@ namespace HHOnline.Common
         {
             return GetDouble(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetFloat
         public static float GetFloat(IDataRecord dr, int ordinal)
         {
             return GetFloat(dr, ordinal, 0);
@@ -205,7 +223,9 @@ namespace HHOnline.Common
         {
             return GetFloat(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetGuid
         public static Guid GetGuid(IDataRecord dr, int ordinal)
         {
             return GetGuid(dr, ordinal, new Guid());
@@ -229,7 +249,9 @@ namespace HHOnline.Common
         {
             return GetGuid(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetInt16
         public static short GetInt16(IDataRecord dr, int ordinal)
         {
             return GetInt16(dr, ordinal, 0);
@@ -253,7 +275,9 @@ namespace HHOnline.Common
         {
             return GetInt16(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetInt32
         public static int? GetNullableInt32(IDataRecord dr, int ordinal)
         {
             if (dr.IsDBNull(ordinal))
@@ -294,7 +318,9 @@ namespace HHOnline.Common
         {
             return GetInt32(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetInt64
         public static long GetInt64(IDataRecord dr, int ordinal)
         {
             return GetInt64(dr, ordinal, 0);
@@ -318,7 +344,9 @@ namespace HHOnline.Common
         {
             return GetInt64(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
 
+        #region GetString
         public static string GetString(IDataRecord dr, int ordinal)
         {
             return GetString(dr, ordinal, string.Empty);
@@ -342,5 +370,6 @@ namespace HHOnline.Common
         {
             return GetString(dr, dr.GetOrdinal(name), defaultValue);
         }
+        #endregion
     }
 }
