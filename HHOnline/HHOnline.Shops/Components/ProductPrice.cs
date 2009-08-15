@@ -18,15 +18,15 @@ namespace HHOnline.Shops
         private PriceIncludeType _includeTax = PriceIncludeType.Include;
         private decimal _applyTaxRate;
         private int _quoteMOQ;
-        private decimal _priceMarket;
-        private decimal _pricePromotion;
-        private decimal _priceFloor;
-        private decimal _pricePurchase;
-        private decimal _priceGradeA;
-        private decimal _priceGradeB;
-        private decimal _priceGradeC;
-        private decimal _priceGradeD;
-        private decimal _priceGradeE;
+        private decimal? _priceMarket;
+        private decimal? _pricePromotion;
+        private decimal? _priceFloor;
+        private decimal? _pricePurchase;
+        private decimal? _priceGradeA;
+        private decimal? _priceGradeB;
+        private decimal? _priceGradeC;
+        private decimal? _priceGradeD;
+        private decimal? _priceGradeE;
         private int _supplyRegion;
         private DateTime _quoteFrom;
         private DateTime _quoteEnd;
@@ -129,7 +129,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///市场价格
         ///</summary>
-        public decimal PriceMarket
+        public decimal? PriceMarket
         {
             get { return _priceMarket; }
             set { _priceMarket = value; }
@@ -138,7 +138,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///促销价格（为0时表示赠送）
         ///</summary>
-        public decimal PricePromotion
+        public decimal? PricePromotion
         {
             get { return _pricePromotion; }
             set { _pricePromotion = value; }
@@ -147,7 +147,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///保底价格
         ///</summary>
-        public decimal PriceFloor
+        public decimal? PriceFloor
         {
             get { return _priceFloor; }
             set { _priceFloor = value; }
@@ -156,7 +156,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///采购价格
         ///</summary>
-        public decimal PricePurchase
+        public decimal? PricePurchase
         {
             get { return _pricePurchase; }
             set { _pricePurchase = value; }
@@ -165,7 +165,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///五级会员价格
         ///</summary>
-        public decimal PriceGradeA
+        public decimal? PriceGradeA
         {
             get { return _priceGradeA; }
             set { _priceGradeA = value; }
@@ -174,7 +174,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///四级会员价格
         ///</summary>
-        public decimal PriceGradeB
+        public decimal? PriceGradeB
         {
             get { return _priceGradeB; }
             set { _priceGradeB = value; }
@@ -183,7 +183,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///三级会员价格
         ///</summary>
-        public decimal PriceGradeC
+        public decimal? PriceGradeC
         {
             get { return _priceGradeC; }
             set { _priceGradeC = value; }
@@ -192,7 +192,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///二级会员价格
         ///</summary>
-        public decimal PriceGradeD
+        public decimal? PriceGradeD
         {
             get { return _priceGradeD; }
             set { _priceGradeD = value; }
@@ -201,7 +201,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///一级会员价格
         ///</summary>
-        public decimal PriceGradeE
+        public decimal? PriceGradeE
         {
             get { return _priceGradeE; }
             set { _priceGradeE = value; }

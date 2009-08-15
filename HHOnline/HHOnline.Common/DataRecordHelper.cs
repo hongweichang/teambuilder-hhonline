@@ -148,6 +148,20 @@ namespace HHOnline.Common
         #endregion
 
         #region GetDecimal
+        public static decimal? GetNullableDecimal(IDataRecord dr, int ordinal)
+        {
+            if (!dr.IsDBNull(ordinal))
+            {
+                return dr.GetDecimal(ordinal);
+            }
+            return null;
+        }
+
+        public static decimal? GetNullableDecimal(IDataRecord dr, string name)
+        {
+            return GetDecimal(dr, dr.GetOrdinal(name));
+        }
+
         public static decimal GetDecimal(IDataRecord dr, int ordinal)
         {
             return GetDecimal(dr, ordinal, 0);
