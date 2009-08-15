@@ -17,7 +17,7 @@ namespace HHOnline.Shops
         private PriceIncludeType _includeFreight = PriceIncludeType.Include;
         private PriceIncludeType _includeTax = PriceIncludeType.Include;
         private decimal _applyTaxRate;
-        private int _quoteMOQ;
+        private int? _quoteMOQ;
         private decimal? _priceMarket;
         private decimal? _pricePromotion;
         private decimal? _priceFloor;
@@ -120,7 +120,7 @@ namespace HHOnline.Shops
         ///<summary>
         ///最小订货量
         ///</summary>
-        public int QuoteMOQ
+        public int? QuoteMOQ
         {
             get { return _quoteMOQ; }
             set { _quoteMOQ = value; }

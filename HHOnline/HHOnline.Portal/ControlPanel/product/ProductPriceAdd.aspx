@@ -63,6 +63,7 @@
                 最小订货量
             </th>
             <td>
+                <asp:TextBox ID="txtQuoteMOQ" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -70,6 +71,7 @@
                 市场价格
             </th>
             <td>
+                <asp:TextBox ID="txtPriceMarket" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -77,6 +79,7 @@
                 促销价格
             </th>
             <td>
+                <asp:TextBox ID="txtPricePromotion" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -84,6 +87,7 @@
                 保底价格
             </th>
             <td>
+                <asp:TextBox ID="txtPriceFloor" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -91,13 +95,7 @@
                 采购价格
             </th>
             <td>
-            </td>
-        </tr>
-        <tr>
-            <th style="width: 100px;">
-                最小订货量
-            </th>
-            <td>
+                <asp:TextBox ID="txtPricePurchase" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -105,6 +103,7 @@
                 五级会员价格
             </th>
             <td>
+                <asp:TextBox ID="txtPriceGradeA" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -112,6 +111,7 @@
                 四级会员价格
             </th>
             <td>
+                <asp:TextBox ID="txtPriceGradeB" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -119,6 +119,7 @@
                 三级会员价格
             </th>
             <td>
+                <asp:TextBox ID="txtPriceGradeC" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -126,6 +127,7 @@
                 二级会员价格
             </th>
             <td>
+                <asp:TextBox ID="txtPriceGradeD" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -133,6 +135,7 @@
                 一级会员价格
             </th>
             <td>
+                <asp:TextBox ID="txtPriceGradeE" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -140,6 +143,8 @@
                 供货区域
             </th>
             <td>
+                <asp:DropDownList ID="ddlSupplyRegion" runat="server">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
@@ -147,6 +152,10 @@
                 报价起始日期
             </th>
             <td>
+                <asp:TextBox ID="txtQuoteFrom" rel="datepicker" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revQuoteFrom" runat="server" ControlToValidate="txtQuoteFrom"
+                    ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
+                </asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -154,6 +163,10 @@
                 报价截止日期
             </th>
             <td>
+                <asp:TextBox ID="txtQuoteEnd" rel="datepicker" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revQuoteEnd" runat="server" ControlToValidate="txtQuoteEnd"
+                    ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
+                </asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -161,6 +174,7 @@
                 报价自动续期周期
             </th>
             <td>
+                <asp:TextBox ID="txtQuoteRenewal" runat="server"></asp:TextBox>月
             </td>
         </tr>
         <tr>

@@ -78,6 +78,7 @@
     <Compile Include="Components\ImageInfo.cs" />
     <Compile Include="Components\KeyValue.cs" />
     <Compile Include="Components\ShoppingCart.cs" />
+    <Compile Include="Components\ShowPicture.cs" />
     <Compile Include="Components\SiteFile.cs" />
     <Compile Include="Components\TemporaryAttachment.cs" />
     <Compile Include="Components\UserActivity.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Enums\StyleRelativePosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CommonDataProvider.cs" />
+    <Compile Include="Services\ShowPictures.cs" />
     <Compile Include="Services\SiteFiles.cs" />
     <Compile Include="Services\SiteSettingsManager.cs" />
     <Compile Include="Services\SiteUrlManager.cs" />

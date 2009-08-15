@@ -43,6 +43,7 @@ namespace HHOnline.Framework
         private string smtpServerPassword = "";
         private int smtpPortNumber = 25;
         private int emailThrottle = -1;
+        private List<ShowPicture> showPictures = new List<ShowPicture>();
 
         //皮肤
         private string skinId = "Default";
@@ -173,6 +174,21 @@ namespace HHOnline.Framework
         {
             get { return serviceTel; }
             set { serviceTel = value; }
+        }
+
+        /// <summary>
+        /// 展示图片
+        /// </summary>
+        public List<ShowPicture> ShowPictures
+        {
+            get
+            {
+                return showPictures;
+            }
+            set
+            {
+                showPictures = value;
+            }
         }
 
         /// <summary>
