@@ -35,7 +35,7 @@ namespace HHOnline.News.Services
 				Category = DataRecordHelper.GetInt32(dr, "CategoryID"),
 				DisplayOrder = DataRecordHelper.GetInt32(dr, "DisplayOrder"),
 				ArticleMemo = DataRecordHelper.GetString(dr, "ArticleMemo"),
-                Status = (ComponentStatus)DataRecordHelper.GetInt32(dr, "ArticleStatus"),
+				Status = (ComponentStatus)DataRecordHelper.GetInt32(dr, "ArticleStatus"),
 				HitTimes = DataRecordHelper.GetInt32(dr, "HitTimes"),
 				CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
 				CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser"),
@@ -55,24 +55,25 @@ namespace HHOnline.News.Services
 		/// <returns></returns>
 		public static ArticleAttachment ParseArticleAttachment(IDataReader dr)
 		{
-			return new ArticleAttachment()
-			{
-				ID = DataRecordHelper.GetInt32(dr, "AttachmentID"),
-				FileName = DataRecordHelper.GetString(dr, "AttachmentFile"),
-				Name = DataRecordHelper.GetString(dr, "AttachmentName"),
-				ContentType = DataRecordHelper.GetString(dr, "ContentType"),
-				ContentSize = DataRecordHelper.GetInt32(dr, "ContentSize"),
-				IsRemote = DataRecordHelper.GetBoolean(dr, "IsRemote"),
-				ImageWidth = DataRecordHelper.GetNullableInt32(dr, "ImageWidth"),
-				ImageHeight = DataRecordHelper.GetNullableInt32(dr, "ImageHeight"),
-				Desc = DataRecordHelper.GetString(dr, "AttachmentDesc"),
-				Memo = DataRecordHelper.GetString(dr, "AttachmentMemo"),
-				Status = (ComponentStatus)DataRecordHelper.GetInt32(dr, "AttachmentStatus"),
-				CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
-				CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser"),
-				UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime"),
-				UpdateUser = DataRecordHelper.GetInt32(dr, "UpdateUser"),
-			};
+			ArticleAttachment result = new ArticleAttachment();
+
+			result.ID = DataRecordHelper.GetInt32(dr, "AttachmentID");
+			result.FileName = DataRecordHelper.GetString(dr, "AttachmentFile");
+			result.Name = DataRecordHelper.GetString(dr, "AttachmentName");
+			result.ContentType = DataRecordHelper.GetString(dr, "ContentType");
+			result.ContentSize = DataRecordHelper.GetInt32(dr, "ContentSize");
+			result.IsRemote = DataRecordHelper.GetInt32(dr, "IsRemote") > 0;
+			result.ImageWidth = DataRecordHelper.GetNullableInt32(dr, "ImageWidth");
+			result.ImageHeight = DataRecordHelper.GetNullableInt32(dr, "ImageHeight");
+			result.Desc = DataRecordHelper.GetString(dr, "AttachmentDesc");
+			result.Memo = DataRecordHelper.GetString(dr, "AttachmentMemo");
+			result.Status = (ComponentStatus)DataRecordHelper.GetInt32(dr, "AttachmentStatus");
+			result.CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime");
+			result.CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser");
+			result.UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime");
+			result.UpdateUser = DataRecordHelper.GetInt32(dr, "UpdateUser");
+
+			return result;
 		}
 
 		/// <summary>

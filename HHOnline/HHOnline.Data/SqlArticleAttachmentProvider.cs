@@ -39,7 +39,9 @@ namespace HHOnline.Data
 			{
 				List<ArticleAttachment> attachmentList = new List<ArticleAttachment>();
 				while (dr.Read())
+				{
 					attachmentList.Add(ArticleReaderConverter.ParseArticleAttachment(dr));
+				}
 
 				dr.NextResult();
 				dr.Read();

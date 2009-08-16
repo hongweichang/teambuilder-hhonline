@@ -48,7 +48,6 @@ namespace HHOnline.News.Services
 			if (result == DataActionStatus.Success)
 			{
 				HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
-                OnUpdated();
 			}
 
 			return result;
@@ -65,7 +64,6 @@ namespace HHOnline.News.Services
 			if (result == DataActionStatus.Success)
 			{
 				HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
-                OnUpdated();
 			}
 
 			return result;
@@ -109,7 +107,7 @@ namespace HHOnline.News.Services
 
 			return result;
 		}
-	
+
 		/// <summary>
 		/// 添加文章
 		/// </summary>
@@ -120,7 +118,7 @@ namespace HHOnline.News.Services
 		{
 			Article result = ArticleProvider.Instance.CreateUpdateArticle(info, DataProviderAction.Create, out status);
 			HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
-            OnUpdated();
+
 			return result;
 		}
 
@@ -137,7 +135,6 @@ namespace HHOnline.News.Services
 			if (result == DataActionStatus.Success)
 			{
 				HHCache.Instance.Remove(NewsManagerCacheKey + "AllArticles");
-                OnUpdated();
 			}
 
 			return result;
@@ -202,7 +199,7 @@ namespace HHOnline.News.Services
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		public static ArticleCategory GetArticleCategory(int id) 
+		public static ArticleCategory GetArticleCategory(int id)
 		{
 			return ArticleCategoryProvider.Instance.GetArticleCategory(id);
 		}

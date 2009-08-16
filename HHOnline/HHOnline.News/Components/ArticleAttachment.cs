@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using HHOnline.Framework;
+using HHOnline.News.Services;
 
 namespace HHOnline.News.Components
 {
@@ -71,5 +72,75 @@ namespace HHOnline.News.Components
 		/// 更新用户
 		/// </summary>
 		public int UpdateUser { get; set; }
+
+		private IStorageFile defaultImageFile;
+		private IStorageFile file;
+
+		/// <summary>
+		/// 存储文件信息
+		/// </summary>
+		public IStorageFile File
+		{
+			get
+			{
+				if (file == null)
+				{
+					if (this.ID > 0)
+					{
+						file = FileStorageProvider.Instance(ArticleAttachments.FileStoreKey)
+							.GetFile(ArticleAttachments.MakePath(this.ID), this.FileName);
+					}
+				}
+
+				return file;
+			}
+			set
+			{
+				file = value;
+			}
+		}
+
+		/// <summary>
+		/// 默认图片文件
+		/// </summary>
+		public IStorageFile DefaultImageFile
+		{
+			get
+			{
+				if (defaultImageFile == null)
+				{
+					defaultImageFile = File;
+				}
+				return defaultImageFile;
+			}
+		}
+
+		/// <summary>
+		/// 获取默认图像
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <returns></returns>
+		public string GetDefaultImageUrl(int width, int height)
+		{
+			if (width == 0 || height == 0)
+			{
+				if (DefaultImageFile != null)
+					return FileStorageProvider.GetGenericDownloadUrl(DefaultImageFile);
+				else
+					return SiteUrlManager.GetNoPictureUrl();
+			}
+			else
+			{
+				if (DefaultImageFile == null)
+				{
+					return SiteUrlManager.GetNoPictureUrl(width, height);
+				}
+				else
+				{
+					return SiteUrlManager.GetResizedImageUrl(DefaultImageFile, width, height);
+				}
+			}
+		}
 	}
 }

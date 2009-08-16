@@ -24,16 +24,16 @@ namespace HHOnline.Data
 			SelectQueryBuilder builder = new SelectQueryBuilder();
 			builder.SelectFromTable("NAttachment");
 			builder.SelectColumns("AttachmentID");
-			builder.AddWhere("AttachmentStatus", Comparison.GreaterOrEquals, 0);
+			builder.AddWhere("AttachmentStatus", Comparison.GreaterThan, 0);
 
 			if (query.Name != null)
 			{
-				builder.AddWhere("AttachmentName", Comparison.Equals, query.Name);
+				builder.AddWhere("AttachmentName", Comparison.Like, query.Name);
 			}
 
 			if (query.ContentType != null)
 			{
-				builder.AddWhere("ContentType", Comparison.Equals, query.ContentType);
+				builder.AddWhere("ContentType", Comparison.Like, query.ContentType);
 			}
 
 			if (query.ContentStartSize.HasValue)
