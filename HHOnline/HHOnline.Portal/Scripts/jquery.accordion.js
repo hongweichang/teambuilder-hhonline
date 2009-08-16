@@ -37,13 +37,14 @@ $.fn.hrzAccordion = function(settings) {
                          '<img src="' + n.Url + '" style="width:' + ps.width + 'px;height:' + ps.height + 'px;"  /></a>';
 
         });
+        if (count == 0) { return; }
         pictures.html(html);
         navigator.width((count + 1) * 16);
         title = pictures.next().css('opacity', 0.7).height(ps.titleHeight);
         pictures.find('a:not(:first)').css('display', 'none');
         var pf = pictures.find('a:first');
         title.html('<b>' + pf.attr('title') + '</b>' + pf.attr('description'));
-        
+
         var _First = pictures.find('a:first');
         var _Last = pictures.find('a:last');
 
@@ -61,7 +62,8 @@ $.fn.hrzAccordion = function(settings) {
             nav.animate({ left: 16 * p.attr('index') });
 
         }
-
-        setInterval(pictureBox, ps.swapSpeed);
+        if (count != 1) {
+            setInterval(pictureBox, ps.swapSpeed);
+        }
     })
 }
