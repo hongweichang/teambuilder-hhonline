@@ -1647,12 +1647,14 @@ postform td
     border:solid 1px #cccccc;
     background-repeat:no-repeat;
     background-position: center center;
+    margin-left:3px;
     }
 .main-r3c3
 {
     float:left;
     width:285px;
     height:184px;
+    margin-left:3px;
     }
 .main-r3c3 div.access-point
 {
@@ -2483,3 +2485,64 @@ a:hover.uploadimages
     border:1px solid #ADCD3C;
     color:#ff0000;
 }
+
+.jquery-accordion
+{
+    overflow:hidden;
+    position:relative;
+    border:solid 1px #ccc;
+    }
+.jquery-accordion .jquery-accordion-pictures
+{
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    }
+.jquery-accordion .jquery-accordion-pictures a,
+.jquery-accordion .jquery-accordion-pictures a:hover
+{
+    text-decoration:none;
+    }
+.jquery-accordion .jquery-accordion-pictures img
+{
+    border:0;
+    }
+.jquery-accordion .jquery-accordion-titles
+{
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:0;
+    line-height:18px;
+    background-color:#7d9edb;
+    font-family:Verdana;
+    font-size:11px;
+    padding:5px;
+    color:#F5F5F5;
+    }
+.jquery-accordion .jquery-accordion-titles b
+{
+    height:20px;
+    line-height:20px;
+    display:block;
+    font-weight:bold;
+    color:#FF4500;
+    }
+.jquery-accordion .jquery-accordion-navigate
+{
+    height:16px;
+    position:absolute;
+    right:4px;
+    top:4px;
+    background:url(../../images/accordion/navigate2.gif) repeat-x left center;
+    }
+.jquery-accordion .jquery-accordion-nav
+{
+    width:16px;
+    height:16px;
+    top:0;
+    position:absolute;    
+    background:url(../../images/accordion/navigate1.gif) no-repeat left center;
+    }

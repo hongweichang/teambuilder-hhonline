@@ -15,6 +15,7 @@ public partial class Main : HHPage
             SetSettings();
         }
         base.ExecuteJs("var showPicture='" + SiteUrlManager.GetShowPicture() + "';var relativeUrl='" + GlobalSettings.RelativeWebRoot + "';", true);
+
     }
     void SetSettings()
     {
@@ -30,7 +31,7 @@ public partial class Main : HHPage
         
         base.OnPageLoaded();
         AddJavaScriptInclude("scripts/jquery.watermark.js", true, false);
-        AddJavaScriptInclude("scripts/jquery.flash.js", true, false);
+        AddJavaScriptInclude("scripts/jquery.accordion.js", true, false);
         AddJavaScriptInclude("scripts/pages/main.aspx.js", true, false);
     }
 }

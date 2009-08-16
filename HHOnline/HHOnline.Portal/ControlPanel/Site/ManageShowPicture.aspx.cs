@@ -71,15 +71,15 @@ public partial class ControlPanel_Site_ManageShowPicture : HHPage
     public override void OnPageLoaded()
     {
         //  this.PagePermission = "TradeModule-View";
-        this.ShortTitle = "展示图片配置";
+        this.ShortTitle = "展示图片";
         this.SetTitle();
         this.SetTabName(this.ShortTitle);
     }
 
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
     {
-        //this.PagePermission = "TradeModule-View";
-        // e.CheckPermissionControls.Add("TradeModule-Add", lbNewIndustry);
+        this.PagePermission = "SiteSettingModule-View";
+        //e.CheckPermissionControls.Add("TradeModule-Add", lbNewIndustry);
         base.OnPermissionChecking(e);
     }
 

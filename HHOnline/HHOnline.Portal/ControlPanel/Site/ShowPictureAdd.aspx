@@ -14,6 +14,8 @@
             </th>
             <td>
                 <asp:TextBox ID="txtTitle" runat="server" Width="500" MaxLength="100" />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ControlToValidate="txtTitle"
+                    ErrorMessage="必须填写！"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -21,7 +23,9 @@
                 图片说明
             </th>
             <td>
-                <hc:Editor ID="txtDescription" runat="server" />
+                <asp:TextBox ID="txtDescription" runat="server" Width="500" MaxLength="300" />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="Dynamic" runat="server" ControlToValidate="txtDescription"
+                    ErrorMessage="必须填写！"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -29,7 +33,7 @@
                 图片链接
             </th>
             <td>
-                <asp:TextBox ID="txtLink" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtLink" runat="server" Width="500"></asp:TextBox>
             </td>
         </tr>
         <tr>
