@@ -14,8 +14,13 @@ public partial class Main : HHPage
         {
             SetSettings();
         }
-        base.ExecuteJs("var showPicture='" + SiteUrlManager.GetShowPicture() + "';var relativeUrl='" + GlobalSettings.RelativeWebRoot + "';", true);
-
+        BindPictures();
+    }
+    void BindPictures()
+    {
+        List<ShowPicture> picTemp = ShowPictures.GetShowPictures();
+        List<ShowPicture> pics = picTemp.GetRange(0, Math.Min(5, picTemp.Count));
+        base.ExecuteJs("var _showPictures = " + Newtonsoft.Json.JavaScriptConvert.SerializeObject(pics) + ";", true);
     }
     void SetSettings()
     {

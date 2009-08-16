@@ -16,9 +16,9 @@ $().ready(function() {
     $('input[rel=searchproduct]').watermark({
         markText: '选择搜索范围，输入名称、品牌、型号等信息搜索产品！'
     });
-    /*
+
     $('#divAdLogo').hrzAccordion({
-        
+        pictures: _showPictures
     });
-    */
+
 });

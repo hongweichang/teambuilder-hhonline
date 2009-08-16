@@ -39,8 +39,11 @@ $.fn.hrzAccordion = function(settings) {
         });
         pictures.html(html);
         navigator.width((count + 1) * 16);
-        title = pictures.next().css('opacity', 0.5);
+        title = pictures.next().css('opacity', 0.7).height(ps.titleHeight);
         pictures.find('a:not(:first)').css('display', 'none');
+        var pf = pictures.find('a:first');
+        title.html('<b>' + pf.attr('title') + '</b>' + pf.attr('description'));
+        
         var _First = pictures.find('a:first');
         var _Last = pictures.find('a:last');
 
