@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="HomeMasterPage.master.cs" Inherits="Masters_HomeMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>HHOnline</title>
+    <asp:ContentPlaceHolder id="ContentPlaceHolderHeader" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">    
+    <div class="main">
+        <huc:Header ID="hMain" runat="server" />
+        <asp:ContentPlaceHolder id="ContentPlaceHolderSearch" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder id="ContentPlaceHolderContent" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <huc:Footer ID="fMain" runat="Server" />
+    </div>
+    </form>
+</body>
+</html>

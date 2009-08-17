@@ -25,7 +25,6 @@ public partial class Main : HHPage
     void SetSettings()
     {
         SiteSettings settings = HHContext.Current.SiteSettings;
-        ltPhone.Text = settings.ServiceTel;
         ltIdeal.Text = settings.CompanyIdea;
         ltService.Text = settings.CompanyService;
         //divAdLogo.Style.Add("background-image", GlobalSettings.RelativeWebRoot + "images/default/ad.jpg");
