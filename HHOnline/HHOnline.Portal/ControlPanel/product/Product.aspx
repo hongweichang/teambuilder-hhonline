@@ -70,15 +70,16 @@
         </table>
     </div>
     <br />
-    <hc:extensiongridview runat="server" id="egvProducts" onrowdatabound="egvProducts_RowDataBound"
-        onrowdeleting="egvProducts_RowDeleting" onrowupdating="egvProducts_RowUpdating"
-        onpageindexchanging="egvProducts_PageIndexChanging" pagesize="5" skinid="DefaultView"
-        autogeneratecolumns="False" datakeynames="ProductID">
+    <hc:ExtensionGridView runat="server" ID="egvProducts" OnRowDataBound="egvProducts_RowDataBound"
+        OnRowDeleting="egvProducts_RowDeleting" OnRowUpdating="egvProducts_RowUpdating"  OnRowCommand="egvProducts_RowCommand"
+        OnPageIndexChanging="egvProducts_PageIndexChanging" PageSize="5" SkinID="DefaultView"
+        AutoGenerateColumns="False" DataKeyNames="ProductID">
         <Columns>
             <asp:TemplateField HeaderText="展示图片">
                 <HeaderStyle Width="100" />
                 <ItemTemplate>
-                    <asp:Image ID="ProductPicture" style="border:double 3px #7d9edb;" Width="40" Height="40" runat="server" />
+                    <asp:Image ID="ProductPicture" Style="border: double 3px #7d9edb;" Width="40" Height="40"
+                        runat="server" />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="产品名称">
@@ -113,8 +114,18 @@
                             </asp:RoleGroup>
                         </RoleGroups>
                     </asp:LoginView>
+                    <asp:LoginView ID="LoginView3" runat="server">
+                        <RoleGroups>
+                            <asp:RoleGroup Roles="ProductModule-View">
+                                <ContentTemplate>
+                                    <asp:LinkButton ID="lnkViewPrice" runat="server" CommandName="ViewPrice" SkinID="lnkviewprice"
+                                        PostBackUrl="#"></asp:LinkButton>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+                        </RoleGroups>
+                    </asp:LoginView>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
-    </hc:extensiongridview>
+    </hc:ExtensionGridView>
 </asp:Content>

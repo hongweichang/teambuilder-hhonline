@@ -4,7 +4,9 @@
 <asp:LinkButton runat="server" CssClass="delete opts" SkinID="lnkdelete" Text=" " ToolTip="删除"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="edit opts" SkinID="lnkedit" Text=" " ToolTip="编辑"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="view opts" SkinID="lnkview" Text=" " ToolTip="查看详细"></asp:LinkButton>
+<asp:LinkButton runat="server" CssClass="view opts" SkinID="lnkviewprice" Text=" " ToolTip="查看报价"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="add opts" SkinID="lnkadd" Text=" " ToolTip="新增"></asp:LinkButton>
+<asp:LinkButton runat="server" CssClass="add opts" SkinID="lnkaddchild" Text=" " ToolTip="新增子信息"></asp:LinkButton>
 <hc:MsgBox CssClass="labelmessage" runat="server" SkinID="msgBox" Visible="false"></hc:MsgBox>
 
 <%-- 设置ExtensionGridView的样式--%>

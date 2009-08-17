@@ -13,7 +13,7 @@
                 产品名称
             </th>
             <td>
-                <asp:Label ID="lblProductName" runat="server" Text=""></asp:Label>
+                <asp:HyperLink ID="hyProductName" runat="server"></asp:HyperLink>
             </td>
         </tr>
         <tr>
@@ -183,6 +183,24 @@
             </th>
             <td>
                 <hc:ComponentStatusList ID="csPrice" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <td>
+                <hc:MsgBox ID="mbMessage" runat="server" SkinID="msgBox"></hc:MsgBox>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <td>
+                <asp:Button ID="btnPost" runat="server" Text="提 交" PostBackUrl="#" Visible="false"
+                    OnClick="btnPost_Click" />&nbsp;&nbsp;
+                <asp:Button ID="btnPostBack" runat="server" Text="返 回" Visible="false" CausesValidation="false" />
             </td>
         </tr>
     </table>

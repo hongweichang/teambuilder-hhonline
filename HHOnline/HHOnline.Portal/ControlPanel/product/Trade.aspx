@@ -36,7 +36,7 @@
                         <RoleGroups>
                             <asp:RoleGroup Roles="TradeModule-Add">
                                 <ContentTemplate>
-                                    <asp:LinkButton ID="lnkAddChild" runat="server" CommandName="AddChild" SkinID="lnkadd"
+                                    <asp:LinkButton ID="lnkAddChild" runat="server" CommandName="AddChild" SkinID="lnkaddchild"
                                         PostBackUrl="#"></asp:LinkButton>
                                 </ContentTemplate>
                             </asp:RoleGroup>
@@ -62,7 +62,7 @@
                             </asp:RoleGroup>
                         </RoleGroups>
                     </asp:LoginView>
-                  <%--  <asp:LoginView ID="LoginView3" runat="server">
+                    <%--  <asp:LoginView ID="LoginView3" runat="server">
                         <RoleGroups>
                             <asp:RoleGroup Roles="TradeModule-View">
                                 <ContentTemplate>

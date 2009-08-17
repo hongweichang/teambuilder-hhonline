@@ -262,5 +262,18 @@ public partial class ControlPanel_Product_Product : HHPage
             }
         }
     }
+
+    protected void egvProducts_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "ViewPrice")
+        {
+            GridViewRow row = ((LinkButton)e.CommandSource).Parent.Parent.Parent.Parent as GridViewRow;
+            if (row != null)
+            {
+                int index = row.RowIndex;
+                Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productprice&ProductID=" + egvProducts.DataKeys[index].Value);
+            }
+        }
+    }
     #endregion
 }

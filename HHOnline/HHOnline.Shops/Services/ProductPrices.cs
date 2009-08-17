@@ -17,34 +17,54 @@ namespace HHOnline.Shops
         /// </summary>
         /// <param name="price"></param>
         /// <returns></returns>
-        public DataActionStatus Create(ProductPrice price)
+        public static DataActionStatus Create(ProductPrice price)
         {
             DataActionStatus status;
             ShopDataProvider.Instance.CreateUpdatePrice(price, DataProviderAction.Create, out status);
             return status;
         }
 
-        public DataActionStatus Update(ProductPrice price)
+        /// <summary>
+        /// 编辑产品报价
+        /// </summary>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public static DataActionStatus Update(ProductPrice price)
         {
             DataActionStatus status;
             ShopDataProvider.Instance.CreateUpdatePrice(price, DataProviderAction.Update, out status);
             return status;
         }
 
-        public DataActionStatus Delete(int priceID)
+        /// <summary>
+        /// 删除产品报价
+        /// </summary>
+        /// <param name="priceID"></param>
+        /// <returns></returns>
+        public static DataActionStatus Delete(int priceID)
         {
             DataActionStatus status = ShopDataProvider.Instance.DeletePrice(priceID);
             return status;
         }
 
-        public ProductPrice GetPrice(int priceID)
+        /// <summary>
+        /// 获取产品报价信息
+        /// </summary>
+        /// <param name="priceID"></param>
+        /// <returns></returns>
+        public static ProductPrice GetPrice(int priceID)
         {
             ProductPrice price = null;
             price = ShopDataProvider.Instance.GetPrice(priceID);
             return price;
         }
 
-        public List<ProductPrice> GetPrices(int productID)
+        /// <summary>
+        /// 获取产品报价信息
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        public static List<ProductPrice> GetPrices(int productID)
         {
             List<ProductPrice> prices = null;
             return prices;

@@ -14,6 +14,7 @@ namespace HHOnline.Shops
         private int? brandID;
         private int? categoryID;
         private int? industryID;
+        private int? productID;
         private string productNameFilter;
         private string keywordsFilter;
         private bool? hasPictures;
@@ -147,6 +148,21 @@ namespace HHOnline.Shops
         public string[] Tags = null;
 
         /// <summary>
+        /// 产品编号
+        /// </summary>
+        public int? ProductID
+        {
+            get
+            {
+                return productID;
+            }
+            set
+            {
+                productID = value;
+            }
+        }
+
+        /// <summary>
         /// 产品品牌
         /// </summary>
         public int? BrandID
@@ -229,13 +245,14 @@ namespace HHOnline.Shops
         public string GetQueryKey()
         {
             return CacheKeyManager.ProductListKey + string.Format(
-                "PI{0}PS{1}SB{2}SO{3}PN{4}PK{5}BI{6}CI{7}HP{8}PR{9}PB{10}",
+                "PI{0}PS{1}SB{2}SO{3}PN{4}PK{5}DI{6}BI{7}CI{8}HP{9}PR{10}PB{11}",
                 this.PageIndex,
                 this.PageSize,
                 this.ProductOrderBy,
                 this.SortOrder,
                 this.ProductNameFilter,
                 this.ProductKeywordsFilter,
+                this.ProductID.HasValue ? this.ProductID.Value : -1,
                 this.BrandID.HasValue ? this.BrandID.Value : -1,
                 this.CategoryID.HasValue ? this.CategoryID.Value : -1,
                 this.HasPictures.HasValue ? Convert.ToInt32(this.HasPictures.Value) : -1,
@@ -254,6 +271,16 @@ namespace HHOnline.Shops
             //ProductName
             if (!GlobalSettings.IsNullOrEmpty(queryString["pn"]))
                 query.ProductNameFilter = queryString["pn"];
+            //ProductID
+            if (!GlobalSettings.IsNullOrEmpty(queryString["di"]))
+            {
+                query.ProductID = Convert.ToInt32(queryString["di"]);
+                Product product = Products.GetProduct(query.ProductID.Value);
+                if (product != null)
+                {
+                    query.ProductNameFilter = product.ProductName;
+                }
+            }
             //BrandID
             if (!GlobalSettings.IsNullOrEmpty(queryString["bi"]))
                 query.BrandID = Convert.ToInt32(queryString["bi"]);
