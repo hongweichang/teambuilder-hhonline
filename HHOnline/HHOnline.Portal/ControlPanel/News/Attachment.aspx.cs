@@ -101,7 +101,7 @@ public partial class ControlPanel_News_Attachment : HHPage
 		query.PageSize = egvAttachments.PageSize;
 		query.PageIndex = egvAttachments.PageIndex;
 
-		PagingDataSet<ArticleAttachment> products = ArticleManager.GetAttachments(query);
+		PagingDataSet<ArticleAttachment> products = ArticleAttachments.GetAttachments(query);
 		egvAttachments.DataSource = products.Records;
 		egvAttachments.DataBind();
 	}
@@ -160,7 +160,7 @@ public partial class ControlPanel_News_Attachment : HHPage
 	protected void egvAttachments_RowDeleting(object sender, GridViewDeleteEventArgs e)
 	{
 		int attachmentID = (int)egvAttachments.DataKeys[e.RowIndex].Value;
-		DataActionStatus status = ArticleManager.DeleteAttachment(attachmentID);
+		DataActionStatus status = ArticleAttachments.DeleteAttachment(attachmentID);
 
 		switch (status)
 		{

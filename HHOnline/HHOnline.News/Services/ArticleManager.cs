@@ -101,13 +101,6 @@ namespace HHOnline.News.Services
 			return result;
 		}
 
-		public static DataActionStatus DeleteAttachment(int id)
-		{
-			DataActionStatus result = ArticleAttachmentProvider.Instance.DeleteArticleAttachment(id);
-
-			return result;
-		}
-
 		/// <summary>
 		/// 添加文章
 		/// </summary>
@@ -240,17 +233,6 @@ namespace HHOnline.News.Services
 		static void GetAllArticlesMethod(ref object list, params object[] ActionID)
 		{
 			list = ArticleProvider.Instance.GetAllArticles();
-		}
-
-		public static PagingDataSet<ArticleAttachment> GetAttachments(AttachmentQuery query)
-		{
-			int totalRecods;
-			List<ArticleAttachment> attachmentList = ArticleAttachmentProvider.Instance.GetAllArticleAttachments(query, out totalRecods);
-			PagingDataSet<ArticleAttachment> articles = new PagingDataSet<ArticleAttachment>();
-			articles.Records = attachmentList;
-			articles.TotalRecords = totalRecods;
-
-			return articles;
 		}
 
 		/// <summary>

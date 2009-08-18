@@ -75,7 +75,7 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 			}
 			catch (Exception ex)
 			{
-                throw new HHException(ExceptionType.ModuleInitFail, ex.Message);
+				throw new HHException(ExceptionType.ModuleInitFail, ex.Message);
 			}
 		}
 	}
@@ -84,88 +84,74 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 	{
 		if (isEdit)
 		{
-			try
+			int id = int.Parse(Request.QueryString["ID"]);
+			Article article = ArticleManager.GetArticle(id);
+
+			article.Title = txtTitle.Text;
+			article.SubTitle = txtSubTitle.Text;
+			article.Abstract = txtAbstract.Text;
+			article.Content = txtContent.Text;
+			article.CopyFrom = txtCopyFrom.Text;
+			article.Author = txtAuthor.Text;
+			article.Keywords = txtKeywords.Text;
+			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
+			article.ArticleMemo = txtMemo.Text;
+			article.Status = csArticle.SelectedValue;
+
+			article.UpdateTime = DateTime.Now;
+			article.UpdateUser = Profile.AccountInfo.UserID;
+
+			DataActionStatus status = ArticleManager.UpdateArticle(article);
+
+			if (status == DataActionStatus.DuplicateName)
 			{
-				int id = int.Parse(Request.QueryString["ID"]);
-				Article article = ArticleManager.GetArticle(id);
-
-				article.Title = txtTitle.Text;
-				article.SubTitle = txtSubTitle.Text;
-				article.Abstract = txtAbstract.Text;
-				article.Content = txtContent.Text;
-				article.CopyFrom = txtCopyFrom.Text;
-				article.Author = txtAuthor.Text;
-				article.Keywords = txtKeywords.Text;
-				article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
-				article.ArticleMemo = txtMemo.Text;
-				article.Status = csArticle.SelectedValue;
-
-				article.UpdateTime = DateTime.Now;
-				article.UpdateUser = Profile.AccountInfo.UserID;
-
-				DataActionStatus status = ArticleManager.UpdateArticle(article);
-
-				if (status == DataActionStatus.DuplicateName)
-				{
-					//mbMsg.ShowMsg("新增资讯失败，存在同名资讯！");
-				}
-				else if (status == DataActionStatus.UnknownFailure)
-				{
-                    throw new HHException(ExceptionType.Failed, "更新资讯信息失败，请联系管理员！");
-				}
-				else if (status == DataActionStatus.Success)
-				{
-                    throw new HHException(ExceptionType.Success, "操作成功，已成功更新资讯！");
-				}
+				//mbMsg.ShowMsg("新增资讯失败，存在同名资讯！");
 			}
-			catch (Exception ex)
+			else if (status == DataActionStatus.UnknownFailure)
 			{
-                throw new HHException(ExceptionType.Failed, ex.Message);
+				throw new HHException(ExceptionType.Failed, "更新资讯信息失败，请联系管理员！");
+			}
+			else if (status == DataActionStatus.Success)
+			{
+				throw new HHException(ExceptionType.Success, "操作成功，已成功更新资讯！");
 			}
 		}
 		else
 		{
-			try
+			Article article = new Article();
+			int parentID = int.Parse(Request.QueryString["catid"]);
+
+			article.Category = parentID;
+			article.Title = txtTitle.Text;
+			article.SubTitle = txtSubTitle.Text;
+			article.Abstract = txtAbstract.Text;
+			article.Content = txtContent.Text;
+			article.CopyFrom = txtCopyFrom.Text;
+			article.Author = txtAuthor.Text;
+			article.Keywords = txtKeywords.Text;
+			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
+			article.ArticleMemo = txtMemo.Text;
+			article.Status = csArticle.SelectedValue;
+
+			article.CreateTime = DateTime.Now;
+			article.CreateUser = Profile.AccountInfo.UserID;
+			article.UpdateTime = DateTime.Now;
+			article.UpdateUser = Profile.AccountInfo.UserID;
+
+			DataActionStatus status;
+			ArticleManager.AddArticle(article, out status);
+
+			if (status == DataActionStatus.DuplicateName)
 			{
-				Article article = new Article();
-				int parentID = int.Parse(Request.QueryString["catid"]);
-
-				article.Category = parentID;
-				article.Title = txtTitle.Text;
-				article.SubTitle = txtSubTitle.Text;
-				article.Abstract = txtAbstract.Text;
-				article.Content = txtContent.Text;
-				article.CopyFrom = txtCopyFrom.Text;
-				article.Author = txtAuthor.Text;
-				article.Keywords = txtKeywords.Text;
-				article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
-				article.ArticleMemo = txtMemo.Text;
-				article.Status = csArticle.SelectedValue;
-
-				article.CreateTime = DateTime.Now;
-				article.CreateUser = Profile.AccountInfo.UserID;
-				article.UpdateTime = DateTime.Now;
-				article.UpdateUser = Profile.AccountInfo.UserID;
-
-				DataActionStatus status;
-				ArticleManager.AddArticle(article, out status);
-
-				if (status == DataActionStatus.DuplicateName)
-				{
-					 throw new HHException(ExceptionType.Failed, "新增资讯失败，存在同名资讯！");
-				}
-				else if (status == DataActionStatus.UnknownFailure)
-				{
-					 throw new HHException(ExceptionType.Failed, "新增资讯失败，请联系管理员！");
-				}
-				else if (status == DataActionStatus.Success)
-				{
-                    throw new HHException(ExceptionType.Success, "操作成功，已成功增加一个新的资讯！");
-				}
+				throw new HHException(ExceptionType.Failed, "新增资讯失败，存在同名资讯！");
 			}
-			catch (Exception ex)
+			else if (status == DataActionStatus.UnknownFailure)
 			{
-                throw new HHException(ExceptionType.Failed, ex.Message);
+				throw new HHException(ExceptionType.Failed, "新增资讯失败，请联系管理员！");
+			}
+			else if (status == DataActionStatus.Success)
+			{
+				throw new HHException(ExceptionType.Success, "操作成功，已成功增加一个新的资讯！");
 			}
 		}
 	}
@@ -174,9 +160,9 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 	{
 		this.ShortTitle = "新增文章";
 
-        this.SetTitle();
-        this.SetTabName(this.ShortTitle);
-		AddJavaScriptInclude("scripts/jquery.datepick.js",false, false);
-        AddJavaScriptInclude("scripts/pages/aticleadd.aspx.js", false, false);
+		this.SetTitle();
+		this.SetTabName(this.ShortTitle);
+		AddJavaScriptInclude("scripts/jquery.datepick.js", false, false);
+		AddJavaScriptInclude("scripts/pages/aticleadd.aspx.js", false, false);
 	}
 }

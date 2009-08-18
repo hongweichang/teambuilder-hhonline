@@ -28,12 +28,12 @@ namespace HHOnline.Data
 
             if (query.Name != null)
             {
-                builder.AddWhere("AttachmentName", Comparison.Like, query.Name);
+                builder.AddWhere("AttachmentName", Comparison.Like, "%" + query.Name + "%");
             }
 
             if (query.ContentType != null)
             {
-                builder.AddWhere("ContentType", Comparison.Like, query.ContentType);
+				builder.AddWhere("ContentType", Comparison.Like, "%" + query.ContentType + "%");
             }
 
             if (query.ContentStartSize.HasValue)
