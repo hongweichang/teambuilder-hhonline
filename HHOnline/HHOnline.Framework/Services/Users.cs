@@ -113,6 +113,17 @@ namespace HHOnline.Framework
         #endregion
 
         #region CreateUser
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="company"></param>
+        /// <returns></returns>
+        public static CreateUserStatus Create(User user, Company company)
+        {
+            return CreateUserStatus.Success;
+        }
+
         public static CreateUserStatus Create(User user)
         {
             return Create(user, false);
