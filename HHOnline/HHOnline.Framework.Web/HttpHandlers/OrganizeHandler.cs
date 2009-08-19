@@ -33,6 +33,9 @@ namespace HHOnline.Framework.Web.HttpHandlers
                     case "ValidUser":
                         msg = ValidUser(context,ref result);
                         break;
+                    case "ValidName":
+                        msg = ValidName(context, ref result);
+                        break;
                 }
                 msg = "{suc:" + result.ToString().ToLower() + ",msg:'" + msg + "'}";
             }
@@ -173,6 +176,20 @@ namespace HHOnline.Framework.Web.HttpHandlers
                     throw new Exception("验证码错误，请重新输入！");
             }
             return "";
+        }
+        string ValidName(HttpContext context, ref bool result)
+        {
+            User u = Users.GetUser(context.Request["name"]);
+            if (u == null)
+            {
+                result = true;
+                return "用户名可以使用！";
+            }
+            else
+            {
+                result = false;
+                return "用户名已经被注册！";
+            }
         }
         #endregion
     }

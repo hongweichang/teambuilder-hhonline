@@ -11,7 +11,7 @@ public partial class Register : HHPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
     public override void OnPageLoaded()
     {

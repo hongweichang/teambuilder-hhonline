@@ -180,7 +180,7 @@ digitalspaghetti.password = {
                     foreColor: digitalspaghetti.password.options.colors[2][2]
                 };
                 digitalspaghetti.password.strText = digitalspaghetti.password.options.verdicts[2];
-                digitalspaghetti.password.width = "60";
+                digitalspaghetti.password.width = "50";
             } else if (digitalspaghetti.password.totalscore > digitalspaghetti.password.options.scores[2] && digitalspaghetti.password.totalscore <= digitalspaghetti.password.options.scores[3]) {
                 digitalspaghetti.password.colors = {
                     strColor: digitalspaghetti.password.options.colors[3][0],
@@ -188,7 +188,7 @@ digitalspaghetti.password = {
                     foreColor: digitalspaghetti.password.options.colors[3][2]
                 };
                 digitalspaghetti.password.strText = digitalspaghetti.password.options.verdicts[3];
-                digitalspaghetti.password.width = "75";
+                digitalspaghetti.password.width = "60";
             } else {
                 digitalspaghetti.password.colors = {
                     strColor: digitalspaghetti.password.options.colors[4][0],
@@ -196,7 +196,7 @@ digitalspaghetti.password = {
                     foreColor: digitalspaghetti.password.options.colors[4][2]
                 };
                 digitalspaghetti.password.strText = digitalspaghetti.password.options.verdicts[4];
-                digitalspaghetti.password.width = "85";
+                digitalspaghetti.password.width = "75";
             }
             jQuery('.password-strength-bar').stop();
 
