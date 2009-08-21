@@ -80,6 +80,57 @@ namespace HHOnline.Data
         #endregion
 
         #region User
+        public override CreateUserStatus CreateUpdateUser(User user, Company company)
+        {
+            ELParameter paramUserID = new ELParameter("@UserID", DbType.Int32, 4, ParameterDirection.Output);
+            ELParameter paramCompanyID = new ELParameter("@CompanyID", DbType.Int32, 4, ParameterDirection.Output);
+            ELParameter paramReturn = new ELParameter("@ReturnValue", DbType.Int32, 4, ParameterDirection.ReturnValue);
+            ELParameter[] elParameters = new ELParameter[]{
+                paramUserID,
+                paramCompanyID,
+                paramReturn,
+                new ELParameter("@LoginName", DbType.String, user.UserName),
+                new ELParameter("@Password", DbType.String, GlobalSettings.EncodePassword(user.Password)),
+                new ELParameter("@UserStatus", DbType.Int32, user.AccountStatus),
+                new ELParameter("@DisplayName", DbType.String, user.DisplayName),
+                new ELParameter("@UserEmail", DbType.String, user.Email),
+                new ELParameter("@UserMobile", DbType.String, user.Mobile),
+                new ELParameter("@UserPhone", DbType.String, user.Phone),
+                new ELParameter("@UserFax", DbType.String, user.Fax),
+                new ELParameter("@UserTitle", DbType.String, user.Title),
+                new ELParameter("@PasswordQuestion", DbType.String, user.PasswordQuestion),
+                new ELParameter("@PasswordAnswer", DbType.String, GlobalSettings.EncodePassword(user.PasswordAnswer)),
+                new ELParameter("@UserMemo", DbType.String, user.Remark),
+                new ELParameter("@UserType", DbType.Int32, user.UserType),
+                new ELParameter("@OrganizationID",DbType.Int32,DataHelper.IntOrNull(user.OrganizationID)),
+                new ELParameter("@IsManager",DbType.Int32,user.IsManager),
+                new ELParameter("@CompanyType",DbType.Int32,company.CompanyType),
+                new ELParameter("@CompanyRegion",DbType.Int32,DataHelper.IntOrNull(company.CompanyRegion)),
+                new ELParameter("@CompanyName",DbType.String,company.CompanyName),
+                new ELParameter("@CompanyAddress",DbType.String,company.Address),
+                new ELParameter("@CompanyZipcode",DbType.String,company.Zipcode),
+                new ELParameter("@CompanyPhone",DbType.String,company.Phone),
+                new ELParameter("@CompanyFax",DbType.String,company.Fax),
+                new ELParameter("@CompanyWebsite",DbType.String,company.Website),
+                new ELParameter("@CompanyOrgcode",DbType.String,company.Orgcode),
+                new ELParameter("@CompanyRegcode",DbType.String,company.Regcode),
+                new ELParameter("@CompanyMemo",DbType.String,company.Remark),
+                new ELParameter("@CompanyStatus",DbType.Int32,company.CompanyStatus),
+                new ELParameter("@UserPropertyNames",DbType.String, user.GetSerializerData().Keys),
+                new ELParameter("@UserPropertyValues",DbType.String,user.GetSerializerData().Values),
+                new ELParameter("@CompanyPropertyNames",DbType.String,company.GetSerializerData().Keys),
+                new ELParameter("@CompanyPropertyValues",DbType.String,company.GetSerializerData().Values),
+            };
+            DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_UserCompany_Create", elParameters);
+            CreateUserStatus status = (CreateUserStatus)Convert.ToInt32(paramReturn.Value);
+            if (status == CreateUserStatus.Success)
+            {
+                user.UserID = Convert.ToInt32(paramUserID.Value);
+                company.CompanyID = Convert.ToInt32(paramCompanyID.Value);
+            }
+            return status;
+        }
+
         public override User CreateUpdateUser(User user, DataProviderAction action, out CreateUserStatus status)
         {
             List<ELParameter> elParameters = new List<ELParameter>();
@@ -252,7 +303,7 @@ namespace HHOnline.Data
             List<ELParameter> elParameters = new List<ELParameter>();
             elParameters.Add(new ELParameter("@Action", DbType.Int32, action));
             elParameters.Add(new ELParameter("@CompanyType", DbType.Int32, company.CompanyType));
-            elParameters.Add(new ELParameter("@CompanyRegion", DbType.Int32, company.CompanyRegion));
+            elParameters.Add(new ELParameter("@CompanyRegion", DbType.Int32, DataHelper.IntOrNull(company.CompanyRegion)));
             elParameters.Add(new ELParameter("@CompanyName", DbType.String, company.CompanyName));
             elParameters.Add(new ELParameter("@CompanyAddress", DbType.String, company.Address));
             elParameters.Add(new ELParameter("@CompanyZipcode", DbType.String, company.Zipcode));
@@ -746,5 +797,7 @@ namespace HHOnline.Data
             }
         }
         #endregion
+
+
     }
 }

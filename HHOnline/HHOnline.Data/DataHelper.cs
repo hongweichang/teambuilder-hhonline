@@ -51,7 +51,7 @@ namespace HHOnline.Data
         {
             foreach (ELParameter param in commandParameters)
             {
-                if (param.Direction == ParameterDirection.Output)
+                if (param.Direction == ParameterDirection.Output || param.Direction == ParameterDirection.ReturnValue)
                 {
                     param.Value = cmd.Parameters[param.ParameterName].Value;
                 }
@@ -64,6 +64,9 @@ namespace HHOnline.Data
             {
                 if (parameter.Direction == ParameterDirection.Input)
                     db.AddInParameter(dbCommand, parameter.ParameterName, parameter.DbType, parameter.Value);
+                else if (parameter.Direction == ParameterDirection.ReturnValue)
+                    db.AddParameter(dbCommand, parameter.ParameterName, parameter.DbType, ParameterDirection.ReturnValue,
+                        "", DataRowVersion.Default, null);
                 else
                     db.AddOutParameter(dbCommand, parameter.ParameterName, parameter.DbType, parameter.Size);
             }

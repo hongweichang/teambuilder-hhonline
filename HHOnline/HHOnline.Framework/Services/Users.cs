@@ -114,14 +114,34 @@ namespace HHOnline.Framework
 
         #region CreateUser
         /// <summary>
-        /// 创建用户
+        /// /创建用户
         /// </summary>
         /// <param name="user"></param>
         /// <param name="company"></param>
         /// <returns></returns>
         public static CreateUserStatus Create(User user, Company company)
         {
-            return CreateUserStatus.Success;
+            return Create(user, company, false);
+        }
+
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="company"></param>
+        /// <returns></returns>
+        public static CreateUserStatus Create(User user, Company company, bool ignoreDisallowNames)
+        {
+            //验证用户名是否合法
+            if ((!ignoreDisallowNames) && (DisallowedNames.NameIsDisallowed(user.UserName)))
+                return CreateUserStatus.DisallowedUsername;
+            //触发事件
+            GlobalEvents.BeforeUser(user, ObjectState.Create);
+            CreateUserStatus status;
+            CommonDataProvider dp = CommonDataProvider.Instance;
+            status = dp.CreateUpdateUser(user, company);
+            GlobalEvents.AfterUser(user, ObjectState.Create);
+            return status;
         }
 
         public static CreateUserStatus Create(User user)

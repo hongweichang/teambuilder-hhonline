@@ -63,6 +63,8 @@ namespace HHOnline.Framework.Providers
         #region Users
         public abstract User CreateUpdateUser(User user, DataProviderAction action, out CreateUserStatus status);
 
+        public abstract CreateUserStatus CreateUpdateUser(User user, Company company);
+
         public abstract List<int> GetUsersInRole(int roleID);
 
         public abstract User GetUser(int userID, string userName, bool isOnline);

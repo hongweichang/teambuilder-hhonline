@@ -66,11 +66,17 @@ public partial class Index : HHPage
     protected void Button2_Click(object sender, EventArgs e)
     {
         User user = new User();
-        user.UserName = "believe3301";
+        user.UserName = "believe3303";
         user.UserType = UserType.InnerUser;
         user.Title = "CEO";
         user.Password = "12345";
-        CreateUserStatus status = Users.Create(user);
+        Company company = new Company();
+        company.CompanyName = "CompanyName";
+        company.CompanyStatus = CompanyStauts.Authenticated;
+        company.Address = "Address12";
+        company.CompanyRegion = 1;
+
+        CreateUserStatus status = Users.Create(user, company);
         switch (status)
         {
             case CreateUserStatus.DisallowedUsername:
