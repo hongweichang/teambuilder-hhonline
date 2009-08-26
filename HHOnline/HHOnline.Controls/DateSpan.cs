@@ -51,20 +51,29 @@ namespace HHOnline.Controls
             set
             {
                 EnsureChildControls();
-                string[] spans = value.Split('-');
-                foreach (string span in spans)
+                if (string.IsNullOrEmpty(value))
                 {
-                    if (span.Contains("Y"))
+                    ddlYear.SelectedIndex = 0;
+                    ddlMonth.SelectedIndex = 0;
+                    ddlDay.SelectedIndex = 0;
+                }
+                else
+                {
+                    string[] spans = value.Split('-');
+                    foreach (string span in spans)
                     {
-                        ddlYear.Text = span.Replace("Y", "").Trim();
-                    }
-                    else if (span.Contains("M"))
-                    {
-                        ddlMonth.Text = span.Replace("M", "").Trim();
-                    }
-                    if (span.Contains("D"))
-                    {
-                        ddlDay.Text = span.Replace("D", "").Trim();
+                        if (span.Contains("Y"))
+                        {
+                            ddlYear.Text = span.Replace("Y", "").Trim();
+                        }
+                        else if (span.Contains("M"))
+                        {
+                            ddlMonth.Text = span.Replace("M", "").Trim();
+                        }
+                        if (span.Contains("D"))
+                        {
+                            ddlDay.Text = span.Replace("D", "").Trim();
+                        }
                     }
                 }
             }

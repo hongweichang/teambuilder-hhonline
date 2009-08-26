@@ -18,6 +18,36 @@
         </tr>
         <tr>
             <th style="width: 100px;">
+                报价起始日期
+            </th>
+            <td>
+                <asp:TextBox ID="txtQuoteFrom" rel="datepicker" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revQuoteFrom" runat="server" ControlToValidate="txtQuoteFrom"
+                    ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
+                </asp:RegularExpressionValidator>
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 100px;">
+                报价截止日期
+            </th>
+            <td>
+                <asp:TextBox ID="txtQuoteEnd" rel="datepicker" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revQuoteEnd" runat="server" ControlToValidate="txtQuoteEnd"
+                    ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
+                </asp:RegularExpressionValidator>
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 100px;">
+                报价自动续期周期
+            </th>
+            <td>
+                <asp:TextBox ID="txtQuoteRenewal" runat="server"></asp:TextBox>月
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 100px;">
                 最短供货时间
             </th>
             <td>
@@ -64,6 +94,15 @@
             </th>
             <td>
                 <asp:TextBox ID="txtQuoteMOQ" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 100px;">
+                供货区域
+            </th>
+            <td>
+                <asp:DropDownList ID="ddlSupplyRegion" runat="server">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
@@ -136,45 +175,6 @@
             </th>
             <td>
                 <asp:TextBox ID="txtPriceGradeE" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <th style="width: 100px;">
-                供货区域
-            </th>
-            <td>
-                <asp:DropDownList ID="ddlSupplyRegion" runat="server">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <th style="width: 100px;">
-                报价起始日期
-            </th>
-            <td>
-                <asp:TextBox ID="txtQuoteFrom" rel="datepicker" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revQuoteFrom" runat="server" ControlToValidate="txtQuoteFrom"
-                    ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
-                </asp:RegularExpressionValidator>
-            </td>
-        </tr>
-        <tr>
-            <th style="width: 100px;">
-                报价截止日期
-            </th>
-            <td>
-                <asp:TextBox ID="txtQuoteEnd" rel="datepicker" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revQuoteEnd" runat="server" ControlToValidate="txtQuoteEnd"
-                    ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
-                </asp:RegularExpressionValidator>
-            </td>
-        </tr>
-        <tr>
-            <th style="width: 100px;">
-                报价自动续期周期
-            </th>
-            <td>
-                <asp:TextBox ID="txtQuoteRenewal" runat="server"></asp:TextBox>月
             </td>
         </tr>
         <tr>
