@@ -2731,3 +2731,18 @@ fieldset.fsNormal legend
     background-color:#FFF5FA;
     border:1px solid #F8B3D0;
     }
+.homemastercontent
+{
+    float:left;
+    width:100%;
+    padding:10px 0;
+    }
+.userLicenceContent
+{
+    text-align:center;
+    }
+.userLicenceContent h4
+{
+    padding:10px;
+    font-size:14px;
+    }

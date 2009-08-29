@@ -221,7 +221,7 @@
         </table>
     </fieldset>
     <div class="divAgree">
-        <input type="checkbox" checked="checked" id="chkAgree" /><a href="#" target="_blank">我同意注册服务条款。</a>
+        <input type="checkbox" checked="checked" id="chkAgree" /><a href="pages/others-userlicence" target="_blank">我同意注册服务条款。</a>
     </div>
     <asp:Button rel="register" ID="btnRegister" runat="server" Text=" 注册新用户 " OnClick="btnRegister_Click" />
 </div>

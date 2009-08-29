@@ -15,7 +15,8 @@ namespace HHOnline.Framework
         enum ResourceManagerType
         {
             String,
-            ErrorMessage
+            ErrorMessage,
+            UserLicence
         }
         #endregion
 
@@ -127,6 +128,32 @@ namespace HHOnline.Framework
         }
         #endregion
 
+        #region GetLicence
+        public static string GetLicence()
+        {
+            Hashtable resources = GetResource(ResourceManagerType.UserLicence, "zh-CN", "UserLicence.xml", false);
+            return resources["licence"].ToString();
+        }
+        public static void SaveLicence(string licence)
+        {
+            string filePath = GlobalSettings.PhysicalPath("Languages\\zh-CN\\UserLicence.xml");
+
+            XmlDocument d = new XmlDocument();
+            d.Load(filePath);
+            XmlCDataSection cdata = null;
+            foreach (XmlNode n in d.SelectSingleNode("root").ChildNodes)
+            {
+                if (n.NodeType != XmlNodeType.Comment)
+                {
+                    cdata = d.CreateCDataSection(licence);
+                    n.InnerText = cdata.Value;
+                    break;
+                }
+            }
+            d.Save(filePath);
+        }
+        #endregion
+
         #region GetResource
         private static Hashtable GetResource(ResourceManagerType resourceType, string userLanguage, string fileName, bool defaultOnly)
         {
@@ -179,6 +206,13 @@ namespace HHOnline.Framework
                                 target.Add(n.Attributes["name"].Value, n.InnerText);
                             else
                                 target[n.Attributes["name"].Value] = n.InnerText;
+                            break;
+
+                        case ResourceManagerType.UserLicence:
+                            if (target["licence"] == null)
+                            {
+                                target.Add("licence", n.InnerText);
+                            }
                             break;
                     }
                 }
