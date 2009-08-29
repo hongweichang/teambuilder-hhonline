@@ -36,6 +36,9 @@ namespace HHOnline.Framework.Web.HttpHandlers
                     case "ValidName":
                         msg = ValidName(context, ref result);
                         break;
+                    case "GetRegion":
+                        msg = GetRegion(context, ref result);
+                        break;
                 }
                 msg = "{suc:" + result.ToString().ToLower() + ",msg:'" + msg + "'}";
             }
@@ -47,6 +50,24 @@ namespace HHOnline.Framework.Web.HttpHandlers
         }
 
         #region -Methods-
+        string GetRegion(HttpContext context, ref bool result)
+        {
+            string msg = "";
+            string type = context.Request["type"];
+            switch (type)
+            {
+                case "1":
+                    msg = Newtonsoft.Json.JavaScriptConvert.SerializeObject(Areas.GetDistinctAreas());
+                    result = true;
+                    break;
+                case "2":
+                    msg = Newtonsoft.Json.JavaScriptConvert.SerializeObject(Areas.GetAllChildAreas(int.Parse(context.Request["areaId"])));
+                    result = true;
+                    break;
+            }
+            return msg;
+        }
+
         string DeleteOrg(HHPrincipal principal, HttpContext context,ref bool result)
         {
             string msg = string.Empty;
