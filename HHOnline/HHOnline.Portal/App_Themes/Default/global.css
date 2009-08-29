@@ -2670,3 +2670,64 @@ fieldset.fsNormal legend
     padding-right:4px;
     border-bottom:solid 4px #fff;
     }
+.divAgree
+{
+    height:30px;
+    width:200px;
+    margin:auto;
+    }
+.divAgree input
+{
+    width:13px;
+    height:13px;
+    display:block;
+    margin:10px 0;
+    float:left;
+    }
+.divAgree a
+{
+    margin-top:9px;
+    margin-left:5px;
+    height:18px;
+    line-height:18px;
+    display:block;
+    float:left;
+    color:#000fff;
+    }
+#regionViewer
+{
+    width:520px;
+    height:auto;
+    padding:10px;
+    position:absolute;
+    z-index:500;
+    display:none;
+    border:solid 4px #ccc;
+    background-color:#fff;
+    float:left;
+    height:auto;
+    }
+.viewerLoader
+{
+    background:#fff url(../../images/default/indicator.gif) no-repeat 20px center;
+    text-indent:40px;
+    }
+#regionViewer a
+{
+    display:block;
+    padding:5px 10px;
+    width:100px;
+    margin:3px;
+    float:left;
+    background-color:#E8F5FE;
+    border:1px solid #A9C9E2;
+    text-decoration:none;
+    color:#000;
+    }
+#regionViewer a:hover
+{
+    text-decoration:none;
+    color:#ff0000;
+    background-color:#FFF5FA;
+    border:1px solid #F8B3D0;
+    }
