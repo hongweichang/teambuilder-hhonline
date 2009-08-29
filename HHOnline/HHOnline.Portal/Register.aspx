@@ -142,8 +142,10 @@
             </tr>
             <tr>
                 <th style="width:100px;">所属区域(<span class="needed" >必填</span>)</th>
-                <td><asp:TextBox Width="230px" ID="txtRegion" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtRegion"
+                <td><asp:TextBox Width="230px" ID="txtRegion" runat="server" ReadOnly="true"></asp:TextBox>
+                        <img id="showArea" src="images/default/choosearea.gif" alt="选择区域" title="选择区域" style="cursor:pointer" />
+                        <asp:HiddenField ID="hfRegionCode" runat="server" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtRegion"
                             ErrorMessage="必须填写！" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
                 <td><span class="tip">区域可为分区、省、市！</span></td>
@@ -212,12 +214,17 @@
              <tr>
                 <th>备注(<span class="unneeded" >可选</span>)</th>
                 <td>
-                    <asp:TextBox Width="230px" ID="txtCompanyMemo" runat="server" MaxLength="500" TextMode="MultiLine" Height="150px"></asp:TextBox>
+                    <asp:TextBox Width="230px" ID="txtCompanyMemo" runat="server" MaxLength="500" TextMode="MultiLine" Height="100px"></asp:TextBox>
                 </td>
                 <td><span class="tip">简要描述公司特色！</span></td>                
             </tr>
         </table>
     </fieldset>
+    <div class="divAgree">
+        <input type="checkbox" checked="checked" id="chkAgree" /><a href="#" target="_blank">我同意注册服务条款。</a>
+    </div>
+    <asp:Button rel="register" ID="btnRegister" runat="server" Text=" 注册新用户 " OnClick="btnRegister_Click" />
 </div>
+<div id="regionViewer"></div>
 </asp:Content>
 
