@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
 using System.Reflection;
 using HHOnline.Framework;
+using System.Web.Security;
 
 public partial class Register : HHPage
 {
@@ -13,30 +14,39 @@ public partial class Register : HHPage
     {
         if (!IsPostBack)
         {
-            BindRegion();
+            if (User.Identity.IsAuthenticated)
+            {
+                throw new HHException(ExceptionType.AccessDenied, "您已经成功登录，无法继续访问注册页面！");
+            }
         }
+        BindRegion();
     }
     void BindRegion()
     {
-        string regId = hfRegionCode.Value;
-        if (!string.IsNullOrEmpty(regId))
+        try
         {
-            Area a = Areas.GetArea(regId);
-            txtRegion.Text = a.RegionName;
+            int regId = int.Parse(hfRegionCode.Value);
+            if (regId != 0)
+            {
+                Area a = Areas.GetArea(regId);
+                txtRegion.Text = a.RegionName;
+            }
         }
+        catch { }
     }
     protected void btnRegister_Click(object sender, EventArgs e)
     {
         User u = new User();
         u.UserName = txtLoginName.Text.Trim();
 
-        if (Users.GetUser(u.UserName) == null)
+        if (Users.GetUser(u.UserName) != null)
         {
             base.ExecuteJs("alert('用户名重复，要完成注册，请尝试其它的用户名！')", false);
             return;
         }
         u.Password = txtPassword.Text.Trim();
         u.DisplayName = txtDisplayName.Text.Trim();
+        u.UserType = UserType.CompanyUser;
         u.PasswordQuestion = txtQuestion.Text.Trim();
         u.PasswordAnswer = txtAnswer.Text.Trim();
         u.Email = txtEmail.Text.Trim();
@@ -65,14 +75,32 @@ public partial class Register : HHPage
         switch (status)
         {
             case CreateUserStatus.Success:
+                HttpCookie cookie = FormsAuthentication.GetAuthCookie(u.UserName, true);
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+                FormsAuthenticationTicket newticket = new FormsAuthenticationTicket(
+                                                                                ticket.Version,
+                                                                                ticket.Name,
+                                                                                ticket.IssueDate,
+                                                                                ticket.Expiration,
+                                                                                ticket.IsPersistent,
+                                                                                DateTime.Now.ToShortDateString());
+                cookie.Value = FormsAuthentication.Encrypt(newticket);
+                HHCookie.AddCookie(cookie);
+                string url = FormsAuthentication.GetRedirectUrl(u.UserName, true);
+
+                throw new HHException(ExceptionType.Success, "注册成功，请返回首页继续浏览！");
                 break;
             case CreateUserStatus.DisallowedUsername:
+                base.ExecuteJs("注册失败，不能使用此登录名注册，请使用其他名称！",false);
                 break;
             case CreateUserStatus.DuplicateUserName:
+                base.ExecuteJs("注册失败，此登录名已经被注册，请使用其他名称！",false);
                 break;
             case CreateUserStatus.DuplicateEmail:
+                base.ExecuteJs("注册失败，此Email已经被注册，请使用其他Email！",false);
                 break;
             case CreateUserStatus.UnknownFailure:
+                base.ExecuteJs("注册失败，发生了未知的错误，请联系管理员！", false);
                 break;
         }
 

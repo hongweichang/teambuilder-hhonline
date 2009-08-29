@@ -55,7 +55,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtQuestion"
                             ErrorMessage="必须填写！" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" Display="Dynamic"
-                        ValidationExpression="\S{25,250}" ControlToValidate="txtQuestion" ErrorMessage="长度为25~250个字符！"></asp:RegularExpressionValidator>                    
+                        ValidationExpression="\S{6,250}" ControlToValidate="txtQuestion" ErrorMessage="长度为6~250个字符！"></asp:RegularExpressionValidator>                    
                 </td>
                 <td><span class="tip">密码提示问题作为找回用户密码的关键凭证！</span></td>
             </tr>
@@ -66,7 +66,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtAnswer"
                             ErrorMessage="必须填写！" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" Display="Dynamic"
-                        ValidationExpression="\S{25,250}" ControlToValidate="txtAnswer" ErrorMessage="长度为25~250个字符！"></asp:RegularExpressionValidator>                    
+                        ValidationExpression="\S{4,250}" ControlToValidate="txtAnswer" ErrorMessage="长度为4~250个字符！"></asp:RegularExpressionValidator>                    
                 </td>
                 <td><span class="tip">找回密码时需此答案与问题匹配才能取回密码！</span></td>
             </tr>
@@ -156,10 +156,10 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtCompanyPhone"
                             ErrorMessage="必须填写！" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" 
-                        ValidationExpression="(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}"  Display="Dynamic"
-                        ControlToValidate="txtCompanyPhone" ErrorMessage="格式不正确！"></asp:RegularExpressionValidator>
+                        ValidationExpression="((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)"  Display="Dynamic"
+                        ControlToValidate="txtCompanyPhone" ErrorMessage="为固话或者手机号码！"></asp:RegularExpressionValidator>
                 </td>
-                 <td><span class="tip">格式形如"区号-号码"或"(区号)号码"！</span></td>
+                 <td><span class="tip">格式形如"区号-号码"或"(区号)号码"或11位手机号码！</span></td>
             </tr>
             <tr>
                 <th>传真(<span class="unneeded" >可选</span>)</th>
