@@ -69,6 +69,9 @@ public partial class Register : HHPage
         com.Orgcode = txtOrgCode.Text.Trim();
         com.Regcode = txtIcpCode.Text.Trim();
         com.Remark = txtCompanyMemo.Text.Trim();
+        com.CompanyStatus = CompanyStatus.ApprovalPending;
+        com.CompanyType = CompanyType.Ordinary;
+        
  
 
         CreateUserStatus status = Users.Create(u, com, true);

@@ -15,43 +15,34 @@
                 <div class="login-main">
                     <div id="loginOverlay"></div>
                     <div class="membership" id="userLogin">
-                        <div class="description">
-                            <div class="description-content">
-                                <h3>为什么要注册企业客户?</h3>
-                                <ol>
-                                    <li>企业客户是以公司作为单位的。</li>
-                                    <li>企业客户拥有与华宏公司更多的合作及产品折扣机会。</li>
-                                    <li>不同等级的企业客户在华宏在线商城享有不同的优惠待遇。</li>
-                                </ol>
-                                <p>
-                                    <a href="#">忘记密码！</a><br />
-                                    <a href="#">我要注册！</a><br />
-                                </p>
-                            </div>  
                             <div class="loading" id="divLoading">
                                 <p class="loading-text">正在验证</p>
                                 <p><img src="Images/Default/loading.gif" alt="Loading" /></p>
                             </div>
                             <div class="error-msg" id="errorMsg">
-                                
+                                Error Message!
                             </div>
-                        </div>
-                        <div class="forms" id="loginForm">                            
-                            <h3 id="loginType">企业用户登录</h3>
-                            <p>
-                                用户<br />
+                        <div class="forms" id="loginForm"> 
+                            <a href="Register.aspx" class="registerLink">注册</a>                           
+                            <div id="loginType" class="loginType">
+                                企业用户登录
+                            </div>
+                            <p class="loginP">
+                                <label>用户</label>
                                 <input type="text" maxlength="50" id="txtUserName" class="text-box normalbg" />
                                 <span title="不能为空！" style="color:#ff0000;display:none;">*</span>
                             </p>
-                            <p>
-                                密码<br />
+                            <p class="loginP">
+                                <label>密码</label>
                                 <input type="password" maxlength="50" id="txtPassword" class="text-box normalbg" />
                                 <span title="不能为空！" style="color:#ff0000;display:none;">*</span>
                             </p>
-                            <p>
-                                验证码<br />
+                            <p class="loginP">
+                                <label>验证码</label>
                                 <input type="text" id="txtValidCode" maxlength="4" class="text-box normalbg" />
                                 <span title="不能为空！" style="color:#ff0000;display:none;">*</span><br />
+                            </p>
+                            <p class="loginP1">                                
                                <img src="validcode.axd" id="imgValidCode" alt="单击换一张！" onclick="this.src='validcode.axd?t='+Math.random()" />
                             </p>
                              <p class="chk-container">

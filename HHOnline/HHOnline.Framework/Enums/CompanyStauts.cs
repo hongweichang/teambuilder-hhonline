@@ -2,7 +2,7 @@
 
 namespace HHOnline.Framework
 {
-    public enum CompanyStauts
+    public enum CompanyStatus
     {
         /// <summary>
         /// 公司被删除

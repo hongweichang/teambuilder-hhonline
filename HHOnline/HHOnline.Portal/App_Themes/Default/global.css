@@ -80,14 +80,13 @@ a:hover.opts
 .page-bg .login-bg
 {
      height:535px;
-     background:url(../../images/default/login-content-bg.gif) no-repeat 0px top;
-     width:600px;
+     width:700px;
      margin:auto;
      position:relative;
     }
 .login-main
 {
-    width:500px;
+    width:600px;
     height:350px;
     position:absolute;
     left:50px;
@@ -113,69 +112,16 @@ a:hover.opts
     display:none;
     background:#fff;
     }
-.membership .description
-{
-    width:240px;
-    position:absolute;
-    left:0;
-    top:0;
-    height:500px;
-    overflow:hidden;
-    }
-.membership .description-content
-{
-    width:240px;
-    height:300px;
-    position:absolute;
-    left:0;
-    top:0;
-    color:#808080;
-    }
-.membership .description-content h3
-{
-    background:url(../../images/default/question.gif) no-repeat left center;
-    height:30px;
-    line-height:30px;
-    padding-left:20px;
-    font-family: '楷体', Arial;
-    }
-.membership .description-content p
-{
-    margin-top:20px;
-    }
-.membership .description-content a
-{
-    background:url(../../images/default/arrow_dred.gif) no-repeat left center;
-    padding-left:10px;
-    color:#ff0000;
-    font-family: '楷体', Arial;
-    }
-.membership .description-content a:hover
-{
-    text-decoration:underline;
-    color:#ff00ff;
-    }
-.membership .description-content ol
-{
-    margin-left:5px;
-    }
-.membership .description-content ol li
-{
-    padding:5px 0;
-    font-size:11px;
-    list-style-type:decimal;
-    margin-left:20px;
-    }
-
 .membership .loading
 {
     width:260px;
-    top:300px;
-    height:150px;
-    position:absolute;
-    left:0;
-    padding-left:10px;
+    top:260px;
+    height:50px;
     display:none;
+    position:absolute;
+    z-index:100;
+    left:300px;
+    padding-left:10px;
     }
 .membership .loading-text
 {
@@ -185,48 +131,81 @@ a:hover.opts
 {
     width:220px;
     padding:0 40px 0 10px;
-    top:300px;
-    height:150px;
-    left:0;
+    top:270px;
+    height:50px;
+    z-index:100;
+    left:300px;
+    display:none;
     color:#ff0000;
     position:absolute;
-    display:none;
     }
 .membership .forms
 {
-    width:240px;
+    width:100%;
     position:absolute;
-    left:260px;
+    left:50px;
     top:0;
     height:500px;
-    background:#fff url(../../images/default/member_login_bg.gif) no-repeat center top;
     }
-.membership .forms h3
+.membership .forms .registerLink
+{
+    position:absolute;
+    right:60px;
+    top:10px;
+    border-left:solid 4px #000080;
+    padding-left:5px;
+    padding-right:5px;
+    }
+.membership .forms a:hover.registerLink
+{
+    color:#ff0000;
+    border-left:solid 4px #ff0000;
+    text-decoration:none;
+    }
+.membership .forms .loginType
 {
     height:32px;
     line-height:32px;
-    background:url(../../images/default/member_login.gif) 8px center no-repeat;
+    border-top:1px solid #A9C9E2;
+    border-bottom:1px solid #A9C9E2;
+    background:#F0FBEB url(../../images/default/member_login.gif) 8px center no-repeat;
     padding-left:24px;
     color:#808080;
-    font-family: '楷体', Arial;
+    }
+.membership .forms .loginType a
+{
+    float:right;
     }
 .membership .forms p
 {
-    font-size:10px;
-    padding:5px 10px;
+    padding:10px 10px 0px 10px;
 }
-.rememberme input
+.membership .forms p.loginP 
 {
-    width:13px;
-    height:13px;
-    margin:4px 0 0 0;
+    height:30px;
+    }
+.membership .forms p.loginP label
+{
+    width:100px;
+    text-align:right;
+    padding-right:15px;
+    height:26px;
+    line-height:26px;
+    display:block;
     float:left;
     }
-.rememberme label
+.membership .forms p.loginP input
 {
-    margin:1px 0 0 3px;
     float:left;
-    font-size:10px;
+    width:200px;
+    }
+.membership .forms p.loginP1 
+{
+    height:60px;
+    }
+.membership .forms p.loginP1 img
+{
+    margin-left:120px;
     }
 .chk-container
 {
@@ -236,6 +215,7 @@ a:hover.opts
 {
     float:left;
     height:20px;
+    margin-left:115px;
     }
 .chk-container label
 {
@@ -250,21 +230,29 @@ a:hover.opts
     height:15px;
     padding-left:10px;
     }
+.button-container
+{
+    height:40px;
+     border-top:1px solid #A9C9E2;
+     border-bottom :1px solid #A9C9E2;
+     background:#F0FBEB;
+    }
 #login
 {
+    margin-left:115px;
     display:block;
     text-decoration:none;
-    width:72px;
-    height:24px;
+    width:98px;
+    height:26px;
     background:url(../../images/default/loginbutton.gif) no-repeat center 0;
     }
 a:hover#login
 {
-    background-position:center -24px;
+    background-position:center -26px;
     }
 a:active#login
 {
-    background-position:center -48px;
+    background-position:center -52px;
     }
 /*--controlpanel--*/
 /* --head-- */

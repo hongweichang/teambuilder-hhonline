@@ -6,7 +6,7 @@ namespace HHOnline.Framework
     public class Company : ExtendedAttributes
     {
         private CompanyType companyType = CompanyType.Ordinary;
-        private CompanyStauts companyStatus = CompanyStauts.ApprovalPending;
+        private CompanyStatus companyStatus = CompanyStatus.ApprovalPending;
         private int createdUser;
         private DateTime createdDate;
         private int updateUser;
@@ -79,7 +79,7 @@ namespace HHOnline.Framework
         /// <summary>
         /// 状态
         /// </summary>
-        public CompanyStauts CompanyStatus
+        public CompanyStatus CompanyStatus
         {
             get
             {

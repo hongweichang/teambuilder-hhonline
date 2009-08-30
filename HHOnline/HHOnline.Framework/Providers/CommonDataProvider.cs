@@ -125,9 +125,9 @@ namespace HHOnline.Framework.Providers
         {
             if (userType == UserType.CompanyUser)
             {
-                switch ((CompanyStauts)companyStatus)
+                switch ((CompanyStatus)companyStatus)
                 {
-                    case CompanyStauts.Authenticated:
+                    case CompanyStatus.Authenticated:
                         switch (userStatus)
                         {
                             case AccountStatus.Authenticated:
@@ -143,13 +143,13 @@ namespace HHOnline.Framework.Providers
                             default:
                                 return LoginUserStatus.Success;
                         }
-                    case CompanyStauts.Deleted:
+                    case CompanyStatus.Deleted:
                         return LoginUserStatus.Deleted;
-                    case CompanyStauts.Disapproved:
+                    case CompanyStatus.Disapproved:
                         return LoginUserStatus.AccountDisapproved;
-                    case CompanyStauts.ApprovalPending:
+                    case CompanyStatus.ApprovalPending:
                         return LoginUserStatus.AccountPending;
-                    case CompanyStauts.Lockon:
+                    case CompanyStatus.Lockon:
                         return LoginUserStatus.AccountBanned;
                     default:
                         return LoginUserStatus.Success;
@@ -227,7 +227,7 @@ namespace HHOnline.Framework.Providers
             company.Orgcode = DataRecordHelper.GetString(dr, "CompanyOrgcode");
             company.Regcode = DataRecordHelper.GetString(dr, "CompanyRegcode");
             company.Remark = DataRecordHelper.GetString(dr, "CompanyMemo");
-            company.CompanyStatus = (CompanyStauts)DataRecordHelper.GetInt32(dr, "CompanyStatus");
+            company.CompanyStatus = (CompanyStatus)DataRecordHelper.GetInt32(dr, "CompanyStatus");
             company.CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime");
             company.CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser");
             company.UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime");
