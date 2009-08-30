@@ -75,8 +75,10 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
         txtPriceMarket.Text = price.PriceMarket.HasValue ? price.PriceMarket.Value.ToString() : string.Empty;
         txtPricePromotion.Text = price.PricePromotion.HasValue ? price.PricePromotion.Value.ToString() : string.Empty;
         txtPricePurchase.Text = price.PricePurchase.HasValue ? price.PricePurchase.Value.ToString() : string.Empty;
-        txtQuoteEnd.Text = price.QuoteEnd.ToString("yyyy年MM月dd日");
-        txtQuoteFrom.Text = price.QuoteFrom.ToString("yyyy年MM月dd日");
+        if (price.QuoteEnd != DateTime.MinValue)
+            txtQuoteEnd.Text = price.QuoteEnd.ToString("yyyy年MM月dd日");
+        if (price.QuoteFrom != DateTime.MinValue)
+            txtQuoteFrom.Text = price.QuoteFrom.ToString("yyyy年MM月dd日");
         txtQuoteMOQ.Text = price.QuoteMOQ.HasValue ? price.QuoteMOQ.Value.ToString() : string.Empty;
         txtQuoteRenewal.Text = price.QuoteRenewal.ToString();
         ddlSupplyRegion.SelectedValue = price.SupplyRegion.ToString();
@@ -214,6 +216,7 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
         this.SetTabName(this.ShortTitle);
         this.PageInfoType = InfoType.PopWinInfo;
         AddJavaScriptInclude("scripts/jquery.datepick.js", false, false);
+        AddJavaScriptInclude("scripts/pages/productpriceadd.aspx.js", false, false);
     }
 
     protected override void OnPagePermissionChecking()

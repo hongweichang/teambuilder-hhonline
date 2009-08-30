@@ -67,6 +67,7 @@ namespace HHOnline.Shops
         public static List<ProductPrice> GetPrices(int productID)
         {
             List<ProductPrice> prices = null;
+            prices = ShopDataProvider.Instance.GetPrices(productID);
             return prices;
         }
     }

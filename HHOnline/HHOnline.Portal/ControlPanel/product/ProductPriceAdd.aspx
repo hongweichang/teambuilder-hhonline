@@ -9,7 +9,7 @@
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
     <table class="postform" cellpadding="10" cellspacing="10">
         <tr>
-            <th style="width: 100px;">
+            <th style="width: 150px;">
                 产品名称
             </th>
             <td>
@@ -17,37 +17,46 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
-                报价起始日期
+            <th>
+                报价起始日期(<span style="color: #ff0000">必填</span>)
             </th>
             <td>
-                <asp:TextBox ID="txtQuoteFrom" rel="datepicker" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtQuoteFrom" rel="datepicker1" runat="server"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="revQuoteFrom" runat="server" ControlToValidate="txtQuoteFrom"
                     ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
                 </asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="rfv1" runat="server" ErrorMessage="报价起始日期不能为空。" Display="Dynamic"
+                    ControlToValidate="txtQuoteFrom"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
-                报价截止日期
+            <th>
+                报价截止日期(<span style="color: #ff0000">必填</span>)
             </th>
             <td>
-                <asp:TextBox ID="txtQuoteEnd" rel="datepicker" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtQuoteEnd" rel="datepicker2" runat="server"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="revQuoteEnd" runat="server" ControlToValidate="txtQuoteEnd"
                     ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
                 </asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="rfv2" runat="server" ErrorMessage="报价截止日期不能为空。" Display="Dynamic"
+                    ControlToValidate="txtQuoteEnd"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
-                报价自动续期周期
+            <th>
+                报价自动续期周期(<span style="color: #ff0000">必填</span>)
             </th>
             <td>
                 <asp:TextBox ID="txtQuoteRenewal" runat="server"></asp:TextBox>月
+                <asp:RegularExpressionValidator ID="revQuoteRenewal" runat="server" ControlToValidate="txtQuoteRenewal"
+                    ValidationExpression="\d{1,2}" ErrorMessage="必须输入整数！">
+                </asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="rfv3" runat="server" ErrorMessage="报价自动续期周期不能为空。"
+                    Display="Dynamic" ControlToValidate="txtQuoteRenewal"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 最短供货时间
             </th>
             <td>
@@ -55,7 +64,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 产品保修期
             </th>
             <td>
@@ -63,8 +72,8 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
-                包含运费
+            <th>
+                含运费
             </th>
             <td>
                 <hc:IncludeTypeList runat="server" ID="piFreight">
@@ -72,8 +81,8 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
-                包含税
+            <th>
+                含税
             </th>
             <td>
                 <hc:IncludeTypeList runat="server" ID="piTax">
@@ -81,7 +90,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 供货税率
             </th>
             <td>
@@ -89,7 +98,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 最小订货量
             </th>
             <td>
@@ -97,7 +106,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 供货区域
             </th>
             <td>
@@ -106,7 +115,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 市场价格
             </th>
             <td>
@@ -114,7 +123,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 促销价格
             </th>
             <td>
@@ -122,7 +131,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 保底价格
             </th>
             <td>
@@ -130,7 +139,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 采购价格
             </th>
             <td>
@@ -138,7 +147,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 五级会员价格
             </th>
             <td>
@@ -146,7 +155,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 四级会员价格
             </th>
             <td>
@@ -154,7 +163,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 三级会员价格
             </th>
             <td>
@@ -162,7 +171,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 二级会员价格
             </th>
             <td>
@@ -170,7 +179,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
+            <th>
                 一级会员价格
             </th>
             <td>

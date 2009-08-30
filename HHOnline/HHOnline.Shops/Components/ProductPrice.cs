@@ -216,6 +216,25 @@ namespace HHOnline.Shops
             set { _supplyRegion = value; }
         }
 
+        /// <summary>
+        /// 供货区域
+        /// </summary>
+        public string SupplyRegionName
+        {
+            get
+            {
+                Area area = Areas.GetArea(SupplyRegion);
+                if (area != null)
+                {
+                    return area.RegionName;
+                }
+                else
+                {
+                    return "全国";
+                }
+            }
+        }
+
         ///<summary>
         ///报价起始日期
         ///</summary>

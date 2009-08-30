@@ -20,6 +20,9 @@
         OnRowDeleting="egvProductPrices_RowDeleting" OnRowUpdating="egvProductPrices_RowUpdating"
         OnPageIndexChanging="egvProductPrices_PageIndexChanging">
         <Columns>
+            <asp:BoundField HeaderText="报价起始日期" DataField="QuoteFrom" DataFormatString="{0:d}" />
+            <asp:BoundField HeaderText="报价截止日期" DataField="QuoteEnd" DataFormatString="{0:d}" />
+            <asp:BoundField HeaderText="供货区域" DataField="SupplyRegionName" />
             <asp:TemplateField>
                 <HeaderStyle Width="200" />
                 <HeaderTemplate>
