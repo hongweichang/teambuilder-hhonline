@@ -15,7 +15,7 @@ namespace HHOnline.Framework
         /// 添加用户级别
         /// </summary>
         /// <param name="userGrade"></param>
-        public static DataActionStatus AddUserGrade(UserGrade userGrade)
+        public static DataActionStatus Create(UserGrade userGrade)
         {
             DataActionStatus status;
             userGrade = CommonDataProvider.Instance.CreateUpdateUserGrade(userGrade, DataProviderAction.Create, out status);
@@ -28,7 +28,7 @@ namespace HHOnline.Framework
         /// </summary>
         /// <param name="userGrade"></param>
         /// <returns></returns>
-        public static DataActionStatus UpdateUserGrade(UserGrade userGrade)
+        public static DataActionStatus Update(UserGrade userGrade)
         {
             DataActionStatus status;
             CommonDataProvider.Instance.CreateUpdateUserGrade(userGrade, DataProviderAction.Update, out status);
@@ -42,7 +42,7 @@ namespace HHOnline.Framework
         /// </summary>
         /// <param name="userGradeID"></param>
         /// <returns></returns>
-        public static UserGrade GetUserGrade(int userGradeID)
+        public static UserGrade Get(int userGradeID)
         {
             string cacheKey = CacheKeyManager.GetUserGradeKey(userGradeID);
             UserGrade userGrade = HHCache.Instance.Get(cacheKey) as UserGrade;
@@ -78,7 +78,7 @@ namespace HHOnline.Framework
         /// 清理用户级别
         /// </summary>
         /// <param name="userID"></param>
-        public static bool ClearUserGrade(int userID)
+        public static bool Clear(int userID)
         {
             bool flag = CommonDataProvider.Instance.ClearUserGrade(userID);
             if (flag)
@@ -90,11 +90,18 @@ namespace HHOnline.Framework
         /// 删除用户级别
         /// </summary>
         /// <param name="gradeID"></param>
-        public static bool DeleteUserGrade(int gradeID)
+        public static bool Delete(int gradeID)
         {
             bool flag = CommonDataProvider.Instance.DeleteUserGrade(gradeID);
             if (flag)
-                HHCache.Instance.Remove(CacheKeyManager.GetUserGradeKey(gradeID));
+            {
+                UserGrade grade = Get(gradeID);
+                if (grade != null)
+                {
+                    HHCache.Instance.Remove(CacheKeyManager.GetUserGradeKeyByUserID(grade.UserID));
+                    HHCache.Instance.Remove(CacheKeyManager.GetUserGradeKey(gradeID));
+                }
+            }
             return flag;
         }
     }

@@ -798,6 +798,76 @@ namespace HHOnline.Data
         }
         #endregion
 
+        #region CustomerGrade
+        public override CustomerGrade CreateUpdateCustomerGrade(CustomerGrade customerGrade, DataProviderAction action, out DataActionStatus status)
+        {
+            ELParameter paramID = null;
+            if (action == DataProviderAction.Create)
+                paramID = new ELParameter("@GradeID", DbType.Int32, 4, ParameterDirection.Output);
+            else
+                paramID = new ELParameter("@GradeID", DbType.Int32, customerGrade.GradeID);
 
+            ELParameter[] elParameters = new ELParameter[]{
+	                paramID,
+                    new ELParameter("@CompanyID",DbType.Int32,customerGrade.CompanyID),
+                    new ELParameter("@GradeLevel",DbType.Int32,customerGrade.GradeLevel),
+                    new ELParameter("@GradeLimit",DbType.String,customerGrade.GradeLimit),
+                    new ELParameter("@GradeName",DbType.String,customerGrade.GradeName),
+                    new ELParameter("@GradeDesc",DbType.String,customerGrade.GradeDesc),
+                    new ELParameter("@GradeMemo",DbType.String,customerGrade.GradeMemo),
+                    new ELParameter("@GradeStatus",DbType.Int32,customerGrade.GradeStatus),
+                    new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
+                    new ELParameter("@Action",DbType.Int32,action),
+            };
+            status = (DataActionStatus)Convert.ToInt32(
+                DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_CustomerGrade_CreateUpdate", elParameters));
+
+            if (action == DataProviderAction.Create)
+                customerGrade.GradeID = Convert.ToInt32(paramID.Value);
+            return customerGrade;
+        }
+
+        public override CustomerGrade GetCustomerGrade(int customerGradeID)
+        {
+            ELParameter paramID = new ELParameter("@GradeID", DbType.Int32, customerGradeID);
+
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_CustomerGrade_Get", paramID))
+            {
+                CustomerGrade customerGrade = null;
+                if (dr.Read())
+                {
+                    customerGrade = PopulateCustomerGradeFromIDataReader(dr);
+                }
+                return customerGrade;
+            }
+        }
+
+        public override List<CustomerGrade> GetCustomerGradeByCompanyID(int companyID)
+        {
+            ELParameter paramID = new ELParameter("@CompanyID", DbType.Int32, companyID);
+
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_CustomerGrade_DeleteByCompanyID", paramID))
+            {
+                List<CustomerGrade> customerGrades = new List<CustomerGrade>();
+                while (dr.Read())
+                {
+                    customerGrades.Add(PopulateCustomerGradeFromIDataReader(dr));
+                }
+                return customerGrades;
+            }
+        }
+
+        public override DataActionStatus DeleteCustomerGrade(int customerGradeID)
+        {
+            ELParameter paramID = new ELParameter("@GradeID", DbType.Int32, customerGradeID);
+            return (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_CustomerGrade_Delete", paramID));
+        }
+
+        public override DataActionStatus ClearCustomerGrade(int companyID)
+        {
+            ELParameter paramID = new ELParameter("@CompanyID", DbType.Int32, companyID);
+            return (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_CustomerGrade_DeleteByUserID", paramID));
+        }
+        #endregion
     }
 }

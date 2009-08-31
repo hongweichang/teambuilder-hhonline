@@ -435,6 +435,36 @@ namespace HHOnline.Framework.Providers
         }
         #endregion
 
+        #region Customer Grade
+        public abstract CustomerGrade CreateUpdateCustomerGrade(CustomerGrade customerGrade, DataProviderAction action, out DataActionStatus status);
+
+        public abstract CustomerGrade GetCustomerGrade(int customerGradeID);
+
+        public abstract List<CustomerGrade> GetCustomerGradeByCompanyID(int companyID);
+
+        public abstract DataActionStatus DeleteCustomerGrade(int customerGradeID);
+
+        public abstract DataActionStatus ClearCustomerGrade(int companyID);
+
+        public static CustomerGrade PopulateCustomerGradeFromIDataReader(IDataReader dr)
+        {
+            CustomerGrade customerGrade = new CustomerGrade();
+            customerGrade.GradeID = DataRecordHelper.GetInt32(dr, "GradeID");
+            customerGrade.CompanyID = DataRecordHelper.GetInt32(dr, "CompanyID");
+            customerGrade.GradeLevel = (UserLevel)DataRecordHelper.GetInt32(dr, "GradeLevel");
+            customerGrade.GradeLimit = DataRecordHelper.GetString(dr, "GradeLimit");
+            customerGrade.GradeName = DataRecordHelper.GetString(dr, "GradeName");
+            customerGrade.GradeDesc = DataRecordHelper.GetString(dr, "GradeDesc");
+            customerGrade.GradeMemo = DataRecordHelper.GetString(dr, "GradeMemo");
+            customerGrade.GradeStatus = (ComponentStatus)DataRecordHelper.GetInt32(dr, "GradeStatus");
+            customerGrade.CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime");
+            customerGrade.CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser");
+            customerGrade.UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime");
+            customerGrade.UpdateUser = DataRecordHelper.GetInt32(dr, "UpdateUser");
+            return customerGrade;
+        }
+        #endregion
+
         #region Common
         public static SerializerData PopulateSerializerDataIDataRecord(IDataRecord record)
         {

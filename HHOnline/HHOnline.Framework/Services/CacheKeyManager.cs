@@ -208,6 +208,24 @@ namespace HHOnline.Framework
         {
             return CompanyPrefix + "QualificationID-" + qualificationID.ToString();
         }
+
+        /// <summary>
+        /// 客户级别CacheKey
+        /// </summary>
+        /// <param name="gradeID"></param>
+        /// <returns></returns>
+        public static string GetCustomerGradeKey(int gradeID)
+        {
+            return CompanyPrefix + "CustomerGrade/GradeID-" + gradeID;
+        }
+
+        /// <summary>
+        /// 客户级别CacheKey
+        /// </summary>
+        public static string GetCustomerGradeKeyByCompanyID(int companyID)
+        {
+            return GetCompanyKey(companyID) + "/CustomerGrades";
+        }
         #endregion
 
         #region Tag
