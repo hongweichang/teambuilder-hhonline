@@ -23,10 +23,13 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
         priceID = Convert.ToInt32(Request.QueryString["ID"]);
         productID = Convert.ToInt32(Request.QueryString["ProductID"]);
         if (priceID != 0)
+        {
             action = OperateType.Edit;
+        }
         else
+        {
             action = OperateType.Add;
-
+        }
         if (!IsPostBack && !IsCallback)
         {
             BindSupplyRegion();
@@ -52,6 +55,12 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
 
     void BindData()
     {
+        ProductPrice price = ProductPrices.GetPrice(priceID);
+        if (price == null)
+            price = new ProductPrice();
+        else
+            productID = price.ProductID;
+
         Product product = Products.GetProduct(productID);
         if (product != null)
         {
@@ -62,16 +71,14 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
         {
             throw new HHException(ExceptionType.ProductNotFound, "未找到商品信息！");
         }
-        ProductPrice price = ProductPrices.GetPrice(priceID);
-        if (price == null)
-            price = new ProductPrice();
+
         txtApplyTaxRate.Text = price.ApplyTaxRate.ToString();
         txtPriceFloor.Text = price.PriceFloor.HasValue ? price.PriceFloor.Value.ToString() : string.Empty;
         txtPriceGradeA.Text = price.PriceGradeA.HasValue ? price.PriceGradeA.Value.ToString() : string.Empty;
-        txtPriceGradeB.Text = price.PriceGradeB.HasValue ? price.PriceGradeA.Value.ToString() : string.Empty;
-        txtPriceGradeC.Text = price.PriceGradeC.HasValue ? price.PriceGradeA.Value.ToString() : string.Empty;
-        txtPriceGradeD.Text = price.PriceGradeD.HasValue ? price.PriceGradeA.Value.ToString() : string.Empty;
-        txtPriceGradeE.Text = price.PriceGradeE.HasValue ? price.PriceGradeA.Value.ToString() : string.Empty;
+        txtPriceGradeB.Text = price.PriceGradeB.HasValue ? price.PriceGradeB.Value.ToString() : string.Empty;
+        txtPriceGradeC.Text = price.PriceGradeC.HasValue ? price.PriceGradeC.Value.ToString() : string.Empty;
+        txtPriceGradeD.Text = price.PriceGradeD.HasValue ? price.PriceGradeD.Value.ToString() : string.Empty;
+        txtPriceGradeE.Text = price.PriceGradeE.HasValue ? price.PriceGradeE.Value.ToString() : string.Empty;
         txtPriceMarket.Text = price.PriceMarket.HasValue ? price.PriceMarket.Value.ToString() : string.Empty;
         txtPricePromotion.Text = price.PricePromotion.HasValue ? price.PricePromotion.Value.ToString() : string.Empty;
         txtPricePurchase.Text = price.PricePurchase.HasValue ? price.PricePurchase.Value.ToString() : string.Empty;
@@ -173,15 +180,12 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
             status = ProductPrices.Create(price);
             switch (status)
             {
-                case DataActionStatus.DuplicateName:
-                    mbMessage.ShowMsg("新增行业信息失败，存在同名行业信息！", Color.Red);
-                    break;
                 case DataActionStatus.UnknownFailure:
-                    mbMessage.ShowMsg("新增行业信息失败，请联系管理员！", Color.Red);
+                    mbMessage.ShowMsg("产品报价失败，请联系管理员！", Color.Red);
                     break;
                 case DataActionStatus.Success:
                 default:
-                    mbMessage.ShowMsg("新增行业信息成功，可继续填写新行业信息，若完成请返回！", Color.Navy);
+                    mbMessage.ShowMsg("产品报价成功，可继续进行产品报价，若完成请返回！", Color.Navy);
                     break;
             }
         }
@@ -190,15 +194,12 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
             status = ProductPrices.Update(price);
             switch (status)
             {
-                case DataActionStatus.DuplicateName:
-                    mbMessage.ShowMsg("修改行业信息失败，存在同名行业信息！", Color.Red);
-                    break;
                 case DataActionStatus.UnknownFailure:
-                    mbMessage.ShowMsg("修改行业信息失败，请联系管理员！", Color.Red);
+                    mbMessage.ShowMsg("修改产品报价失败，请联系管理员！", Color.Red);
                     break;
                 case DataActionStatus.Success:
                 default:
-                    mbMessage.ShowMsg("修改行业信息成功，可继续修改行业信息，若完成请返回！", Color.Navy);
+                    mbMessage.ShowMsg("修改产品报价成功，可继续修改产品报价，若完成请返回！", Color.Navy);
                     break;
             }
         }

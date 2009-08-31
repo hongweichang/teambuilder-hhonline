@@ -57,6 +57,19 @@
         </tr>
         <tr>
             <th>
+                供货税率(<span style="color: #ff0000">必填</span>)
+            </th>
+            <td>
+                <asp:TextBox ID="txtApplyTaxRate" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revApplyTaxRate" runat="server" ControlToValidate="txtApplyTaxRate"
+                    ValidationExpression="^[+\-]?\d+(\.\d+)?$" ErrorMessage="必须输入数字！">
+                </asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="rfv4" runat="server" ErrorMessage="报价自动续期周期不能为空。"
+                    Display="Dynamic" ControlToValidate="txtApplyTaxRate"></asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <th>
                 最短供货时间
             </th>
             <td>
@@ -87,14 +100,6 @@
             <td>
                 <hc:IncludeTypeList runat="server" ID="piTax">
                 </hc:IncludeTypeList>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                供货税率
-            </th>
-            <td>
-                <asp:TextBox ID="txtApplyTaxRate" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>

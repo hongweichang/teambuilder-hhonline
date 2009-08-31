@@ -72,7 +72,7 @@ public partial class Index : HHPage
         user.Password = "12345";
         Company company = new Company();
         company.CompanyName = "CompanyName";
-        company.CompanyStatus = CompanyStauts.Authenticated;
+        company.CompanyStatus = CompanyStatus.Authenticated;
         company.Address = "Address12";
         company.CompanyRegion = 1;
 
@@ -184,7 +184,7 @@ public partial class Index : HHPage
         Company company = new Company();
         company.CompanyName = "CompanyName";
         company.CompanyType = CompanyType.Agent;
-        company.CompanyStatus = CompanyStauts.Authenticated;
+        company.CompanyStatus = CompanyStatus.Authenticated;
         if (Companys.Create(company) == CreateCompanyStatus.Success)
             lblTip.Text = "Create Success:CompanyID =" + company.CompanyID;
         else

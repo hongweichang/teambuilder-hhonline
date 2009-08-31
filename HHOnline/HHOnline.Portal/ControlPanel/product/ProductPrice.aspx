@@ -23,21 +23,13 @@
             <asp:BoundField HeaderText="报价起始日期" DataField="QuoteFrom" DataFormatString="{0:d}" />
             <asp:BoundField HeaderText="报价截止日期" DataField="QuoteEnd" DataFormatString="{0:d}" />
             <asp:BoundField HeaderText="供货区域" DataField="SupplyRegionName" />
+            <asp:BoundField HeaderText="市场价" DataField="PriceMarket" />
+            <asp:BoundField HeaderText="一级会员价" DataField="PriceGradeE" />
             <asp:TemplateField>
                 <HeaderStyle Width="200" />
                 <HeaderTemplate>
                     操作</HeaderTemplate>
                 <ItemTemplate>
-                    <asp:LoginView ID="LoginView4" runat="server">
-                        <RoleGroups>
-                            <asp:RoleGroup Roles="ProductModule-Add">
-                                <ContentTemplate>
-                                    <asp:LinkButton ID="lnkAddChild" runat="server" CommandName="AddChild" SkinID="lnkadd"
-                                        PostBackUrl="#"></asp:LinkButton>
-                                </ContentTemplate>
-                            </asp:RoleGroup>
-                        </RoleGroups>
-                    </asp:LoginView>
                     <asp:LoginView ID="LoginView1" runat="server">
                         <RoleGroups>
                             <asp:RoleGroup Roles="ProductModule-Edit">
