@@ -159,7 +159,7 @@ namespace HHOnline.Common
 
         public static decimal? GetNullableDecimal(IDataRecord dr, string name)
         {
-            return GetDecimal(dr, dr.GetOrdinal(name));
+            return GetNullableDecimal(dr, dr.GetOrdinal(name));
         }
 
         public static decimal GetDecimal(IDataRecord dr, int ordinal)

@@ -64,8 +64,8 @@
                 <asp:RegularExpressionValidator ID="revApplyTaxRate" runat="server" ControlToValidate="txtApplyTaxRate"
                     ValidationExpression="^[+\-]?\d+(\.\d+)?$" ErrorMessage="必须输入数字！">
                 </asp:RegularExpressionValidator>
-                <asp:RequiredFieldValidator ID="rfv4" runat="server" ErrorMessage="报价自动续期周期不能为空。"
-                    Display="Dynamic" ControlToValidate="txtApplyTaxRate"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfv4" runat="server" ErrorMessage="供货税率不能为空。" Display="Dynamic"
+                    ControlToValidate="txtApplyTaxRate"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
