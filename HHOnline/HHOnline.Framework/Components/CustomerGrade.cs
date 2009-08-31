@@ -5,13 +5,13 @@ using System.Text;
 namespace HHOnline.Framework
 {
     /// <summary>
-    /// 用户级别（企业内部用户）
+    /// 客户级别（企业客户）
     /// </summary>
-    public class UserGrade
+    public class CustomerGrade
     {
         #region --Private Members--
         private int _gradeID;
-        private int _userID;
+        private int _companyID;
         private UserLevel _gradeLevel = UserLevel.E;
         private string _gradeLimit;
         private string _gradeName;
@@ -25,7 +25,7 @@ namespace HHOnline.Framework
         #endregion
 
         #region --Constructor--
-        public UserGrade()
+        public CustomerGrade()
         {
         }
         #endregion
@@ -41,12 +41,12 @@ namespace HHOnline.Framework
         }
 
         ///<summary>
-        ///内部用户编号
+        ///客户编号
         ///</summary>
-        public int UserID
+        public int CompanyID
         {
-            get { return _userID; }
-            set { _userID = value; }
+            get { return _companyID; }
+            set { _companyID = value; }
         }
 
         ///<summary>
