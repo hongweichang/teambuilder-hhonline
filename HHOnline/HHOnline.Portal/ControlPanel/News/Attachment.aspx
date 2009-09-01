@@ -46,10 +46,11 @@
                         <asp:LinkButton ID="lnkNoPriced" runat="server" OnClick="lnk_Click">未报价</asp:LinkButton>
                         <asp:LinkButton ID="lnkPicture" runat="server" OnClick="lnk_Click">有图商品</asp:LinkButton>
                         <asp:LinkButton ID="lnkNoPicture" runat="server" OnClick="lnk_Click">无图商品</asp:LinkButton>
---%><asp:LinkButton ID="btnAll" runat="server" OnClick="btnQuickSearch_Click">全部</asp:LinkButton>&nbsp;<asp:LinkButton
-	ID="btnSmallSizeFile" runat="server" OnClick="btnQuickSearch_Click">小文件（&lt;=1M）</asp:LinkButton>&nbsp;<asp:LinkButton
-		ID="btnMediumSizeFile" runat="server" OnClick="btnQuickSearch_Click">中等文件（&gt;1M）</asp:LinkButton>&nbsp;<asp:LinkButton
-			ID="btnLargeSizeFile" runat="server" OnClick="btnQuickSearch_Click">大文件（&gt;10M）</asp:LinkButton>
+                        --%>
+                        <asp:LinkButton ID="btnAll" runat="server" OnClick="btnQuickSearch_Click">全部</asp:LinkButton>
+                        <asp:LinkButton	ID="btnSmallSizeFile" runat="server" OnClick="btnQuickSearch_Click">小文件（&lt;=1M）</asp:LinkButton>
+                        <asp:LinkButton ID="btnMediumSizeFile" runat="server" OnClick="btnQuickSearch_Click">中等文件（&gt;1M）</asp:LinkButton>
+                        <asp:LinkButton ID="btnLargeSizeFile" runat="server" OnClick="btnQuickSearch_Click">大文件（&gt;10M）</asp:LinkButton>
 					</div>
 				</td>
 				<td rowspan="2">

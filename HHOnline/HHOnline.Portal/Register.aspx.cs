@@ -57,6 +57,7 @@ public partial class Register : HHPage
         u.Title = txtTitle.Text.Trim();
         u.Comment = txtMemo.Text.Trim();
         u.AccountStatus = AccountStatus.ApprovalPending;
+        u.IsManager = 1;
 
         Company com = new Company();
         com.CompanyName = txtCompanyName.Text.Trim();
