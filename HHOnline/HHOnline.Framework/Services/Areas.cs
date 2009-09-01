@@ -11,6 +11,7 @@ namespace HHOnline.Framework
     /// </summary>
     public class Areas
     {
+        #region GetAreas
         /// <summary>
         /// 获取所有地区信息
         /// </summary>
@@ -127,7 +128,9 @@ namespace HHOnline.Framework
         {
             return GetAreasByType(AreaType.TerritoryArea);
         }
+        #endregion
 
+        #region GetArea
         /// <summary>
         /// 根据AreaID获取Area
         /// </summary>
@@ -136,23 +139,23 @@ namespace HHOnline.Framework
         public static Area GetArea(int areaID)
         {
             Area area = null;
-            string cacheKey = CacheKeyManager.GetAreaKey(areaID);
-            area = HHCache.Instance.Get(cacheKey) as Area;
+            //string cacheKey = CacheKeyManager.GetAreaKey(areaID);
+            //area = HHCache.Instance.Get(cacheKey) as Area;
 
-            if (area == null)
+            //if (area == null)
+            //{
+            foreach (Area a in GetAllAreas())
             {
-                foreach (Area a in GetAllAreas())
+                if (a.RegionID == areaID)
                 {
-                    if (a.RegionID == areaID)
-                    {
-                        area = a;
-                        break;
-                    }
+                    area = a;
+                    break;
                 }
             }
+            //}
 
-            if (area != null)
-                HHCache.Instance.Max(cacheKey, area);
+            //if (area != null)
+            //    HHCache.Instance.Max(cacheKey, area);
             return area;
         }
 
@@ -164,27 +167,55 @@ namespace HHOnline.Framework
         public static Area GetArea(string distinctCode)
         {
             Area area = null;
-            string cacheKey = CacheKeyManager.GetAreaKey(distinctCode);
-            area = HHCache.Instance.Get(cacheKey) as Area;
-
+            foreach (Area a in GetAllAreas())
+            {
+                if (a.DistrictCode == distinctCode)
+                {
+                    area = a;
+                    break;
+                }
+            }
             if (area == null)
             {
                 foreach (Area a in GetAllAreas())
                 {
-                    if (a.DistrictCode == distinctCode ||
-                        (GlobalSettings.IsNullOrEmpty(a.DistrictCode) && a.RegionCode == distinctCode))
+                    if ((GlobalSettings.IsNullOrEmpty(a.DistrictCode) && a.RegionCode == distinctCode))
                     {
                         area = a;
                         break;
                     }
                 }
             }
-
-            if (area != null)
-                HHCache.Instance.Max(cacheKey, area);
             return area;
         }
+        #endregion
 
+        #region GetParentAreas
+        /// <summary>
+        /// 根据AreaID获取其所有父地区
+        /// </summary>
+        /// <param name="areaID"></param>
+        /// <returns></returns>
+        public static List<Area> GetParentArea(int areaID)
+        {
+            Area area = GetArea(areaID);
+            area = GetArea(area.DistrictCode);
+            List<Area> parentAreas = new List<Area>();
+            if (area != null)
+            {
+                parentAreas.Add(area);
+                while (!GlobalSettings.IsNullOrEmpty(area.DistrictCode) && area.RegionType != AreaType.TerritoryArea)
+                {
+                    area = GetArea(area.RegionCode);
+                    parentAreas.Add(area);
+                }
+            }
+            return parentAreas;
+        }
+
+        #endregion
+
+        #region GetValueRange
         /// <summary>
         /// 获取地区下拉框值
         /// </summary>
@@ -214,5 +245,6 @@ namespace HHOnline.Framework
                 AddChildRegion(chid, deps + 1, ref valueRange);
             }
         }
+        #endregion
     }
 }

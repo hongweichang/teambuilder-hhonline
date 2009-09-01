@@ -84,6 +84,8 @@
         <asp:Button ID="Button26" runat="server" Text="GetArea" OnClick="Button26_Click" />
         <asp:Button ID="Button27" runat="server" Text="GetChildArea" OnClick="Button27_Click" />
         <asp:Button ID="Button28" runat="server" Text="GetAllChildArea" OnClick="Button28_Click" />
+        <asp:Button ID="Button39" runat="server" onclick="Button39_Click" 
+            Text="GetParentArea" />
         <br />
         <asp:Label ID="Label3" runat="server" Text="Label">
         <br />

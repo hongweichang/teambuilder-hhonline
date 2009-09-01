@@ -408,4 +408,10 @@ public partial class Index : HHPage
     {
         List<Article> articles = ArticleManager.GetAllArticles();
     }
+    protected void Button39_Click(object sender, EventArgs e)
+    {
+        List<Area> lstParentArea = Areas.GetParentArea(16);
+        foreach (Area area in lstParentArea)
+            lblCacheTip.Text += area.RegionID + ",";
+    }
 }
