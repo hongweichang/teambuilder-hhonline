@@ -256,6 +256,7 @@ namespace HHOnline.Data
             UserType userType = UserType.InnerUser;
             AccountStatus userStatus = AccountStatus.Authenticated;
             int companyStatus = 0;
+            int companyType = 0;
             int organizationStatus = 0;
             int organizationID = 0;
 
@@ -271,7 +272,8 @@ namespace HHOnline.Data
                     companyStatus = DataRecordHelper.GetInt32(dr, "CompanyStatus", 0);
                     organizationStatus = DataRecordHelper.GetInt32(dr, "OrganizationStatus", 0);
                     organizationID = DataRecordHelper.GetInt32(dr, "OrganizationId", 0);
-                    return CheckUserStatus(userType, userStatus, organizationID, organizationStatus, companyStatus);
+                    companyType = DataRecordHelper.GetInt32(dr, "CompanyType", 0);
+                    return CheckUserStatus(userType, userStatus, organizationID, organizationStatus, companyStatus, companyType);
                 }
                 else
                 {
@@ -846,7 +848,7 @@ namespace HHOnline.Data
         {
             ELParameter paramID = new ELParameter("@CompanyID", DbType.Int32, companyID);
 
-            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_CustomerGrade_DeleteByCompanyID", paramID))
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_CustomerGrade_GetByCompanyID", paramID))
             {
                 List<CustomerGrade> customerGrades = new List<CustomerGrade>();
                 while (dr.Read())
@@ -866,7 +868,7 @@ namespace HHOnline.Data
         public override DataActionStatus ClearCustomerGrade(int companyID)
         {
             ELParameter paramID = new ELParameter("@CompanyID", DbType.Int32, companyID);
-            return (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_CustomerGrade_DeleteByUserID", paramID));
+            return (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_CustomerGrade_DeleteByCompanyID", paramID));
         }
         #endregion
     }

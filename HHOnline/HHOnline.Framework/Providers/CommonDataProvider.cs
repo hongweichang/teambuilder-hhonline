@@ -121,10 +121,13 @@ namespace HHOnline.Framework.Providers
         }
 
         public static LoginUserStatus CheckUserStatus(UserType userType, AccountStatus userStatus,
-            int organizationID, int organizationStatus, int companyStatus)
+            int organizationID, int organizationStatus, int companyStatus, int companyType)
         {
+
+            //企业客户登陆判断
             if (userType == UserType.CompanyUser)
             {
+
                 switch ((CompanyStatus)companyStatus)
                 {
                     case CompanyStatus.Authenticated:
@@ -148,7 +151,13 @@ namespace HHOnline.Framework.Providers
                     case CompanyStatus.Disapproved:
                         return LoginUserStatus.AccountDisapproved;
                     case CompanyStatus.ApprovalPending:
-                        return LoginUserStatus.AccountPending;
+                        //客户类别
+                        CompanyType type = (CompanyType)companyType;
+                        //如是普通客户申请，则以普通客户登录
+                        if (type != CompanyType.Ordinary && (type & CompanyType.Ordinary) == CompanyType.Ordinary)
+                            return LoginUserStatus.Success;
+                        else
+                            return LoginUserStatus.AccountPending;
                     case CompanyStatus.Lockon:
                         return LoginUserStatus.AccountBanned;
                     default:
@@ -157,6 +166,7 @@ namespace HHOnline.Framework.Providers
             }
             else
             {
+                //内部用户登录判断
                 if (organizationID == 0)
                     return LoginUserStatus.Success;
                 switch ((ComponentStatus)organizationStatus)
