@@ -362,6 +362,26 @@ namespace HHOnline.Data
                 return company;
             }
         }
+        public override List<Company> GetCompanys(int comStatus, int comType, string comName)
+        {
+            ELParameter[] parms = new ELParameter[]{
+                new ELParameter("CompanyStatus",DbType.Int32,comStatus),
+                new ELParameter("CompanyType",DbType.Int32,comType),
+                new ELParameter("CompanyName",DbType.String,comName)
+
+            };
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_Company_GetAll", parms))
+            {
+                Company c = null;
+                List<Company> cs = new List<Company>();
+                while (dr.Read())
+                {
+                    c = PopulateCompanyFromIDataReader(dr);
+                    cs.Add(c);
+                }
+                return cs;
+            }
+        }
         #endregion
 
         #region CompanyQualification

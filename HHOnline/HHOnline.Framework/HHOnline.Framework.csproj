@@ -93,7 +93,7 @@
     <Compile Include="Enums\AttachmentType.cs" />
     <Compile Include="Enums\DataActionStatus.cs" />
     <Compile Include="Enums\AreaType.cs" />
-    <Compile Include="Enums\CompanyStauts.cs" />
+    <Compile Include="Enums\CompanyStatus.cs" />
     <Compile Include="Enums\ComponentStatus.cs" />
     <Compile Include="Enums\CreateCompanyStatus.cs" />
     <Compile Include="Enums\CreateUserStatus.cs" />

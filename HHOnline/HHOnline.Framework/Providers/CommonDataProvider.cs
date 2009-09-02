@@ -213,7 +213,11 @@ namespace HHOnline.Framework.Providers
         /// </summary>
         /// <param name="companyID">CompanyID</param>
         public abstract bool DeleteCompany(int companyID, string companyName);
-
+        /// <summary>
+        /// 获取所有公司信息
+        /// </summary>
+        /// <returns></returns>
+        public abstract List<Company> GetCompanys(int comStatus,int comType,string comName);
         /// <summary>
         /// 获取公司信息
         /// </summary>

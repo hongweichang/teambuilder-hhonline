@@ -21,11 +21,12 @@ function signUp() {
         var loading = $('#divLoading');
         var userLogin = $('#userLogin');
         var overlay = $('#loginOverlay');
+        var vc = $('#txtValidCode');
         var data = {
             userName: $('#txtUserName').val(),
             password: $('#txtPassword').val(),
             rememberMe: $('#chkRememberMe').is('[checked=true]'),
-            validCode: $('#txtValidCode').val(),
+            validCode: vc.val(),
             action: 'ValidUser',
             t: Math.random()
         };
@@ -45,6 +46,7 @@ function signUp() {
                     loading.hide();
                     $('#imgValidCode').attr('src', 'validcode.axd?t' + Math.random);
                     error.html(json.msg).show();
+                    vc.val('').focus();
                 }
             }
         });

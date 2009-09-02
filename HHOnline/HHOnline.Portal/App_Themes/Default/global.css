@@ -681,13 +681,17 @@ postform td
 }
 .treeviewpermission td input
 {
-    margin-top:5px;
-    margin-right:5px;
+    height:24px;
+    width:24px;
+    display:block;
     float:left;
     }
 .treeviewpermission td a
 {
     float:left;
+    display:block;
+    height:24px;
+    line-height:24px;
     }
     
 /**********date pick**************************/
@@ -2733,4 +2737,35 @@ fieldset.fsNormal legend
 {
     padding:10px;
     font-size:14px;
+    }
+.companyTypeList
+{
+    list-style-type:none;
+    list-style-position:outside;
+    }
+.companyTypeList li
+{
+    list-style-type:none;
+    float:left;
+    padding-right:5px;
+    }
+.companyTypeList li span
+{
+    width:36px;
+    height:21px;
+    display:block;
+    float:left;
+    cursor:pointer;
+    }
+.originalType
+{
+    background:url(../../images/default/originaluser.gif) center center;
+    }
+.agentType
+{
+    background:url(../../images/default/customer.gif) center center;
+    }
+.providerType
+{
+    background:url(../../images/default/provider.gif) center center;
     }

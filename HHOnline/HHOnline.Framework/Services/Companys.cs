@@ -10,6 +10,17 @@ namespace HHOnline.Framework
     public class Companys
     {
         #region GetCompany
+
+        public static List<Company> GetCompanys(CompanyStatus comStatus, CompanyType comType, string comName)
+        {
+            return GetCompanys((int)comStatus,(int)comType, comName);
+        }
+        private static List<Company> GetCompanys(int comStatus, int comType, string comName)
+        {
+            List<Company> companys = CommonDataProvider.Instance.GetCompanys(comStatus, comType, comName);
+
+            return companys;
+        }
         public static Company GetCompany(int companyID)
         {
             return GetCompany(companyID, null, true);
@@ -65,7 +76,6 @@ namespace HHOnline.Framework
             CreateCompanyStatus status;
             CommonDataProvider dp = CommonDataProvider.Instance;
             company = dp.CreateUpdateCompany(company, DataProviderAction.Create, out status);
-
             return status;
         }
         #endregion

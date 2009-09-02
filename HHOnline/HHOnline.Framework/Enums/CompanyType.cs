@@ -10,6 +10,10 @@ namespace HHOnline.Framework
     public enum CompanyType
     {
         /// <summary>
+        /// 业务逻辑使用（与数据库无关）
+        /// </summary>
+        None=0,
+        /// <summary>
         /// 普通公司
         /// </summary>
         Ordinary = 1,

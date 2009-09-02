@@ -24,6 +24,10 @@ namespace HHOnline.Framework
         /// 公司停用
         /// </summary>
         Lockon = 4,
+        /// <summary>
+        /// 业务逻辑使用（与数据库无关）
+        /// </summary>
+        None=5
 
     }
 }
