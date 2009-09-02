@@ -265,6 +265,8 @@ namespace HHOnline.Shops.Providers
 
         public abstract List<ProductPrice> GetPrices(int productID);
 
+        public abstract decimal? GetMarketPrice(string areaIDList, int productID);
+
         public static ProductPrice PopulateProductPriceFromIDataReader(IDataReader dr)
         {
             ProductPrice productPrice = new ProductPrice();

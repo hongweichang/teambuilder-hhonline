@@ -214,6 +214,25 @@ namespace HHOnline.Framework
             return parentAreas;
         }
 
+        /// <summary>
+        /// 根据AreaID获取其所有父地区ID,通过分号分隔
+        /// </summary>
+        /// <param name="areaID"></param>
+        /// <returns></returns>
+        public static string GetParentAreaIDList(int areaID)
+        {
+            List<Area> parentAreas = Areas.GetParentArea(areaID);
+            if (parentAreas.Count > 0)
+            {
+                string[] areaIDs = new string[parentAreas.Count];
+                for (int i = 0; i < parentAreas.Count; i++)
+                {
+                    areaIDs[i] = parentAreas[i].RegionID.ToString();
+                }
+                return string.Join(";", areaIDs);
+            }
+            return string.Empty;
+        }
         #endregion
 
         #region GetValueRange

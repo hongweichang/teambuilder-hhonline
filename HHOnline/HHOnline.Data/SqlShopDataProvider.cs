@@ -675,7 +675,19 @@ namespace HHOnline.Data
                 return prices;
             }
         }
-        #endregion
 
+        public override decimal? GetMarketPrice(string areaIDList, int productID)
+        {
+            ELParameter[] elParameters = new ELParameter[]{
+                new ELParameter("@AreaList", DbType.String, areaIDList),
+                new ELParameter("@ProductID", DbType.Int32, productID),
+              };
+            object value = DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductPrice_GetMarketPrice", elParameters);
+            if (value != null)
+                return Convert.ToDecimal(value);
+            else
+                return null;
+        }
+        #endregion
     }
 }

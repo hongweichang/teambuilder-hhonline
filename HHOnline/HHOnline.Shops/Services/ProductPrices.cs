@@ -70,5 +70,26 @@ namespace HHOnline.Shops
             prices = ShopDataProvider.Instance.GetPrices(productID);
             return prices;
         }
+
+        /// <summary>
+        /// 获取用户所看到市场价
+        /// 根据客户所在区域，获取所有父区域，按照地域最近原则取市场价
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        public decimal? GetMarketPrice(int userID, int productID)
+        {
+            string areaIDList = string.Empty;
+            User user = Users.GetUser(userID);
+            if (user != null)
+            {
+                if (user.Company != null)
+                {
+                    areaIDList = Areas.GetParentAreaIDList(user.Company.CompanyRegion);
+                }
+            }
+            return ShopDataProvider.Instance.GetMarketPrice(areaIDList, productID);
+        }
     }
 }
