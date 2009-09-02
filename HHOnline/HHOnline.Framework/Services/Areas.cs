@@ -204,11 +204,12 @@ namespace HHOnline.Framework
             if (area != null)
             {
                 parentAreas.Add(area);
-                while (!GlobalSettings.IsNullOrEmpty(area.DistrictCode) && area.RegionType != AreaType.TerritoryArea)
+                do
                 {
                     area = GetArea(area.RegionCode);
                     parentAreas.Add(area);
                 }
+                while (!(GlobalSettings.IsNullOrEmpty(area.DistrictCode) && area.RegionType == AreaType.TerritoryArea));
             }
             return parentAreas;
         }
