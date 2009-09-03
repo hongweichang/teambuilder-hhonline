@@ -320,7 +320,7 @@ public partial class Index : HHPage
     protected void Button26_Click(object sender, EventArgs e)
     {
         Label3.Text = "";
-        Area area = Areas.GetArea(1);
+        Area area = Areas.GetArea(6);
         Label3.Text = area.RegionName;
     }
     protected void Button27_Click(object sender, EventArgs e)
@@ -355,6 +355,11 @@ public partial class Index : HHPage
 
         this.Label4.Text = strategy.BuildQuery();
 
+        CustomerGrade cg = new CustomerGrade();
+        cg.CompanyID = 2;
+        cg.GradeLevel = UserLevel.D;
+        cg.GradeLimit = strategy.BuildQuery();
+        CustomerGradeManager.Create(cg);
 
     }
     protected void Button31_Click(object sender, EventArgs e)
@@ -413,5 +418,16 @@ public partial class Index : HHPage
         List<Area> lstParentArea = Areas.GetParentArea(16);
         foreach (Area area in lstParentArea)
             lblCacheTip.Text += area.RegionID + ",";
+    }
+    protected void Button40_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button41_Click(object sender, EventArgs e)
+    {
+        decimal? price = ProductPrices.GetPriceMarket(10, 23);
+        lblCacheTip.Text = price.HasValue ? price.Value.ToString() : "询价";
+        price = ProductPrices.GetPriceMember(10, 23);
+        Label5.Text = price.HasValue ? price.Value.ToString() : "询价";
     }
 }

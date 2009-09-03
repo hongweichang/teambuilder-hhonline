@@ -97,6 +97,10 @@
         </asp:DropDownList>
         <asp:DropDownList ID="DropDownList2" runat="server">
         </asp:DropDownList>
+        <asp:Button ID="Button40" runat="server" onclick="Button40_Click" 
+            Text="Button" />
+        <asp:Button ID="Button41" runat="server" onclick="Button41_Click" 
+            Text="Button" />
         <br />
         <asp:FileUpload ID="FileUpload2" runat="server" />
         <asp:Button ID="Button32" runat="server" Text="Add Brand" OnClick="Button32_Click" />
