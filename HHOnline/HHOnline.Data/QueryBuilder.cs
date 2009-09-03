@@ -8,6 +8,9 @@ using HHOnline.Shops;
 
 namespace HHOnline.Data
 {
+    /// <summary>
+    /// 查询生成器
+    /// </summary>
     public class QueryGenerator
     {
         private QueryGenerator()
@@ -33,7 +36,7 @@ namespace HHOnline.Data
 
             if (query.ContentType != null)
             {
-				builder.AddWhere("ContentType", Comparison.Like, "%" + query.ContentType + "%");
+                builder.AddWhere("ContentType", Comparison.Like, "%" + query.ContentType + "%");
             }
 
             if (query.ContentStartSize.HasValue)
@@ -350,6 +353,59 @@ namespace HHOnline.Data
                     break;
             }
             return builder.BuildQuery();
+        }
+        #endregion
+
+        #region BuildProductPrice
+        public static string BuilderProductPriceQuery(List<string> filters, int productID, UserLevel level)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            SelectQueryBuilder builder = new SelectQueryBuilder();
+            builder.SelectFromTable("PProductPrice pr");
+            builder.AddJoin(JoinType.InnerJoin, "PProduct p", "p.ProductID", Comparison.Equals, "pr", "ProductID");
+            builder.AddJoin(JoinType.LeftJoin, "PProductIndustry ppi", "ppi.ProductID", Comparison.Equals, "p", "ProductID");
+            builder.AddJoin(JoinType.LeftJoin, "dbo.PProductCategory pc", "pc.ProductID", Comparison.Equals, "p", "ProductID");
+            switch (level)
+            {
+                case UserLevel.E:
+                    builder.SelectColumns("PriceGradeE");
+                    break;
+                case UserLevel.D:
+                    builder.SelectColumns("PriceGradeD");
+                    break;
+                case UserLevel.C:
+                    builder.SelectColumns("PriceGradeC");
+                    break;
+                case UserLevel.B:
+                    builder.SelectColumns("PriceGradeB");
+                    break;
+                case UserLevel.A:
+                    builder.SelectColumns("PriceGradeA");
+                    break;
+            }
+            builder.AddWhere("pr.SupplyStatus ", Comparison.GreaterThan, 0);
+            builder.AddWhere("p.ProductID", Comparison.Equals, productID);
+            sb.Append(builder.BuildQuery());
+            if (filters.Count > 0)
+            {
+                sb.Append(" ");
+                sb.Append(LogicOperator.And.ToString());
+                sb.Append(" (");
+                for (int i = 0; i < filters.Count; i++)
+                {
+                    sb.Append(" ");
+                    sb.Append(" (");
+                    sb.Append(filters[i]);
+                    if (i != filters.Count - 1)
+                    {
+                        sb.Append(LogicOperator.Or.ToString());
+                    }
+                    sb.Append(" )");
+                }
+                sb.Append(" )");
+            }
+            return sb.ToString();
         }
         #endregion
     }

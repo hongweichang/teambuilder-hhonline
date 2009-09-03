@@ -267,6 +267,10 @@ namespace HHOnline.Shops.Providers
 
         public abstract decimal? GetMarketPrice(string areaIDList, int productID);
 
+        public abstract decimal? GetGradePrice(List<string> filters, int productID, UserLevel level);
+
+        public abstract decimal? GetDefaultPrice(int productID);
+
         public static ProductPrice PopulateProductPriceFromIDataReader(IDataReader dr)
         {
             ProductPrice productPrice = new ProductPrice();

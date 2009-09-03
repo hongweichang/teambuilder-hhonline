@@ -676,6 +676,18 @@ namespace HHOnline.Data
             }
         }
 
+        public override decimal? GetGradePrice(List<string> filters, int productID, UserLevel level)
+        {
+            ELParameter[] elParameters = new ELParameter[]{
+                new ELParameter("@SqlPopulate",DbType.String,QueryGenerator.BuilderProductPriceQuery(filters,productID,level)),   
+            };
+            object value = DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductPrice_GetMarketPrice", elParameters);
+            if (value != null)
+                return Convert.ToDecimal(value);
+            else
+                return null;
+        }
+
         public override decimal? GetMarketPrice(string areaIDList, int productID)
         {
             ELParameter[] elParameters = new ELParameter[]{
@@ -688,6 +700,20 @@ namespace HHOnline.Data
             else
                 return null;
         }
+
+        public override decimal? GetDefaultPrice(int productID)
+        {
+            ELParameter[] elParameters = new ELParameter[]{
+                new ELParameter("@ProductID", DbType.Int32, productID),
+              };
+            object value = DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductPrice_GetDefaultPrice", elParameters);
+            if (value != null)
+                return Convert.ToDecimal(value);
+            else
+                return null;
+        }
         #endregion
+
+
     }
 }
