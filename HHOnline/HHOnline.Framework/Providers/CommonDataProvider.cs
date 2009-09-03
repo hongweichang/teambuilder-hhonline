@@ -217,7 +217,7 @@ namespace HHOnline.Framework.Providers
         /// 获取所有公司信息
         /// </summary>
         /// <returns></returns>
-        public abstract List<Company> GetCompanys(int comStatus,int comType,string comName);
+        public abstract List<Company> GetCompanys(int comStatus, int comType, string comName);
         /// <summary>
         /// 获取公司信息
         /// </summary>
@@ -464,7 +464,7 @@ namespace HHOnline.Framework.Providers
         {
             CustomerGrade customerGrade = new CustomerGrade();
             customerGrade.GradeID = DataRecordHelper.GetInt32(dr, "GradeID");
-            customerGrade.CompanyID = DataRecordHelper.GetInt32(dr, "CompanyID");
+            customerGrade.CompanyID = DataRecordHelper.GetInt32(dr, "CustomerID");
             customerGrade.GradeLevel = (UserLevel)DataRecordHelper.GetInt32(dr, "GradeLevel");
             customerGrade.GradeLimit = DataRecordHelper.GetString(dr, "GradeLimit");
             customerGrade.GradeName = DataRecordHelper.GetString(dr, "GradeName");

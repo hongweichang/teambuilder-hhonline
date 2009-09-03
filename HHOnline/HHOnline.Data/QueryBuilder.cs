@@ -387,11 +387,14 @@ namespace HHOnline.Data
             builder.AddWhere("pr.SupplyStatus ", Comparison.GreaterThan, 0);
             builder.AddWhere("p.ProductID", Comparison.Equals, productID);
             sb.Append(builder.BuildQuery());
+
+            //添加条件
+            sb.Append(" ");
+            sb.Append(LogicOperator.And.ToString());
+            sb.Append(" (");
             if (filters.Count > 0)
             {
-                sb.Append(" ");
-                sb.Append(LogicOperator.And.ToString());
-                sb.Append(" (");
+
                 for (int i = 0; i < filters.Count; i++)
                 {
                     sb.Append(" ");
@@ -404,6 +407,10 @@ namespace HHOnline.Data
                     sb.Append(" )");
                 }
                 sb.Append(" )");
+            }
+            else
+            {
+                sb.Append(" 1<> 1)");
             }
             return sb.ToString();
         }

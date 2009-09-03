@@ -681,7 +681,7 @@ namespace HHOnline.Data
             ELParameter[] elParameters = new ELParameter[]{
                 new ELParameter("@SqlPopulate",DbType.String,QueryGenerator.BuilderProductPriceQuery(filters,productID,level)),   
             };
-            object value = DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductPrice_GetMarketPrice", elParameters);
+            object value = DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductPrice_GetMemberPrice", elParameters);
             if (value != null)
                 return Convert.ToDecimal(value);
             else

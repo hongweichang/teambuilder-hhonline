@@ -77,13 +77,35 @@ namespace HHOnline.Shops
 
         #region GetMarketPrice /GetPrice
         /// <summary>
+        /// 根据用户级别获取对应商品的会员价
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        public static decimal? GetPriceMember(int userID, int productID)
+        {
+            List<UserLevel> levels = new List<UserLevel>() { 
+                UserLevel.E,UserLevel.D,UserLevel.C,UserLevel.B,UserLevel.A
+            };
+            decimal? priceMember = null;
+            foreach (UserLevel level in levels)
+            {
+                priceMember = GetPriceGrade(userID, productID, level);
+                if (priceMember.HasValue)
+                    return priceMember;
+            }
+            priceMember = GetPriceDefault(productID);
+            return priceMember;
+        }
+
+        /// <summary>
         /// 获取用户所看到市场价
         /// 根据客户所在区域，获取所有父区域，按照地域最近原则取市场价
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="productID"></param>
         /// <returns></returns>
-        public decimal? GetMarketPrice(int userID, int productID)
+        public static decimal? GetPriceMarket(int userID, int productID)
         {
             string areaIDList = string.Empty;
             User user = Users.GetUser(userID);
@@ -98,63 +120,20 @@ namespace HHOnline.Shops
         }
 
         /// <summary>
-        /// 根据级别获取市场价（UserLevelE,PriceE）<see cref="HHOnline.Framework.UserLevel"/>
+        /// 根据级别获取会员价<see cref="HHOnline.Framework.UserLevel"/>
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="productID"></param>
         /// <returns></returns>
-        public decimal? GetPriceE(int userID, int productID)
+        public static decimal? GetPriceGrade(int userID, int productID, UserLevel level)
         {
-            List<string> filter = GetFilter(userID, UserLevel.E);
-            return ShopDataProvider.Instance.GetGradePrice(filter, productID, UserLevel.E);
+            List<string> filter = GetFilter(userID, level);
+            return ShopDataProvider.Instance.GetGradePrice(filter, productID, level);
         }
 
-        /// <summary>
-        ///  根据级别获取市场价（UserLevelD,PriceD）<see cref="HHOnline.Framework.UserLevel"/>
-        /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="productID"></param>
-        /// <returns></returns>
-        public decimal? GetPriceD(int userID, int productID)
+        public static decimal? GetPriceDefault(int productID)
         {
-            List<string> filter = GetFilter(userID, UserLevel.D);
-            return ShopDataProvider.Instance.GetGradePrice(filter, productID, UserLevel.D);
-        }
-
-        /// <summary>
-        ///  根据级别获取市场价（UserLevelC,PriceC）<see cref="HHOnline.Framework.UserLevel"/>
-        /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="productID"></param>
-        /// <returns></returns>
-        public decimal? GetPriceC(int userID, int productID)
-        {
-            List<string> filter = GetFilter(userID, UserLevel.C);
-            return ShopDataProvider.Instance.GetGradePrice(filter, productID, UserLevel.C);
-        }
-
-        /// <summary>
-        ///  根据级别获取市场价（UserLevelB,PriceB）<see cref="HHOnline.Framework.UserLevel"/>
-        /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="productID"></param>
-        /// <returns></returns>
-        public decimal? GetPriceB(int userID, int productID)
-        {
-            List<string> filter = GetFilter(userID, UserLevel.B);
-            return ShopDataProvider.Instance.GetGradePrice(filter, productID, UserLevel.B);
-        }
-
-        /// <summary>
-        ///  根据级别获取市场价（UserLevelA,PriceA）<see cref="HHOnline.Framework.UserLevel"/>
-        /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="productID"></param>
-        /// <returns></returns>
-        public decimal? GetPriceA(int userID, int productID)
-        {
-            List<string> filter = GetFilter(userID, UserLevel.A);
-            return ShopDataProvider.Instance.GetGradePrice(filter, productID, UserLevel.A);
+            return ShopDataProvider.Instance.GetDefaultPrice(productID);
         }
 
         /// <summary>
@@ -162,7 +141,7 @@ namespace HHOnline.Shops
         /// </summary>
         /// <param name="userID"></param>
         /// <returns></returns>
-        private List<string> GetFilter(int userID, UserLevel level)
+        private static List<string> GetFilter(int userID, UserLevel level)
         {
             //获取筛选条件
             List<string> filters = new List<string>();
