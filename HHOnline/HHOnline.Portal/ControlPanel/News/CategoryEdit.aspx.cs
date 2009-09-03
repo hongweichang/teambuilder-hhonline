@@ -58,7 +58,6 @@ public partial class ControlPanel_News_CategoryEdit : HHPage
 		this.PageInfoType = InfoType.PopWinInfo;
 		this.ShortTitle = "修改资讯分类信息";
 
-		base.OnPageLoaded();
 		SetValidator(true, true, 5000);
 	}
 

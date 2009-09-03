@@ -55,7 +55,6 @@ public partial class ControlPanel_Permission_OrganizeUpdate : HHPage
         this.PageInfoType = InfoType.PopWinInfo;
         this.ShortTitle = "修改部门信息";
         
-        base.OnPageLoaded();
         SetValidator(true, true, 5000);
     }
     protected override void OnPagePermissionChecking()

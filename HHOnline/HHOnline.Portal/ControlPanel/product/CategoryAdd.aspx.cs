@@ -135,7 +135,6 @@ public partial class ControlPanel_product_CategoryAdd : HHPage
             this.ShortTitle = "新增产品分类";
         else
             this.ShortTitle = "修改产品分类";
-        base.OnPageLoaded();
         SetValidator(true, true, 5000);
     }
     protected override void OnPagePermissionChecking()

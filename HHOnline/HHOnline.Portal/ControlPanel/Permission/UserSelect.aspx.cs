@@ -172,7 +172,6 @@ public partial class ControlPanel_Permission_UserSelect : HHPage
         this.ShortTitle = "选择当前角色用户";
         
         AddJavaScriptInclude("scripts/pages/userselect.aspx.js", false, false);
-        base.OnPageLoaded();
     }
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
     {

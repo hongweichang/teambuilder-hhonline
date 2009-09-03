@@ -124,7 +124,7 @@ public partial class ControlPanel_product_PropertyAdd : HHPage
             this.ShortTitle = "新增分类属性";
         else
             this.ShortTitle = "修改分类属性";
-        base.OnPageLoaded();
+
         SetValidator(true, true, 5000);
     }
 

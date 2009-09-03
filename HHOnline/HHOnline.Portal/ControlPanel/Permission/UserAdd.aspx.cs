@@ -85,7 +85,6 @@ public partial class ControlPanel_Permission_UserAdd : HHPage
         this.PageInfoType = InfoType.PopWinInfo;
         this.ShortTitle = "新增用户";
         
-        base.OnPageLoaded();
         SetValidator(true, true, 5000);
     }
     protected override void OnPagePermissionChecking()

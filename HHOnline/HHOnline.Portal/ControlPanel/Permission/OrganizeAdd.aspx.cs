@@ -70,7 +70,6 @@ public partial class ControlPanel_Permission_OrganizeAdd : HHPage
         this.PageInfoType = InfoType.PopWinInfo;
         this.ShortTitle = "新增部门";
         
-        base.OnPageLoaded();
         SetValidator(true,true,5000);
     }
     protected override void OnPagePermissionChecking()

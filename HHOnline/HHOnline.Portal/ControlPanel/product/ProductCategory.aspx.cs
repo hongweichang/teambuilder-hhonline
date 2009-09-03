@@ -174,7 +174,6 @@ public partial class ControlPanel_product_ProductCategory : HHPage
     public override void OnPageLoaded()
     {
         this.PageInfoType = InfoType.IframeInfo;
-        base.OnPageLoaded();
 
         AddJavaScriptInclude("scripts/jquery.jmodal.js", false, true);
         AddJavaScriptInclude("scripts/pages/productcategory.aspx.js", false, false);

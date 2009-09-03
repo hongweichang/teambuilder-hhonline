@@ -21,7 +21,6 @@ public partial class ControlPanel_News_CategoryAdd : HHPage
 		this.PageInfoType = InfoType.PopWinInfo;
 		this.ShortTitle = "新增资讯分类";
 		
-		base.OnPageLoaded();
 		SetValidator(true, true, 5000);
 	}
 
