@@ -23,10 +23,10 @@ namespace HHOnline.Framework
         {
             lock (viewList.SyncRoot)
             {
-                View v = viewList[relatedID] as View;
+                ViewCounter v = viewList[relatedID] as ViewCounter;
                 if (v == null)
                 {
-                    v = new View(relatedID);
+                    v = new ViewCounter(relatedID);
                     viewList.Add(relatedID, v);
                 }
                 v.Count++;

@@ -5,12 +5,12 @@ namespace HHOnline.Framework
     /// <summary>
     /// 计数类
     /// </summary>
-    public class View
+    public class ViewCounter
     {
-        public View()
+        public ViewCounter()
         { }
 
-        public View(int relatedID)
+        public ViewCounter(int relatedID)
         {
             this.RelatedID = relatedID;
         }
