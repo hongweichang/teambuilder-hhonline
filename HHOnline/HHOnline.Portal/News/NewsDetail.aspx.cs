@@ -40,6 +40,7 @@ public partial class News_NewsDetail : HHPage
 					lblHitTimes.Text = article.HitTimes.ToString();
 					lblTitle.Text = article.Title;
 					lblSubTitle.Text = article.SubTitle;
+					lblKeywords.Text = string.IsNullOrEmpty(article.Keywords) ? "无" : article.Keywords;
 
 					if (!string.IsNullOrEmpty(article.CopyFrom))
 					{

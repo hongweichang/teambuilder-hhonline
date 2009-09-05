@@ -27,16 +27,18 @@
 						<asp:Label ID="lblDate" runat="server" Text=""></asp:Label>
 						作者: <a class="lightblue" href='#'>
 							<asp:Label ID="lblAuthor" runat="server" Text=""></asp:Label></a> <span class="article_view">
-								<a class="grayline" href='#'>阅读次数: (<span id="viewcount_1560804"><asp:Label ID="lblHitTimes"
-									runat="server" Text="Label"></asp:Label></span>)</a></span></div>
+								阅读次数: <span id="viewcount_1560804">
+									<asp:Label ID="lblHitTimes" runat="server" Text="Label"></asp:Label></span></span>
+						关键字:
+						<asp:Label ID="lblKeywords" runat="server" Text="Label"></asp:Label></div>
 					<div class="post_item_sep">
 					</div>
 					<p class="post_item_summary">
 						<asp:Label ID="lblAbstract" runat="server" Text=""></asp:Label></p>
 					<p>
 						<asp:Label ID="lblContent" runat="server" Text=""></asp:Label></p>
-						<p id="copy_form">
-							<asp:Label ID="lblCopyForm" runat="server" Text=""></asp:Label></p>
+					<p id="copy_form">
+						<asp:Label ID="lblCopyForm" runat="server" Text=""></asp:Label></p>
 				</div>
 			</div>
 		</div>
