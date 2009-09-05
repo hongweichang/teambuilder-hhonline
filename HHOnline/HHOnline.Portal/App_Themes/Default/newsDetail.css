@@ -1,4 +1,12 @@
-﻿#newsBox #news
+﻿.post_item_sep_detail
+{
+	height: 1px;
+	margin-top: 4px;
+	margin-bottom: 6px;
+	width: 600px;
+	border-top: #ccc 1px dotted;
+}
+#newsBox #news
 {
 	margin-right: 1px;
 	padding: 10px 10px 20px 10px;
@@ -48,8 +56,14 @@
 	overflow: hidden;
 	_overflow: visible;
 	_overflow-x: hidden;
-	font-size: 14px;
+	/*font-size: 12pt;*/	
 }
+
+#news #news_content #news_content_detail
+{
+	line-height:200%;
+}
+
 #news #news_content img#sign
 {
 	/* float: right*/

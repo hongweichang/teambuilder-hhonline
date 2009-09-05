@@ -42,6 +42,14 @@ public partial class News_NewsDetail : HHPage
 					lblSubTitle.Text = article.SubTitle;
 					lblKeywords.Text = string.IsNullOrEmpty(article.Keywords) ? "无" : article.Keywords;
 
+					// 查找分类
+					ArticleCategory ac = ArticleManager.GetArticleCategory(article.Category);
+					if (ac != null)
+					{
+						btnCategory.Text = ac.Name;
+						btnCategory.OnClientClick = "window.location.href='newslist.aspx?cate=" + ac.ID + "';return false;";
+					}
+
 					if (!string.IsNullOrEmpty(article.CopyFrom))
 					{
 						lblCopyForm.Text = "文章来源: " + article.CopyFrom;
