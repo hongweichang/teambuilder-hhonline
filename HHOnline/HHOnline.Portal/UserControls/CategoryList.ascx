@@ -8,11 +8,11 @@
 	<asp:Repeater ID="repCategories" runat="server">
 		<HeaderTemplate>
 			<ul id="cate_item">
-				<li id="cate_item_parent %>"><a class="cate_link" href="newslist.aspx">资讯首页</a></li>
+				<li id="cate_item_parent %>"><a class="cate_link" href="news-newslist">资讯首页</a></li>
 		</HeaderTemplate>
 		<ItemTemplate>
 			<li id="cate_item_<%#Eval("ID") %>" onmouseover="cateShow(<%#Eval("ID") %>)" onmouseout="cateHidden(<%#Eval("ID") %>)">
-				<a class="cate_link" href="newslist.aspx?cate=<%#Eval("ID") %>">
+				<a class="cate_link" href="news-newslist&cate=<%#Eval("ID") %>">
 					<%#Eval("Name") %></a></li>
 		</ItemTemplate>
 		<FooterTemplate>
@@ -32,7 +32,7 @@
 					<ul class="cate_content_body">
 						<asp:Repeater ID="repCategoryLevel2" runat="server">
 							<ItemTemplate>
-								<li><a class="cate_link" href="newslist.aspx?cate=<%#Eval("ID") %>">
+								<li><a class="cate_link" href="news-newslist&cate=<%#Eval("ID") %>">
 									<%#Eval("Name") %></a> </li>
 							</ItemTemplate>
 						</asp:Repeater>
