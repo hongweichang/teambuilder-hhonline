@@ -2,6 +2,9 @@
 	CodeFile="NewsDetail.aspx.cs" Inherits="News_NewsDetail" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHeader" runat="Server">
+<script type="text/javascript">
+    var activeTab = 'news';
+</script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSearch" runat="Server">
 </asp:Content>

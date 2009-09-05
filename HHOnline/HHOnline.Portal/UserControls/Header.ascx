@@ -40,7 +40,7 @@
                     <%--<li><a href="javascript:void(0)">解决方案</a></li>--%>
                 </ul>
             </div>
-            <div class="main-r1c2-r2r2">
+            <div class="main-r1c2-r2r2" id="headerDesc">
                 工业自动化仪表及实验室分析仪器专业销售平台!
             </div>
         </div>

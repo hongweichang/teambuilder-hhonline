@@ -12,6 +12,7 @@
 	padding: 10px 10px 20px 10px;
 	text-align: left;
 	overflow: hidden;
+	min-height:500px;
 }
 #news #news_title
 {
@@ -78,7 +79,6 @@
 #news #news_foot
 {
 	margin: 0px -10px 0px;
-	background: transparent url(http://img.cnbeta.com/bg_news_foot_op.png) repeat-x;
 	height: 32px;
 	line-height: 32px;
 }

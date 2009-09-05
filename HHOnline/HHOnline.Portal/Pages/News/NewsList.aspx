@@ -13,29 +13,16 @@
 	<div id="main">
 		<div class="post_nav_block_wrapper">
 			<ul class="post_nav_block">
-				<li><a class="current_nav" href="#">
-					<asp:Label ID="lblCategoryName" runat="server"></asp:Label></a></li></ul>
+				<li>
+					<asp:Label ID="lblCategoryName" runat="server"></asp:Label></li></ul>
 			<div class="clear">
 			</div>
 		</div>
-		<div class="rss_link">
-			<a href="#">
-				<img style="position: relative; top: 2px" title="订阅资讯" alt="点击订阅" src="../images/default/icon_rss.gif"></a>
-		</div>
-		<div class="news_list">
-			<a href="<%
-			Response.Write("news-newslist&v=1&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]);
-			 %>">
-				<img alt="列表" title="查看方式 - 列表" src="../Images/Default/news_list.png" />
-			</a>
-		</div>
-		<div class="news_detail">
-			<a href="<%
-			Response.Write("news-newslist&v=0&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]);
-			 %>">
-				<img alt="列表" title="查看方式 - 详细资料" src="../Images/Default/news_detail.png" />
-			</a>
-		</div>
+		
+		<a class="rss_link" href="javascript:void(0)" title="订阅Rss">&nbsp;</a>
+		<a href="<% Response.Write("news-newslist&v=1&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]); %>" title="查看方式 - 列表" class="news_list">&nbsp;</a>		
+		<a href="<%Response.Write("news-newslist&v=0&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]);%>" class="news_detail" title="查看方式 - 详细资料" >&nbsp;</a>
+		
 		<div id="post_list">
 			<asp:Repeater ID="repArticlesList" runat="server">
 				<ItemTemplate>
@@ -87,8 +74,5 @@
 			<div id="pager">
 				<% WritePagesNavigator(); %></div>
 		</div>
-	</div>
-	<div id="side_nav">
-		<huc:CategoryList ID="clCategories" runat="server" />
 	</div>
 </asp:Content>

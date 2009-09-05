@@ -93,8 +93,8 @@ public partial class News_NewsList : HHPage
 
 	public override void OnPageLoaded()
 	{
-		base.OnPageLoaded();
-		AddGenericLink("text/css", "Stylesheet", "global", "App_Themes/Default/newsList.css");
+        this.ShortTitle = "资讯信息";
+        this.SetTitle();
 		AddJavaScriptInclude("Scripts/Pages/newsList.aspx.js", false, false);
 	}
 
