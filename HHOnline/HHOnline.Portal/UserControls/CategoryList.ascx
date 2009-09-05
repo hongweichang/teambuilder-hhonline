@@ -12,7 +12,7 @@
 		</HeaderTemplate>
 		<ItemTemplate>
 			<li id="cate_item_<%#Eval("ID") %>" onmouseover="cateShow(<%#Eval("ID") %>)" onmouseout="cateHidden(<%#Eval("ID") %>)">
-				<a class="cate_link" href="#">
+				<a class="cate_link" href="newslist.aspx?cate=<%#Eval("ID") %>">
 					<%#Eval("Name") %></a></li>
 		</ItemTemplate>
 		<FooterTemplate>

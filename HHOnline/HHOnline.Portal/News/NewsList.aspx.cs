@@ -129,14 +129,20 @@ public partial class News_NewsList : HHPage
 	/// </summary>
 	protected void WritePagesNavigator()
 	{
-		int articlesCount = ArticleManager.GetCategoryArticlesCount(-1);
+		int cateID = -1;
+		string cateIDStr = Request.QueryString["cate"];
+		if (!string.IsNullOrEmpty(cateIDStr))
+		{
+			int.TryParse(cateIDStr, out cateID);
+		}
+
+		int articlesCount = ArticleManager.GetCategoryArticlesCount(cateID);
 		int pagesCount = articlesCount / pageSize;
 		if (pagesCount * pageSize < articlesCount)
 		{
 			++pagesCount;
 		}
 
-		string cateIDStr = Request.QueryString["cate"];
 		string viewStateStr = Request.QueryString["v"];
 
 		// 当前页
@@ -183,7 +189,7 @@ public partial class News_NewsList : HHPage
 		}
 
 		// 如果当前页为最后一页则不显示最后一页
-		if (pageIndex != pagesCount - 1)
+		if (pageIndex != pagesCount - 1 && pagesCount > 0)
 		{
 			Response.Write("<a href='newslist.aspx?cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pageIndex + 1) + "'>下一页 &gt;</a>");
 		}
