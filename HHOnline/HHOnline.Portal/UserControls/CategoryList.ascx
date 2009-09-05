@@ -21,4 +21,26 @@
 	</asp:Repeater>
 	<div class="cate_bottom">
 	</div>
+	<asp:Repeater ID="repCategoryLevel1" runat="server" 
+		onitemdatabound="repCategoryLevel1_ItemDataBound">
+		<ItemTemplate>
+			<div class="cate_content_block_wrapper" id="cate_content_block_<%#Eval("ID") %>"
+				style="top: 29px;" onmouseover="cateShow(<%#Eval("ID") %>)" onmouseout="cateHidden(<%#Eval("ID") %>)">
+				<div class="cate_content_top">
+				</div>
+				<div class="cate_content_block">
+					<ul class="cate_content_body">
+						<asp:Repeater ID="repCategoryLevel2" runat="server">
+							<ItemTemplate>
+								<li><a class="cate_link" href="newslist.aspx?cate=<%#Eval("ID") %>">
+									<%#Eval("Name") %></a> </li>
+							</ItemTemplate>
+						</asp:Repeater>
+					</ul>
+				</div>
+				<div class="cate_content_bottom">
+				</div>
+			</div>
+		</ItemTemplate>
+	</asp:Repeater>
 </div>
