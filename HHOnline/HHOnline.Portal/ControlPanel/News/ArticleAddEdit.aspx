@@ -69,6 +69,15 @@
         </tr>
         <tr>
             <th>
+                标题图像(<span style="color: #4682B4">可选</span>)
+            </th>
+            <td>
+				<asp:DropDownList ID="ddlArticleImages" runat="server">
+				</asp:DropDownList>
+            </td>
+        </tr>
+        <tr>
+            <th>
                 摘要(<span style="color: #4682B4">可选</span>)
             </th>
             <td>

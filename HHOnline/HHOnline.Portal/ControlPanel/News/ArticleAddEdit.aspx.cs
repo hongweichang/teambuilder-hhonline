@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Web;
@@ -26,6 +27,7 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 		txtSubTitle.Text = article.SubTitle;
 		txtAbstract.Text = article.Abstract;
 		txtContent.Text = article.Content;
+		ddlArticleImages.SelectedValue = article.Image.ToString();
 
 		if (article.Date.HasValue)
 		{
@@ -52,12 +54,25 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 		base.OnPagePermissionChecking();
 	}
 
+	private void BindArticleAttachment()
+	{
+		AttachmentQuery aq = new AttachmentQuery();
+		PagingDataSet<ArticleAttachment> items = ArticleAttachments.GetAttachments(aq);
+
+		ddlArticleImages.DataTextField = "Name";
+		ddlArticleImages.DataValueField = "ID";
+		ddlArticleImages.DataSource = items.Records;
+		ddlArticleImages.DataBind();
+	}
+
 	protected void Page_Load(object sender, EventArgs e)
 	{
 		isEdit = Request.QueryString["act"].ToLower() == "edit";
 
 		if (!IsPostBack && !IsCallback)
 		{
+			BindArticleAttachment();
+
 			try
 			{
 				if (isEdit)
@@ -97,6 +112,7 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
 			article.ArticleMemo = txtMemo.Text;
 			article.Status = csArticle.SelectedValue;
+			article.Image = int.Parse(ddlArticleImages.SelectedValue);
 
 			article.UpdateTime = DateTime.Now;
 			article.UpdateUser = Profile.AccountInfo.UserID;
@@ -132,6 +148,7 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
 			article.ArticleMemo = txtMemo.Text;
 			article.Status = csArticle.SelectedValue;
+			article.Image = int.Parse(ddlArticleImages.SelectedValue);
 
 			article.CreateTime = DateTime.Now;
 			article.CreateUser = Profile.AccountInfo.UserID;
