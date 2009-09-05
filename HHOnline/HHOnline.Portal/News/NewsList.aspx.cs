@@ -75,7 +75,10 @@ public partial class News_NewsList : HHPage
 			query.CategoryID = categoryID;
 		}
 
+		this.ShortTitle = "资讯 - " + lblCategoryName.Text;
+
 		query.PageIndex = pageIndex;
+		query.PageSize = pageSize;
 		PagingDataSet<Article> articles = ArticleManager.GetArticles(query);
 
 		// 绑定
@@ -90,8 +93,6 @@ public partial class News_NewsList : HHPage
 
 	public override void OnPageLoaded()
 	{
-		this.ShortTitle = "资讯";
-
 		base.OnPageLoaded();
 		AddGenericLink("text/css", "Stylesheet", "global", "App_Themes/Default/newsList.css");
 		AddJavaScriptInclude("Scripts/Pages/newsList.aspx.js", false, false);
@@ -114,6 +115,10 @@ public partial class News_NewsList : HHPage
 						string imgPath = "../FileStore/" + ArticleAttachments.FileStoreKey + "/" + attachment.FileName;
 						image.ImageUrl = imgPath;
 						image.Visible = true;
+					}
+					else
+					{
+						image.Visible = false;
 					}
 				}
 				else

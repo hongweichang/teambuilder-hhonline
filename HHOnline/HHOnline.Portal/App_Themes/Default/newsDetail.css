@@ -1,0 +1,89 @@
+﻿#newsBox #news
+{
+	margin-right: 1px;
+	padding: 10px 10px 20px 10px;
+	text-align: left;
+	overflow: hidden;
+}
+#news #news_title
+{
+	margin: 10px 0px;
+	text-align: center;
+}
+#news #news_subtitle
+{
+	margin: 10px 0px;
+	text-align: center;
+}
+#news #news_subtitle span
+{
+	font-weight:normal;
+	font-size: 12px;
+}
+#news #news_title span
+{
+	font-size: 14px;
+}
+#news #news_font
+{
+	margin: 0px 0px 10px;
+	color: #369;
+	text-align: center;
+}
+#news #news_author span
+{
+	padding: 0px 0px 6px;
+	border-bottom: 1px solid #369;
+	color: #369;
+}
+#news #news_content
+{
+	padding: 0px 20px 6px 20px;
+	/*width: 577px;
+	_width: 576px; */
+	min-height: 100px; /* ie7 */
+	height: auto;
+	_height: 300px; /* ie6 */
+	line-height: 150%;
+	overflow: hidden;
+	_overflow: visible;
+	_overflow-x: hidden;
+	font-size: 14px;
+}
+#news #news_content img#sign
+{
+	/* float: right*/
+}
+
+#news #news_content #copy_form
+{
+	color: Gray;
+	margin-top: 10px;
+}
+
+#news #news_foot
+{
+	margin: 0px -10px 0px;
+	background: transparent url(http://img.cnbeta.com/bg_news_foot_op.png) repeat-x;
+	height: 32px;
+	line-height: 32px;
+}
+#news #news_foot span
+{
+	padding: 0px 10px 0px;
+	color: #369;
+}
+#news #news_ads
+{
+	padding: 5px 0px;
+	width: 576px;
+	overflow: hidden;
+}
+
+#content #newsBox
+{
+	width: 100%;
+	text-align: center;
+	word-break: break-all;
+	float: left;
+}

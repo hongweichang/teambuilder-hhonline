@@ -83,14 +83,6 @@
 		<div id="pager_block">
 			<div id="pager">
 				<% WritePagesNavigator(); %>
-<%--				<span class="current">1</span><a href="/SiteCategory.aspx?alias=java&amp;page=2">2</a><a
-					href="/SiteCategory.aspx?alias=java&amp;page=3">3</a><a href="/SiteCategory.aspx?alias=java&amp;page=4">4</a><a
-						href="/SiteCategory.aspx?alias=java&amp;page=5">5</a><a href="/SiteCategory.aspx?alias=java&amp;page=6">6</a><a
-							href="/SiteCategory.aspx?alias=java&amp;page=7">7</a><a href="/SiteCategory.aspx?alias=java&amp;page=8">8</a><a
-								href="/SiteCategory.aspx?alias=java&amp;page=9">9</a><a href="/SiteCategory.aspx?alias=java&amp;page=10">10</a><a
-									href="/SiteCategory.aspx?alias=java&amp;page=11">11</a>...<a href="/SiteCategory.aspx?alias=java&amp;page=55">55</a><a
-										href="/SiteCategory.aspx?alias=java&amp;page=2">下一页 &gt;</a>
---%>										</div>
 		</div>
 	</div>
 	<div id="side_nav">
