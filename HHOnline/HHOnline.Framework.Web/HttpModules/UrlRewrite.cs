@@ -19,7 +19,7 @@ namespace HHOnline.Framework.Web.HttpModules
         void context_BeginRequest(object sender, EventArgs e)
         {
             HttpContext context = (sender as HttpApplication).Context;
-            string url = context.Request.RawUrl.ToLowerInvariant();
+            string url = context.Request.RawUrl;
             //string path = context.Request.Path.ToLowerInvariant();
             //if(!string.IsNullOrEmpty(path))
             //{

@@ -50,7 +50,9 @@
                 </ul>
             </div>
             <div class="tab-content">
-                <iframe class="tab-content-iframe" id="frameProduct1" src="Pages/Home/ProductCategories.aspx" frameborder="0" scrolling="no"></iframe>
+                <div id="productTabContent" class="productTabContent">
+                    <hc:CategoryList ID="clProduct" runat="server" CssClass="hpCategoryList"></hc:CategoryList>
+                </div>
             </div>
             <br />
             <div class="tab-nav">

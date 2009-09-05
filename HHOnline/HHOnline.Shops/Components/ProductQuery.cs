@@ -13,6 +13,7 @@ namespace HHOnline.Shops
         private int pageSize = 20;
         private int? brandID;
         private int? categoryID;
+        private int? propertyID;
         private int? industryID;
         private int? productID;
         private string productNameFilter;
@@ -176,7 +177,20 @@ namespace HHOnline.Shops
                 brandID = value;
             }
         }
-
+        /// <summary>
+        /// 产品属性
+        /// </summary>
+        public int? PropertyID
+        {
+            get
+            {
+                return propertyID;
+            }
+            set
+            {
+                propertyID = value;
+            }
+        }
         /// <summary>
         /// 产品行业
         /// </summary>

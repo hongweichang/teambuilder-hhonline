@@ -1,18 +1,14 @@
 ﻿/// <reference path="../jquery-vsdoc.js" />
-var navigates = {
-    product: 'pages/home/productcategories.aspx',
-    variety: 'pages/home/productvariety.aspx',
-    trade: 'pages/home/producttrade.aspx'
-};
 function changeTab() {
     var me = $(this);
+    if (me.hasClass('active')) { return; }
     var tabName = me.attr('rel');
     var last = $('#productNavigator1').find('li.active');
-    if (me != last) {
-        last.removeClass('active');
-        me.addClass('active');
-        document.getElementById('frameProduct1').src = eval('(navigates.' + tabName + ')')+'?t='+Math.random();
-    }
+
+    last.removeClass('active');
+    me.addClass('active');
+    $('#' + last.attr('rel') + 'TabContent').hide();
+    $('#' + tabName + 'TabContent').show();
 }
 $().ready(function() {
     $('#btnSearchTrade').hover(function() {

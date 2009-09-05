@@ -28,3 +28,5 @@
         <CurrentNodeStyle CssClass="curnode" />
         <PathSeparatorStyle CssClass="pathSeparatorStyle" />
     </asp:SiteMapPath>
+    
+<hc:CollectionPager ControlCssClass="pager" ResultsStyle="margin:10px 0px;font-weight:bold" ResultsLocation="Bottom" BackText="前一页" NextText="后一页" FirstText="首页"  LastText="尾页"  BackNextStyle="margin:auto 10px"   ResultsFormat="显示第 {0}-{1} 条 (共{2}条)" LabelText="当前页"  BackNextLinkSeparator="||" PageNumbersSeparator="" runat="server" HideOnSinglePage="true" UseSlider="true" SliderSize="10" PagingMode="QueryString" ShowFirstLast="true"></hc:CollectionPager>

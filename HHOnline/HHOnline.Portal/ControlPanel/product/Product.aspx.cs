@@ -120,11 +120,11 @@ public partial class ControlPanel_Product_Product : HHPage
                 item.Selected = true;
                 if (flag)
                 {
-                    lblTip.Text = lblTip.Text + ",分类为“" + ProductCategories.GeCategory(query.CategoryID.Value).CategoryName + "”";
+                    lblTip.Text = lblTip.Text + ",分类为“" + ProductCategories.GetCategory(query.CategoryID.Value).CategoryName + "”";
                 }
                 else
                 {
-                    lblTip.Text = "分类为“" + ProductCategories.GeCategory(query.CategoryID.Value).CategoryName + "”";
+                    lblTip.Text = "分类为“" + ProductCategories.GetCategory(query.CategoryID.Value).CategoryName + "”";
                     flag = true;
                 }
             }

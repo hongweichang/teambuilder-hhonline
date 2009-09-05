@@ -41,6 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountStatusList.cs" />
+    <Compile Include="CollectionPager.cs" />
+    <Compile Include="Controls\CategoryLikeList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CategoryNavigate.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CategoryList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ComponentStatusList.cs" />
     <Compile Include="Controls\VarietyList.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -49,6 +59,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ArticleList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CategoryPropertyList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DateSpan.cs" />

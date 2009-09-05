@@ -40,7 +40,7 @@ public partial class ControlPanel_product_CategoryAdd : HHPage
 
     void BindData()
     {
-        ProductCategory category = ProductCategories.GeCategory(id);
+        ProductCategory category = ProductCategories.GetCategory(id);
         ProductCategory parent = null;
         ProductProperty property = null;
         if (category != null)
@@ -49,11 +49,11 @@ public partial class ControlPanel_product_CategoryAdd : HHPage
             txtCategoryName.Text = category.CategoryName;
             txtCategoryDesc.Text = category.CategoryDesc;
             txtDisplayOrder.Text = category.DisplayOrder.ToString();
-            parent = ProductCategories.GeCategory(category.ParentID);
+            parent = ProductCategories.GetCategory(category.ParentID);
             property = ProductProperties.GetProperty(category.PropertyID);
         }
         if (parent == null)
-            parent = ProductCategories.GeCategory(parentID);
+            parent = ProductCategories.GetCategory(parentID);
         if (parent != null)
         {
             ltParCategory.Text = parent.CategoryName;
@@ -87,7 +87,7 @@ public partial class ControlPanel_product_CategoryAdd : HHPage
         }
         else
         {
-            category = ProductCategories.GeCategory(id);
+            category = ProductCategories.GetCategory(id);
         }
         category.CategoryName = txtCategoryName.Text;
         category.CategoryDesc = txtCategoryDesc.Text;

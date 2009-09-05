@@ -27,36 +27,17 @@
                     </asp:LoginView>
                 </div>
                 <div class="top-nav1">
-                    <asp:LoginView ID="lvWelcome" runat="server">
-                        <LoggedInTemplate>
-                            欢迎您,
-                            <%= Profile.AccountInfo.DisplayName %>!&nbsp;&nbsp;
-                        </LoggedInTemplate>
-                        <AnonymousTemplate>
-                            请您登录：
-                        </AnonymousTemplate>
-                    </asp:LoginView>
-                    <asp:LoginStatus ID="lsQuit" runat="server" LogoutAction="Refresh" LoginText="[登录]"
-                        LogoutText="[注销]" ForeColor="#ff0000" />
-                    <asp:LoginView ID="lvManage" runat="server">
-                        <RoleGroups>
-                            <asp:RoleGroup Roles="HHOnlineUser-View">
-                                <ContentTemplate>
-                                    <a href="controlpanel/controlpanel.aspx" style="color: #ff0000">[管理中心]</a>
-                                </ContentTemplate>
-                            </asp:RoleGroup>
-                        </RoleGroups>
-                    </asp:LoginView>
+                    <asp:Literal ID="ltDescriptions" runat="server"></asp:Literal>
                 </div>
             </div>
         </div>
         <div class="main-r1c2-r2">
             <div class="main-r1c2-r2r1">
-                <ul class="nav-main">
-                    <li><a href="#" class="selected">首页</a></li>
-                    <li><a href="#">产品</a></li>
-                    <li><a href="#">资讯</a></li>
-                    <li><a href="#">解决方案</a></li>
+                <ul class="nav-main" id="headerNav">
+                    <li><a href="javascript:void(0)" class="selected" rel="main">首页</a></li>
+                    <li><a href="javascript:void(0)" rel="product">产品</a></li>
+                    <li><a href="javascript:void(0)" rel="news">资讯</a></li>
+                    <%--<li><a href="javascript:void(0)">解决方案</a></li>--%>
                 </ul>
             </div>
             <div class="main-r1c2-r2r2">

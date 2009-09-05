@@ -11,12 +11,29 @@ public partial class UserControls_Header : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-            BindTel();
+            BindTel();            
         }
     }
     void BindTel()
     {
         SiteSettings settings = HHContext.Current.SiteSettings;
         ltPhone.Text = settings.ServiceTel;
+        HttpContext context = HttpContext.Current;
+        string des = string.Empty;
+        if (context.User.Identity.IsAuthenticated)
+        {
+            des = "欢迎您，" + Profile.AccountInfo.DisplayName + "！&nbsp;&nbsp;" +
+                                           "<a href=\"" + GlobalSettings.RelativeWebRoot + "controlpanel/logout.aspx\">[注销]</a>";
+            if (Profile.AccountInfo.UserType == UserType.InnerUser)
+            {
+                des += "&nbsp;|&nbsp;<a href=\"" + GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx\">[管理中心]</a>";
+            }
+        }
+        else
+        {
+            des = "<a href=\"" + GlobalSettings.RelativeWebRoot + "login.aspx\">[登录]</a>" +
+                "&nbsp;|&nbsp;<a href=\"" + GlobalSettings.RelativeWebRoot + "register.aspx\">[注册]</a>";
+        }
+        ltDescriptions.Text = des;
     }
 }

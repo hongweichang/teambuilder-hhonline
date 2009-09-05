@@ -48,10 +48,10 @@ public partial class ControlPanel_product_PropertyAdd : HHPage
             this.txtPropertyName.Text = property.PropertyName;
             this.txtDisplayOrder.Text = property.DisplayOrder.ToString();
             this.scHidden.SelectedValue = property.SubCategoryHidden;
-            category = ProductCategories.GeCategory(property.CategoryID);
+            category = ProductCategories.GetCategory(property.CategoryID);
         }
         if (category == null)
-            category = ProductCategories.GeCategory(categoryID);
+            category = ProductCategories.GetCategory(categoryID);
 
         if (category != null)
         {

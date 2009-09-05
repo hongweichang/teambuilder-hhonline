@@ -38,7 +38,7 @@ namespace HHOnline.Shops
         {
             get
             {
-                return ProductCategories.GeCategory(CategoryID);
+                return ProductCategories.GetCategory(CategoryID);
             }
         }
 

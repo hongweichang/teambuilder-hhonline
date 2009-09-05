@@ -78,7 +78,7 @@ namespace HHOnline.Shops
         /// </summary>
         /// <param name="categoryID"></param>
         /// <returns></returns>
-        public static ProductCategory GeCategory(int categoryID)
+        public static ProductCategory GetCategory(int categoryID)
         {
             foreach (ProductCategory category in GetCategories())
             {
