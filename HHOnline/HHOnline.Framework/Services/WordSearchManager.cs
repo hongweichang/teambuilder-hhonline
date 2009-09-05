@@ -21,10 +21,7 @@ namespace HHOnline.Framework
         /// <param name="keyword"></param>
         public void Insert(string keyword)
         {
-
+            CommonDataProvider.Instance.InsertWordSearch(keyword);
         }
-
-
-
     }
 }

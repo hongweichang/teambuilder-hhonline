@@ -15,7 +15,7 @@
         //在应用程序启动时运行的代码
 
         //配置log4net
-        log4net.Config.XmlConfigurator.Configure(new FileInfo(GlobalSettings.MapPath("log4net.config")));
+        log4net.Config.XmlConfigurator.Configure(new FileInfo(GlobalSettings.MapPath("~/log4net.config")));
 
         //启动后台任务
         XmlNode node = HHConfiguration.GetConfig().GetConfigSection("HHOnline/Tasks");
@@ -56,7 +56,7 @@
     void Application_Error(object sender, EventArgs e)
     {
         //在出现未处理的错误时运行的代码
-        
+
         HttpApplication application = (HttpApplication)sender;
         HttpContext context = application.Context;
 
@@ -107,7 +107,7 @@
             hhException.Log();
             Server.Transfer("~/pages/messages/error.aspx");
         }
-         
+
     }
 
     void Session_Start(object sender, EventArgs e)
