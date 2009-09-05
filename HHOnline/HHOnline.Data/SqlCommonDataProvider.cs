@@ -891,5 +891,25 @@ namespace HHOnline.Data
             return (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_CustomerGrade_DeleteByCompanyID", paramID));
         }
         #endregion
+
+        public override void InsertWordSearch(string keyword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void StatisticWordSearch()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<string> GetWordSuggest(string startLetter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<string> GetHotWordSearch(int topCount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

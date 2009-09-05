@@ -516,5 +516,15 @@ namespace HHOnline.Framework.Providers
 
 
         #endregion
+
+        #region WordSearch
+        public abstract void InsertWordSearch(string keyword);
+
+        public abstract void StatisticWordSearch();
+
+        public abstract List<string> GetWordSuggest(string startLetter);
+
+        public abstract List<string> GetHotWordSearch(int topCount);
+        #endregion
     }
 }

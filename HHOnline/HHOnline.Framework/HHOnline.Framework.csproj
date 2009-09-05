@@ -167,6 +167,7 @@
     <Compile Include="Services\UserGradeManager.cs" />
     <Compile Include="Services\Users.cs" />
     <Compile Include="Core\BaseViews.cs" />
+    <Compile Include="Services\WordSearchManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HHOnline.Cache\HHOnline.Cache.csproj">

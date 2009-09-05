@@ -156,11 +156,11 @@ namespace HHOnline.Data
 		{
 			ELParameter paramArticleID = new ELParameter("@ArticleID", DbType.Int32);
 			ELParameter paramViewCount = new ELParameter("@ViewCount", DbType.Int32);
-			View v = null;
+			ViewCounter v = null;
 
 			foreach (int articleID in views.Keys)
 			{
-				v = views[articleID] as View;
+				v = views[articleID] as ViewCounter;
 				if (v != null)
 				{
 					paramArticleID.Value = v.RelatedID;
