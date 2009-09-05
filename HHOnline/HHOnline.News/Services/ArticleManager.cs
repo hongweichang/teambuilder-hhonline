@@ -49,6 +49,18 @@ namespace HHOnline.News.Services
 		}
 
 		/// <summary>
+		/// 增加点击率
+		/// </summary>
+		/// <param name="articleID"></param>
+		/// <returns></returns>
+		public static int IncreaseHitTimes(int articleID)
+		{
+			int result = ArticleProvider.Instance.IncreaseHitTimes(articleID);
+
+			return result;
+		}
+
+		/// <summary>
 		/// 批量删除文章
 		/// </summary>
 		/// <param name="articleIDList"></param>

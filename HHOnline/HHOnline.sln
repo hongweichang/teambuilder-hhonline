@@ -81,7 +81,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HHOnline.Portal", "HHOnline
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "3488"
+		VWDPort = "1548"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HHOnline.QueryBuilder", "HHOnline.QueryBuilder\HHOnline.QueryBuilder.csproj", "{4D6E8B56-390C-482D-9BD4-2CDBF1815F48}"
@@ -89,10 +89,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HHOnline.Shops", "HHOnline.Shops\HHOnline.Shops.csproj", "{EAF0EF22-8AD4-4772-A9D7-61EB86080B07}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -249,5 +245,9 @@ Global
 		{70B33E8B-FBF0-4D75-8593-79AEDBEA30DF} = {C4E1D7E1-4C5A-4049-97AB-4C67030A8855}
 		{0C34FF77-CD0F-40D1-BD2F-557B2AA9B026} = {6F2CAE20-9424-4582-BC36-887AF82F5107}
 		{BFA25610-CC24-48FA-A672-BD9D1C0177F8} = {06377B76-3AF3-4B8E-A3C7-E0DD4727A1BE}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

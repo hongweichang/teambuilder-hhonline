@@ -33,6 +33,20 @@ namespace HHOnline.Data
 		}
 
 		/// <summary>
+		/// 增加访问率
+		/// </summary>
+		/// <returns></returns>
+		public override int IncreaseHitTimes(int articleID)
+		{
+			ELParameter articleIDParam = new ELParameter("@ArticleID", DbType.Int32);
+			articleIDParam.Value = articleID;
+
+			int result = Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_Article_IncreaseHitTimes", articleIDParam));
+
+			return result;
+		}
+
+		/// <summary>
 		/// 获取制定文章
 		/// </summary>
 		/// <param name="id"></param>

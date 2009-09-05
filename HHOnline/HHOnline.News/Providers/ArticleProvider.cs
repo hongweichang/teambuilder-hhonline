@@ -34,6 +34,12 @@ namespace HHOnline.News.Providers
         public abstract List<Article> GetAllArticles();
 
 		/// <summary>
+		/// 增加访问率
+		/// </summary>
+		/// <returns></returns>
+		public abstract int IncreaseHitTimes(int articleID);
+
+		/// <summary>
 		/// 获取制定文章
 		/// </summary>
 		/// <param name="id"></param>
