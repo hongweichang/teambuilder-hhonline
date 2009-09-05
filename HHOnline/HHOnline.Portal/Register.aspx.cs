@@ -56,14 +56,14 @@ public partial class Register : HHPage
         u.Department = txtDepartment.Text.Trim();
         u.Title = txtTitle.Text.Trim();
         u.Comment = txtMemo.Text.Trim();
-        u.AccountStatus = AccountStatus.ApprovalPending;
+        u.AccountStatus = AccountStatus.Authenticated;
         u.IsManager = 1;
 
         Company com = new Company();
         com.CompanyName = txtCompanyName.Text.Trim();
         com.CompanyRegion = int.Parse(hfRegionCode.Value);
         com.Phone = txtCompanyPhone.Text.Trim();
-        com.Fax = txtFax.Text.Trim();
+        com.Fax = txtCompanyFax.Text.Trim();
         com.Address = txtCompanyAddress.Text.Trim();
         com.Zipcode = txtZipCode.Text.Trim();
         com.Website = txtCompanyWebsite.Text.Trim();

@@ -102,7 +102,7 @@ namespace HHOnline.Permission.Services
             if (dics == null)
             {
                 dics = PermissionDataProvider.Instance.ModuleActionKeyValues(userName);
-                HHCache.Instance.Insert(key, dics, 6);
+                HHCache.Instance.Insert(key, dics);
             }
             return dics;
         }

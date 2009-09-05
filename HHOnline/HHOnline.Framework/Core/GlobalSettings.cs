@@ -668,5 +668,23 @@ namespace HHOnline.Framework
             }
         }
         #endregion
+
+        #region MaxMember
+        private static int _MaxMember=0;
+        /// <summary>
+        /// 企业客户最大自增会员数
+        /// </summary>
+        public static int MaxMember
+        {
+            get
+            {
+                if (_MaxMember == 0)
+                {
+                    _MaxMember = int.Parse(HHConfiguration.GetConfig()["maxMember"].ToString());
+                }
+                return _MaxMember;
+            }
+        }
+        #endregion
     }
 }

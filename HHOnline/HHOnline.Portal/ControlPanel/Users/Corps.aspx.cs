@@ -21,6 +21,23 @@ public partial class ControlPanel_Users_Corps : HHPage
             BindCorps();
         }
     }
+
+   
+    #region -Events-
+    protected void btnQuickSearch_Click(object sender, EventArgs e)
+    {
+        LinkButton btn = sender as LinkButton;
+        Response.Redirect(btn.PostBackUrl);
+    }
+    protected void btnSearch_Click(object obj, EventArgs e)
+    {
+        egvCorps.DataSource = Companys.GetCompanys(GetComStatus(), CompanyType.None, txtCompanyName.Text.Trim());
+        egvCorps.DataBind();
+    }
+    #endregion
+
+    #region -BindData-
+
     void BindLinkButton()
     {
         btnAll.PostBackUrl = destUrl;
@@ -73,21 +90,6 @@ public partial class ControlPanel_Users_Corps : HHPage
             }
         }
     }
-   
-    #region -Events-
-    protected void btnQuickSearch_Click(object sender, EventArgs e)
-    {
-        LinkButton btn = sender as LinkButton;
-        Response.Redirect(btn.PostBackUrl);
-    }
-    protected void btnSearch_Click(object obj, EventArgs e)
-    {
-        egvCorps.DataSource = Companys.GetCompanys(GetComStatus(), CompanyType.None, txtCompanyName.Text.Trim());
-        egvCorps.DataBind();
-    }
-    #endregion
-
-    #region -BindData-
     object[] _arr = null;
     void BuildArray()
     {
@@ -174,14 +176,9 @@ public partial class ControlPanel_Users_Corps : HHPage
     #endregion
 
     #region -ExtendgridView-
-    public void egvCorps_RowUpdating(object sender, GridViewUpdateEventArgs e)
-    {
-        Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?Users-corpedit&ID=" + egvCorps.DataKeys[e.RowIndex].Value);
-    }
-
     public void egvCorps_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int roleId = (int)egvCorps.DataKeys[e.RowIndex].Value;
+        int id = (int)egvCorps.DataKeys[e.RowIndex].Value;
     
     }
 
@@ -260,6 +257,7 @@ public partial class ControlPanel_Users_Corps : HHPage
         this.ShortTitle = "客户管理";
         this.SetTitle();
         this.SetTabName(this.ShortTitle);
+        this.AddJavaScriptInclude("scripts/pages/corp.aspx.js", false, false);
     }
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
     {

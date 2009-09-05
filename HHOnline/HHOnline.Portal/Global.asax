@@ -57,7 +57,7 @@
     {
         //在出现未处理的错误时运行的代码
        
-        /*
+        
         HttpApplication application = (HttpApplication)sender;
         HttpContext context = application.Context;
 
@@ -108,7 +108,7 @@
             hhException.Log();
             Server.Transfer("~/pages/messages/error.aspx");
         }
-         * */
+         
     }
 
     void Session_Start(object sender, EventArgs e)

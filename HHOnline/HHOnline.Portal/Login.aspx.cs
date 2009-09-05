@@ -20,7 +20,7 @@ public partial class Login : HHPage
             {
                 string uid = GlobalSettings.Decrypt(c.Values["UserName"]);
                 string pwd = GlobalSettings.Decrypt(c.Values["Password"]);
-                base.ExecuteJs("window.$userinfo={uid:'" + uid + "',pwd:'" + pwd + "'}", false);
+                base.ExecuteJs("window.$userinfo={uid:'" + uid + "',pwd:'" + pwd + "'};", false);
             }
         }
 

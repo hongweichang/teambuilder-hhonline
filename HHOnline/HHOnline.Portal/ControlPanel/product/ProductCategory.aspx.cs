@@ -173,10 +173,12 @@ public partial class ControlPanel_product_ProductCategory : HHPage
     #region -Override-
     public override void OnPageLoaded()
     {
+        base.OnPageLoaded();
         this.PageInfoType = InfoType.IframeInfo;
 
         AddJavaScriptInclude("scripts/jquery.jmodal.js", false, true);
         AddJavaScriptInclude("scripts/pages/productcategory.aspx.js", false, false);
+        
     }
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
     {

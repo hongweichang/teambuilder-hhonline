@@ -36,7 +36,7 @@
 	</div>
 	<br />
 	
- <hc:ExtensionGridView ID="egvCorps" PageSize="10" DataKeyNames="CompanyID" OnRowUpdating="egvCorps_RowUpdating" OnRowDeleting="egvCorps_RowDeleting"
+ <hc:ExtensionGridView ID="egvCorps" PageSize="10" DataKeyNames="CompanyID" OnRowDeleting="egvCorps_RowDeleting"
             AutoGenerateColumns="false" runat="server" SkinID="DefaultView" OnPageIndexChanging="egvCorps_PageIndexChanging">
         <Columns>
             <asp:TemplateField>
@@ -68,11 +68,12 @@
                 <HeaderStyle Width="200" />
                 <HeaderTemplate>操作</HeaderTemplate>
                 <ItemTemplate>
+                    <input type="hidden" value='<%# Eval("CompanyID") %>' />
                     <asp:LoginView ID="LoginView1" runat="server">
                         <RoleGroups>
                             <asp:RoleGroup Roles="CorpUserModule-Edit"> 
                                 <ContentTemplate>    
-                                <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" SkinID="lnkedit" PostBackUrl="#"></asp:LinkButton>
+                                <a href='javascript:void(0)' rel="editcompany" class="opts edit" title="编辑信息"></a>
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>
@@ -91,7 +92,7 @@
                              <asp:RoleGroup Roles="CorpUserModule-View"> 
                                 <ContentTemplate>    
                                     <%--<a href="javascript:popWin('<%# "Permission/RoleDetail.aspx?ID="+Eval("RoleID").ToString() %>',800)" title="查看详细" class="opts view">&nbsp;</a>--%>
-                                    <a href='javascript:void(<%# Eval("CompanyID") %>)' rel="showdetails" class="opts view" title="查看详细"></a>
+                                    <a href='javascript:void(0)' rel="showdetails" class="opts view" title="查看详细"></a>
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>

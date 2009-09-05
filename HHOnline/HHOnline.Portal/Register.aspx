@@ -186,6 +186,7 @@
                         ValidationExpression="\d{6}"  Display="Dynamic"
                         ControlToValidate="txtZipCode" ErrorMessage="请输入6位数字的邮政编码！"></asp:RegularExpressionValidator>
                 </td>
+                <td>&nbsp;</td>
             </tr>
              <tr>
                 <th>公司主页(<span class="unneeded" >可选</span>)</th>

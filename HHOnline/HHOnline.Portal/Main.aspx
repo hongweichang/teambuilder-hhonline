@@ -43,13 +43,14 @@
     <div class="main-r4">
         <div class="main-r4c1">
             <div class="tab-nav">
-                <ul>
-                    <li class="active">产品</li>
-                    <li>品牌</li>
-                    <li>行业</li>
+                <ul id="productNavigator1">
+                    <li class="active" rel="product">产品</li>
+                    <li rel="variety">品牌</li>
+                    <li rel="trade">行业</li>
                 </ul>
             </div>
             <div class="tab-content">
+                <iframe class="tab-content-iframe" id="frameProduct1" src="Pages/Home/ProductCategories.aspx" frameborder="0" scrolling="no"></iframe>
             </div>
             <br />
             <div class="tab-nav">

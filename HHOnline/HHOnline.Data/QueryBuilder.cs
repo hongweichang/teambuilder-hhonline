@@ -139,8 +139,10 @@ namespace HHOnline.Data
             {
                 builder.AddWhere("OrganizationID", Comparison.Equals, query.OrganizationID.Value);
             }
-            query.UserType = UserType.InnerUser;
-
+            if (query.UserType == null || !query.UserType.HasValue)
+            {
+                query.UserType = UserType.InnerUser;
+            }
 
             //RoleID
             if (query.RoleID.HasValue)
