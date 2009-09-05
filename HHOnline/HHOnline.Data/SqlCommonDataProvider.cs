@@ -892,9 +892,16 @@ namespace HHOnline.Data
         }
         #endregion
 
+        #region WordSearch
         public override void InsertWordSearch(string keyword)
         {
-            throw new NotImplementedException();
+
+            ELParameter[] elParameters = new ELParameter[]{
+	                new ELParameter("@SearchID", DbType.Int32, 4, ParameterDirection.Output),
+                    new ELParameter("@SearchWord",DbType.Int32,keyword),
+                    new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
+            };
+            DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_WordSearch_Insert", elParameters);
         }
 
         public override void StatisticWordSearch()
@@ -911,5 +918,6 @@ namespace HHOnline.Data
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }
