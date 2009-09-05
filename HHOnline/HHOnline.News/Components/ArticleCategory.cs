@@ -55,5 +55,10 @@ namespace HHOnline.News.Components
 		/// 更新用户
 		/// </summary>
 		public int UpdateUser { get; set; }
+
+		public override string ToString()
+		{
+			return Name;
+		}
 	}
 }

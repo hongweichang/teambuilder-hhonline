@@ -13,6 +13,7 @@ using HHOnline.News.Services;
 using HHOnline.Framework.Web;
 using HHOnline.Framework.Web.Enums;
 using HHOnline.Framework;
+using System.IO;
 
 public partial class ControlPanel_News_AttachmentAddEdit : HHPage
 {
@@ -24,6 +25,8 @@ public partial class ControlPanel_News_AttachmentAddEdit : HHPage
 	/// 附件ID
 	/// </summary>
 	private int attachmentID;
+
+	private string attachmentLocalPath;
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
@@ -45,6 +48,8 @@ public partial class ControlPanel_News_AttachmentAddEdit : HHPage
 		{
 			BindDetail();
 		}
+
+		attachmentLocalPath = Server.MapPath("~") + "/FileStore/" + ArticleAttachments.FileStoreKey;
 	}
 
 	private void BindDetail()
@@ -116,6 +121,8 @@ public partial class ControlPanel_News_AttachmentAddEdit : HHPage
 				attachment.IsRemote = true;
 
 				// TODO: 删除文件
+				string filePath = attachmentLocalPath + attachment.FileName;
+				File.Delete(filePath);
 
 				// 更新字段
 				attachment.FileName = txtUrl.Text;
@@ -126,7 +133,13 @@ public partial class ControlPanel_News_AttachmentAddEdit : HHPage
 				attachment.IsRemote = false;
 
 				// TODO: 本地上传
-				attachment.FileName = "";
+				// 获取扩展名
+				string ext = Path.GetExtension(fuLocal.FileName);
+
+				attachment.FileName = Guid.NewGuid().ToString() + ext;
+				string filePath = attachmentLocalPath + attachment.FileName;
+
+				fuLocal.SaveAs(filePath);
 			}
 
 			attachment.UpdateTime = DateTime.Now;
@@ -173,7 +186,12 @@ public partial class ControlPanel_News_AttachmentAddEdit : HHPage
 				attachment.IsRemote = false;
 
 				// TODO: 本地上传
-				attachment.FileName = "";
+				string ext = Path.GetExtension(fuLocal.FileName);
+
+				attachment.FileName = Guid.NewGuid().ToString() + ext;
+				string filePath = attachmentLocalPath + attachment.FileName;
+
+				fuLocal.SaveAs(filePath);
 			}
 
 			attachment.CreateTime = DateTime.Now;

@@ -101,6 +101,19 @@ namespace HHOnline.Data
 		}
 
 		/// <summary>
+		/// 获取分类文章总数
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public override int GetCategoryArticlesCount(int id)
+		{
+			ELParameter idParam = new ELParameter("@CategoryID", DbType.Int32, id);
+
+			int result = Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ArticleCategory_GetArticlesCount", idParam));
+			return result;
+		}
+
+		/// <summary>
 		/// 批量删除分类
 		/// </summary>
 		/// <param name="categoryIDList"></param>

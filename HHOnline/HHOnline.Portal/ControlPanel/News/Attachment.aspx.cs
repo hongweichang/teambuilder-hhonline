@@ -160,7 +160,9 @@ public partial class ControlPanel_News_Attachment : HHPage
 	protected void egvAttachments_RowDeleting(object sender, GridViewDeleteEventArgs e)
 	{
 		int attachmentID = (int)egvAttachments.DataKeys[e.RowIndex].Value;
-		DataActionStatus status = ArticleAttachments.DeleteAttachment(attachmentID);
+		DataActionStatus status = ArticleAttachments.DeleteAttachment(
+			Server.MapPath("~") + "/FileStore/" + ArticleAttachments.FileStoreKey,
+			attachmentID);
 
 		switch (status)
 		{

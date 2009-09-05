@@ -38,6 +38,17 @@ namespace HHOnline.News.Services
 		}
 
 		/// <summary>
+		/// 获取分类文章总数
+		/// </summary>
+		/// <param name="categoryID"></param>
+		/// <returns></returns>
+		public static int GetCategoryArticlesCount(int categoryID)
+		{
+			int result = ArticleCategoryProvider.Instance.GetCategoryArticlesCount(categoryID);
+			return result;
+		}
+
+		/// <summary>
 		/// 批量删除文章
 		/// </summary>
 		/// <param name="articleIDList"></param>
@@ -203,7 +214,8 @@ namespace HHOnline.News.Services
 		/// <returns></returns>
 		public static List<ArticleCategory> GetAllCategories()
 		{
-			return CacheInstance<ArticleCategory>(GetAllCategoriesMethod, "AllCategories");
+			//return CacheInstance<ArticleCategory>(GetAllCategoriesMethod, "AllCategories");
+			return ArticleCategoryProvider.Instance.GetAllArticleCategories();
 		}
 
 		static void GetAllCategoriesMethod(ref object list, params object[] ActionID)

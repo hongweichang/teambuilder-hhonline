@@ -56,6 +56,13 @@ namespace HHOnline.News.Providers
 		public abstract DataActionStatus DeleteArticleCategory(int id);
 
 		/// <summary>
+		/// 获取分类下文章总数
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public abstract int GetCategoryArticlesCount(int id);
+
+		/// <summary>
 		/// 批量删除分类
 		/// </summary>
 		/// <param name="categoryIDList"></param>

@@ -21,7 +21,7 @@ namespace HHOnline.News.Services
 			return GlobalSettings.MakePath(productID);
 		}
 
-		public static DataActionStatus DeleteAttachment(int id)
+		public static DataActionStatus DeleteAttachment(string attachmentPath, int id)
 		{
 			DataActionStatus result = ArticleAttachmentProvider.Instance.DeleteArticleAttachment(id);
 
