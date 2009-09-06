@@ -15,6 +15,8 @@ namespace HHOnline.SearchBarrel
 
         public static readonly string ProductName;
 
+        public static readonly string ProductContent;
+
         public static readonly string BrandID;
 
         public static readonly string BrandName;
@@ -22,6 +24,10 @@ namespace HHOnline.SearchBarrel
         public static readonly string CategoryID;
 
         public static readonly string CategoryName;
+
+        public static readonly string ProductKeywords;
+
+        public static readonly string DateCreated;
 
         static ProductIndexField()
         {
@@ -31,6 +37,8 @@ namespace HHOnline.SearchBarrel
 
             ProductAbstract = "ProductAbstract";
 
+            ProductContent = "ProductContent";
+
             BrandID = "BrandID";
 
             BrandName = "BrandName";
@@ -38,6 +46,10 @@ namespace HHOnline.SearchBarrel
             CategoryID = "CategoryID";
 
             CategoryName = "CategoryName";
+
+            ProductKeywords = "Productkeywords";
+
+            DateCreated = "DateCreated";
         }
     }
 }

@@ -298,9 +298,43 @@ namespace HHOnline.SearchBarrel
         /// </summary>
         /// <param name="pu"></param>
         /// <returns></returns>
-        public static Document ConvertProductToDocument(Product pu)
+        public static Document ConvertProductToDocument(Product product)
         {
-            return null;
+            Document doc = new Document();
+            Field field;
+
+            field = new Field(ProductIndexField.ProductID, product.ProductID.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED);
+            doc.Add(field);
+
+            field = new Field(ProductIndexField.ProductName, product.ProductName.ToString(), Field.Store.YES, Field.Index.TOKENIZED);
+            doc.Add(field);
+
+            field = new Field(ProductIndexField.ProductContent, product.ProductContent.ToString(), Field.Store.YES, Field.Index.TOKENIZED);
+            doc.Add(field);
+
+            field = new Field(ProductIndexField.ProductAbstract, product.ProductAbstract.ToString(), Field.Store.YES, Field.Index.TOKENIZED);
+            doc.Add(field);
+
+            if (!GlobalSettings.IsNullOrEmpty(product.ProductKeywords))
+            {
+                foreach (string tagName in product.ProductKeywords.Split(';'))
+                {
+                    field = new Field(ProductIndexField.ProductKeywords, tagName, Field.Store.YES, Field.Index.TOKENIZED);
+                    field.SetBoost(2.0F);
+                    doc.Add(field);
+                }
+            }
+
+            field = new Field(ProductIndexField.DateCreated, DateTools.DateToString(DateTime.Now, DateTools.Resolution.DAY), Field.Store.YES, Field.Index.TOKENIZED);
+            doc.Add(field);
+
+            field = new Field(ProductIndexField.BrandID, product.BrandID.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED);
+            doc.Add(field);
+
+            field = new Field(ProductIndexField.BrandName, product.BrandName.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED);
+            doc.Add(field);
+
+            return doc;
         }
 
         /// <summary>
@@ -310,7 +344,16 @@ namespace HHOnline.SearchBarrel
         /// <returns></returns>
         public static Product ConvertDocumentToProduct(Document doc)
         {
-            return null;
+            Product product = new Product();
+            product.ProductID = Convert.ToInt32(doc.Get(ProductIndexField.ProductID));
+            product.ProductName = doc.Get(ProductIndexField.ProductName);
+            product.BrandID = Convert.ToInt32(doc.Get(ProductIndexField.BrandID));
+            product.ProductContent = doc.Get(ProductIndexField.ProductContent);
+            product.ProductAbstract = doc.Get(ProductIndexField.ProductAbstract);
+            product.CreateTime = DateTools.StringToDate(doc.Get(ProductIndexField.DateCreated));
+            string[] tagNames = doc.GetValues(ProductIndexField.ProductKeywords);
+            product.ProductKeywords = string.Join(";", tagNames);
+            return product;
         }
         #endregion
     }
