@@ -17,14 +17,15 @@ namespace HHOnline.SearchBarrel
     /// <summary>
     /// 用于Lucene索引文件添加、修改、删除、搜索
     /// </summary>
-    public class SearchManager
+    public class PostSearchManager
     {
-        private static SearchManager instance = null;
+        /*
+        private static PostSearchManager instance = null;
         private static object lockObject = new object();
 
-        private SearchManager() { }
+        private PostSearchManager() { }
 
-        public static SearchManager Instance
+        public static PostSearchManager Instance
         {
             get
             {
@@ -33,7 +34,7 @@ namespace HHOnline.SearchBarrel
                     lock (lockObject)
                     {
                         if (instance == null)
-                            instance = new SearchManager();
+                            instance = new PostSearchManager();
                     }
                 }
                 return instance;
@@ -52,118 +53,118 @@ namespace HHOnline.SearchBarrel
             }
         }
 
-        public List<SearchItem> Search(FullTextQuery query)
-        {
-            if (!IndexFileIsExist(PhysicalIndexDirectory))
-                return new List<SearchItem>();
+        //public List<SearchItem> Search(FullTextQuery query)
+        //{
+        //    if (!IndexFileIsExist(PhysicalIndexDirectory))
+        //        return new List<SearchItem>();
 
-            DateTime startTime = DateTime.Now;
-            BooleanQuery currentQuery = new BooleanQuery();
+        //    DateTime startTime = DateTime.Now;
+        //    BooleanQuery currentQuery = new BooleanQuery();
 
-            Query postKeywordQuery = null;
-            if (!string.IsNullOrEmpty(query.Keyword))
-            {
-                query.Keyword = SearchHelper.LuceneKeywordsScrubber(query.Keyword);
-                if (!string.IsNullOrEmpty(query.Keyword))
-                {
-                    string[] searchFieldsForKeyword = new string[4];
-                    searchFieldsForKeyword[0] = "Subject";
-                    searchFieldsForKeyword[1] = "Body";
-                    searchFieldsForKeyword[2] = "Tags";
-                    searchFieldsForKeyword[3] = "Author";
+        //    Query postKeywordQuery = null;
+        //    if (!string.IsNullOrEmpty(query.Keyword))
+        //    {
+        //        query.Keyword = SearchHelper.LuceneKeywordsScrubber(query.Keyword);
+        //        if (!string.IsNullOrEmpty(query.Keyword))
+        //        {
+        //            string[] searchFieldsForKeyword = new string[4];
+        //            searchFieldsForKeyword[0] = "Subject";
+        //            searchFieldsForKeyword[1] = "Body";
+        //            searchFieldsForKeyword[2] = "Tags";
+        //            searchFieldsForKeyword[3] = "Author";
 
-                    MultiFieldQueryParser keywordParser = new MultiFieldQueryParser(searchFieldsForKeyword, GetChineseAnalyzer());
+        //            MultiFieldQueryParser keywordParser = new MultiFieldQueryParser(searchFieldsForKeyword, GetChineseAnalyzer());
 
-                    keywordParser.SetLowercaseExpandedTerms(true);
-                    keywordParser.SetDefaultOperator(QueryParser.OR_OPERATOR);
+        //            keywordParser.SetLowercaseExpandedTerms(true);
+        //            keywordParser.SetDefaultOperator(QueryParser.OR_OPERATOR);
 
-                    string keyWordsOfSplit = SplitKeywordsBySpace(query.Keyword);
-                    postKeywordQuery = keywordParser.Parse(keyWordsOfSplit);
+        //            string keyWordsOfSplit = SplitKeywordsBySpace(query.Keyword);
+        //            postKeywordQuery = keywordParser.Parse(keyWordsOfSplit);
 
-                    currentQuery.Add(postKeywordQuery, BooleanClause.Occur.MUST);
-                }
-            }
+        //            currentQuery.Add(postKeywordQuery, BooleanClause.Occur.MUST);
+        //        }
+        //    }
 
-            if (query.TagNames != null)
-            {
-                string tagNames = string.Join(" ", query.TagNames);
-                tagNames = SearchHelper.LuceneKeywordsScrubber(tagNames);
+        //    if (query.TagNames != null)
+        //    {
+        //        string tagNames = string.Join(" ", query.TagNames);
+        //        tagNames = SearchHelper.LuceneKeywordsScrubber(tagNames);
 
-                if (!string.IsNullOrEmpty(tagNames))
-                {
-                    QueryParser tagNameQueryParser = new QueryParser("Tags", GetChineseAnalyzer());
+        //        if (!string.IsNullOrEmpty(tagNames))
+        //        {
+        //            QueryParser tagNameQueryParser = new QueryParser("Tags", GetChineseAnalyzer());
 
-                    currentQuery.Add(tagNameQueryParser.Parse(tagNames), BooleanClause.Occur.MUST);
-                }
-            }
+        //            currentQuery.Add(tagNameQueryParser.Parse(tagNames), BooleanClause.Occur.MUST);
+        //        }
+        //    }
 
-            if (!string.IsNullOrEmpty(query.Author))
-            {
-                query.Author = SearchHelper.LuceneKeywordsScrubber(query.Author);
-                if (!string.IsNullOrEmpty(query.Author))
-                {
-                    QueryParser authorQueryParser = new QueryParser("Author", new WhitespaceAnalyzer());
-                    currentQuery.Add(authorQueryParser.Parse(query.Author), BooleanClause.Occur.MUST);
-                }
-            }
+        //    if (!string.IsNullOrEmpty(query.Author))
+        //    {
+        //        query.Author = SearchHelper.LuceneKeywordsScrubber(query.Author);
+        //        if (!string.IsNullOrEmpty(query.Author))
+        //        {
+        //            QueryParser authorQueryParser = new QueryParser("Author", new WhitespaceAnalyzer());
+        //            currentQuery.Add(authorQueryParser.Parse(query.Author), BooleanClause.Occur.MUST);
+        //        }
+        //    }
 
-            IndexSearcher searcher = new IndexSearcher(PhysicalIndexDirectory);
+        //    IndexSearcher searcher = new IndexSearcher(PhysicalIndexDirectory);
 
-            Hits hits = searcher.Search(currentQuery);
+        //    Hits hits = searcher.Search(currentQuery);
 
-            IList<SearchItem> pds = new List<SearchItem>();
+        //    IList<SearchItem> pds = new List<SearchItem>();
 
-            int pageLowerBound = (query.PageIndex - 1) * query.PageSize;
-            int pageUpperBound = pageLowerBound + query.PageSize;
-            if (pageUpperBound > hits.Length())
-                pageUpperBound = hits.Length();
+        //    int pageLowerBound = (query.PageIndex - 1) * query.PageSize;
+        //    int pageUpperBound = pageLowerBound + query.PageSize;
+        //    if (pageUpperBound > hits.Length())
+        //        pageUpperBound = hits.Length();
 
-            KTDictSeg.HighLight.Highlighter highlighter = null;
-            if (!string.IsNullOrEmpty(query.Keyword))
-            {
-                highlighter = new KTDictSeg.HighLight.Highlighter(new KTDictSeg.HighLight.SimpleHTMLFormatter("<font color=\"#c60a00\">", "</font>"), new Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer());
-                highlighter.FragmentSize = 100;
-            }
-            return null;
-            //for (int i = pageLowerBound; i < pageUpperBound; i++)
-            //{
-            //    NewsThread item = ConvertDocumentToNewsThread(hits.Doc(i));
+        //    KTDictSeg.HighLight.Highlighter highlighter = null;
+        //    if (!string.IsNullOrEmpty(query.Keyword))
+        //    {
+        //        highlighter = new KTDictSeg.HighLight.Highlighter(new KTDictSeg.HighLight.SimpleHTMLFormatter("<font color=\"#c60a00\">", "</font>"), new Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer());
+        //        highlighter.FragmentSize = 100;
+        //    }
+        //    return null;
+        //    //for (int i = pageLowerBound; i < pageUpperBound; i++)
+        //    //{
+        //    //    NewsThread item = ConvertDocumentToNewsThread(hits.Doc(i));
 
-            //    #region 搜索结果高亮显示
-            //    if (!string.IsNullOrEmpty(query.Keyword))
-            //    {
-            //        string bestBody = null;
-            //        if (!string.IsNullOrEmpty(item.Body) && item.Body.Length > MaxNumFragmentsRequired)
-            //            bestBody = highlighter.GetBestFragment(query.Keyword, item.Body);
+        //    //    #region 搜索结果高亮显示
+        //    //    if (!string.IsNullOrEmpty(query.Keyword))
+        //    //    {
+        //    //        string bestBody = null;
+        //    //        if (!string.IsNullOrEmpty(item.Body) && item.Body.Length > MaxNumFragmentsRequired)
+        //    //            bestBody = highlighter.GetBestFragment(query.Keyword, item.Body);
 
-            //        if (!string.IsNullOrEmpty(bestBody))
-            //            item.Body = bestBody;
-            //        else
-            //            item.Body = HtmlUtils.TrimHtml(item.Body, 100);
+        //    //        if (!string.IsNullOrEmpty(bestBody))
+        //    //            item.Body = bestBody;
+        //    //        else
+        //    //            item.Body = HtmlUtils.TrimHtml(item.Body, 100);
 
-            //        string bestSubject = null;
-            //        if (!string.IsNullOrEmpty(item.Title) && item.Title.Length > MaxNumFragmentsRequired)
-            //            bestSubject = highlighter.GetBestFragment(query.Keyword, item.Title);
+        //    //        string bestSubject = null;
+        //    //        if (!string.IsNullOrEmpty(item.Title) && item.Title.Length > MaxNumFragmentsRequired)
+        //    //            bestSubject = highlighter.GetBestFragment(query.Keyword, item.Title);
 
-            //        if (!string.IsNullOrEmpty(bestSubject))
-            //            item.Title = bestSubject;
-            //    }
-            //    #endregion
+        //    //        if (!string.IsNullOrEmpty(bestSubject))
+        //    //            item.Title = bestSubject;
+        //    //    }
+        //    //    #endregion
 
 
-            //    pds.Records.Add(item);
-            //}
-            //searcher.Close();
-            //pds.TotalRecords = hits.Length();
+        //    //    pds.Records.Add(item);
+        //    //}
+        //    //searcher.Close();
+        //    //pds.TotalRecords = hits.Length();
 
-            //DateTime endTime = DateTime.Now;
-            //pds.SearchDuration = (endTime.Ticks - startTime.Ticks) / 1E7f;
+        //    //DateTime endTime = DateTime.Now;
+        //    //pds.SearchDuration = (endTime.Ticks - startTime.Ticks) / 1E7f;
 
-            //pds.PageIndex = query.PageIndex;
-            //pds.PageSize = query.PageSize;
+        //    //pds.PageIndex = query.PageIndex;
+        //    //pds.PageSize = query.PageSize;
 
-            //return pds;
-        }
+        //    //return pds;
+        //}
 
         /// <summary>
         /// 切分关键词(用空格分隔)
@@ -378,5 +379,6 @@ namespace HHOnline.SearchBarrel
         {
             return new Lucene.Net.Analysis.KTDictSeg.KTDictSegAnalyzer(true);
         }
+         * */
     }
 }

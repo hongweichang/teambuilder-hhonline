@@ -221,7 +221,7 @@ namespace HHOnline.SearchBarrel
         /// <summary>
         /// 更新索引
         /// </summary>
-        public bool Update(List<Product> products)
+        public static bool Update(List<Product> products)
         {
             if (products == null || products.Count == 0)
                 return false;
@@ -246,7 +246,7 @@ namespace HHOnline.SearchBarrel
         /// <summary>
         /// 删除索引
         /// </summary>
-        public bool Delete(int[] productIDList)
+        public static bool Delete(int[] productIDList)
         {
             return Delete(productIDList, true);
         }
@@ -254,7 +254,7 @@ namespace HHOnline.SearchBarrel
         /// <summary>
         /// 删除索引
         /// </summary>
-        public bool Delete(int[] productIDList, bool needOptimize)
+        public static bool Delete(int[] productIDList, bool needOptimize)
         {
             if (productIDList == null && productIDList.Length == 0)
                 return false;
@@ -289,6 +289,45 @@ namespace HHOnline.SearchBarrel
             }
 
             return result;
+        }
+        #endregion
+
+        #region InitializeIndex
+        /// <summary>
+        /// 初始化索引
+        /// </summary>
+        /// <param name="indexPath"></param>
+        public static void InitializeIndex(string indexPath)
+        {
+            System.IO.Directory.Delete(indexPath);
+
+            ProductQuery query = new ProductQuery();
+            query.HasPublished = true;
+            query.PageSize = Int32.MaxValue;
+            List<Product> productsForIndex = new List<Product>();
+            List<Product> products = Products.GetProductList(query);
+
+            //分多次进行索引
+            int indexedCount = 0;
+            for (int i = 0; i < products.Count; i++)
+            {
+                indexedCount += 1;
+                if (products[i] != null)
+                    productsForIndex.Add(products[i]);
+
+                if (indexedCount >= 1000)
+                {
+                    Insert(productsForIndex, indexPath);
+                    productsForIndex.Clear();
+                    indexedCount = 0;
+                }
+            }
+            Insert(products, indexPath);
+        }
+
+        public static void InitializeIndex()
+        {
+            InitializeIndex(PhysicalIndexDirectory);
         }
         #endregion
 
