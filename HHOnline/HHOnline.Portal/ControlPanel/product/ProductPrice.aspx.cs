@@ -56,21 +56,18 @@ public partial class ControlPanel_product_ProductPrice : HHPage
 
     protected void egvProductPrices_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        //int industryID = (int)egvProductPrices.DataKeys[e.RowIndex].Value;
-        //DataActionStatus status = ProductIndustries.Delete(industryID);
-        //switch (status)
-        //{
-        //    case DataActionStatus.RelationshipExist:
-        //        throw new HHException(ExceptionType.Failed, "此行业信息下存在关联商品，无法直接删除(请先删除此行业信息下关联商品)！");
-        //    case DataActionStatus.ChildExist:
-        //        throw new HHException(ExceptionType.Failed, "此行业信息下存在子行业信息，无法直接删除(请先删除子行业信息)");
-        //    case DataActionStatus.UnknownFailure:
-        //        throw new HHException(ExceptionType.Failed, "删除行业信息失败，请确认此行业信息存在，并状态正常！");
-        //    default:
-        //    case DataActionStatus.Success:
-        //        BindData();
-        //        break;
-        //}
+        int priceID = (int)egvProductPrices.DataKeys[e.RowIndex].Value;
+        DataActionStatus status = ProductPrices.Delete(priceID);
+        switch (status)
+        {
+            case DataActionStatus.Success:
+                BindData();
+                break;
+            default:
+            case DataActionStatus.UnknownFailure:
+                throw new HHException(ExceptionType.Failed, "删除报价信息失败，请确认此报价信息存在，并状态正常！");
+                break;
+        }
     }
 
     protected void egvProductPrices_RowUpdating(object sender, GridViewUpdateEventArgs e)
