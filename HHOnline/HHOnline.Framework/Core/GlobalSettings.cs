@@ -117,6 +117,22 @@ namespace HHOnline.Framework
                 Directory.CreateDirectory(directoryName);
         }
 
+        /// <summary>
+        /// 检查目录是否存在和是否存在文件
+        /// </summary>
+        public static bool CheckFileExist(string indexPath)
+        {
+            if (!System.IO.Directory.Exists(indexPath))
+            {
+                return false;
+            }
+            else
+            {
+                DirectoryInfo indexPathDirectoryInfo = new DirectoryInfo(indexPath);
+                return (indexPathDirectoryInfo.GetFiles().Length > 0);
+            }
+        }
+
         #endregion
 
         #region -Web Path-

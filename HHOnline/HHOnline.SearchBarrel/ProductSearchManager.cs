@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using HHOnline.Common;
 using HHOnline.Framework;
 using HHOnline.Shops;
 using Lucene.Net.Search;
 using Lucene.Net.Index;
 using Lucene.Net.Store;
 using Lucene.Net.QueryParsers;
-using Lucene.Net.Analysis.Standard;
-using Lucene.Net.Analysis;
 using Lucene.Net.Documents;
 
 namespace HHOnline.SearchBarrel
@@ -18,6 +17,11 @@ namespace HHOnline.SearchBarrel
     /// </summary>
     public class ProductSearchManager
     {
+        #region Property
+        protected static readonly int MaxNumFragmentsRequired = 2;
+
+        protected static readonly string FragmentSeparator = "...";
+
         /// <summary>
         /// 索引文件目录名称
         /// </summary>
@@ -33,7 +37,105 @@ namespace HHOnline.SearchBarrel
                 return Path.Combine(GlobalSettings.IndexDirectory, IndexFileDirectory);
             }
         }
+        #endregion
 
+        #region Search
+        public SearchResultDataSet<Product> Search(ProductQuery query)
+        {
+            //索引文件不存在时，返回null
+            if (!GlobalSettings.CheckFileExist(PhysicalIndexDirectory))
+                return new SearchResultDataSet<Product>();
+            DateTime startTime = DateTime.Now;
+            BooleanQuery currentQuery = new BooleanQuery();
+
+            //BrandID
+            if (query.BrandID.HasValue && query.BrandID.Value != 0)
+            {
+                Term brandIDTearm = new Term(ProductIndexField.BrandID, query.BrandID.ToString());
+                Query brandIDQuery = new TermQuery(brandIDTearm);
+                currentQuery.Add(brandIDQuery, BooleanClause.Occur.MUST);
+            }
+
+            //CategoryID
+            if (query.CategoryID.HasValue && query.CategoryID.Value != 0)
+            {
+                Term categoryIDTearm = new Term(ProductIndexField.CategoryID, query.CategoryID.ToString());
+                Query categoryIDQuery = new TermQuery(categoryIDTearm);
+                currentQuery.Add(categoryIDQuery, BooleanClause.Occur.MUST);
+            }
+
+            //KeyWord
+            if (!string.IsNullOrEmpty(query.ProductNameFilter))
+            {
+                query.ProductNameFilter = SearchHelper.LuceneKeywordsScrubber(query.ProductNameFilter);
+                if (!string.IsNullOrEmpty(query.ProductNameFilter))
+                {
+                    string[] searchFieldsForKeyword = new string[2];
+                    searchFieldsForKeyword[0] = ProductIndexField.ProductName;
+                    searchFieldsForKeyword[1] = ProductIndexField.ProductAbstract;
+
+                    MultiFieldQueryParser productNameQueryParser = new MultiFieldQueryParser(searchFieldsForKeyword, SearchHelper.GetChineseAnalyzer());
+                    productNameQueryParser.SetLowercaseExpandedTerms(true);
+                    productNameQueryParser.SetDefaultOperator(QueryParser.OR_OPERATOR);
+
+                    string keyWordsSplit = SearchHelper.SplitKeywordsBySpace(query.ProductNameFilter);
+                    Query productNameQuery = productNameQueryParser.Parse(keyWordsSplit);
+                    currentQuery.Add(productNameQuery, BooleanClause.Occur.MUST);
+                }
+            }
+
+            //Search
+            IndexSearcher searcher = new IndexSearcher(PhysicalIndexDirectory);
+            Hits hits = searcher.Search(currentQuery);
+            SearchResultDataSet<Product> products = new SearchResultDataSet<Product>();
+            int pageLowerBound = query.PageIndex * query.PageSize;
+            int pageUpperBound = pageLowerBound + query.PageSize;
+            if (pageUpperBound > hits.Length())
+                pageUpperBound = hits.Length();
+
+            //HighLight
+            KTDictSeg.HighLight.Highlighter highlighter = null;
+            if (!string.IsNullOrEmpty(query.ProductNameFilter))
+            {
+                highlighter = new KTDictSeg.HighLight.Highlighter(new KTDictSeg.HighLight.SimpleHTMLFormatter("<font color=\"#c60a00\">", "</font>"), new Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer());
+                highlighter.FragmentSize = 100;
+            }
+            for (int i = pageLowerBound; i < pageUpperBound; i++)
+            {
+                Product item = ConvertDocumentToProduct(hits.Doc(i));
+                if (!string.IsNullOrEmpty(query.ProductNameFilter))
+                {
+                    string bestBody = null;
+                    if (!string.IsNullOrEmpty(item.ProductAbstract) && item.ProductAbstract.Length > MaxNumFragmentsRequired)
+                        bestBody = highlighter.GetBestFragment(query.ProductNameFilter, item.ProductAbstract);
+
+                    if (!string.IsNullOrEmpty(bestBody))
+                        item.ProductAbstract = bestBody;
+                    else
+                        item.ProductAbstract = HtmlHelper.TrimHtml(item.ProductAbstract, 100);
+
+                    string bestSubject = null;
+                    if (!string.IsNullOrEmpty(item.ProductName) && item.ProductName.Length > MaxNumFragmentsRequired)
+                        bestSubject = highlighter.GetBestFragment(query.ProductNameFilter, item.ProductName);
+
+                    if (!string.IsNullOrEmpty(bestSubject))
+                        item.ProductName = bestSubject;
+                }
+                products.Records.Add(item);
+            }
+            searcher.Close();
+            products.TotalRecords = hits.Length();
+
+            DateTime endTime = DateTime.Now;
+            products.SearchDuration = (endTime.Ticks - startTime.Ticks) / 1E7f;
+            products.PageIndex = query.PageIndex;
+            products.PageSize = query.PageSize;
+
+            return products;
+        }
+        #endregion
+
+        #region Insert
         /// <summary>
         /// 加入索引
         /// </summary>
@@ -52,7 +154,16 @@ namespace HHOnline.SearchBarrel
         /// <returns></returns>
         public static bool Insert(List<Product> products, string indexPath)
         {
-            return Insert(products, indexPath, true);
+            bool indexFileIsExist = GlobalSettings.CheckFileExist(indexPath);
+            if (!indexFileIsExist)
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(indexPath);
+                }
+                catch { }
+            }
+            return Insert(products, indexPath, !indexFileIsExist);
         }
 
         /// <summary>
@@ -61,19 +172,77 @@ namespace HHOnline.SearchBarrel
         /// <param name="users">加入索引的产品集合</param>
         /// <param name="indexPath">索引所在路径</param>
         /// <param name="createIndexFile">是否创建索引文件</param>
-        public static bool Insert(List<Product> product, string indexpath, bool createIndexFile)
+        public static bool Insert(List<Product> products, string indexPath, bool createIndexFile)
         {
-            return true;
-        }
+            if (products == null || products.Count == 0)
+                return false;
 
+            FSDirectory fsDir;
+            IndexWriter fsWriter;
+
+            if (createIndexFile)
+            {
+                fsDir = FSDirectory.GetDirectory(indexPath, true);
+                fsWriter = new IndexWriter(fsDir, SearchHelper.GetChineseAnalyzer(), true);
+            }
+            else
+            {
+                fsDir = FSDirectory.GetDirectory(indexPath, false);
+                fsWriter = new IndexWriter(fsDir, SearchHelper.GetChineseAnalyzer(), false);
+            }
+            fsWriter.SetMergeFactor(SearchHelper.MergeFactor);
+            fsWriter.SetMaxMergeDocs(SearchHelper.MaxMergeDocs);
+            fsWriter.SetMaxBufferedDocs(SearchHelper.MinMergeDocs);
+
+            bool result = false;
+            try
+            {
+                foreach (Product product in products)
+                {
+                    if (product != null)
+                    {
+                        Document doc = ConvertProductToDocument(product);
+                        if (doc != null)
+                            fsWriter.AddDocument(doc);
+                    }
+                }
+                fsWriter.Optimize();
+                result = true;
+            }
+            finally
+            {
+                fsWriter.Close();
+            }
+            return result;
+        }
+        #endregion
+
+        #region Update
         /// <summary>
         /// 更新索引
         /// </summary>
-        public bool Update(IList<Product> products)
+        public bool Update(List<Product> products)
         {
-            return true;
-        }
+            if (products == null || products.Count == 0)
+                return false;
 
+            int[] productIDList = new int[products.Count];
+
+            for (int i = 0; i < products.Count; i++)
+            {
+                productIDList[i] = products[i].ProductID;
+            }
+
+            bool result = Delete(productIDList, false);
+
+            if (result)
+                result = Insert(products);
+
+            return result;
+        }
+        #endregion
+
+        #region Delete
         /// <summary>
         /// 删除索引
         /// </summary>
@@ -87,9 +256,43 @@ namespace HHOnline.SearchBarrel
         /// </summary>
         public bool Delete(int[] productIDList, bool needOptimize)
         {
-            return true;
-        }
+            if (productIDList == null && productIDList.Length == 0)
+                return false;
+            Lucene.Net.Store.Directory fsDir = FSDirectory.GetDirectory(PhysicalIndexDirectory, false);
+            IndexReader reader = IndexReader.Open(fsDir);
 
+            bool result = false;
+            try
+            {
+                for (int i = 0; i < productIDList.Length; i++)
+                {
+                    if (productIDList[i] != 0)
+                    {
+                        Term term = new Term(ProductIndexField.ProductID, productIDList[i].ToString());
+                        reader.DeleteDocuments(term);
+                    }
+                }
+                reader.Close();
+
+                if (needOptimize)
+                {
+                    IndexWriter fsWriter = new IndexWriter(fsDir, SearchHelper.GetChineseAnalyzer(), false);
+                    fsWriter.Optimize();
+                    fsWriter.Close();
+                }
+
+                result = true;
+            }
+            finally
+            {
+                fsDir.Close();
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region Convert
         /// <summary>
         /// 将产品转换为索引文档
         /// </summary>
@@ -109,5 +312,6 @@ namespace HHOnline.SearchBarrel
         {
             return null;
         }
+        #endregion
     }
 }

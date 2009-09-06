@@ -4,6 +4,10 @@ using System.Text;
 
 namespace HHOnline.Framework
 {
+    /// <summary>
+    /// 返回分页数据集
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class PagingDataSet<T>
     {
         public PagingDataSet()
@@ -19,7 +23,9 @@ namespace HHOnline.Framework
         private int totalRecords;
         private List<T> records;
 
-
+        /// <summary>
+        /// 总记录数
+        /// </summary>
         public int TotalRecords
         {
             get
@@ -32,6 +38,9 @@ namespace HHOnline.Framework
             }
         }
 
+        /// <summary>
+        /// 页索引
+        /// </summary>
         public int PageIndex
         {
             get
@@ -44,6 +53,9 @@ namespace HHOnline.Framework
             }
         }
 
+        /// <summary>
+        /// 页大小
+        /// </summary>
         public int PageSize
         {
             get
@@ -56,7 +68,9 @@ namespace HHOnline.Framework
             }
         }
 
-
+        /// <summary>
+        /// 返回结果
+        /// </summary>
         public List<T> Records
         {
             get
@@ -71,6 +85,9 @@ namespace HHOnline.Framework
             }
         }
 
+        /// <summary>
+        /// 是否查询到结果
+        /// </summary>
         public bool HasResults
         {
             get { return (totalRecords > 0); }

@@ -78,6 +78,7 @@
     <Compile Include="Components\FileSystemStorageFile.cs" />
     <Compile Include="Components\ImageInfo.cs" />
     <Compile Include="Components\KeyValue.cs" />
+    <Compile Include="Components\SearchResultDataSet.cs" />
     <Compile Include="Components\ShoppingCart.cs" />
     <Compile Include="Components\ShowPicture.cs" />
     <Compile Include="Components\SiteFile.cs" />

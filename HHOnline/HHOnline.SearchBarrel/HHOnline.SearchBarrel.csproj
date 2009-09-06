@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="FullTextQuery.cs" />
     <Compile Include="IndexSearchReport.cs" />
+    <Compile Include="SearchHelper.cs" />
     <Compile Include="ProductIndexField.cs" />
     <Compile Include="ProductSearchManager.cs" />
     <Compile Include="SearchItem.cs" />

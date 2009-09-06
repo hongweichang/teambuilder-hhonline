@@ -63,7 +63,7 @@ namespace HHOnline.SearchBarrel
             Query postKeywordQuery = null;
             if (!string.IsNullOrEmpty(query.Keyword))
             {
-                query.Keyword = LuceneHelper.LuceneKeywordsScrubber(query.Keyword);
+                query.Keyword = SearchHelper.LuceneKeywordsScrubber(query.Keyword);
                 if (!string.IsNullOrEmpty(query.Keyword))
                 {
                     string[] searchFieldsForKeyword = new string[4];
@@ -87,7 +87,7 @@ namespace HHOnline.SearchBarrel
             if (query.TagNames != null)
             {
                 string tagNames = string.Join(" ", query.TagNames);
-                tagNames = LuceneHelper.LuceneKeywordsScrubber(tagNames);
+                tagNames = SearchHelper.LuceneKeywordsScrubber(tagNames);
 
                 if (!string.IsNullOrEmpty(tagNames))
                 {
@@ -99,7 +99,7 @@ namespace HHOnline.SearchBarrel
 
             if (!string.IsNullOrEmpty(query.Author))
             {
-                query.Author = LuceneHelper.LuceneKeywordsScrubber(query.Author);
+                query.Author = SearchHelper.LuceneKeywordsScrubber(query.Author);
                 if (!string.IsNullOrEmpty(query.Author))
                 {
                     QueryParser authorQueryParser = new QueryParser("Author", new WhitespaceAnalyzer());
