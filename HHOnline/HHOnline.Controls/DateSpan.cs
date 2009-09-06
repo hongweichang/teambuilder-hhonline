@@ -30,17 +30,17 @@ namespace HHOnline.Controls
             {
                 EnsureChildControls();
                 string value = "";
-                if (ddlYear.Text.Trim() != string.Empty)
+                if (ddlYear.SelectedIndex > 0)
                 {
                     value += ddlYear.Text + "Y";
                 }
-                if (ddlMonth.Text.Trim() != string.Empty)
+                if (ddlMonth.SelectedIndex > 0)
                 {
                     if (value.Trim() != string.Empty)
                         value += "-";
                     value += ddlMonth.Text + "M";
                 }
-                if (ddlDay.Text.Trim() != string.Empty)
+                if (ddlDay.SelectedIndex > 0)
                 {
                     if (value.Trim() != string.Empty)
                         value += "-";
@@ -91,24 +91,24 @@ namespace HHOnline.Controls
 
             ddlYear = new DropDownList();
             ddlYear.ID = "ddlYear";
-            ddlYear.Items.Add("   ");
-            for (int i = 1; i <= 20; i++)
+            //ddlYear.Items.Add("   ");
+            for (int i = 0; i <= 20; i++)
             {
                 ddlYear.Items.Add(i.ToString());
             }
 
             ddlMonth = new DropDownList();
             ddlMonth.ID = "ddlMonth";
-            ddlMonth.Items.Add("   ");
-            for (int i = 1; i <= 12; i++)
+            //ddlMonth.Items.Add("   ");
+            for (int i = 0; i <= 12; i++)
             {
                 ddlMonth.Items.Add(i.ToString());
             }
 
             ddlDay = new DropDownList();
             ddlDay.ID = "ddlDay";
-            ddlDay.Items.Add("   ");
-            for (int i = 1; i <= 30; i++)
+            //ddlDay.Items.Add("   ");
+            for (int i = 0; i <= 30; i++)
             {
                 ddlDay.Items.Add(i.ToString());
             }
