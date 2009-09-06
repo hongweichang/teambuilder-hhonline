@@ -18,6 +18,6 @@ public partial class UserControls_Footer : System.Web.UI.UserControl
     {
         SiteSettings ss = HHContext.Current.SiteSettings;
         ltCopyRight.Text = ss.Copyright;
-        ltIcp.Text = ss.CompanyICP;
+        ltIcp.Text = "<a style=\"font-size:10px\" href=\"http://www.miibeian.gov.cn/\" target=\"_blank\">" + ss.CompanyICP + "</a>";
     }
 }

@@ -35,7 +35,7 @@ namespace HHOnline.Controls
             StringBuilder sb = new StringBuilder();
             if (_CategoryID == 0)
             {
-                return "<div class=\"" + _CssClass + "\">暂无相关类别信息！</div>";
+                return "<div class=\"" + _CssClass + "\"><span>暂无相关类别信息！</span></div>";
             }
             else
             {
@@ -48,7 +48,7 @@ namespace HHOnline.Controls
                     List<ProductCategory> subCats = ProductCategories.GetChidCategories(parId);
                     if (subCats == null || subCats.Count == 0 || (subCats.Count==1&&subCats[0].CategoryID == _CategoryID))
                     {
-                        return "<div class=\"" + _CssClass + "\">暂无相关类别信息！</div>";
+                        return "<div class=\"" + _CssClass + "\"><span>暂无相关类别信息！</span></div>";
                     }
                     sb.Append("<div class=\"" + _CssClass + "\">");
                     ProductQuery query;
@@ -73,7 +73,7 @@ namespace HHOnline.Controls
                 }
                 else
                 {
-                    return "<div class=\"" + _CssClass + "\">暂无相关类别信息！</div>";
+                    return "<div class=\"" + _CssClass + "\"><span>暂无相关类别信息！</span></div>";
                 }
             }
             return sb.ToString();

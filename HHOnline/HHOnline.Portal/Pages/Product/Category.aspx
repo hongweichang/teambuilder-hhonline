@@ -11,12 +11,16 @@
     <div class="cdCatNavigate">
         <hc:CategoryNavigate ID="cnProduct" runat="server"></hc:CategoryNavigate>
     </div>
-    <div>
+    <div style="padding-left:20px;">
         <hc:CategoryList ID="clProduct" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
     </div>
     <div class="navigateData">相关类别</div>
     <div>
         <hc:CategoryLikeList ID="cllProduct" runat="server" CssClass="cllProduct"></hc:CategoryLikeList>
+    </div>
+     <div class="navigateData">子分类信息</div>
+    <div>
+        <hc:CategorySubList ID="cslProduct" runat="server" CssClass="cllProduct"></hc:CategorySubList>
     </div>
     <asp:Panel ID="pnlSort" runat="server">
     <div class="sortList">

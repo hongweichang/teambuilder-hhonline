@@ -60,7 +60,7 @@ public partial class News_NewsDetail : HHPage
 					{
 						ReplaceKeyValue rkv = new ReplaceKeyValue();
 						rkv.Key = item.ProductName;
-						rkv.Value = "<a style='color: blue; text-decoration:underline;' href=\"#\">" + item.ProductName + "</a>";
+						rkv.Value = "<a style='color: blue; text-decoration:underline;' href=\"produc-product&ID="+item.ProductID+"\">" + item.ProductName + "</a>";
 						rkvs.Add(rkv);
 					}
 

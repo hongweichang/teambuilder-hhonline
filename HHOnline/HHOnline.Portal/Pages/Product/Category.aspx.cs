@@ -31,7 +31,7 @@ public partial class Pages_Product_Category : HHPage
             if (ltPrice != null)
             {
                 decimal? price = ProductPrices.GetPriceDefault( product.ProductID);
-                ltPrice.Text = (price == null ? "需询价" : price.ToString());
+                ltPrice.Text = (price == null ? "需询价" : "￥" + price.Value.ToString("f2"));
             }
         }
     }
@@ -73,7 +73,7 @@ public partial class Pages_Product_Category : HHPage
             int catId = int.Parse(GlobalSettings.Decrypt(id));
             cnProduct.CategoryID = catId;
             cllProduct.CategoryID = catId;
-
+            cslProduct.CategoryID = catId;
             ProductQuery query = new ProductQuery();
             query.CategoryID = catId;
             query.ProductOrderBy = ProductOrderBy.DataCreated;

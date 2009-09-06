@@ -2845,10 +2845,15 @@ fieldset.fsNormal legend
 {
     padding:5px;
     }
+.cllProduct span
+{
+    padding-left:20px;
+    color:#888;
+    }
 .cllProduct a
 {
     color:#0000FF;
-    margin-right:10px;
+    margin-left:20px;
     }
 .navigateData
 {
@@ -2950,7 +2955,7 @@ fieldset.fsNormal legend
     }
 .productGridShow2
 {
-    width:120px;
+    width:170px;
     height:150px;
     text-align:center;
     float:left;

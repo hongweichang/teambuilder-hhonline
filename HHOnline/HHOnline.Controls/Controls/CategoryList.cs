@@ -35,7 +35,7 @@ namespace HHOnline.Controls
             string nav = GlobalSettings.RelativeWebRoot + "pages/product-category";
             if (pcs == null || pcs.Count == 0)
             {
-                return "<div>没有可用的分类信息！</div>";
+                return "<div><span>没有可用的分类信息！</span></div>";
             }
             StringBuilder sb = new StringBuilder();
             List<ProductCategory> pcList = new List<ProductCategory>();
