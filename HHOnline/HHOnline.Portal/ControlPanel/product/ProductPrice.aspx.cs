@@ -66,7 +66,6 @@ public partial class ControlPanel_product_ProductPrice : HHPage
             default:
             case DataActionStatus.UnknownFailure:
                 throw new HHException(ExceptionType.Failed, "删除报价信息失败，请确认此报价信息存在，并状态正常！");
-                break;
         }
     }
 
