@@ -337,12 +337,23 @@ namespace HHOnline.Framework
         #endregion
 
         #region -Encrypt-
+        static readonly string plusReplacer = "______hhonline_________________";
         /// <summary>
         /// 加密字符串 MD5+TRIPLE DES
         /// </summary>
         /// <param name="planText"></param>
         /// <returns></returns>
         public static string Encrypt(string planText)
+        {
+            return Encrypt(planText, true);
+        }
+        /// <summary>
+        /// 加密字符串 MD5+TRIPLE DES
+        /// </summary>
+        /// <param name="planText"></param>
+        /// <param name="filterPlus">是否替换特殊字符，如'+'，以免在Url传递中发生错误</param>
+        /// <returns></returns>
+        public static string Encrypt(string planText,bool filterPlus)
         {
             try
             {
@@ -352,7 +363,13 @@ namespace HHOnline.Framework
                 TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
                 des.Key = buffer;
                 des.Mode = CipherMode.ECB;
-                return Convert.ToBase64String(des.CreateEncryptor().TransformFinalBlock(inputs, 0, inputs.Length));
+
+                string result = Convert.ToBase64String(des.CreateEncryptor().TransformFinalBlock(inputs, 0, inputs.Length));
+                if (filterPlus)
+                {
+                    result = result.Replace("+", plusReplacer);
+                }
+                return HttpUtility.UrlEncode(result);
             }
             catch (Exception ex)
             {
@@ -368,6 +385,8 @@ namespace HHOnline.Framework
         {
             try
             {
+                planText = HttpUtility.UrlDecode(planText);
+                planText = planText.Replace(plusReplacer, "+");
                 byte[] inputs = Convert.FromBase64String(planText);
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 byte[] buffer = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(encryptKey));

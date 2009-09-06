@@ -47,8 +47,7 @@ public partial class ControlPanel_product_VarietyAdd : HHPage
         }
         else
         {
-            newGroupRow.Style.Add("visibility", "hidden");
-            newGroupRow.Style.Add("position", "absolute");
+            newGroupRow.Style.Add("display", "none");
             foreach (string group in groups)
             {
                 ddlBrandGroup.Items.Add(new ListItem(group));

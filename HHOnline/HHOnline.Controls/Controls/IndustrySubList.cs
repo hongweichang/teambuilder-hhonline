@@ -7,22 +7,22 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class CategorySubList:UserControl
+    public class IndustrySubList:UserControl
     {
-        static CategorySubList()
+        static IndustrySubList()
         {
-            if (pcs == null)
+            if (inds == null)
             {
-                pcs = ProductCategories.GetCategories();
+                inds = ProductIndustries.GetChildIndustries(0);
             }
         }
-        private static List<ProductCategory> pcs = null;
-        private int _CategoryID = 0;
-        static readonly string _href = "<a href=\""+GlobalSettings.RelativeWebRoot+"pages/product-category&ID={0}\">{1}</a>";
-        public int CategoryID
+        private static List<ProductIndustry> inds = null;
+        private int _IndustryID = 0;
+        static readonly string _href = "<a href=\""+GlobalSettings.RelativeWebRoot+"pages/product-industry&ID={0}\">{1}</a>";
+        public int IndustryID
         {
-            get { return _CategoryID; }
-            set { _CategoryID = value; }
+            get { return _IndustryID; }
+            set { _IndustryID = value; }
         }
         private string _CssClass;
         public string CssClass
@@ -33,34 +33,34 @@ namespace HHOnline.Controls
         string RenderHTML()
         {
             StringBuilder sb = new StringBuilder();
-            if (_CategoryID == 0)
+            if (_IndustryID == 0)
             {
-                return "<div class=\"" + _CssClass + "\"><span>暂无子分类信息！</span></div>";
+                return "<div class=\"" + _CssClass + "\"><span>暂无子行业信息！</span></div>";
             }
             else
             {
-                string _catId = string.Empty;
-                ProductCategory curCat = null;
-                List<ProductCategory> subCats = ProductCategories.GetChidCategories(_CategoryID);
-                if (subCats == null || subCats.Count == 0)
+                string _indId = string.Empty;
+                ProductIndustry pi = null;
+                List<ProductIndustry> pis = ProductIndustries.GetChildIndustries(_IndustryID);
+                if (pis == null || pis.Count == 0)
                 {
-                    return "<div class=\"" + _CssClass + "\"><span>暂无子分类信息！</span></div>";
+                    return "<div class=\"" + _CssClass + "\"><span>暂无子行业信息！</span></div>";
                 }
                 sb.Append("<div class=\"" + _CssClass + "\">");
                 ProductQuery query;
                 int count = 0;
-                for (int i = 0; i < subCats.Count; i++)
+                for (int i = 0; i < pis.Count; i++)
                 {
-                    curCat = subCats[i];
+                    pi = pis[i];
                     count = 0;
                     query = new ProductQuery();
-                    query.CategoryID = curCat.CategoryID;
+                    query.IndustryID = pi.IndustryID;
                     try
                     {
                         count = Products.GetProducts(query).Records.Count;
                     }
                     catch { count = 0; }
-                    sb.AppendFormat(_href, GlobalSettings.Encrypt(curCat.CategoryID.ToString()), curCat.CategoryName + "(" + count + ")");
+                    sb.AppendFormat(_href, GlobalSettings.Encrypt(pi.IndustryID.ToString()), pi.IndustryName + "(" + count + ")");
                 }
                 sb.Append("</div>");
             }

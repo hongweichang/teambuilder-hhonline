@@ -67,6 +67,24 @@
     <Compile Include="Controls\CategorySubList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Controls\VarietyLikeList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\VarietyNavigate.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\HPIndustryList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\IndustryLikeList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\IndustryNavigate.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\IndustrySubList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\HtmlEditorMode.cs" />
@@ -76,7 +94,7 @@
     <Compile Include="HHLoginView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="HPVarietyList.cs">
+    <Compile Include="Controls\HPVarietyList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="IncludeTypeList.cs" />

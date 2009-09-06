@@ -53,6 +53,12 @@
                 <div id="productTabContent" class="productTabContent">
                     <hc:CategoryList ID="clProduct" runat="server" CssClass="hpCategoryList"></hc:CategoryList>
                 </div>
+                <div id="varietyTabContent" class="productTabContent" style="display:none">
+                    <hc:HPVarietyList ID="hpvlProduct" runat="server" CssClass="hpCategoryList"></hc:HPVarietyList>
+                </div>
+                <div id="tradeTabContent" class="productTabContent" style="display:none">
+                    <hc:HPIndustryList ID="hpilProduct" runat="server" CssClass="hpCategoryList"></hc:HPIndustryList>
+                </div>
             </div>
             <br />
             <div class="tab-nav">

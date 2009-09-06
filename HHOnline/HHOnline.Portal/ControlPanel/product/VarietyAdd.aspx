@@ -47,14 +47,16 @@ function IsNewGroup(si)
                 <asp:DropDownList ID="ddlBrandGroup" runat="server" onchange="IsNewGroup(this)" />
             </td>
         </tr>
-        <tr runat="server" id="newGroupRow" style="display: none;">
-            <th>
-                新建分组
-            </th>
-            <td>
-                <asp:TextBox ID="txtBrandGroup" runat="server" Width="200" MaxLength="100" />
-            </td>
-        </tr>
+        <tbody runat="server" id="newGroupRow" style="display: none;">
+            <tr >
+                <th>
+                    新建分组
+                </th>
+                <td>
+                    <asp:TextBox ID="txtBrandGroup" runat="server" Width="200" MaxLength="100" />
+                </td>
+            </tr>
+        </tbody>
         <tr>
             <th>
                 标题说明
