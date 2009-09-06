@@ -44,12 +44,14 @@
     <Compile Include="Components\Product.cs" />
     <Compile Include="Components\ProductBrand.cs" />
     <Compile Include="Components\ProductCategory.cs" />
+    <Compile Include="Components\ProductFocus.cs" />
     <Compile Include="Components\ProductIndustry.cs" />
     <Compile Include="Components\ProductModel.cs" />
     <Compile Include="Components\ProductPicture.cs" />
     <Compile Include="Components\ProductPrice.cs" />
     <Compile Include="Components\ProductProperty.cs" />
     <Compile Include="Components\ProductQuery.cs" />
+    <Compile Include="Enums\FocusType.cs" />
     <Compile Include="Enums\PriceIncludeType.cs" />
     <Compile Include="Enums\ProductOrderBy.cs" />
     <Compile Include="GradeStrategy\BrandStrategy.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Providers\ShopDataProvider.cs" />
     <Compile Include="Services\ProductBrands.cs" />
     <Compile Include="Services\ProductCategories.cs" />
+    <Compile Include="Services\ProductFocusManager.cs" />
     <Compile Include="Services\ProductIndustries.cs" />
     <Compile Include="Services\ProductModels.cs" />
     <Compile Include="Services\ProductPictures.cs" />
