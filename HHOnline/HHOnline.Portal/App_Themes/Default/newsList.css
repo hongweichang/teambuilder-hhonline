@@ -105,9 +105,10 @@
 #post_list
 {
 	margin-top: 0px;
-	padding-left: 5px;
+	padding-left: 15px;
 	padding-right: 0px;
 	padding-top: 15px;
+	margin-left:150px;
 }
 
 #post_list .post_item_summary
@@ -378,21 +379,23 @@ A.titlelnk:hover
 }
 #side_nav
 {
-	position: relative; 
+    z-index:1000;
+	position: absolute; 
 	/*float: left;
 	top: 150px;*/
 	background-color: #eeeeff;
 	margin-top: 0px;
 	width: 160px;
 	padding-top: 0px;
-	left: 10px;
+	left: 0;
+	top:30px;
 }
 
 #main
 {
 	float:left;
-	/*width:100%;
-	position:relative;*/
+	width:100%;
+	position:relative
 }
 
 #cate_title_title
@@ -401,7 +404,7 @@ A.titlelnk:hover
 	background: url(../../Images/Default/site_cate_title_bg.png) no-repeat left top;
 	border-right: #83abc6 1px solid;
 	padding-top: 8px;
-	height: 30px;
+	height: 22px;
 }
 
 H2#cate_title
@@ -410,7 +413,6 @@ H2#cate_title
 	padding-bottom: 3px;
 	padding-left: 25px;
 	color: #333;
-	font-size: 14px;
 	font-weight: bold;
 	padding-top: 0px;
 }
@@ -480,6 +482,7 @@ H2#cate_title
 
 .post_nav_block_wrapper
 {
+    margin-left:160px;
 }
 .post_nav_block
 {

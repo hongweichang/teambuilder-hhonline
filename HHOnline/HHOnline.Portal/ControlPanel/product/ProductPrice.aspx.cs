@@ -40,7 +40,6 @@ public partial class ControlPanel_product_ProductPrice : HHPage
         if (product != null)
         {
             hyProductPrice.Text = product.ProductName;
-            hyProductPrice.NavigateUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productprice&ProductID=" + productID;
         }
         this.lbNewPrice.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productpriceadd&ProductID=" + productID;
     }

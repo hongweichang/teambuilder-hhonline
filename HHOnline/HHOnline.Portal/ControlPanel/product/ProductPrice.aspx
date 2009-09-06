@@ -10,10 +10,10 @@
     </asp:LinkButton>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
-    <div id="nav">
+    <div id="nav" class="productPriceNav">
         <asp:HyperLink ID="hyAllProduct" runat="server">所有产品</asp:HyperLink>
         >>
-        <asp:HyperLink ID="hyProductPrice" runat="server"></asp:HyperLink>
+        <asp:Label ID="hyProductPrice" runat="server"></asp:Label>
     </div>
     <hc:ExtensionGridView ID="egvProductPrices" AutoGenerateColumns="False" DataKeyNames="PriceID"
         runat="server" OnRowDataBound="egvProductPrices_RowDataBound" PageSize="5" SkinID="DefaultView"

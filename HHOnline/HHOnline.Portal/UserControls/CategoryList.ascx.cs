@@ -27,13 +27,16 @@ public partial class UserControls_CategoryList : System.Web.UI.UserControl
 	private void BindList()
 	{
 		tempCates = ArticleManager.GetAllCategories();
-
-		// 首先绑定父亲节点（一级分类）
+        int? parId = null;
+        foreach (ArticleCategory ac in tempCates)
+        {
+            if (ac.ParentID == null || ac.ParentID == 0) { parId = ac.ID; break; }
+        }
 		List<ArticleCategory> catesLevel1 = new List<ArticleCategory>();
 		foreach (ArticleCategory item in tempCates)
 		{
 			// 1为“华宏资讯”分类
-			if (item.ParentID == 1)
+			if (item.ParentID == parId)
 			{
 				catesLevel1.Add(item);
 			}
