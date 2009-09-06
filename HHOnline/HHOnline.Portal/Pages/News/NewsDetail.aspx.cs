@@ -33,7 +33,7 @@ public partial class News_NewsDetail : HHPage
 		if (!string.IsNullOrEmpty(articleIDStr))
 		{
 			int articleID;
-			if (int.TryParse(articleIDStr, out articleID))
+			if (int.TryParse(HHOnline.Framework.GlobalSettings.Decrypt(articleIDStr), out articleID))
 			{
 				// 增加点击率
 				//ArticleManager.IncreaseHitTimes(articleID);
@@ -60,7 +60,7 @@ public partial class News_NewsDetail : HHPage
 					{
 						ReplaceKeyValue rkv = new ReplaceKeyValue();
 						rkv.Key = item.ProductName;
-						rkv.Value = "<a style='color: blue; text-decoration:underline;' href=\"produc-product&ID="+item.ProductID+"\">" + item.ProductName + "</a>";
+						rkv.Value = "<a style='color: blue; text-decoration:underline;' href=\"product-product&ID=" + HHOnline.Framework.GlobalSettings.Encrypt(item.ProductID.ToString()) + "\">" + item.ProductName + "</a>";
 						rkvs.Add(rkv);
 					}
 
@@ -72,7 +72,7 @@ public partial class News_NewsDetail : HHPage
 					if (ac != null)
 					{
 						btnCategory.Text = ac.Name;
-						btnCategory.OnClientClick = "window.location.href='news-newslist&cate=" + ac.ID + "';return false;";
+						btnCategory.OnClientClick = "window.location.href='news-newslist&cate=" + HHOnline.Framework.GlobalSettings.Encrypt(ac.ID.ToString()) + "';return false;";
 					}
 
 					if (!string.IsNullOrEmpty(article.CopyFrom))

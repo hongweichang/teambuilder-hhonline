@@ -43,7 +43,7 @@ public partial class News_NewsList : HHPage
 		string categoryIDStr = Request.QueryString["cate"];
 		if (!string.IsNullOrEmpty(categoryIDStr))
 		{
-			int.TryParse(categoryIDStr, out categoryID);
+			int.TryParse(HHOnline.Framework.GlobalSettings.Decrypt(categoryIDStr), out categoryID);
 		}
 
 		int pageIndex = 0;
@@ -138,7 +138,7 @@ public partial class News_NewsList : HHPage
 		string cateIDStr = Request.QueryString["cate"];
 		if (!string.IsNullOrEmpty(cateIDStr))
 		{
-			int.TryParse(cateIDStr, out cateID);
+			int.TryParse(HHOnline.Framework.GlobalSettings.Decrypt(cateIDStr), out cateID);
 		}
 
 		int articlesCount = ArticleManager.GetCategoryArticlesCount(cateID);

@@ -32,7 +32,7 @@
                     <div class="post_item">
                         <div class="post_item_body">
                             <h3>
-                                <a class="titlelnk" href='news-newsdetail&id=<%#Eval("ID") %>' target="_blank">
+                                <a class="titlelnk" href='news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>' target="_blank">
                                     <%#Eval("Title") %></a>
                                 <%#Eval("SubTitle") %></h3>
                             <div class="post_item_foot_list">
@@ -49,7 +49,7 @@
                     <div class="post_item">
                         <div class="post_item_body">
                             <h3>
-                                <a class="titlelnk" href='news-newsdetail&id=<%#Eval("ID") %>' target="_blank">
+                                <a class="titlelnk" href='news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>' target="_blank">
                                     <%#Eval("Title") %></a>
                             </h3>
                             <div class="articleimg">
@@ -60,7 +60,7 @@
                                 <%#Eval("Date")%>
                                 作者: 
                                 <a class="lightblue" href='#'><%#Eval("Author")%></a> 
-                                    <span class="article_view">  <a class="grayline" href='news-newsdetail&id=<%#Eval("ID") %>'>阅读(<span id="viewcount_1560804"><%#Eval("HitTimes")%></span>)</a></span></div>
+                                    <span class="article_view">  <a class="grayline" href='news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>'>阅读(<span id="viewcount_1560804"><%#Eval("HitTimes")%></span>)</a></span></div>
                             <div class="post_item_sep">
                             </div>
                             <p class="post_item_summary">
