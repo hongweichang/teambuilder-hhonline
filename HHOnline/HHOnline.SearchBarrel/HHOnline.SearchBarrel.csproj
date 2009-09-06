@@ -33,25 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DictSeg, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DictSeg.dll</HintPath>
-    </Reference>
-    <Reference Include="FTAlgorithm, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\FTAlgorithm.dll</HintPath>
-    </Reference>
-    <Reference Include="KTDictSeg.HighLight, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\KTDictSeg.HighLight.dll</HintPath>
-    </Reference>
-    <Reference Include="KTDictSegAnalyzer, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\KTDictSegAnalyzer.dll</HintPath>
-    </Reference>
     <Reference Include="Lucene.Net, Version=2.0.0.4, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\PanGu.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.HighLight, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\PanGu.HighLight.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.Lucene.Analyzer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\PanGu.Lucene.Analyzer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

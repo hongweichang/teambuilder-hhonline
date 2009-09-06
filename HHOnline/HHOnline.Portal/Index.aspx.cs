@@ -430,4 +430,14 @@ public partial class Index : HHPage
         price = ProductPrices.GetPriceMember(10, 23);
         Label5.Text = price.HasValue ? price.Value.ToString() : "询价";
     }
+    protected void Button42_Click(object sender, EventArgs e)
+    {
+        HHOnline.SearchBarrel.ProductSearchManager.InitializeIndex();
+    }
+    protected void Button43_Click(object sender, EventArgs e)
+    {
+        ProductQuery query = new ProductQuery();
+        query.ProductNameFilter = "黑 sd";
+        SearchResultDataSet<Product> products = HHOnline.SearchBarrel.ProductSearchManager.Search(query);
+    }
 }

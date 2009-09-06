@@ -119,10 +119,10 @@ namespace HHOnline.SearchBarrel
         //    if (pageUpperBound > hits.Length())
         //        pageUpperBound = hits.Length();
 
-        //    KTDictSeg.HighLight.Highlighter highlighter = null;
+        //    PanGu.HighLight.Highlighter highlighter = null;
         //    if (!string.IsNullOrEmpty(query.Keyword))
         //    {
-        //        highlighter = new KTDictSeg.HighLight.Highlighter(new KTDictSeg.HighLight.SimpleHTMLFormatter("<font color=\"#c60a00\">", "</font>"), new Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer());
+        //        highlighter = new PanGu.HighLight.Highlighter(new PanGu.HighLight.SimpleHTMLFormatter("<font color=\"#c60a00\">", "</font>"), new Lucene.Net.Analysis.PanGu.KTDictSegTokenizer());
         //        highlighter.FragmentSize = 100;
         //    }
         //    return null;
@@ -175,7 +175,7 @@ namespace HHOnline.SearchBarrel
         {
             StringBuilder result = new StringBuilder();
 
-            Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer ktTokenizer = new Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer();
+            Lucene.Net.Analysis.PanGu.KTDictSegTokenizer ktTokenizer = new Lucene.Net.Analysis.PanGu.KTDictSegTokenizer();
             List<FTAlgorithm.T_WordInfo> words = ktTokenizer.SegmentToWordInfos(keywords);
 
             foreach (FTAlgorithm.T_WordInfo word in words)
@@ -368,7 +368,7 @@ namespace HHOnline.SearchBarrel
         /// <returns>Analyzer</returns>
         protected static Analyzer GetChineseAnalyzer()
         {
-            return new Lucene.Net.Analysis.KTDictSeg.KTDictSegAnalyzer();
+            return new Lucene.Net.Analysis.PanGu.KTDictSegAnalyzer();
         }
 
         /// <summary>
@@ -377,7 +377,7 @@ namespace HHOnline.SearchBarrel
         /// <returns>Analyzer</returns>
         protected static Analyzer GetChineseAnalyzerOfUnTokenized()
         {
-            return new Lucene.Net.Analysis.KTDictSeg.KTDictSegAnalyzer(true);
+            return new Lucene.Net.Analysis.PanGu.KTDictSegAnalyzer(true);
         }
          * */
     }

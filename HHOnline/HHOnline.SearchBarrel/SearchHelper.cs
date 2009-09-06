@@ -24,7 +24,7 @@ namespace HHOnline.SearchBarrel
         /// <returns>Analyzer</returns>
         public static Analyzer GetChineseAnalyzer()
         {
-            return new Lucene.Net.Analysis.KTDictSeg.KTDictSegAnalyzer();
+            return new Lucene.Net.Analysis.PanGu.PanGuAnalyzer();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace HHOnline.SearchBarrel
         /// <returns>Analyzer</returns>
         public static Analyzer GetChineseAnalyzerOfUnTokenized()
         {
-            return new Lucene.Net.Analysis.KTDictSeg.KTDictSegAnalyzer(true);
+            return new Lucene.Net.Analysis.PanGu.PanGuAnalyzer(true);
         }
 
         /// <summary>
@@ -45,10 +45,10 @@ namespace HHOnline.SearchBarrel
         {
             StringBuilder result = new StringBuilder();
 
-            Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer ktTokenizer = new Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer();
-            List<FTAlgorithm.T_WordInfo> words = ktTokenizer.SegmentToWordInfos(keywords);
+            Lucene.Net.Analysis.PanGu.PanGuTokenizer ktTokenizer = new Lucene.Net.Analysis.PanGu.PanGuTokenizer();
+            ICollection<PanGu.WordInfo> words = ktTokenizer.SegmentToWordInfos(keywords);
 
-            foreach (FTAlgorithm.T_WordInfo word in words)
+            foreach (PanGu.WordInfo word in words)
             {
                 if (word == null)
                     continue;

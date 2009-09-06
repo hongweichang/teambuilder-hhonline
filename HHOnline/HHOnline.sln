@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HHOnline.News", "HHOnline.N
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{5A5B3F7D-079B-40D5-935C-4AEC52F0D93B}"
 	ProjectSection(SolutionItems) = preProject
-		Libs\DictSeg.dll = Libs\DictSeg.dll
-		Libs\FTAlgorithm.dll = Libs\FTAlgorithm.dll
-		Libs\KTDictSeg.HighLight.dll = Libs\KTDictSeg.HighLight.dll
-		Libs\KTDictSegAnalyzer.dll = Libs\KTDictSegAnalyzer.dll
 		Libs\log4net.dll = Libs\log4net.dll
 		Libs\Lucene.Net.dll = Libs\Lucene.Net.dll
 		Libs\Microsoft.Practices.EnterpriseLibrary.Caching.dll = Libs\Microsoft.Practices.EnterpriseLibrary.Caching.dll
@@ -23,6 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{5A5B3F7D-0
 		Libs\Microsoft.Practices.Unity.dll = Libs\Microsoft.Practices.Unity.dll
 		Libs\Moxiecode.TinyMCE.dll = Libs\Moxiecode.TinyMCE.dll
 		Libs\Newtonsoft.Json.dll = Libs\Newtonsoft.Json.dll
+		Libs\PanGu.dll = Libs\PanGu.dll
+		Libs\PanGu.HighLight.dll = Libs\PanGu.HighLight.dll
+		Libs\PanGu.Lucene.Analyzer.dll = Libs\PanGu.Lucene.Analyzer.dll
 		Libs\PostSharp.Laos.dll = Libs\PostSharp.Laos.dll
 		Libs\PostSharp.Public.dll = Libs\PostSharp.Public.dll
 	EndProjectSection

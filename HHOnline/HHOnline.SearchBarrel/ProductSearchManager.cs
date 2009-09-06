@@ -40,7 +40,7 @@ namespace HHOnline.SearchBarrel
         #endregion
 
         #region Search
-        public SearchResultDataSet<Product> Search(ProductQuery query)
+        public static SearchResultDataSet<Product> Search(ProductQuery query)
         {
             //索引文件不存在时，返回null
             if (!GlobalSettings.CheckFileExist(PhysicalIndexDirectory))
@@ -94,10 +94,10 @@ namespace HHOnline.SearchBarrel
                 pageUpperBound = hits.Length();
 
             //HighLight
-            KTDictSeg.HighLight.Highlighter highlighter = null;
+            PanGu.HighLight.Highlighter highlighter = null;
             if (!string.IsNullOrEmpty(query.ProductNameFilter))
             {
-                highlighter = new KTDictSeg.HighLight.Highlighter(new KTDictSeg.HighLight.SimpleHTMLFormatter("<font color=\"#c60a00\">", "</font>"), new Lucene.Net.Analysis.KTDictSeg.KTDictSegTokenizer());
+                highlighter = new PanGu.HighLight.Highlighter(new PanGu.HighLight.SimpleHTMLFormatter("<font color=\"#c60a00\">", "</font>"), new PanGu.Segment());
                 highlighter.FragmentSize = 100;
             }
             for (int i = pageLowerBound; i < pageUpperBound; i++)
@@ -159,7 +159,8 @@ namespace HHOnline.SearchBarrel
             {
                 try
                 {
-                    System.IO.Directory.CreateDirectory(indexPath);
+                    GlobalSettings.EnsureDirectoryExists(indexPath);
+                    //System.IO.Directory.CreateDirectory(indexPath);
                 }
                 catch { }
             }
@@ -299,7 +300,19 @@ namespace HHOnline.SearchBarrel
         /// <param name="indexPath"></param>
         public static void InitializeIndex(string indexPath)
         {
-            System.IO.Directory.Delete(indexPath);
+
+            try
+            {
+                string[] oldIndexFiles = System.IO.Directory.GetFiles(indexPath, "*.*");
+                foreach (var oldIndexFile in oldIndexFiles)
+                {
+                    System.IO.File.Delete(oldIndexFile);
+                }
+            }
+            catch
+            {
+
+            }
 
             ProductQuery query = new ProductQuery();
             query.HasPublished = true;

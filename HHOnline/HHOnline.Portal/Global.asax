@@ -17,6 +17,9 @@
         //配置log4net
         log4net.Config.XmlConfigurator.Configure(new FileInfo(GlobalSettings.MapPath("~/log4net.config")));
 
+        //配置Lucene分词
+        PanGu.Segment.Init(GlobalSettings.MapPath("~/Utility/PanGu.xml"));
+
         //启动后台任务
         XmlNode node = HHConfiguration.GetConfig().GetConfigSection("HHOnline/Tasks");
         TaskManager.Initialize(node);

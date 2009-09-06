@@ -116,7 +116,11 @@
         <br />
         <asp:Button ID="Button37" runat="server" OnClick="Button37_Click" Text="Get All Category" />
         <asp:Button ID="Button38" runat="server" OnClick="Button38_Click" Text="Get All Article" />
+        <asp:Button ID="Button42" runat="server" onclick="Button42_Click" 
+            Text="Button" />
         <hc:Editor EditorMode="Enhanced" runat="server" ID="txtEditor" />
+        <asp:Button ID="Button43" runat="server" onclick="Button43_Click" 
+            style="margin-bottom: 0px" Text="Button" />
         <a href="javascript:void(0)" onmousedown="<%=txtEditor.GetContentInsertScript("abc") %>">
             Insert Content</a> <a href="javascript:InsertContentToHtmlEditor('<b>abc</b>')">Insert
                 Content</a>
