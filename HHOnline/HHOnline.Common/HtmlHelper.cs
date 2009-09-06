@@ -65,12 +65,100 @@ namespace HHOnline.Common
         /// <summary>
         /// 替换所有Html 标记
         /// </summary>
+        /// <param name="stringToStrip"></param>
+        /// <returns></returns>
+        public static string StripAllTags(string stringToStrip)
+        {
+            return StripAllTags(stringToStrip, true);
+        }
+
+        /// <summary>
+        /// 替换所有Html 标记
+        /// </summary>
         /// <param name="html"></param>
         /// <param name="enableMultiLine"></param>
         /// <returns></returns>
-        public static string StripAllTags(string html, bool enableMultiLine)
+        public static string StripAllTags(string stringToStrip, bool enableMultiLine)
         {
-            return null;
+            if (enableMultiLine)
+            {
+                stringToStrip = Regex.Replace(stringToStrip, @"</p(?:\s*)>(?:\s*)<p(?:\s*)>", "\n\n", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                stringToStrip = Regex.Replace(stringToStrip, @"<br(?:\s*)/>", "\n", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            }
+            else
+            {
+                stringToStrip = Regex.Replace(stringToStrip, @"</p(?:\s*)>(?:\s*)<p(?:\s*)>", string.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                stringToStrip = Regex.Replace(stringToStrip, @"<br(?:\s*)/>", string.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            }
+            stringToStrip = Regex.Replace(stringToStrip, "\"", "''", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            stringToStrip = Regex.Replace(stringToStrip, "&[^;]*;", string.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            stringToStrip = Regex.Replace(stringToStrip, "<[^>]+>", string.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return stringToStrip;
+        }
+
+
+        /// <summary>
+        /// TrimHtml
+        /// </summary>
+        /// <param name="sourceHtml"></param>
+        /// <param name="charLimit"></param>
+        /// <returns></returns>
+        public static string TrimHtml(string sourceHtml, int charLimit)
+        {
+            if (string.IsNullOrEmpty(sourceHtml))
+            {
+                return string.Empty;
+            }
+            string stringTrim = StripAllTags(sourceHtml, false);
+            if ((charLimit <= 0) || (charLimit >= stringTrim.Length))
+            {
+                return stringTrim;
+            }
+            return Trim(stringTrim, charLimit);
+        }
+
+        /// <summary>
+        /// Trim
+        /// </summary>
+        /// <param name="stringTrim"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        public static string Trim(string stringTrim, int maxLength)
+        {
+            return Trim(stringTrim, maxLength, "...");
+        }
+
+        /// <summary>
+        /// Trim
+        /// </summary>
+        /// <param name="rawString"></param>
+        /// <param name="maxLength"></param>
+        /// <param name="appendString"></param>
+        /// <returns></returns>
+        public static string Trim(string rawString, int maxLength, string appendString)
+        {
+            if (string.IsNullOrEmpty(rawString) || (rawString.Length <= maxLength))
+            {
+                return rawString;
+            }
+            if (Encoding.Default.GetBytes(rawString).Length <= (maxLength * 2))
+            {
+                return rawString;
+            }
+            int length = Encoding.Default.GetBytes(appendString).Length;
+            StringBuilder builder = new StringBuilder();
+            int num = 0;
+            for (int i = 0; i < rawString.Length; i++)
+            {
+                char ch = rawString[i];
+                builder.Append(ch);
+                num += Encoding.Default.GetBytes(new char[] { ch }).Length;
+                if (num >= ((maxLength * 2) - length))
+                {
+                    break;
+                }
+            }
+            return (builder.ToString() + appendString);
         }
     }
 }
