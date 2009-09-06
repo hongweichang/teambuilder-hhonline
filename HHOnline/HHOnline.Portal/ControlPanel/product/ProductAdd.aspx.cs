@@ -388,7 +388,17 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
     {
         this.mvProductAdd.SetActiveView(vwProductCategoies);
     }
-
+    protected void btnBackToProduct_Click(object sender, EventArgs e)
+    {
+        if (Request.UrlReferrer != null && Request.UrlReferrer.ToString().ToLower().IndexOf(Request.RawUrl.ToLower())<0)
+        {
+            Response.Redirect(Request.UrlReferrer.ToString());
+        }
+        else
+        {
+            Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product");
+        }
+    }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Product product = Products.GetProduct(productID);

@@ -140,6 +140,8 @@
                         </th>
                         <td>
                             <asp:Button runat="server" ID="btnSubmit" Text="确定" OnClick="btnSubmit_Click" />
+                            &nbsp;&nbsp;
+                            <asp:Button runat="server" ID="btnBackToProduct" Text="返回" OnClick="btnBackToProduct_Click" />
                         </td>
                     </tr>
                 </table>
