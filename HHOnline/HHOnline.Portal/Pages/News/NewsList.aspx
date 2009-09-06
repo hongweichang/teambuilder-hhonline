@@ -10,6 +10,9 @@
 	<huc:ArticleSearch ID="asNews" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderContent" runat="Server">
+	<div id="side_nav">
+		<huc:CategoryList ID="clCategory" runat="server" />
+	</div>
 	<div id="main">
 		<div class="post_nav_block_wrapper">
 			<ul class="post_nav_block">
