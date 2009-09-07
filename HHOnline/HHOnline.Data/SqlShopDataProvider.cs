@@ -695,7 +695,7 @@ namespace HHOnline.Data
                 new ELParameter("@ProductID", DbType.Int32, productID),
               };
             object value = DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductPrice_GetMarketPrice", elParameters);
-            if (value != null)
+            if (value != null && value != DBNull.Value)
                 return Convert.ToDecimal(value);
             else
                 return null;
@@ -707,7 +707,7 @@ namespace HHOnline.Data
                 new ELParameter("@ProductID", DbType.Int32, productID),
               };
             object value = DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductPrice_GetDefaultPrice", elParameters);
-            if (value != null)
+            if (value != null && value != DBNull.Value)
                 return Convert.ToDecimal(value);
             else
                 return null;

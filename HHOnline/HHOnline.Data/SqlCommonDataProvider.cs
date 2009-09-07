@@ -743,7 +743,7 @@ namespace HHOnline.Data
         {
             ELParameter paramID = new ELParameter("@UserID", DbType.Int32, userID);
 
-            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_UserGrade_DeleteByUserID", paramID))
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_UserGrade_GetByUserID", paramID))
             {
                 List<UserGrade> userGrades = new List<UserGrade>();
                 while (dr.Read())
