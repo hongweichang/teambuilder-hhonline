@@ -32,7 +32,7 @@ $().ready(function() {
     if (typeof activeTab != 'undefined') {
         changeHeaderTab(n, activeTab);
     }
-    var mk1 = '直接输入关键字根据产品名称、品牌、型号等信息进行产品相关搜索！';
+    var mk1 = '直接输入关键字根据产品名称、概要、内容等信息进行产品相关搜索！';
     var mk2 = '直接输入关键字根据资讯名称、概要、内容等信息进行咨询相关搜索！';
     var s1 = $('input[rel=searchproduct]');
     s1.watermark({

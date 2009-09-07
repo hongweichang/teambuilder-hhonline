@@ -47,7 +47,7 @@
 					<div class="productNav">
                         <asp:LinkButton ID="btnAll" runat="server" OnClick="btnQuickSearch_Click">全部</asp:LinkButton>
                         <asp:LinkButton	ID="btnSmallHitTimes" runat="server" OnClick="btnQuickSearch_Click">小访问量（&lt;=100）</asp:LinkButton>
-                        <asp:LinkButton ID="btnMediumHitTimes" runat="server" OnClick="btnQuickSearch_Click">中等访问量（&gt;1000）</asp:LinkButton>
+                        <asp:LinkButton ID="btnMediumHitTimes" runat="server" OnClick="btnQuickSearch_Click">中等访问量（100~1000）</asp:LinkButton>
                         <asp:LinkButton ID="btnLargeHitTimes" runat="server" OnClick="btnQuickSearch_Click">大访问量（&gt;1000）</asp:LinkButton>
 					</div>
 				</td>
@@ -68,7 +68,7 @@
 	<br />
 	<hc:ExtensionGridView runat="server" ID="egvArticles" OnRowDataBound="egvArticles_RowDataBound"
 		OnRowDeleting="egvArticles_RowDeleting" OnRowUpdating="egvArticles_RowUpdating"
-		PageSize="5" SkinID="DefaultView" AutoGenerateColumns="False" DataKeyNames="ID" 
+		PageSize="10" SkinID="DefaultView" AutoGenerateColumns="false" DataKeyNames="ID" 
         onpageindexchanging="egvArticles_PageIndexChanging">
 		<Columns>
 			<asp:TemplateField HeaderText="资讯图片">

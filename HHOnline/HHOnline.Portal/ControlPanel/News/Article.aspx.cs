@@ -114,8 +114,7 @@ public partial class ControlPanel_News_Article : HHPage
 			btnAll.CssClass = "active";
 		}
 		
-		query.PageSize = egvArticles.PageSize;
-		query.PageIndex = egvArticles.PageIndex;
+		query.PageSize = Int32.MaxValue;
 
 		PagingDataSet<Article> products = ArticleManager.GetArticles(query);
 		egvArticles.DataSource = products.Records;
@@ -202,8 +201,6 @@ public partial class ControlPanel_News_Article : HHPage
 
 	public override void OnPageLoaded()
 	{
-		this.PageInfoType = InfoType.IframeInfo;
-		base.OnPageLoaded();
 		this.ShortTitle = "附件管理";
 		this.SetTitle();
 		this.SetTabName(this.ShortTitle);
