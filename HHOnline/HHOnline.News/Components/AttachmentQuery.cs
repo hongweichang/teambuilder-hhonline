@@ -50,7 +50,7 @@ namespace HHOnline.News.Components
 		}
 
 		/// <summary>
-		/// 产品排序依据
+		/// 附件排序依据
 		/// </summary>
 		public AttachmentOrderBy AttachmentOrderBy = AttachmentOrderBy.UpdateTime;
 		/// <summary>
@@ -114,7 +114,7 @@ namespace HHOnline.News.Components
 				result.CreateEndTime = DateTime.Parse(queryString["cet"]);
 			}
 
-			//ProductOrderBy
+			// OrderBy
 			try
 			{
 				AttachmentOrderBy sortBy = (AttachmentOrderBy)Enum.Parse(typeof(AttachmentOrderBy), GlobalSettings.IsNullOrEmpty(queryString["sb"]) ? "1" : int.Parse(queryString["sb"]).ToString(), true);

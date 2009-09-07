@@ -39,14 +39,6 @@
 				</th>
 				<td colspan="6">
 					<div class="productNav">
-						<%--                        <asp:LinkButton ID="lnkAll" runat="server" OnClick="lnk_Click">所有产品</asp:LinkButton>
-                        <asp:LinkButton ID="lnkPublished" runat="server" OnClick="lnk_Click">已发布</asp:LinkButton>
-                        <asp:LinkButton ID="lnkUnPublishied" runat="server" OnClick="lnk_Click">未发布</asp:LinkButton>
-                        <asp:LinkButton ID="lnkPriced" runat="server" OnClick="lnk_Click">已报价</asp:LinkButton>
-                        <asp:LinkButton ID="lnkNoPriced" runat="server" OnClick="lnk_Click">未报价</asp:LinkButton>
-                        <asp:LinkButton ID="lnkPicture" runat="server" OnClick="lnk_Click">有图商品</asp:LinkButton>
-                        <asp:LinkButton ID="lnkNoPicture" runat="server" OnClick="lnk_Click">无图商品</asp:LinkButton>
-                        --%>
                         <asp:LinkButton ID="btnAll" runat="server" OnClick="btnQuickSearch_Click">全部</asp:LinkButton>
                         <asp:LinkButton	ID="btnSmallSizeFile" runat="server" OnClick="btnQuickSearch_Click">小文件（&lt;=1M）</asp:LinkButton>
                         <asp:LinkButton ID="btnMediumSizeFile" runat="server" OnClick="btnQuickSearch_Click">中等文件（&gt;1M）</asp:LinkButton>
@@ -54,7 +46,7 @@
 					</div>
 				</td>
 				<td rowspan="2">
-					<asp:Button ID="btnSearch" runat="server" Text="查找产品" OnClick="btnSearch_Click" />
+					<asp:Button ID="btnSearch" runat="server" Text="查找附件" OnClick="btnSearch_Click" />
 				</td>
 			</tr>
 			<tr>
@@ -94,7 +86,7 @@
 				<ItemTemplate>
 					<asp:LoginView ID="LoginView1" runat="server">
 						<RoleGroups>
-							<asp:RoleGroup Roles="ProductModule-Edit">
+							<asp:RoleGroup Roles="ArticleAttachmentModule-Edit">
 								<ContentTemplate>
 									<asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" SkinID="lnkedit"
 										PostBackUrl="#"></asp:LinkButton>
@@ -104,7 +96,7 @@
 					</asp:LoginView>
 					<asp:LoginView ID="LoginView2" runat="server">
 						<RoleGroups>
-							<asp:RoleGroup Roles="ProductModule-Delete">
+							<asp:RoleGroup Roles="ArticleAttachmentModule-Delete">
 								<ContentTemplate>
 									<asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" SkinID="lnkdelete"
 										OnClientClick="return confirm('确定要删除此记录吗？')" PostBackUrl="#"></asp:LinkButton>

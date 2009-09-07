@@ -12,7 +12,7 @@
                 所属分类
             </th>
             <td>
-                <asp:Label runat="server" ID="lblParentCategory"></asp:Label>
+                <huc:ArticleCategoryCombo ID="ascCategory" runat="server" />
             </td>
         </tr>
         <tr>

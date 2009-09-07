@@ -44,8 +44,9 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 
 	void BindParentCategory(int parentID)
 	{
-		ArticleCategory category = ArticleManager.GetArticleCategory(parentID);
-		lblParentCategory.Text = category.Name;
+		//ArticleCategory category = ArticleManager.GetArticleCategory(parentID);
+		//lblParentCategory.Text = category.Name;
+		ascCategory.SelectedCategoryID = parentID;
 	}
 
 	protected override void OnPagePermissionChecking()
@@ -84,8 +85,16 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 				else
 				{
 					btnPost.Text = " 增 加 ";
-					int parentID = int.Parse(Request.QueryString["catid"]);
-					BindParentCategory(parentID);
+
+					if (Request.QueryString["catid"] != null)
+					{
+						int parentID;
+
+						if (int.TryParse(Request.QueryString["catid"], out parentID))
+						{
+							BindParentCategory(parentID);
+						}
+					}
 				}
 			}
 			catch (Exception ex)
@@ -135,7 +144,8 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 		else
 		{
 			Article article = new Article();
-			int parentID = int.Parse(Request.QueryString["catid"]);
+			//int parentID = int.Parse(Request.QueryString["catid"]);
+			int parentID = ascCategory.SelectedCategoryID;
 
 			article.Category = parentID;
 			article.Title = txtTitle.Text;

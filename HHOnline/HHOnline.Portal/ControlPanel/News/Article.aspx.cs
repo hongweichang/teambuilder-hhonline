@@ -17,20 +17,185 @@ using HHOnline.Framework.Web.Enums;
 
 public partial class ControlPanel_News_Article : HHPage
 {
+	private readonly string destUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?news-article";
+
 	protected void Page_Load(object sender, EventArgs e)
 	{
 		if (!IsPostBack && !IsCallback)
 		{
-			BindCategories();
+			BindData();
+			BindLinkButton();
 		}
+	}
+
+	void BindLinkButton()
+	{
+		btnNewArticle.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?news-articleaddedit&act=new";
+		btnAll.PostBackUrl = destUrl;
+		btnSmallHitTimes.PostBackUrl = destUrl + "&hst=0&het=100";
+		btnMediumHitTimes.PostBackUrl = destUrl + "&hst=100&het=1000";
+		btnLargeHitTimes.PostBackUrl = destUrl + "&hst=1000";
+	}
+
+	private void BindData()
+	{
+		ascCategory.IsShowAllCategory = true;
+
+		ArticleQuery query = ArticleQuery.GetQueryFromQueryString(Request.QueryString);
+
+		btnAll.CssClass = string.Empty;
+		lblTip.Text = string.Empty;
+
+		// 判断标题
+		if (!string.IsNullOrEmpty(query.Title))
+		{
+			lblTip.Text = "标题中包含“" + query.Title + "”";
+		}
+
+		// 判断点击次数
+		if (query.HitStartTimes.HasValue)
+		{
+			if (!string.IsNullOrEmpty(lblTip.Text))
+			{
+				lblTip.Text += "；";
+			}
+
+			lblTip.Text += "访问量大于" + query.HitStartTimes.Value + "次";
+		}
+
+		if (query.HitEndTimes.HasValue)
+		{
+			if (!string.IsNullOrEmpty(lblTip.Text))
+			{
+				lblTip.Text += "；";
+			}
+
+			lblTip.Text += "访问量小于" + query.HitEndTimes.Value + "次";
+		}
+
+		// 判断日期
+		if (query.CreateStartTime.HasValue)
+		{
+			if (!string.IsNullOrEmpty(lblTip.Text))
+			{
+				lblTip.Text += "；";
+			}
+
+			lblTip.Text += "时间从“" + query.CreateStartTime.Value.ToShortDateString() + "”开始";
+		}
+
+		if (query.CreateEndTime.HasValue)
+		{
+			if (!string.IsNullOrEmpty(lblTip.Text))
+			{
+				lblTip.Text += "；";
+			}
+
+			lblTip.Text += "时间到“" + query.CreateEndTime.Value.ToShortDateString() + "”截止";
+		}
+
+		if (string.IsNullOrEmpty(lblTip.Text))
+		{
+			lblTip.Text = "全部";
+			btnAll.CssClass = "active";
+		}
+		
+		query.PageSize = egvArticles.PageSize;
+		query.PageIndex = egvArticles.PageIndex;
+
+		PagingDataSet<Article> products = ArticleManager.GetArticles(query);
+		egvArticles.DataSource = products.Records;
+		egvArticles.DataBind();
+	}
+
+	protected void btnQuickSearch_Click(object sender, EventArgs e)
+	{
+		LinkButton btn = sender as LinkButton;
+		Response.Redirect(btn.PostBackUrl);
+	}
+
+	protected void btnSearch_Click(object sender, EventArgs e)
+	{
+		string url = destUrl;
+
+		if (!string.IsNullOrEmpty(txtArticleTitle.Text))
+		{
+			url += "&title=" + txtArticleTitle.Text;
+		}
+
+		if (!string.IsNullOrEmpty(txtCreateStartTime.Text))
+		{
+			DateTime dt = DateTime.Parse(txtCreateStartTime.Text);
+			url += "&cst=" + dt.ToShortDateString();
+		}
+
+		if (!string.IsNullOrEmpty(txtCreateEndTime.Text))
+		{
+			DateTime dt = DateTime.Parse(txtCreateEndTime.Text);
+			url += "&cet=" + dt.ToShortDateString();
+		}
+
+		url += "&cat=" + ascCategory.SelectedCategoryID;
+
+		Response.Redirect(url);
+	}
+
+	protected void egvArticles_RowDataBound(object sender, GridViewRowEventArgs e)
+	{
+		if (e.Row.RowType == DataControlRowType.DataRow)
+		{
+			Article article = e.Row.DataItem as Article;
+			Image picture = e.Row.FindControl("imgPicture") as Image;
+
+			if (picture != null)
+			{
+				picture.ImageUrl = article.GetDefaultImageUrl((int)picture.Width.Value, (int)picture.Height.Value);
+			}
+
+			HyperLink hyName = e.Row.FindControl("hlName") as HyperLink;
+			if (hyName != null)
+			{
+				hyName.Text = article.Title;
+				hyName.NavigateUrl = "#";
+			}
+		}
+	}
+
+	protected void egvArticles_RowDeleting(object sender, GridViewDeleteEventArgs e)
+	{
+		int articleID = (int)egvArticles.DataKeys[e.RowIndex].Value;
+		DataActionStatus status = ArticleManager.DeleteArticle(articleID);
+
+		switch (status)
+		{
+			case DataActionStatus.RelationshipExist:
+				throw new HHException(ExceptionType.Failed, "此附件下存在关联数据，无法直接删除！");
+
+			case DataActionStatus.UnknownFailure:
+				throw new HHException(ExceptionType.Failed, "删除附件失败，请联系管理人员！");
+
+			default:
+			case DataActionStatus.Success:
+				BindData();
+				break;
+		}
+	}
+
+	protected void egvArticles_RowUpdating(object sender, GridViewUpdateEventArgs e)
+	{
+		Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?news-articleaddedit&act=edit&ID=" + egvArticles.DataKeys[e.RowIndex].Value);
 	}
 
 	public override void OnPageLoaded()
 	{
 		this.PageInfoType = InfoType.IframeInfo;
 		base.OnPageLoaded();
+		this.ShortTitle = "附件管理";
+		this.SetTitle();
+		this.SetTabName(this.ShortTitle);
 
 		AddJavaScriptInclude("scripts/jquery.jmodal.js", false, true);
+		AddJavaScriptInclude("scripts/jquery.datepick.js", false, false);
 		AddJavaScriptInclude("scripts/pages/article.aspx.js", false, false);
 	}
 
@@ -39,165 +204,15 @@ public partial class ControlPanel_News_Article : HHPage
 		this.PagePermission = "ArticleModule-View";
 		//e.CheckPermissionControls.Add("ArticleModule-Add", btnAddCategory);
 		//e.CheckPermissionControls.Add("ArticleModule-Delete", btnDeleteCategory);
-		e.CheckPermissionControls.Add("ArticleModule-Add", btnAddArticle);
-		e.CheckPermissionControls.Add("ArticleModule-Delete", btnDeleteArticle);
+		//e.CheckPermissionControls.Add("ArticleArticleModule-Add", btnAddArticle);
+		//e.CheckPermissionControls.Add("ArticleArticleModule-Delete", btnDeleteArticle);
 
 		base.OnPermissionChecking(e);
 	}
 
-	/// <summary>
-	/// 添加子节点
-	/// </summary>
-	/// <param name="node"></param>
-	void LoadChild(TreeNode node)
+	protected void egvArticles_PageIndexChanging(object sender, GridViewPageEventArgs e)
 	{
-		int parentID = int.Parse(node.Value);
-		List<ArticleCategory> categories = ArticleManager.GetChildCategories(parentID);
-		if (categories != null && categories.Count > 0)
-		{
-			foreach (ArticleCategory info in categories)
-			{
-				TreeNode newNode = MakeCategoryNode(info);
-
-				LoadChild(newNode);
-				node.ChildNodes.Add(newNode);
-			}
-		}
-	}
-
-	private static string nodeState = CacheKeyManager.PagePrefix + "SelectedArticleCategoryValue/";
-
-	/// <summary>
-	/// 绑定分类集合
-	/// </summary>
-	private void BindCategories()
-	{
-		List<ArticleCategory> categories = ArticleManager.GetAllCategories();
-
-		foreach (ArticleCategory info in categories)
-		{
-			if (info.ParentID == null || info.ParentID == 0)
-			{
-				TreeNode newNode = MakeCategoryNode(info);
-				newNode.ExpandAll();
-
-				LoadChild(newNode);
-
-				tvwCategory.Nodes.Add(newNode);
-			}
-		}
-
-		HttpCookie cache = HHCookie.GetCookie(nodeState + Profile.AccountInfo.UserName);
-		if (cache != null)
-		{
-			CheckNode(tvwCategory.Nodes, cache.Value);
-			SetValue();
-			LoadChildArticles(int.Parse(cache.Value));
-		}
-
-		if (tvwCategory.Nodes.Count != 0)
-		{
-			HttpCookie hhcache = HHCookie.GetCookie(nodeState + Profile.AccountInfo.UserName);
-			if (hhcache != null)
-			{
-				CheckNode(tvwCategory.Nodes, hhcache.Value);
-				SetValue();
-				//BindUserDept(int.Parse(hhcache.Value));
-			}
-			else
-			{
-				tvwCategory.Nodes[0].Selected = true;
-			}
-
-			tvwCategory_SelectedNodeChanged(tvwCategory, null);
-		}
-	}
-
-	void SetValue()
-	{
-		ExecuteJs("window.$selectNodeId=" + tvwCategory.SelectedValue, false);
-	}
-
-	/// <summary>
-	/// 载入文章
-	/// </summary>
-	/// <param name="id"></param>
-	void LoadChildArticles(int id)
-	{
-		//UserQuery q = new UserQuery();
-		//q.OrganizationID = orgId;
-		//q.PageSize = Int32.MaxValue;
-		//PagingDataSet<User> pds = Users.GetUsers(q, false);
-		//rpUsers.DataSource = pds.Records;
-		//rpUsers.DataBind();
-
-		ArticleQuery query = new ArticleQuery();
-		query.CategoryID = id;
-		query.PageSize = Int32.MaxValue;
-
-		PagingDataSet<Article> pds = ArticleManager.GetArticles(query);
-		rpArticles.DataSource = pds.Records;
-		rpArticles.DataBind();
-
-		//LoadArticleCategory(id);
-	}
-
-	void ExpandParent(TreeNode tn)
-	{
-		TreeNode node = tn;
-		while (node != null && node.Parent != null)
-		{
-			node = node.Parent;
-			if (node != null)
-			{
-				node.Expand();
-			}
-		}
-	}
-
-	/// <summary>
-	/// 创建分类节点
-	/// </summary>
-	/// <param name="info"></param>
-	/// <returns></returns>
-	private TreeNode MakeCategoryNode(ArticleCategory info)
-	{
-		TreeNode result = new TreeNode(
-			info.Name,
-			info.ID.ToString(),
-			GlobalSettings.RelativeWebRoot + "images/default/cat.gif");
-
-		result.ToolTip = info.Description;
-
-		return result;
-	}
-
-	void CheckNode(TreeNodeCollection nodes, string value)
-	{
-		if (nodes != null && nodes.Count > 0)
-		{
-			foreach (TreeNode root in nodes)
-			{
-				if (value == root.Value)
-				{
-					root.Select();
-					ExpandParent(root);
-				}
-				else
-				{
-					CheckNode(root.ChildNodes, value);
-				}
-			}
-		}
-	}
-
-	protected void tvwCategory_SelectedNodeChanged(object sender, EventArgs e)
-	{
-		TreeNode node = tvwCategory.SelectedNode;
-		node.Expand();
-		HHCookie.AddCookie(nodeState + Profile.AccountInfo.UserName, node.Value, DateTime.Now.AddMinutes(1));
-
-		LoadChildArticles(int.Parse(node.Value));
-		SetValue();
+		egvArticles.PageIndex = e.NewPageIndex;
+		BindData();
 	}
 }

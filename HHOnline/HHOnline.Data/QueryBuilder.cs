@@ -104,7 +104,56 @@ namespace HHOnline.Data
                 builder.AddWhere("CategoryID", Comparison.Equals, query.CategoryID.Value);
             }
 
-            return builder.BuildQuery();
+			if (query.Title != null)
+			{
+				builder.AddWhere("ArticleTitle", Comparison.Like, "%" + query.Title + "%");
+			}
+
+			if (query.HitStartTimes.HasValue)
+			{
+				builder.AddWhere("HitTimes", Comparison.GreaterOrEquals, query.HitStartTimes.Value);
+			}
+
+			if (query.HitEndTimes.HasValue)
+			{
+				builder.AddWhere("HitTimes", Comparison.LessOrEquals, query.HitEndTimes.Value);
+			}
+
+			if (query.CreateStartTime.HasValue)
+			{
+				builder.AddWhere("CreateTime", Comparison.GreaterOrEquals, query.CreateStartTime);
+			}
+
+			if (query.CreateEndTime.HasValue)
+			{
+				builder.AddWhere("CreateTime", Comparison.LessOrEquals, query.CreateEndTime);
+			}
+
+			// 添加OrderBy
+			switch (query.ArticleOrderBy)
+			{
+				case HHOnline.News.enums.ArticleOrderBy.Category:
+					builder.AddOrderBy("CategoryID", (Sorting)query.SortOrder);
+					break;
+
+				case HHOnline.News.enums.ArticleOrderBy.HitTimes:
+					builder.AddOrderBy("HitTimes", (Sorting)query.SortOrder);
+					break;
+
+				case HHOnline.News.enums.ArticleOrderBy.CreateTime:
+					builder.AddOrderBy("CreateTime", (Sorting)query.SortOrder);
+					break;
+
+				case HHOnline.News.enums.ArticleOrderBy.Title:
+					builder.AddOrderBy("ArticleTitle", (Sorting)query.SortOrder);
+					break;
+
+				case HHOnline.News.enums.ArticleOrderBy.UpdateTime:
+					builder.AddOrderBy("UpdateTime", (Sorting)query.SortOrder);
+					break;
+			}
+			
+			return builder.BuildQuery();
         }
         #endregion
 
