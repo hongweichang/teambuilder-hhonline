@@ -18,7 +18,7 @@ namespace HHOnline.Controls
         }
         private static List<ProductBrand> brands = null;
         private int _BrandID = 0;
-        static readonly string _href = "<a href=\""+GlobalSettings.RelativeWebRoot+"pages/product-brand{0}\">{1}</a>";
+        static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand{0}\">{1}</a>";
         public int BrandID
         {
             get { return _BrandID; }

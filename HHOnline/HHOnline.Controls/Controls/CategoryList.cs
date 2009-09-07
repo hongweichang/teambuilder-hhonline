@@ -32,7 +32,7 @@ namespace HHOnline.Controls
         }
         public string RenderHTML()
         {
-            string nav = GlobalSettings.RelativeWebRoot + "pages/product-category";
+            string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category";
             if (pcs == null || pcs.Count == 0)
             {
                 return "<div><span>没有可用的分类信息！</span></div>";

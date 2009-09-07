@@ -161,7 +161,7 @@ public partial class News_NewsList : HHPage
 		// 如果当前页为第一页则不显示第一页
 		if (pageIndex != 0)
 		{
-			Response.Write("<a href='news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pageIndex - 1) + "'>&lt; 上一页</a>");
+            Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pageIndex - 1) + "'>&lt; 上一页</a>");
 		}
 
 		// 计算开始显示的页数和未来显示的页数
@@ -171,7 +171,7 @@ public partial class News_NewsList : HHPage
 		// 是否显示首页
 		if (startIndex > 0)
 		{
-			Response.Write("<a href='news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=0'>1</a>");
+            Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=0'>1</a>");
 		}
 
 		// 显示中间的页数
@@ -183,20 +183,20 @@ public partial class News_NewsList : HHPage
 			}
 			else
 			{
-				Response.Write("<a href='news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + n + "'>" + (n + 1) + "</a>");
+                Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + n + "'>" + (n + 1) + "</a>");
 			}
 		}
 
 		// 是否显示尾页
 		if (endIndex < pagesCount - 1)
 		{
-			Response.Write("<a href='news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pagesCount - 1) + "'>" + pagesCount + "</a>");
+            Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pagesCount - 1) + "'>" + pagesCount + "</a>");
 		}
 
 		// 如果当前页为最后一页则不显示最后一页
 		if (pageIndex != pagesCount - 1 && pagesCount > 0)
 		{
-			Response.Write("<a href='news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pageIndex + 1) + "'>下一页 &gt;</a>");
+            Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pageIndex + 1) + "'>下一页 &gt;</a>");
 		}
 	}
 }

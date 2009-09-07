@@ -70,7 +70,7 @@ namespace HHOnline.Controls
             {
                 li = new HtmlGenericControl("LI");
                 anchor = new HtmlAnchor();
-                anchor.HRef = GlobalSettings.RelativeWebRoot + "pages/news-newsdetail&ID=" + b.ID ;
+                anchor.HRef = GlobalSettings.RelativeWebRoot + "pages/view.aspx?news-newsdetail&ID=" + b.ID ;
                 anchor.InnerText = GlobalSettings.SubString(b.Title, 30);
                 anchor.Title = b.Title;
                 anchor.Target = "_blank";

@@ -18,7 +18,7 @@ namespace HHOnline.Controls
         }
         private static List<ProductCategory> pcs = null;
         private int _CategoryID = 0;
-        static readonly string _href = "<a href=\""+GlobalSettings.RelativeWebRoot+"pages/product-category&ID={0}\">{1}</a>";
+        static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category&ID={0}\">{1}</a>";
         public int CategoryID
         {
             get { return _CategoryID; }

@@ -60,7 +60,7 @@ public partial class News_NewsDetail : HHPage
 					{
 						ReplaceKeyValue rkv = new ReplaceKeyValue();
 						rkv.Key = item.ProductName;
-						rkv.Value = "<a style='color: blue; text-decoration:underline;' href=\"product-product&ID=" + HHOnline.Framework.GlobalSettings.Encrypt(item.ProductID.ToString()) + "\">" + item.ProductName + "</a>";
+                        rkv.Value = "<a style='color: blue; text-decoration:underline;' href=\"view.aspx?product-product&ID=" + HHOnline.Framework.GlobalSettings.Encrypt(item.ProductID.ToString()) + "\">" + item.ProductName + "</a>";
 						rkvs.Add(rkv);
 					}
 
@@ -72,7 +72,7 @@ public partial class News_NewsDetail : HHPage
 					if (ac != null)
 					{
 						btnCategory.Text = ac.Name;
-						btnCategory.OnClientClick = "window.location.href='news-newslist&cate=" + HHOnline.Framework.GlobalSettings.Encrypt(ac.ID.ToString()) + "';return false;";
+                        btnCategory.OnClientClick = "window.location.href='view.aspx?news-newslist&cate=" + HHOnline.Framework.GlobalSettings.Encrypt(ac.ID.ToString()) + "';return false;";
 					}
 
 					if (!string.IsNullOrEmpty(article.CopyFrom))

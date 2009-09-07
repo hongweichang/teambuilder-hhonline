@@ -1,8 +1,8 @@
 ﻿/// <reference path="../jquery-vsdoc.js" />
 var nav = {
     main:'main.aspx',
-    product:'pages/product-productlist.aspx',
-    news:'pages/news-newslist.aspx'
+    product:'pages/view.aspx?product-productlist',
+    news:'pages/view.aspx?news-newslist'
 };
 var desc = {
     main: '工业自动化仪表及实验室分析仪器专业销售平台!',

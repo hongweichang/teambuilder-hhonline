@@ -8,11 +8,11 @@
 	<asp:Repeater ID="repCategories" runat="server">
 		<HeaderTemplate>
 			<ul id="cate_item">
-				<li id="cate_item_parent"><a class="cate_link" href="news-newslist">资讯首页</a></li>
+				<li id="cate_item_parent"><a class="cate_link" href="view.aspx?news-newslist">华宏资讯</a></li>
 		</HeaderTemplate>
 		<ItemTemplate>
 			<li id="cate_item_<%#Eval("ID") %>" onmouseover="cateShow(<%#Eval("ID") %>)" onmouseout="cateHidden(<%#Eval("ID") %>)">
-				<a class="cate_link" href="news-newslist&cate=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>">
+				<a class="cate_link" href="view.aspx?view.aspx?news-newslist&cate=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>">
 					<%#Eval("Name") %></a></li>
 		</ItemTemplate>
 		<FooterTemplate>
@@ -32,7 +32,7 @@
 					<ul class="cate_content_body">
 						<asp:Repeater ID="repCategoryLevel2" runat="server">
 							<ItemTemplate>
-								<li><a class="cate_link" href="news-newslist&cate=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>">
+								<li><a class="cate_link" href="view.aspx?news-newslist&cate=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>">
 									<%#Eval("Name") %></a> </li>
 							</ItemTemplate>
 						</asp:Repeater>

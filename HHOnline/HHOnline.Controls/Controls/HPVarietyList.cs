@@ -34,7 +34,7 @@ namespace HHOnline.Controls
         private static  List<ProductBrand> brands = null;
         string RenderHTML()
         {
-            string nav = GlobalSettings.RelativeWebRoot + "pages/product-brand";
+            string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand";
             if (brands == null || brands.Count == 0)
             {
                 return "<div><span>没有显示的品牌信息！</span></div>";

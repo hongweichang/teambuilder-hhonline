@@ -34,7 +34,7 @@ namespace HHOnline.Controls
         private static  List<ProductIndustry> inds = null;
         string RenderHTML()
         {
-            string nav = GlobalSettings.RelativeWebRoot + "pages/product-industry";
+            string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry";
             if (inds == null || inds.Count == 0)
             {
                 return "<div><span>没有显示的行业信息！</span></div>";

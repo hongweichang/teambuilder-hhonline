@@ -61,8 +61,8 @@ public partial class Pages_Product_Product :HHPage
            string cats = string.Empty;
            foreach (ProductCategory pc in cat)
            {
-               cats += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot + 
-                            "pages/product-category&ID=" + GlobalSettings.Encrypt(pc.CategoryID.ToString()) + "\">" + pc.CategoryName + "</a>";
+               cats += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
+                            "pages/view.aspx?product-category&ID=" + GlobalSettings.Encrypt(pc.CategoryID.ToString()) + "\">" + pc.CategoryName + "</a>";
            }
            ltCategory.Text = cats;
        }
@@ -79,8 +79,8 @@ public partial class Pages_Product_Product :HHPage
             string pis = string.Empty;
             foreach (ProductIndustry p in pi)
             {
-                pis += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot + 
-                            "pages/product-industry&ID=" + GlobalSettings.Encrypt(p.IndustryID.ToString()) + "\">" + p.IndustryName + "</a>";
+                pis += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
+                            "pages/view.aspx?product-industry&ID=" + GlobalSettings.Encrypt(p.IndustryID.ToString()) + "\">" + p.IndustryName + "</a>";
             }
             ltIndustry.Text = pis;
         }
@@ -93,8 +93,8 @@ public partial class Pages_Product_Product :HHPage
         }
         else
         {
-            ltBrand.Text = "<a target=\"_blank\"  href=\"" + GlobalSettings.RelativeWebRoot + 
-                                    "pages/product-brand&ID=" + GlobalSettings.Encrypt(p.BrandID.ToString()) + "\">" + p.BrandName + "</a>"; ;
+            ltBrand.Text = "<a target=\"_blank\"  href=\"" + GlobalSettings.RelativeWebRoot +
+                                    "pages/view.aspx?product-brand&ID=" + GlobalSettings.Encrypt(p.BrandID.ToString()) + "\">" + p.BrandName + "</a>"; ;
         }
     }
     void BindPrice(int pId)

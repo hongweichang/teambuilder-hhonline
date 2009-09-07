@@ -51,7 +51,7 @@
                     <asp:Image BorderWidth="4" BorderColor="#dedede" ID="imgProduct" runat="server" />
                     <div class="productTitle">
                         <div class="productTitle-r1">
-                            <a href='product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
+                            <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
                         </div>
                         <div class="productTitle-r2">
                             <%# Eval("ProductAbstract")%>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="productPrice price"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></div>
                     <div class="productBrand">品牌：
-                    <a href='product-brand&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("BrandID").ToString()) %>' target="_blank">
+                    <a href='view.aspx?product-brand&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("BrandID").ToString()) %>' target="_blank">
                         <%# Eval("BrandName")%>
                     </a></div>
                 </div>
@@ -76,7 +76,7 @@
                     <div class="productGridShow2">
                         <div class="imgborder"><asp:Image BorderWidth="4" BorderColor="#dedede" ID="imgProduct" runat="server" /></div>
                         <div class="productTitle">
-                                <a href='product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
+                                <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
                         </div>
                         <div class="productPrice price"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></div>
                     </div>

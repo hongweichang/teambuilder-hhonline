@@ -18,7 +18,7 @@ namespace HHOnline.Controls
         }
         private static List<ProductIndustry> inds = null;
         private int _IndustryID = 0;
-        static readonly string _href = "<a href=\""+GlobalSettings.RelativeWebRoot+"pages/product-industry&ID={0}\">{1}</a>";
+        static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry&ID={0}\">{1}</a>";
         public int IndustryID
         {
             get { return _IndustryID; }
