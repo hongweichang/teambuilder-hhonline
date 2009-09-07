@@ -97,18 +97,43 @@ public partial class Pages_Product_Product :HHPage
                                     "pages/product-brand&ID=" + GlobalSettings.Encrypt(p.BrandID.ToString()) + "\">" + p.BrandName + "</a>"; ;
         }
     }
-    void BindPrice(int productId)
+    void BindPrice(int pId)
     {
         decimal? price = null;
+        string priceText = string.Empty;
         if (!User.Identity.IsAuthenticated)
         {
-            price = ProductPrices.GetPriceDefault(productId);
+            price = ProductPrices.GetPriceDefault(pId);
+            priceText = (price == null ? "需询价" : price.Value.ToString("c"));
         }
         else
         {
-            price = ProductPrices.GetPriceDefault(productId);
+            price = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, pId);
+            decimal? price1 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, pId);
+            if (price == null)
+            {
+                priceText = (price1 == null ? "需询价" : price1.Value.ToString("c"));
+            }
+            else
+            {
+                if (price1 == null)
+                {
+                    priceText = (price == null ? "需询价" : price.Value.ToString("c"));
+                }
+                else
+                {
+                    if (price == price1)
+                    {
+                        priceText = price.Value.ToString("c");
+                    }
+                    else
+                    {
+                        priceText = "<s>" + price.Value.ToString("c") + "</s><br />" + price1.Value.ToString("c");
+                    }
+                }
+            }
         }
-        ltPrice.Text = (price == null ? "需询价" : price.Value.ToString("c"));
+        ltPrice.Text = priceText;
     }
     void BindProperty(int pId)
     {

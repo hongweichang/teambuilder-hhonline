@@ -4,13 +4,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
-using HHOnline.Framework;
 using HHOnline.Shops;
+using HHOnline.Framework;
 
-public partial class Pages_Product_Industry : HHPage
+public partial class Pages_Product_ProductList :HHPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!IsPostBack)
         {
             BindData();
@@ -134,101 +135,86 @@ public partial class Pages_Product_Industry : HHPage
         lnkList.PostBackUrl = Request.RawUrl;
         lnkGrid.Attributes.Add("rel", "grid");
         lnkList.Attributes.Add("rel", "list");
-        string id = Request.QueryString["ID"];
-        if (string.IsNullOrEmpty(id))
+
+        #region -Adapt Show-
+        string s = Request.QueryString["s"];
+        if (!string.IsNullOrEmpty(s))
         {
-            hpilProduct.Visible = true;
-            pnlSort.Visible = false;
+            switch (s)
+            {
+                case "grid":
+                    lnkGrid.CssClass = "showByGrid showBy showByGridActive";
+                    lnkList.CssClass = "showByList showBy";
+                    cpProduct.PageSize = 20;
+                    break;
+                case "list":
+                    lnkList.CssClass = "showByList showBy showByListActive";
+                    lnkGrid.CssClass = "showByGrid showBy";
+                    cpProduct.PageSize = 100;
+                    break;
+            }
         }
         else
         {
-            #region -Adapt Show-
-            string s = Request.QueryString["s"];
-            if (!string.IsNullOrEmpty(s))
-            {
-                switch (s)
-                {
-                    case "grid":
-                        lnkGrid.CssClass = "showByGrid showBy showByGridActive";
-                        lnkList.CssClass = "showByList showBy";
-                        cpProduct.PageSize = 20;
-                        break;
-                    case "list":
-                        lnkList.CssClass = "showByList showBy showByListActive";
-                        lnkGrid.CssClass = "showByGrid showBy";
-                        cpProduct.PageSize = 100;
-                        break;
-                }
-            }
-            else
-            {
-                cpProduct.PageSize = 20;
-                s = "grid";
-                lnkGrid.CssClass = "showByGrid showBy showByGridActive";
-                lnkList.CssClass = "showByList showBy";
-            }
-            #endregion
-
-            hpilProduct.Visible = false;
-            int pid = int.Parse(GlobalSettings.Decrypt(id));
-            inProduct.IndustryID = pid;
-            illProduct.IndustryID = pid;
-            islProduct.IndustryID = pid;
-
-            #region -BindData-
-            ProductQuery query = new ProductQuery();
-            query.IndustryID = pid;
-            string sortBy = Request.QueryString["sortby"];
-            ProductOrderBy orderBy = ProductOrderBy.DisplayOrder;
-            SortOrder sortOrder = SortOrder.Descending;
-            if (!string.IsNullOrEmpty(sortBy))
-            {
-                try
-                {
-                    ddlSortBy.Items.FindByValue(sortBy).Selected = true;
-                }
-                catch { ddlSortBy.SelectedIndex = 0; }
-                GetData(out orderBy, out sortOrder, sortBy);
-            }
-            query.ProductOrderBy = orderBy;
-            query.SortOrder = sortOrder;
-            List<Product> prods = Products.GetProducts(query).Records;
-            if (prods == null || prods.Count == 0)
-            {
-                msgBox.ShowMsg("没有符合条件的产品存在！", System.Drawing.Color.Gray);
-                return;
-            }
-            msgBox.HideMsg();
-
-            if (orderBy == ProductOrderBy.Price)
-            {
-                prods.Sort(new SortProductByPrice(sortOrder,
-                    (User.Identity.IsAuthenticated ? Profile.AccountInfo.UserID : 0),
-                    User.Identity.IsAuthenticated
-                    ));
-            }
-
-            if (s == "grid")
-            {
-                dlProduct2.Visible = false;
-                dlProduct.Visible = true;
-                cpProduct.DataSource = prods;
-                cpProduct.BindToControl = dlProduct;
-                dlProduct.DataSource = cpProduct.DataSourcePaged;
-                dlProduct.DataBind();
-            }
-            else
-            {
-                dlProduct.Visible = false;
-                dlProduct2.Visible = true;
-                cpProduct.DataSource = prods;
-                cpProduct.BindToControl = dlProduct2;
-                dlProduct2.DataSource = cpProduct.DataSourcePaged;
-                dlProduct2.DataBind();
-
-            }
-            #endregion
+            cpProduct.PageSize = 20;
+            s = "grid";
+            lnkGrid.CssClass = "showByGrid showBy showByGridActive";
+            lnkList.CssClass = "showByList showBy";
         }
+        #endregion
+
+        #region -BindData-
+        ProductQuery query = new ProductQuery();
+        string sortBy = Request.QueryString["sortby"];
+        ProductOrderBy orderBy = ProductOrderBy.DisplayOrder;
+        SortOrder sortOrder = SortOrder.Descending;
+        if (!string.IsNullOrEmpty(sortBy))
+        {
+            try
+            {
+                ddlSortBy.Items.FindByValue(sortBy).Selected = true;
+            }
+            catch { ddlSortBy.SelectedIndex = 0; }
+            GetData(out orderBy, out sortOrder, sortBy);
+        }
+        query.ProductOrderBy = orderBy;
+        query.SortOrder = sortOrder;
+        List<Product> prods = Products.GetProducts(query).Records;
+        if (prods == null || prods.Count == 0)
+        {
+            msgBox.ShowMsg("没有符合条件的产品存在！", System.Drawing.Color.Gray);
+            return;
+        }
+        msgBox.HideMsg();
+
+        if (orderBy == ProductOrderBy.Price)
+        {
+            prods.Sort(new SortProductByPrice(sortOrder,
+                (User.Identity.IsAuthenticated ? Profile.AccountInfo.UserID : 0),
+                User.Identity.IsAuthenticated
+                ));
+        }
+
+        if (s == "grid")
+        {
+            dlProduct2.Visible = false;
+            dlProduct.Visible = true;
+            cpProduct.DataSource = prods;
+            cpProduct.BindToControl = dlProduct;
+            dlProduct.DataSource = cpProduct.DataSourcePaged;
+            dlProduct.DataBind();
+        }
+        else
+        {
+            dlProduct.Visible = false;
+            dlProduct2.Visible = true;
+            cpProduct.DataSource = prods;
+            cpProduct.BindToControl = dlProduct2;
+            dlProduct2.DataSource = cpProduct.DataSourcePaged;
+            dlProduct2.DataBind();
+
+        }
+        #endregion
     }
     #endregion
 
@@ -263,20 +249,9 @@ public partial class Pages_Product_Industry : HHPage
     #region -Override-
     public override void OnPageLoaded()
     {
-        string id = Request.QueryString["ID"];
-        if (!string.IsNullOrEmpty(id))
-        {
-            int pid = int.Parse(GlobalSettings.Decrypt(id));
-            ProductIndustry pi = ProductIndustries.GetProductIndustry(pid);
-            this.ShortTitle = pi.IndustryName;
-        }
-        else
-        {
-            this.ShortTitle = "所有行业";
-        }
+        this.ShortTitle = "产品列表";
         this.SetTitle();
         this.AddJavaScriptInclude("scripts/pages/sortby.aspx.js", false, false);
     }
     #endregion
 }
-

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/HomeMasterPage.master" AutoEventWireup="true" CodeFile="Industry.aspx.cs" Inherits="Pages_Product_Industry" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/HomeMasterPage.master" AutoEventWireup="true" CodeFile="ProductList.aspx.cs" Inherits="Pages_Product_ProductList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHeader" Runat="Server">
 <script type="text/javascript">
@@ -6,24 +6,10 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderSearch" Runat="Server">
-    <huc:Search ID="sMain" runat="server" />
+ <huc:Search ID="sMain" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderContent" Runat="Server">
 <div class="homemastercontent">
-    <div class="cdCatNavigate">
-        <hc:IndustryNavigate ID="inProduct" runat="server"></hc:IndustryNavigate>
-    </div>
-    <div style="padding-left:20px;">
-        <hc:HPIndustryList ID="hpilProduct" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
-    </div>
-    <div class="navigateData">相关行业</div>
-    <div>
-        <hc:IndustryLikeList ID="illProduct" runat="server" CssClass="cllProduct"></hc:IndustryLikeList>
-    </div>
-     <div class="navigateData">子行业信息</div>
-    <div>
-        <hc:IndustrySubList ID="islProduct" runat="server" CssClass="cllProduct"></hc:IndustrySubList>
-    </div>
     <asp:Panel ID="pnlSort" runat="server">
         <div class="sortList">
             <div class="sortViewTitle">显示方式：</div>

@@ -105,14 +105,12 @@ public partial class News_NewsDetail : HHPage
 					imgAttachment.Visible = false;
 				}
 			}
+            this.SetTitle();
 		}
 	}
 
 	public override void OnPageLoaded()
 	{
-		base.OnPageLoaded();
-		AddGenericLink("text/css", "Stylesheet", "global", "App_Themes/Default/newsList.css");
-		AddGenericLink("text/css", "Stylesheet", "global", "App_Themes/Default/newsDetail.css");
 		AddJavaScriptInclude("Scripts/Pages/newsDetail.aspx.js", false, false);
 	}
 }

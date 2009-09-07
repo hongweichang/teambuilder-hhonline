@@ -90,7 +90,7 @@ public partial class Search : HHPage
             List<Product> ps = products.Records;
             if (ps == null || ps.Count == 0)
             {
-                ltSearchDuration.Text = "搜索用时：" + products.SearchDuration.ToString() + "ms";
+                ltSearchDuration.Text = "搜索用时：" + products.SearchDuration.ToString() + "秒";
                 msgBox.ShowMsg("没有搜索到相应的产品信息！", System.Drawing.Color.Gray);
             }
             else

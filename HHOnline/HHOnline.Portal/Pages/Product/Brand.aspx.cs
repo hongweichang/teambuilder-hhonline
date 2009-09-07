@@ -39,15 +39,40 @@ public partial class Pages_Product_Brand : HHPage
             if (ltPrice != null)
             {
                 decimal? price = null;
+                string priceText = string.Empty;
                 if (!User.Identity.IsAuthenticated)
                 {
                     price = ProductPrices.GetPriceDefault(product.ProductID);
+                    priceText = (price == null ? "需询价" : price.Value.ToString("c"));
                 }
                 else
                 {
-                    price = ProductPrices.GetPriceDefault(product.ProductID);
+                    price = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, product.ProductID);
+                    decimal? price1 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, product.ProductID);
+                    if (price == null)
+                    {
+                        priceText = (price1 == null ? "需询价" : price1.Value.ToString("c"));
+                    }
+                    else
+                    {
+                        if (price1 == null)
+                        {
+                            priceText = (price == null ? "需询价" : price.Value.ToString("c"));
+                        }
+                        else
+                        {
+                            if (price == price1)
+                            {
+                                priceText = price.Value.ToString("c");
+                            }
+                            else
+                            {
+                                priceText = "<s>" + price.Value.ToString("c") + "</s><br />" + price1.Value.ToString("c");
+                            }
+                        }
+                    }
                 }
-                ltPrice.Text = (price == null ? "需询价" : price.Value.ToString("c"));
+                ltPrice.Text = priceText;
             }
         }
     }
@@ -179,7 +204,15 @@ public partial class Pages_Product_Brand : HHPage
                 msgBox.ShowMsg("没有符合条件的产品存在！", System.Drawing.Color.Gray);
                 return;
             }
-            msgBox.HideMsg();
+            msgBox.HideMsg(); 
+            if (orderBy == ProductOrderBy.Price)
+            {
+                prods.Sort(new SortProductByPrice(sortOrder,
+                    (User.Identity.IsAuthenticated ? Profile.AccountInfo.UserID : 0),
+                    User.Identity.IsAuthenticated
+                    ));
+            }
+
             if (s == "grid")
             {
                 dlProduct2.Visible = false;

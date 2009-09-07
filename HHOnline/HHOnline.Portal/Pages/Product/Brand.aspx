@@ -74,7 +74,7 @@
                             <div class="productTitle">
                                     <a href='product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
                             </div>
-                            <div class="productPrice"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></div>
+                            <div class="productPrice price"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></div>
                         </div>
                     </ItemTemplate>
                 </asp:DataList>
