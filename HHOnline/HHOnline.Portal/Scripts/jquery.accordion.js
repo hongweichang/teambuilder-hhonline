@@ -40,17 +40,22 @@ $.fn.hrzAccordion = function(settings) {
         if (count == 0) { return; }
         pictures.html(html);
         navigator.width((count + 1) * 16);
-        title = pictures.next().css('opacity', 0.7).height(ps.titleHeight);
+        if (ps.titleHeight != 0) {
+            title = pictures.next().css('opacity', 0.7).height(ps.titleHeight);
+        }
+        else {
+            pictures.next().hide();
+        }
         pictures.find('a:not(:first)').css('display', 'none');
         var pf = pictures.find('a:first');
-        title.html('<b>' + pf.attr('title') + '</b>' + pf.attr('description'));
+        if (ps.titleHeight != 0) {
+            title.html('<b>' + pf.attr('title') + '</b>' + pf.attr('description'));
+        }
 
         var _First = pictures.find('a:first');
         var _Last = pictures.find('a:last');
 
         function pictureBox() {
-            title.height(0);
-            title.animate({ height: ps.titleHeight }, ps.speed);
             var p = null;
             if (_Last.is(':visible')) {
                 p = _First.fadeIn(ps.speed).addClass('jquery-accordion-visible');
@@ -58,9 +63,13 @@ $.fn.hrzAccordion = function(settings) {
             } else {
                 p = pictures.find('a:visible').hide().next().fadeIn(ps.speed);
             }
-            title.html('<b>' + p.attr('title') + '</b>' + p.attr('description'));
             nav.animate({ left: 16 * p.attr('index') });
 
+            if (ps.titleHeight != 0) {
+                title.height(0);
+                title.animate({ height: ps.titleHeight }, ps.speed);
+                title.html('<b>' + p.attr('title') + '</b>' + p.attr('description'));
+            }
         }
         if (count != 1) {
             setInterval(pictureBox, ps.swapSpeed);

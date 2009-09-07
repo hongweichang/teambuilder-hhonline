@@ -397,7 +397,7 @@ namespace HHOnline.Data
                 case ProductOrderBy.BrandName:
                     builder.AddJoin(JoinType.InnerJoin, "PBrand pb", "pb.BrandID", Comparison.Equals, "p", "BrandID");
                     builder.AddOrderBy("pb.BrandName", (Sorting)query.SortOrder);
-                    break;
+                    break; 
                 default:
                 case ProductOrderBy.DisplayOrder:
                     builder.AddOrderBy("p.DisplayOrder", (Sorting)query.SortOrder);

@@ -16,43 +16,5 @@ public partial class UserControls_ArticleSearch : System.Web.UI.UserControl
 {
 	protected void Page_Load(object sender, EventArgs e)
 	{
-		if (!IsPostBack)
-		{
-			// 绑定资讯列表
-			BindTreeList();
-		}
-	}
-
-	/// <summary>
-	/// 绑定资讯列表
-	/// </summary>
-	private void BindTreeList()
-	{
-		ddlSearchType.Items.Clear();
-
-		List<ArticleCategory> cates = ArticleManager.GetAllCategories();
-		BindTreeItem(cates, null, 0);
-	}
-
-	private void BindTreeItem(List<ArticleCategory> cates, int? parentID, int level)
-	{
-		string prefix = string.Empty;
-		if (level != 0)
-		{
-			for (int n = 0; n < level; ++n)
-			{
-				prefix += "　";
-			}
-		}
-
-		foreach (ArticleCategory item in cates)
-		{
-			if (item.ParentID == parentID)
-			{
-				ListItem li = new ListItem(prefix + item.Name, item.ID.ToString());
-				ddlSearchType.Items.Add(li);
-				BindTreeItem(cates, item.ID, level + 1);
-			}
-		}
 	}
 }

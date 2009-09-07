@@ -14,6 +14,13 @@ function changeHeaderTab(navigate,tabName) {
     navigate.find('a[rel=' + tabName + ']').addClass('selected');
     $('#headerDesc').html(eval('(desc.' + tabName + ')'))
 }
+function searchPruduct(searchText,maskText) {
+    var _searchText = $.trim(searchText.val())
+    if (_searchText == '' || _searchText == maskText) {
+        return;
+    }
+    window.location.href = relativeUrl + 'pages/product-search&w=' + encodeURIComponent(_searchText);
+}
 $().ready(function() {
     var n = $('#headerNav');
     n.find('a').click(function() {
@@ -25,4 +32,25 @@ $().ready(function() {
     if (typeof activeTab != 'undefined') {
         changeHeaderTab(n, activeTab);
     }
+    var mk1 = '直接输入关键字根据产品名称、品牌、型号等信息进行产品相关搜索！';
+    var mk2 = '直接输入关键字根据资讯名称、概要、内容等信息进行咨询相关搜索！';
+    var s1 = $('input[rel=searchproduct]');
+    s1.watermark({
+        markText: mk1
+    });
+    s1.keydown(function(e) {
+        if ((e.keyCode || e.which) == 13) {
+            searchPruduct($(this), mk1);
+            return false;
+        }
+    })
+    var s2 = $('input[rel=searcharticle]');
+    s2.watermark({
+        markText: mk2
+    });
+
+    $('#searchProduct').click(function() {
+        this.blur();
+        searchPruduct(s1, mk1);
+    })
 });

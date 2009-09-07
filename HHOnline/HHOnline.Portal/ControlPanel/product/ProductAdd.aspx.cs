@@ -44,8 +44,11 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
         {
             action = OperateType.Edit;
             this.mvProductAdd.SetActiveView(vwProductDetail);
-            BindProduct();
-            BindIndustries();
+            if (!IsPostBack)
+            {
+                BindProduct();
+                BindIndustries();
+            }
             base.ExecuteJs("var first=false;var uploaded = " + BindPictures() + ";var productId=" + productID + ";", true);
         }
         else

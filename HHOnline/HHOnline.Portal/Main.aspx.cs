@@ -32,9 +32,7 @@ public partial class Main : HHPage
     public override void OnPageLoaded()
     {
         this.ShortTitle = "首页";
-        
-        base.OnPageLoaded();
-        AddJavaScriptInclude("scripts/jquery.watermark.js", true, false);
+        this.SetTitle();
         AddJavaScriptInclude("scripts/jquery.accordion.js", true, false);
         AddJavaScriptInclude("scripts/pages/main.aspx.js", true, false);
     }

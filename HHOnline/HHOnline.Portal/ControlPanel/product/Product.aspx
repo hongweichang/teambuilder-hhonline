@@ -88,7 +88,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField HeaderText="产品品牌" DataField="BrandName" />
-            <asp:BoundField HeaderText="介绍摘要" DataField="ProductAbstract" />
+            <asp:BoundField HeaderText="介绍摘要" DataField="ProductAbstract" DataFormatString="{0:S20}" />
             <asp:TemplateField>
                 <HeaderStyle Width="200" />
                 <HeaderTemplate>
