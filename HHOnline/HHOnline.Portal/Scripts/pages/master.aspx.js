@@ -19,7 +19,7 @@ function searchPruduct(searchText,maskText) {
     if (_searchText == '' || _searchText == maskText) {
         return;
     }
-    window.location.href = relativeUrl + 'pages/product-search&w=' + encodeURIComponent(_searchText);
+    window.location.href = relativeUrl + 'pages/view.aspx?product-search&w=' + encodeURIComponent(_searchText);
 }
 $().ready(function() {
     var n = $('#headerNav');

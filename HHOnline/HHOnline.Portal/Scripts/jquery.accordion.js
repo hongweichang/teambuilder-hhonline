@@ -30,7 +30,7 @@ $.fn.hrzAccordion = function(settings) {
 
         var html = '', b = false;
         $.each(ps.pictures, function(i, n) {
-            count = i;
+            count = i+1;
             b = ($.trim(n.Link) != '');
             html += '<a index="' + i + '"' + (b ? ' href="' + n.Link + '" style="cursor:pointer" target="_blank" ' : ' style="cursor:default" ') +
                          'title="' + n.Title + '" description="' + n.Description + '">' +
@@ -39,7 +39,7 @@ $.fn.hrzAccordion = function(settings) {
         });
         if (count == 0) { return; }
         pictures.html(html);
-        navigator.width((count + 1) * 16);
+        navigator.width(count * 16);
         if (ps.titleHeight != 0) {
             title = pictures.next().css('opacity', 0.7).height(ps.titleHeight);
         }
@@ -71,7 +71,7 @@ $.fn.hrzAccordion = function(settings) {
                 title.html('<b>' + p.attr('title') + '</b>' + p.attr('description'));
             }
         }
-        if (count != 1) {
+        if (count >1) {
             setInterval(pictureBox, ps.swapSpeed);
         }
     })
