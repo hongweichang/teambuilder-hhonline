@@ -52,6 +52,20 @@ public partial class ControlPanel_News_Article : HHPage
 			lblTip.Text = "标题中包含“" + query.Title + "”";
 		}
 
+		// 判断分类
+		if (query.CategoryID.HasValue)
+		{
+			if (!string.IsNullOrEmpty(lblTip.Text))
+			{
+				lblTip.Text += "；";
+			}
+
+			// 获取分类
+			ArticleCategory ac = ArticleManager.GetArticleCategory(query.CategoryID.Value);
+			//ascCategory.SelectedCategoryID = query.CategoryID.Value;
+			lblTip.Text += "分类为“" + ac.Name + "”";
+		}
+
 		// 判断点击次数
 		if (query.HitStartTimes.HasValue)
 		{
