@@ -59,9 +59,9 @@ public partial class ControlPanel_Site_Task : HHPage
                 Label IsRunning = e.Item.FindControl("IsRunning") as Label;
                 Label Minutes = e.Item.FindControl("Minutes") as Label;
                 ThreadTitle.Text = string.Format("任务线程#{0}统计", threadCount++);
-                Created.Text = taskThread.Created == DateTime.MinValue ? "--" : taskThread.Created.ToString();
-                LastStart.Text = taskThread.Started == DateTime.MinValue ? "--" : taskThread.Started.ToString();
-                LastStop.Text = taskThread.Completed == DateTime.MinValue ? "--" : taskThread.Completed.ToString();
+                Created.Text = taskThread.Created == DateTime.MinValue ? "--" : taskThread.Created.ToString("yyyy/MM/dd HH:mm");
+                LastStart.Text = taskThread.Started == DateTime.MinValue ? "--" : taskThread.Started.ToString("yyyy/MM/dd HH:mm");
+                LastStop.Text = taskThread.Completed == DateTime.MinValue ? "--" : taskThread.Completed.ToString("yyyy/MM/dd HH:mm");
                 IsRunning.Text = taskThread.IsRunning ? "是" : "否";
                 Minutes.Text = (taskThread.Interval / 60000).ToString() + "分钟";
                 break;

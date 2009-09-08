@@ -6,6 +6,9 @@ using System.Xml;
 
 namespace HHOnline.Task
 {
+    /// <summary>
+    /// 任务集
+    /// </summary>
     public class TaskThread : IDisposable
     {
         private DateTime completed;
@@ -78,12 +81,17 @@ namespace HHOnline.Task
         {
             this.started = DateTime.Now;
             this.isRunning = true;
-            TaskApplication.Instance().ExecutePreTaskRunEvents();
+
             foreach (Task task in this.tasks.Values)
             {
-                task.ExecuteTask();
+                if (task.Enabled)
+                {
+                    TaskApplication.Instance().ExecutePreTaskRunEvents(task);
+                    task.ExecuteTask();
+                    TaskApplication.Instance().ExecutePostTaskRunEvents(task);
+                }
             }
-            TaskApplication.Instance().ExecutePostTaskRunEvents();
+
             this.isRunning = false;
             this.completed = DateTime.Now;
         }

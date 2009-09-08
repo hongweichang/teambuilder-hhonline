@@ -4,6 +4,9 @@ using System.Xml.Serialization;
 
 namespace HHOnline.Task
 {
+    /// <summary>
+    /// 任务
+    /// </summary>
     [Serializable, XmlRoot("task")]
     public sealed class Task
     {
@@ -46,6 +49,10 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 创建任务实例
+        /// </summary>
+        /// <returns></returns>
         internal ITask CreateTaskInstance()
         {
             if (this.Enabled && (this._itask == null))
@@ -81,6 +88,9 @@ namespace HHOnline.Task
             this._isRunning = false;
         }
 
+        /// <summary>
+        /// 可用
+        /// </summary>
         public bool Enabled
         {
             get
@@ -89,6 +99,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 可关闭
+        /// </summary>
         public bool EnableShutDown
         {
             get
@@ -97,6 +110,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 正在运行
+        /// </summary>
         public bool IsRunning
         {
             get
@@ -105,6 +121,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Type JobType
         {
             get
@@ -113,6 +132,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 上次终止时间
+        /// </summary>
         public DateTime LastEnd
         {
             get
@@ -121,6 +143,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 上次开始时间
+        /// </summary>
         public DateTime LastStarted
         {
             get
@@ -129,6 +154,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 上次成功时间
+        /// </summary>
         public DateTime LastSuccess
         {
             get
@@ -137,6 +165,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 任务名称
+        /// </summary>
         public string Name
         {
             get

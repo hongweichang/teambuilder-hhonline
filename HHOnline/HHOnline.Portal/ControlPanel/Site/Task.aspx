@@ -38,9 +38,9 @@
                         <asp:BoundField HeaderText = "类型" DataField="JobType" DataFormatString="{0:S30}" />
                         <asp:BoundField HeaderText = "已激活" DataField="Enabled" DataFormatString="{0:B}" />
                         <asp:BoundField HeaderText = "在运行" DataField="IsRunning"  DataFormatString="{0:B}" />
-                        <asp:BoundField HeaderText = "启动" DataField="LastStarted" DataFormatString="{0:D}"  />
-                        <asp:BoundField HeaderText = "终止" DataField="LastEnd" DataFormatString="{0:D}" />
-                        <asp:BoundField HeaderText = "成功" DataField="LastSuccess" DataFormatString="{0:D}"  />
+                        <asp:BoundField HeaderText = "启动" DataField="LastStarted" DataFormatString="{0:yyyy/MM/dd HH:mm}"  />
+                        <asp:BoundField HeaderText = "终止" DataField="LastEnd" DataFormatString="{0:yyyy/MM/dd HH:mm}" />
+                        <asp:BoundField HeaderText = "成功" DataField="LastSuccess" DataFormatString="{0:yyyy/MM/dd HH:mm}"  />
                     </Columns>
                 </hc:ExtensionGridView>
         </ItemTemplate>

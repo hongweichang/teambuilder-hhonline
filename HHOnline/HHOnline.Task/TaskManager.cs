@@ -65,6 +65,10 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// LoadModule
+        /// </summary>
+        /// <param name="modulesNode"></param>
         private void LoadModules(XmlNode modulesNode)
         {
             TaskApplication taskApplication = TaskApplication.Instance();
@@ -121,6 +125,10 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// LoadThreads
+        /// </summary>
+        /// <param name="tasksNode"></param>
         private void LoadThreads(XmlNode tasksNode)
         {
             this.taskThreads.Clear();
@@ -149,6 +157,9 @@ namespace HHOnline.Task
 
         }
 
+        /// <summary>
+        /// 开始运行
+        /// </summary>
         public void Start()
         {
             TaskApplication.Instance().ExecuteTaskStartupEvents();
@@ -158,6 +169,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 结束
+        /// </summary>
         public void Stop()
         {
             foreach (TaskThread thread in this.taskThreads)

@@ -17,9 +17,17 @@
         //配置log4net
         log4net.Config.XmlConfigurator.Configure(new FileInfo(GlobalSettings.MapPath("~/log4net.config")));
 
-        //配置Lucene分词
-        PanGu.Segment.Init(GlobalSettings.MapPath("~/Utility/PanGu.xml"));
+        try
+        {
+            //配置Lucene分词
+            //PanGu.Segment.Init(GlobalSettings.MapPath("~/Utility/PanGu.xml"));
+            PanGu.Segment.Init();
+        }
+        catch
+        {
 
+        }
+        
         //启动后台任务
         XmlNode node = HHConfiguration.GetConfig().GetConfigSection("HHOnline/Tasks");
         TaskManager.Initialize(node);
@@ -54,6 +62,7 @@
             errorMessage = string.Format("{0}\r\n\r\n_shutDownMessage={1}\r\n\r\n_shutDownStack={2}", errorMessage, shutDownMessage, shutDownStack);
         }
         new HHException(ExceptionType.ApplicationStart, errorMessage).Log();
+        TaskManager.Instance().Start();
     }
 
     void Application_Error(object sender, EventArgs e)

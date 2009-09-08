@@ -4,6 +4,9 @@ using System.ComponentModel;
 
 namespace HHOnline.Task
 {
+    /// <summary>
+    /// Task Application
+    /// </summary>
     public sealed class TaskApplication
     {
         private static object EventPostTaskRun = new object();
@@ -15,7 +18,10 @@ namespace HHOnline.Task
         private static TaskApplication instance = new TaskApplication();
         private Dictionary<string, ITaskModule> modules = new Dictionary<string, ITaskModule>();
 
-        public event TaskEventHandler PostTaskRun
+        /// <summary>
+        /// 任务运行结束事件
+        /// </summary>
+        public event TaskRunEventHandler PostTaskRun
         {
             add
             {
@@ -27,7 +33,10 @@ namespace HHOnline.Task
             }
         }
 
-        public event TaskEventHandler PreTaskRun
+        /// <summary>
+        /// 任务运行前事件
+        /// </summary>
+        public event TaskRunEventHandler PreTaskRun
         {
             add
             {
@@ -39,6 +48,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 任务异常事件
+        /// </summary>
         public event TaskExceptionEventHandler TaskException
         {
             add
@@ -51,6 +63,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 后台任务结束事件
+        /// </summary>
         public event TaskEventHandler TaskShutdown
         {
             add
@@ -63,6 +78,9 @@ namespace HHOnline.Task
             }
         }
 
+        /// <summary>
+        /// 后台任务开始事件
+        /// </summary>
         public event TaskEventHandler TaskStartup
         {
             add
@@ -79,12 +97,12 @@ namespace HHOnline.Task
         {
         }
 
-        internal void ExecutePostTaskRunEvents()
+        internal void ExecutePostTaskRunEvents(Task task)
         {
             this.ExecuteTaskEvent(EventPostTaskRun);
         }
 
-        internal void ExecutePreTaskRunEvents()
+        internal void ExecutePreTaskRunEvents(Task task)
         {
             this.ExecuteTaskEvent(EventPreTaskRun);
         }
@@ -95,6 +113,15 @@ namespace HHOnline.Task
             if (handler != null)
             {
                 handler();
+            }
+        }
+
+        internal void ExecuteTaskExceptionEvents(object EventKey, Task task)
+        {
+            TaskRunEventHandler handler = this.Events[EventKey] as TaskRunEventHandler;
+            if (handler != null)
+            {
+                handler(task);
             }
         }
 

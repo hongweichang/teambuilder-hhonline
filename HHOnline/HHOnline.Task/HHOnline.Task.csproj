@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{615180EA-3AC7-4768-A1B5-8BECA26B843E}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -44,7 +44,6 @@
     <Compile Include="Task.cs" />
     <Compile Include="TaskApplication.cs" />
     <Compile Include="TaskEventHandler.cs" />
-    <Compile Include="TaskExceptionEventHandler.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="TaskThread.cs" />
   </ItemGroup>
