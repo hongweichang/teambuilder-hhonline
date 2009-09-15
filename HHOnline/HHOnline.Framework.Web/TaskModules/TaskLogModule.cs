@@ -21,12 +21,12 @@ namespace HHOnline.Framework.Web.TaskModules
 
         void taskApplication_PostTaskRun(HHOnline.Task.Task task)
         {
-            log.Info("准备运行后台任务："+task.JobType.ToString());
+            log.Info("完成运行后台任务：" + task.JobType.ToString());
         }
 
         void taskApplication_PreTaskRun(HHOnline.Task.Task task)
         {
-            log.Info("完成运行后台任务："+task.JobType.ToString());
+            log.Info("准备运行后台任务：" + task.JobType.ToString());
         }
 
         void taskApplication_TaskShutdown()
