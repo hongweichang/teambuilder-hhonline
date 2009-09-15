@@ -99,12 +99,12 @@ namespace HHOnline.Task
 
         internal void ExecutePostTaskRunEvents(Task task)
         {
-            this.ExecuteTaskEvent(EventPostTaskRun);
+            this.ExecuteTaskEvent(task, EventPostTaskRun);
         }
 
         internal void ExecutePreTaskRunEvents(Task task)
         {
-            this.ExecuteTaskEvent(EventPreTaskRun);
+            this.ExecuteTaskEvent(task, EventPreTaskRun);
         }
 
         private void ExecuteTaskEvent(object EventKey)
@@ -116,7 +116,7 @@ namespace HHOnline.Task
             }
         }
 
-        internal void ExecuteTaskExceptionEvents(object EventKey, Task task)
+        internal void ExecuteTaskEvent(Task task, object EventKey)
         {
             TaskRunEventHandler handler = this.Events[EventKey] as TaskRunEventHandler;
             if (handler != null)
