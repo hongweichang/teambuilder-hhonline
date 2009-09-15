@@ -178,26 +178,33 @@ namespace HHOnline.SearchBarrel
             if (products == null || products.Count == 0)
                 return false;
 
-            FSDirectory fsDir;
-            IndexWriter fsWriter;
+            //Unlock Temp
+            if (IndexReader.IsLocked(Path.GetTempPath()))
+                IndexReader.Unlock(FSDirectory.GetDirectory(Path.GetTempPath(), false));
 
-            if (createIndexFile)
-            {
-                fsDir = FSDirectory.GetDirectory(indexPath, true);
-                fsWriter = new IndexWriter(fsDir, SearchHelper.GetChineseAnalyzer(), true);
-            }
-            else
-            {
-                fsDir = FSDirectory.GetDirectory(indexPath, false);
-                fsWriter = new IndexWriter(fsDir, SearchHelper.GetChineseAnalyzer(), false);
-            }
-            fsWriter.SetMergeFactor(SearchHelper.MergeFactor);
-            fsWriter.SetMaxMergeDocs(SearchHelper.MaxMergeDocs);
-            fsWriter.SetMaxBufferedDocs(SearchHelper.MinMergeDocs);
+            FSDirectory fsDir = null;
+            IndexWriter fsWriter = null;
 
             bool result = false;
             try
             {
+                if (createIndexFile)
+                {
+                    fsDir = FSDirectory.GetDirectory(indexPath, true);
+                    fsWriter = new IndexWriter(fsDir, SearchHelper.GetChineseAnalyzer(), true);
+                }
+                else
+                {
+                    fsDir = FSDirectory.GetDirectory(indexPath, false);
+                    fsWriter = new IndexWriter(fsDir, SearchHelper.GetChineseAnalyzer(), false);
+                }
+                if (IndexReader.IsLocked(fsDir))
+                    IndexReader.Unlock(fsDir);
+
+                fsWriter.SetMergeFactor(SearchHelper.MergeFactor);
+                fsWriter.SetMaxMergeDocs(SearchHelper.MaxMergeDocs);
+                fsWriter.SetMaxBufferedDocs(SearchHelper.MinMergeDocs);
+
                 foreach (Product product in products)
                 {
                     if (product != null)
@@ -210,9 +217,25 @@ namespace HHOnline.SearchBarrel
                 fsWriter.Optimize();
                 result = true;
             }
+            catch (System.IO.IOException ex)
+            {
+                try
+                {
+                    string message = ex.Message;
+                    if (message.IndexOf("@") >= 0)
+                        message = message.Substring(message.IndexOf("@") + 1);
+                    File.Delete(message);
+                }
+                catch
+                {
+
+                }
+                throw ex;
+            }
             finally
             {
-                fsWriter.Close();
+                if (fsWriter != null)
+                    fsWriter.Close();
             }
             return result;
         }
