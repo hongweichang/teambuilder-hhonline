@@ -23,6 +23,7 @@
                                 Error Message!
                             </div>
                         <div class="forms" id="loginForm"> 
+                            <a href="main.aspx" class="homepageLink">首页</a>
                             <a href="Register.aspx" class="registerLink">注册</a>                           
                             <div id="loginType" class="loginType">
                                 企业用户登录

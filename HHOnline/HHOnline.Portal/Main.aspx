@@ -83,7 +83,7 @@
             <div class="list-content">
                 <hc:VarietyList ID="vlProduct" runat="server"></hc:VarietyList>
                 <div class="list-more">
-                    <a href="#" title="查看更多。。。">&nbsp;</a>
+                    <a href="pages/view.aspx?product-brand" target="_blank" title="查看更多。。。">&nbsp;</a>
                 </div>
             </div>
             <br />
@@ -98,7 +98,7 @@
             <div class="list-content">
                 <hc:IndustryList ID="ilProduct" runat="server" runat="server"></hc:IndustryList>
                 <div class="list-more">
-                    <a href="#" title="查看更多。。。">&nbsp;</a>
+                    <a href="pages/view.aspx?product-industry" target="_blank" title="查看更多。。。">&nbsp;</a>
                 </div>
             </div>
             <br />
@@ -113,7 +113,7 @@
             <div class="list-content">
                 <hc:ArticleList ID="alProduct" runat="server"></hc:ArticleList>
                 <div class="list-more">
-                    <a href="#" title="查看更多。。。">&nbsp;</a>
+                    <a href="pages/view.aspx?news-newslist" target="_blank" title="查看更多。。。">&nbsp;</a>
                 </div>
             </div>
         </div>

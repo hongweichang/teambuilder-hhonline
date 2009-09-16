@@ -36,9 +36,9 @@
                             <td class="frame-r1c1">&nbsp;</td>
                             <td class="frame-r1c2"><div class="frame-r1c2cell1"><asp:Literal ID="ltPageName" runat="server"></asp:Literal></div></td>
                             <td class="frame-r1c2plus">                                  
-                                    <asp:ContentPlaceHolder id="cphOpts" runat="server">
-                                    
-                                    </asp:ContentPlaceHolder>
+                                <asp:ContentPlaceHolder id="cphOpts" runat="server">
+                                
+                                </asp:ContentPlaceHolder>
                             </td>
                             <td class="frame-r1c3">&nbsp;</td>
                         </tr>

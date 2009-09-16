@@ -67,7 +67,8 @@ namespace HHOnline.Controls
             {
                 li = new HtmlGenericControl("LI");
                 anchor = new HtmlAnchor();
-                anchor.HRef = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry&ID=" + b.IndustryID;
+                anchor.HRef = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry&ID=" + GlobalSettings.Encrypt(b.IndustryID.ToString());
+                anchor.Target = "_blank";
                 anchor.InnerText = b.IndustryName;
                 anchor.Title = b.IndustryTitle;
                 li.Controls.Add(anchor);

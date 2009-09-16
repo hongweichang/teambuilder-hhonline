@@ -50,7 +50,7 @@
                                 <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
                             </div>
                             <div class="productTitle-r2">
-                                <%# Eval("ProductAbstract")%>
+                                <%# HHOnline.Framework.GlobalSettings.SubString(Eval("ProductAbstract").ToString(),400)%>
                             </div>
                             <div class="productTitle-r3">
                                 关键字：<%# Eval("ProductKeywords")%>
