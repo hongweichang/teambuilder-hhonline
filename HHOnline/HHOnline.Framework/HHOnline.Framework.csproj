@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6A7F2A2A-6788-4F11-B3B6-F4799CCA77AF}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -77,6 +77,7 @@
     <Compile Include="Components\FavoriteQuery.cs" />
     <Compile Include="Components\FileSystemStorageFile.cs" />
     <Compile Include="Components\ImageInfo.cs" />
+    <Compile Include="Components\IndexFileReport.cs" />
     <Compile Include="Components\KeyValue.cs" />
     <Compile Include="Components\SearchResultDataSet.cs" />
     <Compile Include="Components\ShoppingCart.cs" />
