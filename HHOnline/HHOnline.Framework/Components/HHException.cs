@@ -132,7 +132,10 @@ namespace HHOnline.Framework
 
         public void Log()
         {
-            log.Error(this);
+            if (this.InnerException != null)
+                log.Error(this.message, this);
+            else
+                log.Info(this);
         }
 
         public override string ToString()
