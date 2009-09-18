@@ -5,6 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
 using HHOnline.Framework;
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net.config", Watch = true)]
 
 public partial class Main : HHPage
 {
