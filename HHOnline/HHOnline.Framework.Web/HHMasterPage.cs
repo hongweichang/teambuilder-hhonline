@@ -31,6 +31,17 @@ namespace HHOnline.Framework.Web
 
         #region -Abstract method-
         /// <summary>
+        /// 添加编码规范，默认为UTF-8
+        /// </summary>
+        public abstract void AddEncodeMeta()
+        {
+            //<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+            HtmlMeta meta = new HtmlMeta();
+            meta.Attributes.Add("content", "text/html; charset=utf-8");
+            meta.Attributes.Add("http-equiv", "Content-Type");
+            Page.Header.Controls.Add(meta);
+        }
+        /// <summary>
         /// 版权信息
         /// </summary>
         public string CopyRight
@@ -75,6 +86,7 @@ namespace HHOnline.Framework.Web
         /// </summary>
         public virtual void OnPageLoaded()
         {
+            AddEncodeMeta();
             CompressCss();
             AddGenericLink("image/x-icon", "shortcut icon", "ICON", "images/favicon.ico");
             AddJavaScriptInclude( "scripts/jquery-min.js", false, false);

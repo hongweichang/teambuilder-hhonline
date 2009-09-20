@@ -919,5 +919,20 @@ namespace HHOnline.Data
             throw new NotImplementedException();
         }
         #endregion
+
+        #region -Pending-
+        public override List<Pending> PendingsLoad()
+        {
+            return null;
+        }
+        public override bool PendingAdd(Pending pending)
+        {
+            return false;
+        }
+        public override bool PendingUpdate(Pending pending)
+        {
+            return false;
+        }
+        #endregion
     }
 }

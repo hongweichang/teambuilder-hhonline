@@ -90,6 +90,7 @@
     <Compile Include="Components\View.cs" />
     <Compile Include="Components\WordSearch.cs" />
     <Compile Include="Components\WordStatistic.cs" />
+    <Compile Include="Components\Pending.cs" />
     <Compile Include="Core\BaseApplication.cs" />
     <Compile Include="Core\HHCookie.cs" />
     <Compile Include="Core\HHEventArgs.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Enums\SortOrder.cs" />
     <Compile Include="Enums\SortUsersBy.cs" />
     <Compile Include="Enums\UserLevel.cs" />
+    <Compile Include="Enums\PendingStatus.cs" />
     <Compile Include="GradeStrategy\GeneralStrategy.cs" />
     <Compile Include="GradeStrategy\RegionStrategy.cs" />
     <Compile Include="GradeStrategy\StrategyFactory.cs" />

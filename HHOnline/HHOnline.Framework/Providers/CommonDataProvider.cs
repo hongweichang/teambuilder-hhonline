@@ -526,5 +526,11 @@ namespace HHOnline.Framework.Providers
 
         public abstract List<string> GetHotWordSearch(int topCount);
         #endregion
+
+        #region -Pending-
+        public abstract List<Pending> PendingsLoad();
+        public abstract bool PendingAdd(Pending pending);
+        public abstract bool PendingUpdate(Pending pending);
+        #endregion
     }
 }
