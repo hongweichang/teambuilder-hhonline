@@ -3019,25 +3019,22 @@ fieldset.fsNormal legend
     }
 .productGridShow
 {
-    height:120px;
+    height:auto;
     width:100%;
-    position:relative;
+    float:left;
     border-bottom:dashed 1px #dedede;
     }
 .productGridShow img
 {
-    position:absolute;
-    left:0;
-    top:0;
+    float:left;
+    margin:5px;
     }
 .productGridShow .productTitle
 {
-    width:400px;
+    width:50%;
     color:#888;
-    height:100px;
-    left:120px;
-    top:0;
-    position:absolute;
+    float:left;
+    height:auto;
     }
 .productGridShow a,
 .productGridShow2 a
@@ -3053,22 +3050,24 @@ fieldset.fsNormal legend
     }
 .productGridShow .productTitle-r2
 {
-    height:52px;
+    height:auto;
+    padding-bottom:5px;
+    }
+.productGridShow .productTitle-r3
+{
+    color:#7d9edb;
     }
 .productGridShow .productPrice
 {
-    position:absolute;
-    left:550px;
-    top:0;
+    float:left;
+    margin-left:10px;
     height:100px;
     width:100px;
     }
 
 .productGridShow .productBrand
 {
-    position:absolute;
-    left:650px;
-    top:0;
+    float:left;
     height:100px;
     }
 .productGridShow2
