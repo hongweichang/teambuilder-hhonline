@@ -39,7 +39,7 @@ namespace HHOnline.Framework
                     config = HHCache.Instance.Get(CacheKeyManager.HHConfigurationKey) as HHConfiguration;
                     if (config == null)
                     {
-                        string path = GlobalSettings.MapPath("~/HHOnline.config");
+                        string path = HHConfiguration.ConfigFilePath;//GlobalSettings.MapPath("~/HHOnline.config");
                         XmlDocument doc = new XmlDocument();
                         doc.Load(path);
                         config = new HHConfiguration(doc);
@@ -93,6 +93,17 @@ namespace HHOnline.Framework
                     defaultLanguage = ResourceManager.GetSupportedLanguage(defaultLanguage, "zh-CN");
 
                 return defaultLanguage;
+            }
+        }
+
+        /// <summary>
+        /// 配置文件路径
+        /// </summary>
+        public static string ConfigFilePath
+        {
+            get
+            {
+                return GlobalSettings.MapPath("~/HHOnline.config");
             }
         }
 

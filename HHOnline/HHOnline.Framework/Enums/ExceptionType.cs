@@ -124,6 +124,16 @@ namespace HHOnline.Framework
         /// 模块初始化异常
         /// </summary>
         ModuleInitFail = 129,
+
+        /// <summary>
+        /// Type 未找到
+        /// </summary>
+        TypeNotFount = 130,
+
+        /// <summary>
+        /// 类型初始化异常
+        /// </summary>
+        TypeInitFail =131,
         #endregion
 
         #region -信息提示512~1023-

@@ -92,8 +92,10 @@
     <Compile Include="Components\WordStatistic.cs" />
     <Compile Include="Components\Pending.cs" />
     <Compile Include="Core\BaseApplication.cs" />
+    <Compile Include="Core\BaseSearchSetting.cs" />
     <Compile Include="Core\HHCookie.cs" />
     <Compile Include="Core\HHEventArgs.cs" />
+    <Compile Include="Core\SearchConfiguration.cs" />
     <Compile Include="Core\ViewsFactory.cs" />
     <Compile Include="Enums\AttachmentType.cs" />
     <Compile Include="Enums\DataActionStatus.cs" />

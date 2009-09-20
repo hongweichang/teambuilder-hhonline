@@ -78,6 +78,11 @@ namespace HHOnline.Framework
         public static readonly string HHConfigurationKey = FrameworkPrefix + "HHConfiguration";
 
         /// <summary>
+        /// 站点查询CacheKey
+        /// </summary>
+        public static readonly string SearchConfigurationKey = FrameworkPrefix + "SearchConfiguration";
+
+        /// <summary>
         /// 地址重写Cachekey
         /// </summary>
         public static readonly string HHUrlRewriteKey = FrameworkPrefix + "HHUrlRewrite";
