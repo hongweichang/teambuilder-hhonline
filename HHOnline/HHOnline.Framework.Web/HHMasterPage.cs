@@ -33,7 +33,7 @@ namespace HHOnline.Framework.Web
         /// <summary>
         /// 添加编码规范，默认为UTF-8
         /// </summary>
-        public abstract void AddEncodeMeta()
+        public virtual void AddEncodeMeta()
         {
             //<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
             HtmlMeta meta = new HtmlMeta();
