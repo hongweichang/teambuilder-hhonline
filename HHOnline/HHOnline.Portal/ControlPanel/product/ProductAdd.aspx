@@ -90,10 +90,10 @@
                     </tr>
                     <tr>
                         <th>
-                            关键字(使用英文法输入状态下";"分割)
+                            关键字
                         </th>
                         <td>
-                            <asp:TextBox ID="txtKeyWords" Width="540px" runat="server" />
+                            <asp:TextBox ID="txtKeyWords" Width="540px" runat="server" />(使用分号划分)
                         </td>
                     </tr>
                     <tr>
