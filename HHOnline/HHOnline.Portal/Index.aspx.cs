@@ -421,7 +421,10 @@ public partial class Index : HHPage
     }
     protected void Button40_Click(object sender, EventArgs e)
     {
-
+        string path ="~/Utility/IndexDictionary/";
+        new HHException(ExceptionType.UnknownError,
+            GlobalSettings.PhysicalPath(path.Replace("/", System.IO.Path.DirectorySeparatorChar.ToString()).Replace("~", ""))).Log();
+        new HHException(ExceptionType.UnknownError, GlobalSettings.MapPath(path)).Log();
     }
     protected void Button41_Click(object sender, EventArgs e)
     {
