@@ -18,14 +18,32 @@ namespace HHOnline.SearchBarrel
     public class ProductSearchManager
     {
         #region Property
+        private static BaseSearchSetting searchSetting;
+
+        public static BaseSearchSetting SearchSetting
+        {
+            get
+            {
+                if (searchSetting == null)
+                {
+                    SearchConfiguration.GetConfig().SearchSettings.TryGetValue("productSearchSetting", out searchSetting);
+                    if (searchSetting == null)
+                        searchSetting = new ProductSearchSetting();
+                }
+                return searchSetting;
+            }
+        }
+
         protected static readonly int MaxNumFragmentsRequired = 2;
 
         protected static readonly string FragmentSeparator = "...";
 
+        /*
         /// <summary>
         /// 索引文件目录名称
         /// </summary>
         public static readonly string IndexFileDirectory = "Product";
+        */
 
         /// <summary>
         /// 索引文件物理路径
@@ -34,7 +52,8 @@ namespace HHOnline.SearchBarrel
         {
             get
             {
-                return Path.Combine(GlobalSettings.IndexDirectory, IndexFileDirectory);
+                return SearchSetting.PhysicalIndexDirectory;
+                //return Path.Combine(GlobalSettings.IndexDirectory, IndexFileDirectory);
             }
         }
         #endregion
@@ -361,9 +380,19 @@ namespace HHOnline.SearchBarrel
             Insert(products, indexPath);
         }
 
+        /// <summary>
+        /// 初始化索引
+        /// </summary>
         public static void InitializeIndex()
         {
-            InitializeIndex(PhysicalIndexDirectory);
+            try
+            {
+                InitializeIndex(PhysicalIndexDirectory);
+            }
+            catch (Exception ex)
+            {
+                new HHException(ExceptionType.UnknownError, ex.Message, ex).Log();
+            }
         }
         #endregion
 
