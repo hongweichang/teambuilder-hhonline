@@ -9,14 +9,14 @@
 <%@ Import Namespace="System.Collections.Generic" %>
 
 <script RunAt="server">
-
+    
     void Application_Start(object sender, EventArgs e)
     {
         //在应用程序启动时运行的代码
 
         //配置log4net
-        log4net.Config.XmlConfigurator.Configure(new FileInfo(GlobalSettings.RelativeWebRoot +"log4net.config"));
-
+        //log4net.Config.XmlConfigurator.Configure(new FileInfo(GlobalSettings.RelativeWebRoot +"log4net.config"));
+        log4net.Config.XmlConfigurator.Configure(new FileInfo(GlobalSettings.MapPath("~/Log4Net.config")));
         try
         {
             //配置Lucene分词
@@ -27,7 +27,7 @@
         {
 
         }
-        
+
         //启动后台任务
         XmlNode node = HHConfiguration.GetConfig().GetConfigSection("HHOnline/Tasks");
         TaskManager.Initialize(node);
@@ -67,7 +67,7 @@
 
     void Application_Error(object sender, EventArgs e)
     {
-        
+
         //在出现未处理的错误时运行的代码
 
         HttpApplication application = (HttpApplication)sender;
