@@ -12,7 +12,7 @@
     <form id="form1" runat="server" action="#">
         <div>
             <div class="cp-head">
-                <div class="head-r1c1">&nbsp;</div>
+                <div class="head-r1c1">华宏在线后台管理</div>
                     <asp:LoginView ID="lvUser" runat="server">
                         <LoggedInTemplate>  
                         <div class="head-r1c2">                      

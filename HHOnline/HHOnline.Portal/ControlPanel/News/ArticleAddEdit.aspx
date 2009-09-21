@@ -61,10 +61,10 @@
         </tr>
         <tr>
             <th>
-                关键字（多个关键字用分号分隔）(<span style="color: #4682B4">可选</span>)
+                关键字(<span style="color: #4682B4">可选</span>)
             </th>
             <td>
-                <asp:TextBox Width="500" ID="txtKeywords" runat="server" MaxLength="50"></asp:TextBox>
+                <asp:TextBox Width="500" ID="txtKeywords" runat="server" MaxLength="50"></asp:TextBox>(多个关键字用分号分隔)
             </td>
         </tr>
         <tr>
