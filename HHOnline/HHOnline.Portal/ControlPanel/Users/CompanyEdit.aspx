@@ -5,7 +5,7 @@
     <table class="detail" cellspacing="0" cellpadding="0">
         <tr>
             <th style="width: 140px">
-                公司名称(<span class="needed">必填</span>)
+                名称(<span class="needed">必填</span>)
             </th>
             <td>
                 <asp:TextBox Width="230px" ID="txtCompanyName" runat="server"></asp:TextBox>
@@ -17,8 +17,8 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 100px;">
-                所属区域(<span class="needed">必填</span>)
+            <th>
+                区域(<span class="needed">必填</span>)
             </th>
             <td>
                 <asp:TextBox Width="230px" ID="txtRegion" runat="server" ReadOnly="true"></asp:TextBox>
@@ -33,7 +33,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width: 140px">
+            <th>
                 联系电话(<span class="needed">必填</span>)
             </th>
             <td>
@@ -45,6 +45,17 @@
             </td>
             <td>
                 <span class="tip">格式形如"区号-号码"或"(区号)号码"或11位手机号码！</span>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <span class="needed">公司状态</span>
+            </th>
+            <td>
+                <hc:CompanyStatusList ID="cslMain" runat="server" Width="240px"></hc:CompanyStatusList>
+            </td>
+            <td>
+                <span class="tip">公司当前状态！</span>
             </td>
         </tr>
         <tr>
@@ -124,7 +135,7 @@
             </th>
             <td>
                 <asp:TextBox Width="230px" ID="txtCompanyMemo" runat="server" MaxLength="500" TextMode="MultiLine"
-                    Height="100px"></asp:TextBox>
+                    Height="60px"></asp:TextBox>
             </td>
             <td>
                 <span class="tip">简要描述公司特色！</span>
@@ -134,8 +145,9 @@
             <th>
                 关联账户
             </th>
-            <td class="link">
-                <asp:Literal ID="ltUsers" runat="server"></asp:Literal>
+            <td class="link">    
+                <a href='UserEdit.aspx?ID=<%# Request.QueryString["ID"] %>&Mode=Add' class="opts add" title="新增关联用户"></a>
+                &nbsp;&nbsp;<asp:Literal ID="ltUsers" runat="server"></asp:Literal>
             </td>
             <td>
                 <span class="tip">该公司所关联的平台账户！</span>

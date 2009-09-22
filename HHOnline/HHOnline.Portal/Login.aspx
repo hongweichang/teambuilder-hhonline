@@ -7,7 +7,7 @@
     <title>Member Login</title>
 </head>
 <body style="background:#1D3647;">
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" onsubmit="return false;">
     <div style="width:99%;margin:auto;">
         <div class="page-top"></div>
         <div class="page-bg">

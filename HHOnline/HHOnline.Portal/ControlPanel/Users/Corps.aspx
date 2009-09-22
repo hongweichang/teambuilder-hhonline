@@ -50,7 +50,7 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <HeaderTemplate>工商注册号</HeaderTemplate>
-                <ItemTemplate><%# string.IsNullOrEmpty(Eval("Regcode").ToString())?"--":Eval("Phone")%></ItemTemplate>
+                <ItemTemplate><%# string.IsNullOrEmpty(Eval("Regcode").ToString())?"--":Eval("RegCode")%></ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <HeaderTemplate>联系电话</HeaderTemplate>

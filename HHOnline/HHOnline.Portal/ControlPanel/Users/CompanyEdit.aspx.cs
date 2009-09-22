@@ -31,12 +31,13 @@ public partial class ControlPanel_Users_CompanyEdit : HHPage
         }
         catch { }
     }
+    Company c = null;
     void BindData()
     {
         try
         {
             int id = int.Parse(Request.QueryString["ID"]);
-            Company c = Companys.GetCompany(id);
+            c = Companys.GetCompany(id);
             txtCompanyName.Text = c.CompanyName;
             try
             {
@@ -45,7 +46,7 @@ public partial class ControlPanel_Users_CompanyEdit : HHPage
                 txtRegion.Text = a.RegionName;
             }
             catch { }
-
+            cslMain.SelectedValue = c.CompanyStatus;
             txtCompanyPhone.Text = c.Phone;
             txtCompanyFax.Text = c.Fax;
             txtCompanyAddress.Text = c.Address;
@@ -77,28 +78,34 @@ public partial class ControlPanel_Users_CompanyEdit : HHPage
         }
         catch (Exception ex)
         {
-            //base.ExecuteJs("msg('" + ex.Message + "')", false);
+            base.ExecuteJs("msg('" + ex.Message + "')", false);
         }
     }
     protected void btnEdit_Click(object obj, EventArgs e)
     {
-        int id = int.Parse(Request.QueryString["ID"]);
-        
-        Company com = new Company();
-        com.CompanyID = id;
-        com.CompanyName = txtCompanyName.Text.Trim();
-        com.CompanyRegion = int.Parse(hfRegionCode.Value);
-        com.Phone = txtCompanyPhone.Text.Trim();
-        com.Fax = txtCompanyFax.Text.Trim();
-        com.Address = txtCompanyAddress.Text.Trim();
-        com.Zipcode = txtZipCode.Text.Trim();
-        com.Website = txtCompanyWebsite.Text.Trim();
-        com.Orgcode = txtOrgCode.Text.Trim();
-        com.Regcode = txtIcpCode.Text.Trim();
-        com.Remark = txtCompanyMemo.Text.Trim();
-        com.UpdateTime = DateTime.Now;
-        com.UpdateUser = Profile.AccountInfo.UserID;
-        
+        if (c == null)
+        {
+            int id = int.Parse(Request.QueryString["ID"]);
+            c = Companys.GetCompany(id);
+        }
+        c.CompanyName = txtCompanyName.Text.Trim();
+        c.CompanyRegion = int.Parse(hfRegionCode.Value);
+        c.Phone = txtCompanyPhone.Text.Trim();
+        c.Fax = txtCompanyFax.Text.Trim();
+        c.Address = txtCompanyAddress.Text.Trim();
+        c.Zipcode = txtZipCode.Text.Trim();
+        c.Website = txtCompanyWebsite.Text.Trim();
+        c.Orgcode = txtOrgCode.Text.Trim();
+        c.Regcode = txtIcpCode.Text.Trim();
+        c.Remark = txtCompanyMemo.Text.Trim();
+        c.CompanyStatus = cslMain.SelectedValue;
+        c.UpdateTime = DateTime.Now;
+        c.UpdateUser = Profile.AccountInfo.UserID;
+        bool result = Companys.UpdateCompany(c);
+        if (result)
+            base.ExecuteJs("msg('操作成功，已成功修改公司信息！',true);", false);
+        else
+            base.ExecuteJs("msg('操作失败，无法修改公司信息！',false);", false);
 
     }
     public override void OnPageLoaded()

@@ -40,7 +40,6 @@ a.opts
     }
 /*endregion*/
 a.delete,a.edit,a.view,a.add,
-.cp-head .head-r1c1,
 .cp-head .head-r1c2 a,
 .cp-head .head-r1c3 a,
 .cp-menu .menu-head a,
@@ -309,7 +308,7 @@ a:active#login
 .cp-head
 {
     height:64px;
-    background-position:center -593px;
+    background-position:center -592px;
     position:relative;
     }
 .cp-head .head-r1c1
@@ -319,7 +318,11 @@ a:active#login
     top:0;
     height:64px;
     width:262px;
-    background-position:-32px 0;
+    background:url(../../images/default/logo.png) 20px 10px no-repeat;
+    text-indent:70px;
+    line-height:64px;
+    font-weight:bold;
+    color:#fff;
     }
 .cp-head .head-r1c2,.cp-head .head-r1c3
 {
@@ -438,6 +441,8 @@ a:active#login
 .cp-content-frame
 {
     width:100%;
+    table-layout:fixed;
+    border-collapse:collapse;
     }
 /*endregion*/
 /*region*/
@@ -465,15 +470,15 @@ a:active#login
     width:90px;
     height:29px;
     line-height:34px;
-    background-position:-76px -64px;
+    background-position:-77px -64px;
     padding-left:10px;
     font-weight:bold;
     }
 .cp-content-frame .frame-r1c3
 {
-    width:16px;
+    width:7px;
     height:29px;
-    background-position:-476px -29px;
+    background-position:-477px -29px;
     }
 /*endregion*/
 .cp-content-frame .frame-r2c1,
@@ -505,6 +510,7 @@ a:active#login
     }
 .cp-content-frame .frame-r3c1
 {
+    overflow:hidden;
     height:17px;
     background-position:-476px -58px;
     }
@@ -514,7 +520,7 @@ a:active#login
     }
 .cp-content-frame .frame-r3c3
 {
-    background-position:-476px -75px;
+    background-position:-477px -75px;
     }
 
 /* message box */
@@ -946,11 +952,11 @@ postform td
 }
 .detail-r1c1 table.detail th
 {
-	font: bold 11px "Trebuchet MS" , Verdana, Arial, Helvetica, sans-serif;
+    font-weight:normal;
 	color: #4f6b72;
 	border: 1px solid #C1DAD7;
 	border-width:0 1px 1px 0;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 	text-transform: uppercase;
 	padding: 6px 7px 6px 0px;
 	background: #CAE8EA no-repeat;
@@ -986,6 +992,10 @@ postform td
     height:453px;
     margin:0;
     overflow:auto;
+    }
+.lefttree .row2
+{
+    width:200px;
     }
 /*endregion*/
 /*region*/

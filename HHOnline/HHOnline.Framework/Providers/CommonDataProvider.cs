@@ -96,7 +96,7 @@ namespace HHOnline.Framework.Providers
             user.Mobile = DataRecordHelper.GetString(dr, "UserMobile", string.Empty);
             user.Phone = DataRecordHelper.GetString(dr, "UserPhone", string.Empty);
             user.Fax = DataRecordHelper.GetString(dr, "UserFax", string.Empty);
-            user.Title = DataRecordHelper.GetString(dr, "UserDepartment", string.Empty);
+            user.Department = DataRecordHelper.GetString(dr, "UserDepartment", string.Empty);
             user.Title = DataRecordHelper.GetString(dr, "UserTitle", string.Empty);
             user.Remark = DataRecordHelper.GetString(dr, "UserMemo", string.Empty);
             user.AccountStatus = (AccountStatus)DataRecordHelper.GetInt32(dr, "UserStatus");

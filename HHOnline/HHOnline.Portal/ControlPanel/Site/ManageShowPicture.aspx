@@ -21,9 +21,9 @@
                     <asp:Image ID="ShowPictureThumb" Width="40" Height="40" runat="server" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField HeaderText="图片标题" DataField="Title" />
-            <asp:BoundField HeaderText="图片描述" DataField="Description" />
-            <asp:BoundField HeaderText="链接地址" DataField="Link" />
+            <asp:BoundField HeaderText="图片标题" DataField="Title" DataFormatString="{0:S10}" />
+            <asp:BoundField HeaderText="图片描述" DataField="Description"  DataFormatString="{0:S20}" />
+            <asp:BoundField HeaderText="链接地址" DataField="Link" DataFormatString="{0:S20}"  />
             <asp:TemplateField>
                 <HeaderStyle Width="200" />
                 <HeaderTemplate>

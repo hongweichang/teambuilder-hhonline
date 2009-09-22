@@ -26,7 +26,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtPassword"
                             ErrorMessage="必须填写！" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" Display="Dynamic"
-                        ValidationExpression="\S{8,25}" ControlToValidate="txtPassword" ErrorMessage="长度为8~25位！"></asp:RegularExpressionValidator>
+                        ValidationExpression="^[0-9a-zA-z_]{8,25}$" ControlToValidate="txtPassword" ErrorMessage="长度为8~25位,由数字字母和下划线组成！"></asp:RegularExpressionValidator>
                 </td>
                 <td><span class="tip">请尽量设置较复杂密码！</span></td>
             </tr>
@@ -55,7 +55,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtQuestion"
                             ErrorMessage="必须填写！" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" Display="Dynamic"
-                        ValidationExpression="\S{6,250}" ControlToValidate="txtQuestion" ErrorMessage="长度为6~250个字符！"></asp:RegularExpressionValidator>                    
+                        ValidationExpression="\S{6,250}" ControlToValidate="txtQuestion" ErrorMessage="长度为6~250个字符,不包含空格！"></asp:RegularExpressionValidator>                    
                 </td>
                 <td><span class="tip">密码提示问题作为找回用户密码的关键凭证！</span></td>
             </tr>
@@ -66,7 +66,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtAnswer"
                             ErrorMessage="必须填写！" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" Display="Dynamic"
-                        ValidationExpression="\S{4,250}" ControlToValidate="txtAnswer" ErrorMessage="长度为4~250个字符！"></asp:RegularExpressionValidator>                    
+                        ValidationExpression="\S{4,250}" ControlToValidate="txtAnswer" ErrorMessage="长度为4~250个字符,不包含空格！"></asp:RegularExpressionValidator>                    
                 </td>
                 <td><span class="tip">找回密码时需此答案与问题匹配才能取回密码！</span></td>
             </tr>
@@ -109,16 +109,13 @@
                         ControlToValidate="txtFax" ErrorMessage="格式不正确！"></asp:RegularExpressionValidator>
                 </td>
                  <td><span class="tip">格式要求同上！</span></td>
-            </tr>        
-            <tr>
-                <th >所属部门(<span class="unneeded" >已选</span>)</th>
-                <td> <asp:TextBox Width="230px" ID="txtDepartment" runat="server" MaxLength="50"></asp:TextBox></td>
-            </tr>   
+            </tr>  
             <tr>
                 <th>职务(<span class="unneeded" >可选</span>)</th>
                 <td>
                     <asp:TextBox Width="230px" ID="txtTitle" runat="server" MaxLength="50"></asp:TextBox>
                 </td>
+                <td>&nbsp;</td>
             </tr>
             <tr>
                 <th>备注(<span class="unneeded" >可选</span>)</th>
@@ -222,7 +219,7 @@
         </table>
     </fieldset>
     <div class="divAgree">
-        <input type="checkbox" checked="checked" id="chkAgree" /><a href="pages/others-userlicence" target="_blank">我同意注册服务条款。</a>
+        <input type="checkbox" checked="checked" id="chkAgree" /><a href="pages/view.aspx?others-userlicence" target="_blank">我同意注册服务条款。</a>
     </div>
     <asp:Button rel="register" ID="btnRegister" runat="server" Text=" 注册新用户 " OnClick="btnRegister_Click" />
 </div>

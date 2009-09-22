@@ -53,9 +53,8 @@ public partial class Register : HHPage
         u.Phone = txtPhone.Text.Trim();
         u.Mobile = txtMobile.Text.Trim();
         u.Fax = txtFax.Text.Trim();
-        u.Department = txtDepartment.Text.Trim();
         u.Title = txtTitle.Text.Trim();
-        u.Comment = txtMemo.Text.Trim();
+        u.Remark = txtMemo.Text.Trim();
         u.AccountStatus = AccountStatus.Authenticated;
         u.IsManager = 1;
 

@@ -51,7 +51,7 @@
 								</td>
 								<td class="cat-c2">
 									<asp:LinkButton ID="btnChildCategory" runat="server" OnClick="btnChildCategory_Click"
-										ToolTip='<%# Eval("Description") %>' PostBackUrl="#" CategoryID='<%# Eval("ID") %>'><%# Eval("Name")%></asp:LinkButton>
+										ToolTip='<%# Eval("Description") %>' PostBackUrl="#" CategoryID='<%# Eval("ID") %>'><%# HHOnline.Framework.GlobalSettings.SubString(Eval("Name").ToString(),20)%></asp:LinkButton>
 								</td>
 								<td class="cat-c3" catid='<%# Eval("ID") %>'>
 									<asp:LoginView ID="lv1" runat="server">

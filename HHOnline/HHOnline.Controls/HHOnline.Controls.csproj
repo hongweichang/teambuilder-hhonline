@@ -106,6 +106,7 @@
     <Compile Include="SubCategoryHiddenList.cs" />
     <Compile Include="TextEllipsisProvider.cs" />
     <Compile Include="YesNoRadioButtonList.cs" />
+    <Compile Include="CompanyStatusList.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HHOnline.Common\HHOnline.Common.csproj">
