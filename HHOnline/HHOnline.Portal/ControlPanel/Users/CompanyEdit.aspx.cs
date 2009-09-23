@@ -37,6 +37,7 @@ public partial class ControlPanel_Users_CompanyEdit : HHPage
         try
         {
             int id = int.Parse(Request.QueryString["ID"]);
+            lbAdd.PostBackUrl = "UserEdit.aspx?ID=" + id + "&Mode=Add";
             c = Companys.GetCompany(id);
             txtCompanyName.Text = c.CompanyName;
             try
@@ -59,7 +60,7 @@ public partial class ControlPanel_Users_CompanyEdit : HHPage
             UserQuery query = new UserQuery();
             query.CompanyID = c.CompanyID;
             query.UserType = UserType.CompanyUser;
-            query.AccountStatus=AccountStatus.Authenticated;
+            query.AccountStatus=AccountStatus.All;
             PagingDataSet<User> pds = Users.GetUsers(query, false);
             List<User> users = pds.Records;
             if (users.Count == 0)
@@ -71,7 +72,16 @@ public partial class ControlPanel_Users_CompanyEdit : HHPage
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < users.Count; i++)
                 {
-                    sb.Append("<a href=\"UserEdit.aspx?ID=" + users[i].UserID + "\">" + users[i].UserName + "</a>;&nbsp;");
+                    sb.Append("<a href=\"UserEdit.aspx?ID=");
+                    sb.Append(users[i].UserID);
+                    sb.Append("\" ");
+                    if (users[i].AccountStatus != AccountStatus.Authenticated)
+                    {
+                        sb.Append("style=\"color:#888\" title=\"被锁定\" ");
+                    }
+                    sb.Append(">");
+                    sb.Append(users[i].UserName);
+                    sb.Append("</a>;&nbsp;");
                 }
                 ltUsers.Text = sb.ToString();
             }

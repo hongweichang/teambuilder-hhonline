@@ -146,7 +146,7 @@
                 关联账户
             </th>
             <td class="link">    
-                <a href='UserEdit.aspx?ID=<%# Request.QueryString["ID"] %>&Mode=Add' class="opts add" title="新增关联用户"></a>
+                <asp:LinkButton ID="lbAdd" runat="server" SkinID="lnkadd" Text=" "></asp:LinkButton>
                 &nbsp;&nbsp;<asp:Literal ID="ltUsers" runat="server"></asp:Literal>
             </td>
             <td>

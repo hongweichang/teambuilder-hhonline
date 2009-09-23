@@ -82,17 +82,7 @@
                         <RoleGroups>
                             <asp:RoleGroup Roles="CorpUserModule-Delete"> 
                                 <ContentTemplate>    
-                                <asp:LinkButton ID="lnkDelete" runat="server"  CommandName="Delete" SkinID="lnkdelete"  OnClientClick="return confirm('确定要删除此记录吗？')" PostBackUrl="#"></asp:LinkButton>
-                                </ContentTemplate>
-                            </asp:RoleGroup>
-                        </RoleGroups>
-                    </asp:LoginView>
-                    <asp:LoginView ID="LoginView3" runat="server">
-                        <RoleGroups>
-                             <asp:RoleGroup Roles="CorpUserModule-View"> 
-                                <ContentTemplate>    
-                                    <%--<a href="javascript:popWin('<%# "Permission/RoleDetail.aspx?ID="+Eval("RoleID").ToString() %>',800)" title="查看详细" class="opts view">&nbsp;</a>--%>
-                                    <a href='javascript:void(0)' rel="showdetails" class="opts view" title="查看详细"></a>
+                                <asp:LinkButton ID="lnkDelete" runat="server"  CommandName="Delete" SkinID="lnkdelete"  OnClientClick="return confirm('删除后，公司将被停用，确定要继续？')" PostBackUrl="#"></asp:LinkButton>
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>

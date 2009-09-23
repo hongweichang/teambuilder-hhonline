@@ -19,7 +19,7 @@
             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" Display="Dynamic"
                 ValidationExpression="^[0-9a-zA-z_]{8,25}$" ControlToValidate="txtPassword" ErrorMessage="长度为8~25位,由数字字母和下划线组成！"></asp:RegularExpressionValidator>
         </td>
-        <td><span class="tip"><asp:Literal ID="ltPwdDesc" runat="server"></asp:Literal></span></td>
+        <td><span class="tip"><span class="needed"><asp:Literal ID="ltPwdDesc" runat="server"></asp:Literal></span></span></td>
     </tr>
     <tr>
         <th>重复密码(<span class="needed" >必填</span>)</th>
@@ -51,13 +51,13 @@
         <td><span class="tip">密码提示问题作为找回用户密码的关键凭证！</span></td>
     </tr>
     <tr>
-        <th>密码提示答案(<span class="needed" >必填</span>)</th>
+        <th>密码提示答案(<span class="unneeded" >可选</span>)</th>
         <td>
             <asp:TextBox Width="230px" ID="txtAnswer" MaxLength="250" runat="server"></asp:TextBox>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" Display="Dynamic"
                 ValidationExpression="\S{4,250}" ControlToValidate="txtAnswer" ErrorMessage="长度为4~250个字符,不包含空格！"></asp:RegularExpressionValidator>                    
         </td>
-        <td><span class="tip"><asp:Literal ID="ltPADesc" runat="server"></asp:Literal></span></td>
+        <td><span class="tip"><span class="needed"><asp:Literal ID="ltPADesc" runat="server"></asp:Literal></span></span></td>
     </tr>
      <tr>
         <th>是否领导(<span class="needed" >必填</span>)</th>
@@ -125,6 +125,7 @@
         </th>
         <td colspan="2">
            <asp:Button ID="btnEdit" runat="server" Text="保存" CausesValidation="true" OnClick="btnEdit_Click" />
+           <asp:Button ID="btnSetStatus" runat="server" Text="禁用" CausesValidation="false" OnClick="btnSetStatus_Click" />
            <asp:Button ID="btnPostBack" runat="server" Text="返回" CausesValidation="false" OnClick="btnPostBack_Click" />
            <asp:Button ID="btnCancel" runat="server" Text="关闭" OnClientClick="return cancel();" CausesValidation="false" />
         </td>

@@ -179,7 +179,10 @@ public partial class ControlPanel_Users_Corps : HHPage
     public void egvCorps_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int id = (int)egvCorps.DataKeys[e.RowIndex].Value;
-    
+        Company c = Companys.GetCompany(id);
+        c.CompanyStatus = CompanyStatus.Lockon;
+        Companys.UpdateCompany(c);
+        BindCorps();
     }
 
     public void egvCorps_PageIndexChanging(object sender, GridViewPageEventArgs e)
