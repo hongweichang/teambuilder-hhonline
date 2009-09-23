@@ -11,10 +11,7 @@ var menu = {
                 mc = $('#' + c).attr('class', 'active');
                 m = $('#' + mc.attr('parentId'));
             }
-            else {
-                m = $('dl.cp-menu:first-child');
-            }
-            if (m == null || m.length == 0) {
+            if (!m||m == null || m.length == 0) {
                 m = $('dl.cp-menu:first-child');
             }
         }

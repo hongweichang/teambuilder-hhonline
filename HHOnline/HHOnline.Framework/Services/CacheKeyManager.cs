@@ -90,6 +90,10 @@ namespace HHOnline.Framework
         /// 菜单配置Cachekey
         /// </summary>
         public static readonly string MenuKey = FrameworkPrefix + "Menus";
+        /// <summary>
+        /// Profile菜单配置Cachekey
+        /// </summary>
+        public static readonly string ProfileMenuKey = FrameworkPrefix + "ProfileMenus";
 
         /// <summary>
         /// 语言配置Cachekey

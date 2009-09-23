@@ -36,6 +36,7 @@ function signUp() {
             url: 'organize.axd',
             error: function(msg) {
                 error.html(msg.responseText).show();
+                $('#imgValidCode').attr('src', 'validcode.axd?t=' + Math.random);
             },
             success: function(json) {
                 if (json.suc) {
@@ -44,7 +45,7 @@ function signUp() {
                 else {
                     overlay.hide();
                     loading.hide();
-                    $('#imgValidCode').attr('src', 'validcode.axd?t' + Math.random);
+                    $('#imgValidCode').attr('src', 'validcode.axd?t=' + Math.random);
                     error.html(json.msg).show();
                     vc.val('').focus();
                 }
@@ -56,9 +57,21 @@ function signUp() {
     }
 }
 window.onload = function() {
+    var un = $('#txtUserName');
+    var pwd = $('#txtPassword'); 
+    var vc = $('#txtValidCode');
+    un.focus(function() {
+        $(this).select();
+    });
+    pwd.focus(function() {
+        $(this).select();
+    });
+    vc.focus(function() {
+        $(this).select();
+    });
     if (typeof window.$userinfo != 'undefined') {
-        $('#txtUserName').val($userinfo.uid);
-        $('#txtPassword').val($userinfo.pwd);
+        un.val($userinfo.uid);
+        pwd.val($userinfo.pwd);
         $('#chkRememberMe').attr('checked', true);
     }
     $('#userLogin').find('input').keyup(function(e) {

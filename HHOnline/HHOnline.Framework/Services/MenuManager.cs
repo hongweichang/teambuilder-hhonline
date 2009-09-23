@@ -60,5 +60,47 @@ namespace HHOnline.Framework
             }
             return menus;
         }
+
+        public static List<Menu> GetProfileMenus()
+        {
+            string cacheKey = CacheKeyManager.ProfileMenuKey;
+            List<Menu> menus = HHCache.Instance.Get(cacheKey) as List<Menu>;
+            if (menus == null || menus.Count == 0)
+            {
+                string path = GlobalSettings.MapPath("~/pages/profiles/menu.config");
+                FileDependency fd = new FileDependency(path);
+                menus = new List<Menu>();
+                Menu menu = null;
+                List<MenuItem> items = null;
+                MenuItem item = null;
+
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(path);
+                foreach (XmlNode xn in xmlDoc.SelectSingleNode("menus").ChildNodes)
+                {
+                    if (xn.NodeType == XmlNodeType.Element)
+                    {
+                        items = new List<MenuItem>();
+                        foreach (XmlNode n in xn.ChildNodes)
+                        {
+                            if (n.NodeType == XmlNodeType.Element)
+                            {
+                                item = new MenuItem(n.Attributes["name"].Value,
+                                                                xn.Attributes["name"].Value,
+                                                                n.Attributes["itemTitle"].Value,
+                                                                n.Attributes["url"].Value,
+                                                                n.Attributes["roles"].Value);
+                                items.Add(item);
+                            }
+                        }
+
+                        menu = new Menu(xn.Attributes["name"].Value, xn.Attributes["menuTitle"].Value, xn.Attributes["roles"].Value, items);
+                        menus.Add(menu);
+                    }
+                }
+                HHCache.Instance.Max(cacheKey, menus, fd);
+            }
+            return menus;
+        }
     }
 }

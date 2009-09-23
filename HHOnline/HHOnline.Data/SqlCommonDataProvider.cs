@@ -362,6 +362,20 @@ namespace HHOnline.Data
                 return company;
             }
         }
+        public override Company GetCompanyByUser(int userID)
+        {
+            ELParameter[] elParameters = new ELParameter[]{
+                new ELParameter("@UserID",DbType.Int32,userID)};
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_Company_GetByUser", elParameters))
+            {
+                Company company = null;
+                if (dr.Read())
+                {
+                    company = PopulateCompanyFromIDataReader(dr);
+                }
+                return company;
+            }
+        }
         public override List<Company> GetCompanys(int comStatus, int comType, string comName)
         {
             ELParameter[] parms = new ELParameter[]{

@@ -36,7 +36,7 @@
             <hc:HHLoginView ID="hhView" runat="server" PanelLeftCss="main-r3c3-c1 access-point"
                 PanelMiddleCss="main-r3c3-c2 access-point" PanelRightCss="main-r3c3-c3 access-point"
                 RegisterUrl="register.aspx" RegisterCss="login-access register-access" LoginUrl="login.aspx"
-                LoginCss="login-access signup-access" InfoCss="info-access" ProfileUrl="Profile.aspx"
+                LoginCss="login-access signup-access" InfoCss="info-access" ProfileUrl="pages/view.aspx?profiles-dashboard"
                 MsgCss="msg-access" Message="抢先加盟，获取更多优惠和合作机会！" />
         </div>
     </div>

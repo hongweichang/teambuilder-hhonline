@@ -30,7 +30,10 @@ namespace HHOnline.Framework
         {
             return GetCompany(0, companyName, true);
         }
-
+        public static Company GetCompanyByUser(int userID)
+        {
+            return CommonDataProvider.Instance.GetCompanyByUser(userID);
+        }
         public static Company GetCompany(int companyID, string companyName, bool useCache)
         {
             Company company = null;

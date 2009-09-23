@@ -84,7 +84,7 @@ namespace HHOnline.Controls
 
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderMenu();
+            string html = this.RenderMenu();
            
             writer.Write(html);
             writer.WriteLine(Environment.NewLine);

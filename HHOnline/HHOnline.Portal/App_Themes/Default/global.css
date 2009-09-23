@@ -40,7 +40,7 @@ a.opts
     }
 /*endregion*/
 a.delete,a.edit,a.view,a.add,
-.cp-head .head-r1c2 a,
+/*.cp-head .head-r1c2 a,*/
 .cp-head .head-r1c3 a,
 .cp-menu .menu-head a,
 .cp-menu .menu-content li a,
@@ -83,7 +83,7 @@ a:hover.opts
     }
 /*endregion*/
 /* page */
-.page-top,.page-bg,.page-bottom,
+.page-top,.page-bottom,
 .cp-head,
 .cp-content-frame .frame-r1c2,
 .cp-content-frame .frame-r1c2plus,
@@ -103,10 +103,32 @@ a:hover.opts
     height:43px;
     background-position:center 0;
     }
+.page-top span.logo
+{
+    height:50px;
+    display:block;
+    width:150px;
+    padding-left:55px;
+    line-height:50px;
+    color:#fff;
+    font-weight:bold;
+    background:url(../../images/default/logo.png) no-repeat 5px center;
+    }
+.page-top a.back
+{
+    position:absolute;
+    right:10px;
+    top:2px;
+    color:#fff;
+    }
+.page-top a:hover.back
+{
+    color:#ff0000;
+    }
 .page-bg
 {
-    height:535px;
-    background-position:center -41px;
+    min-height:535px;
+    background:#fff url(../../images/default/content-bg.gif) repeat-x left top;
     position:relative;
     }
 .page-bottom
@@ -334,9 +356,9 @@ a:active#login
     }
 .head-r1c2 a
 {
-    color:#ff0;
-    background-position:-8px -135px;
-    padding-left:15px;
+    color:#FFA500;
+    /*background-position:-8px -135px;
+    padding-left:15px;*/
     }
 .head-r1c2 a:hover
 {
@@ -3256,4 +3278,97 @@ fieldset.fsNormal legend
     color:#888;
     text-align:left;
     border-bottom:solid 1px #dedede;
+    }
+.fieldset_m
+{
+    width:45%;
+    float:left;
+    margin:0 10px;
+    border:0;
+    }
+.fieldset_m h4
+{
+    color:#000080;
+    padding:5px 24px;
+    font-weight:normal;
+    background:#DCDCDC url(../../images/default/cat.gif) no-repeat 3px center;
+    }
+.clPending ul
+{
+    margin-bottom:10px;
+    }
+.clPending li
+{
+    border-bottom:dashed 1px #dedede;
+    height:28px;
+    display:block;
+    }
+.clPending li .companyList_col1
+{
+    color:#008080;
+    height:28px;
+    line-height:28px;
+    width:60%;
+    float:left;
+    }
+.clPending li .companyList_col2
+{
+    width:35%;
+    float:left;
+    height:28px;
+    line-height:28px;
+    }
+.clPending li .companyList_col2 a
+{
+    color:#0000ff;
+    text-decoration:underline;
+    }
+.clPending li .companyList_col2 a:hover
+{
+    color:#ff0000;
+    }
+.clPending a.clExec
+{
+    color:#8B0000;
+    }
+.clPending a.clExec span
+{
+    color:#ff0000;
+    font-weight:bold;
+    }
+.clPending .empty_cl
+{
+    padding:10px 0;
+    color:#888;
+    }
+    
+.profileContent
+{
+    width:910px;
+    min-height:500px;
+    margin:10px auto;
+    }
+.profileContent .leftMenu
+{
+    width:150px;
+    height:auto;
+    float:left;
+    z-index:2;
+    background:#fff;
+    }
+.profileContent .rightContent
+{
+    width:750px;
+    min-height:500px;
+    border:solid 1px #7d9edb;
+    float:left;
+    z-index:1;
+    }
+a.blueStyle
+{
+    color:#0000ff;
+    }
+a:hover.blueStyle
+{
+    color:#ff0000;
     }

@@ -219,6 +219,11 @@ namespace HHOnline.Framework.Providers
         /// <returns></returns>
         public abstract List<Company> GetCompanys(int comStatus, int comType, string comName);
         /// <summary>
+        /// 根据UserID获取公司信息
+        /// </summary>
+        /// <returns></returns>
+        public abstract Company GetCompanyByUser(int userID);
+        /// <summary>
         /// 获取公司信息
         /// </summary>
         /// <param name="companyID"></param>

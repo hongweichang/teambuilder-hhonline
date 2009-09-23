@@ -85,6 +85,9 @@
     <Compile Include="Controls\IndustrySubList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Controls\CompanyList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\HtmlEditorMode.cs" />
@@ -107,6 +110,9 @@
     <Compile Include="TextEllipsisProvider.cs" />
     <Compile Include="YesNoRadioButtonList.cs" />
     <Compile Include="CompanyStatusList.cs" />
+    <Compile Include="ProfileMenu.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HHOnline.Common\HHOnline.Common.csproj">
