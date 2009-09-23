@@ -17,6 +17,8 @@ public partial class ControlPanel_ControlPanel : HHPage
         this.ShortTitle = "管理中心";
         SetTitle();
         SetTabName(this.ShortTitle);
+        AddJavaScriptInclude("scripts/jquery.cookie.js", false, false);
+        AddJavaScriptInclude("scripts/pages/controlpanel.aspx.js", false, false);
     }
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
     {
