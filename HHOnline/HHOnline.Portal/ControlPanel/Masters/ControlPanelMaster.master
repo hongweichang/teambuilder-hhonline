@@ -17,7 +17,8 @@
                         <LoggedInTemplate>  
                         <div class="head-r1c2">                      
                             欢迎您，<%= Profile.AccountInfo.DisplayName %>！
-                            <a href='<%= ResolveUrl("~") %>main.aspx'>[返回首页]</a>
+                            <a href='<%= ResolveUrl("~") %>main.aspx'>首页</a>&nbsp;|&nbsp;
+                            <a href='<%= ResolveUrl("~") %>controlpanel/controlpanel.aspx'>管理中心</a>
                         </div>
                         <div class="head-r1c3">
                            <a href='<%= ResolveUrl("~") %>controlpanel/logout.aspx'></a>
