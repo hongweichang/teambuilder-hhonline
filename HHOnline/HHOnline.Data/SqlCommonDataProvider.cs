@@ -315,7 +315,7 @@ namespace HHOnline.Data
             elParameters.Add(new ELParameter("@CompanyOrgcode", DbType.String, company.Orgcode));
             elParameters.Add(new ELParameter("@CompanyRegcode", DbType.String, company.Regcode));
             elParameters.Add(new ELParameter("@CompanyStatus", DbType.Int32, company.CompanyStatus));
-            elParameters.Add(new ELParameter("@CompanyMemo", DbType.Int32, company.Remark));
+            elParameters.Add(new ELParameter("@CompanyMemo", DbType.String, company.Remark));
             elParameters.Add(new ELParameter("@Operator", DbType.Int32, GlobalSettings.GetCurrentUser().UserID));
             SerializerData data = company.GetSerializerData();
             elParameters.Add(new ELParameter("@PropertyNames", DbType.String, data.Keys));
