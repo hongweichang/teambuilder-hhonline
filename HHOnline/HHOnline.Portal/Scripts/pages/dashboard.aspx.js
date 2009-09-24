@@ -17,3 +17,6 @@ function changeQA() {
         url: 'profiles/changeqa.aspx?t=' + Math.random()
     });
 }
+$().ready(function() {
+    $.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_dashboard' });
+});

@@ -4,11 +4,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
-using HHOnline.Framework.Web.Enums;
 using HF = HHOnline.Framework;
 using HHOnline.Framework;
-
-public partial class ControlPanel_Users_UserEdit : HHPage
+using HHOnline.Framework.Web.Enums;
+public partial class Pages_Profiles_CompanyUserEdit : HHPage
 {
     static string lastUrl = string.Empty;
     protected void Page_Load(object sender, EventArgs e)
@@ -17,11 +16,10 @@ public partial class ControlPanel_Users_UserEdit : HHPage
         if (!IsPostBack)
         {
             lastUrl = Request.UrlReferrer.ToString();
-            if (!string.IsNullOrEmpty(mode)&&mode.ToLower()=="add")
+            if (!string.IsNullOrEmpty(mode) && mode.ToLower() == "add")
             {
                 ltPwdDesc.Text = "密码为空时将使用\"hhonline\"作为密码！";
                 ltPADesc.Text = "为了密码的安全，请填写密码提示答案！";
-                btnSetStatus.Visible = false;
 
             }
             else
@@ -52,30 +50,9 @@ public partial class ControlPanel_Users_UserEdit : HHPage
         txtFax.Text = u.Fax;
         txtTitle.Text = u.Title;
         txtMemo.Text = u.Remark;
-        if (u.AccountStatus == AccountStatus.Authenticated)
-            btnSetStatus.Text = "禁用";
-        else
-            btnSetStatus.Text = "启用";
-    }
-    protected void btnSetStatus_Click(object sender, EventArgs e)
-    {
-        int userId = int.Parse(Request.QueryString["ID"]);
-        u = Users.GetUser(userId);
-        switch ((sender as Button).Text)
-        {
-            case "启用":
-                u.AccountStatus = AccountStatus.Authenticated;
-                break;
-            case "禁用":
-                u.AccountStatus = AccountStatus.Lockon;
-                break;
-        }
-        Users.UpdateUser(u);
-        BindUser();
     }
     protected void btnEdit_Click(object sender, EventArgs e)
     {
-        int userId = int.Parse(Request.QueryString["ID"]);
         string mode = Request.QueryString["mode"];
         if (!string.IsNullOrEmpty(mode) && mode.ToLower() == "add")
         {
@@ -102,7 +79,7 @@ public partial class ControlPanel_Users_UserEdit : HHPage
                 u.Title = txtTitle.Text.Trim();
                 u.Remark = txtMemo.Text.Trim();
                 u.AccountStatus = AccountStatus.Authenticated;
-                u.CompanyID = userId;
+                u.CompanyID = Profile.AccountInfo.CompanyID;
                 u.CreateTime = DateTime.Now;
                 u.CreateUser = Profile.AccountInfo.UserID;
                 u.UpdateTime = DateTime.Now;
@@ -112,28 +89,29 @@ public partial class ControlPanel_Users_UserEdit : HHPage
                 switch (s)
                 {
                     case CreateUserStatus.Success:
-                        base.ExecuteJs("alert('成功添加新用户!');window.location.href='" + lastUrl + "'", false); 
+                        base.ExecuteJs("msg('成功添加新用户!',true)", false);
                         break;
                     case CreateUserStatus.DisallowedUsername:
-                        base.ExecuteJs("alert('此登录名、显示名被禁止使用，请选择其它名称进行注册!')", false); 
+                        base.ExecuteJs("alert('此登录名、显示名被禁止使用，请选择其它名称进行注册!')", false);
                         break;
-                    case CreateUserStatus.DuplicateUserName: 
-                        base.ExecuteJs("alert('登录名重复，请选择其它名称!')", false); 
+                    case CreateUserStatus.DuplicateUserName:
+                        base.ExecuteJs("alert('登录名重复，请选择其它名称!')", false);
                         break;
                     case CreateUserStatus.DuplicateEmail:
-                        base.ExecuteJs("alert('邮件地址已经被注册，请使用其它邮件地址!')", false); 
+                        base.ExecuteJs("alert('邮件地址已经被注册，请使用其它邮件地址!')", false);
                         break;
-                    case CreateUserStatus.UnknownFailure: 
-                        base.ExecuteJs("alert('发生了未知的错误，无法添加新用户!')", false); 
+                    case CreateUserStatus.UnknownFailure:
+                        base.ExecuteJs("alert('发生了未知的错误，无法添加新用户!')", false);
                         break;
                 }
             }
         }
         else
-        { 
-            if(u==null)
+        {
+            int userId = int.Parse(Request.QueryString["ID"]);
+            if (u == null)
             {
-                u = HF.Users.GetUser(userId); 
+                u = HF.Users.GetUser(userId);
             }
             u.DisplayName = txtDisplayName.Text.Trim();
             u.PasswordQuestion = txtQuestion.Text.Trim();
@@ -149,19 +127,13 @@ public partial class ControlPanel_Users_UserEdit : HHPage
             u.Remark = txtMemo.Text.Trim();
             bool result = HF.Users.UpdateUser(u);
             if (result)
-                base.ExecuteJs("alert('成功更新用户信息！');", false);
+                base.ExecuteJs("msg('成功更新用户信息！',true);", false);
             else
-                base.ExecuteJs("alert('修改用户信息失败！');", false);
+                base.ExecuteJs("msg('修改用户信息失败！');", false);
         }
-    }
-    protected void btnPostBack_Click(object sender, EventArgs e)
-    {
-        if (!string.IsNullOrEmpty(lastUrl))
-            Response.Redirect(lastUrl);
     }
     public override void OnPageLoaded()
     {
-        this.PagePermission = "CorpUserModule-Edit";
         this.PageInfoType = InfoType.IframeInfo;
         SetValidator(true, true, 5000);
         this.AddJavaScriptInclude("scripts/jquery.password.js", false, false);

@@ -46,7 +46,8 @@ public partial class Pages_Profiles_Dashboard : HHPage
     public override void OnPageLoaded()
     {
         this.ShortTitle = "个人信息";
-        this.SetTabName(this.ShortTitle);
+        this.SetTabName(this.ShortTitle); 
+        this.SetTitle();
         AddJavaScriptInclude("scripts/pages/dashboard.aspx.js", false, false);
     }
 }

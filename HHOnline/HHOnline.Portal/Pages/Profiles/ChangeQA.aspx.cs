@@ -27,6 +27,7 @@ public partial class Pages_Profiles_ChangeQA :HHPage
         else
         {
             u.PasswordAnswer = txtNewAnswer.Text.Trim();
+            u.Password = string.Empty;
             if (Users.UpdateUser(u))
                 base.ExecuteJs("msg('成功修改密码提示答案！')", false);
             else
