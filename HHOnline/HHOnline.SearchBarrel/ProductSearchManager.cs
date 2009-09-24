@@ -377,7 +377,7 @@ namespace HHOnline.SearchBarrel
                     indexedCount = 0;
                 }
             }
-            Insert(products, indexPath);
+            Insert(productsForIndex, indexPath);
         }
 
         /// <summary>
@@ -410,13 +410,13 @@ namespace HHOnline.SearchBarrel
             field = new Field(ProductIndexField.ProductID, product.ProductID.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED);
             doc.Add(field);
 
-            field = new Field(ProductIndexField.ProductName, product.ProductName.ToString(), Field.Store.YES, Field.Index.TOKENIZED);
+            field = new Field(ProductIndexField.ProductName, product.ProductName, Field.Store.YES, Field.Index.TOKENIZED);
             doc.Add(field);
 
-            field = new Field(ProductIndexField.ProductContent, product.ProductContent.ToString(), Field.Store.YES, Field.Index.TOKENIZED);
+            field = new Field(ProductIndexField.ProductContent, product.ProductContent, Field.Store.YES, Field.Index.TOKENIZED);
             doc.Add(field);
 
-            field = new Field(ProductIndexField.ProductAbstract, product.ProductAbstract.ToString(), Field.Store.YES, Field.Index.TOKENIZED);
+            field = new Field(ProductIndexField.ProductAbstract, product.ProductAbstract, Field.Store.YES, Field.Index.TOKENIZED);
             doc.Add(field);
 
             if (!GlobalSettings.IsNullOrEmpty(product.ProductKeywords))
@@ -429,13 +429,13 @@ namespace HHOnline.SearchBarrel
                 }
             }
 
-            field = new Field(ProductIndexField.DateCreated, DateTools.DateToString(DateTime.Now, DateTools.Resolution.DAY), Field.Store.YES, Field.Index.TOKENIZED);
+            field = new Field(ProductIndexField.DateCreated, DateTools.DateToString(product.CreateTime, DateTools.Resolution.DAY), Field.Store.YES, Field.Index.TOKENIZED);
             doc.Add(field);
 
             field = new Field(ProductIndexField.BrandID, product.BrandID.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED);
             doc.Add(field);
 
-            field = new Field(ProductIndexField.BrandName, product.BrandName.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED);
+            field = new Field(ProductIndexField.BrandName, product.BrandName ,Field.Store.YES, Field.Index.TOKENIZED);
             doc.Add(field);
 
             return doc;
