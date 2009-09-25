@@ -14,7 +14,6 @@ public partial class ControlPanel_Users_Corps : HHPage
     private readonly string destUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?users-corps";
     protected void Page_Load(object sender, EventArgs e)
     {
-        BuildArray();
         if (!IsPostBack)
         {
             BindLinkButton();
@@ -89,60 +88,6 @@ public partial class ControlPanel_Users_Corps : HHPage
                 btnLockon.CssClass = "active";
             }
         }
-    }
-    object[] _arr = null;
-    void BuildArray()
-    {
-        int length = (int)(CompanyType.Agent | CompanyType.Ordinary | CompanyType.Provider);
-        _arr = new object[length+1];
-
-        List<ComTypeList> ctls = null;
-        ComTypeList ctl = null;
-
-        ctls = new List<ComTypeList>();
-        ctl =  new ComTypeList("agentType", "代理商");
-        ctls.Add(ctl);
-        _arr[(int)(CompanyType.Agent)] = ctls;
-        
-        ctls = new List<ComTypeList>();
-        ctl = new ComTypeList("providerType", "供应商");
-        ctls.Add(ctl);
-        _arr[(int)(CompanyType.Provider)] = ctls;
-
-        ctls = new List<ComTypeList>();
-        ctl = new ComTypeList("originalType", "普通客户");
-        ctls.Add(ctl);
-        _arr[(int)(CompanyType.Ordinary)] = ctls;
-
-        ctls = new List<ComTypeList>();
-        ctl = new ComTypeList("originalType", "普通客户");
-        ctls.Add(ctl);
-        ctl = new ComTypeList("agentType", "代理商");
-        ctls.Add(ctl);
-        _arr[(int)(CompanyType.Agent|CompanyType.Ordinary)] = ctls;
-
-        ctls = new List<ComTypeList>();
-        ctl = new ComTypeList("originalType", "普通客户");
-        ctls.Add(ctl);
-        ctl = new ComTypeList("providerType", "供应商");
-        ctls.Add(ctl);
-        _arr[(int)(CompanyType.Ordinary|CompanyType.Provider)] = ctls;
-
-        ctls = new List<ComTypeList>();
-        ctl = new ComTypeList("agentType", "代理商");
-        ctls.Add(ctl);
-        ctl = new ComTypeList("providerType", "供应商");
-        ctls.Add(ctl);
-        _arr[(int)(CompanyType.Agent | CompanyType.Provider)] = ctls;
-
-        ctls = new List<ComTypeList>();
-        ctl = new ComTypeList("originalType", "普通客户");
-        ctls.Add(ctl);
-        ctl = new ComTypeList("agentType", "代理商");
-        ctls.Add(ctl);
-        ctl = new ComTypeList("providerType", "供应商");
-        ctls.Add(ctl);
-        _arr[(int)(CompanyType.Agent | CompanyType.Ordinary | CompanyType.Provider)] = ctls;
     }
     CompanyStatus GetComStatus()
     {
@@ -225,7 +170,7 @@ public partial class ControlPanel_Users_Corps : HHPage
     {
         string re = string.Empty;
         CompanyType ct = (CompanyType)comType;
-        List<ComTypeList> ctls = _arr[(int)ct] as List<ComTypeList>;
+        List<ComTypeList> ctls = CompanyTypeKeyValue.Instance[(int)ct] as List<ComTypeList>;
         ComTypeList ctl = null;
         for (int i = 0; i < ctls.Count; i++)
         {
@@ -268,28 +213,4 @@ public partial class ControlPanel_Users_Corps : HHPage
         base.OnPermissionChecking(e);
     }
     #endregion
-}
-
-
-internal class ComTypeList
-{
-    public ComTypeList() { }
-    public ComTypeList(string cssClass, string title)
-    {
-        this._CssClass = cssClass;
-        this._Title = title;
-    }
-    private string _CssClass;
-    public string CssClass
-    {
-        get { return _CssClass; }
-        set { _CssClass = value; }
-    }
-
-    private string _Title;
-    public string Title
-    {
-        get { return _Title; }
-        set { _Title = value; }
-    }
 }
