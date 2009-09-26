@@ -76,10 +76,11 @@ namespace HHOnline.SearchBarrel
                 query.Title = SearchHelper.LuceneKeywordsScrubber(query.Title);
                 if (!string.IsNullOrEmpty(query.Title))
                 {
-                    string[] searchFieldsForKeyword = new string[3];
+                    string[] searchFieldsForKeyword = new string[4];
                     searchFieldsForKeyword[0] = NewsIndexField.Title;
                     searchFieldsForKeyword[1] = NewsIndexField.SubTitle;
                     searchFieldsForKeyword[2] = NewsIndexField.Abstract;
+                    searchFieldsForKeyword[3] = NewsIndexField.Keywords;
 
                     MultiFieldQueryParser articleWordQueryParser = new MultiFieldQueryParser(searchFieldsForKeyword, SearchHelper.GetChineseAnalyzer());
                     articleWordQueryParser.SetLowercaseExpandedTerms(true);
