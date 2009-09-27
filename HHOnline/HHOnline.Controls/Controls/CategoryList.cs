@@ -51,21 +51,45 @@ namespace HHOnline.Controls
             }
             sb.AppendLine("<table cellpadding=\"0\" cellspacing=\"0\" class=\""+_CssClass+"\">");
             string catId = string.Empty;
+            int length = pcList.Count;
+            int dev = length / 2;
+            int left = length % 2;
+            for (int i = 0; i < dev; i++)
+            {
+                pc = pcList[i];
+                sb.Append("<tr>");
+                sb.Append(BindCategory(pc, nav));
+                pc = pcList[i + dev + left];
+                sb.Append(BindCategory(pc, nav));
+                sb.Append("</tr>");
+            }
+
+            if (left == 1)
+            {
+                pc = pcList[length - 1];
+                sb.Append("<tr>");
+                sb.Append(BindCategory(pc, nav));
+                sb.Append("<td>&nbsp;</td>");
+                sb.Append("</tr>");
+            }
+
+            #region -Ignore-
+            /*
             for (int i = 0; i < pcList.Count; i++)
             {
                 pc = pcList[i];
                 if (i % _Columns == 0)
                     sb.AppendLine("<tr>");
-                catId =  GlobalSettings.Encrypt(pc.CategoryID.ToString());
+                catId = GlobalSettings.Encrypt(pc.CategoryID.ToString());
                 sb.AppendLine("<td>");
-                sb.AppendLine("<div><a href=\""+nav+"&ID=" + catId + "\" target=\"_blank\">" + pc.CategoryName + "</a></div>");
+                sb.AppendLine("<div><a href=\"" + nav + "&ID=" + catId + "\" target=\"_blank\">" + pc.CategoryName + "</a></div>");
                 pcSubList = GetSubCategories(pc.CategoryID);
                 for (int j = 0; j < pcSubList.Count; j++)
                 {
                     pc = pcSubList[j];
                     catId = GlobalSettings.Encrypt(pc.CategoryID.ToString());
                     sb.AppendLine("<a href=\"" + nav + "&ID=" + catId + "\" target=\"_blank\">" + pc.CategoryName + "</a>");
-                    if (j != pcSubList.Count-1)
+                    if (j != pcSubList.Count - 1)
                     {
                         sb.Append("&nbsp;|&nbsp;");
                     }
@@ -76,10 +100,32 @@ namespace HHOnline.Controls
                     sb.AppendLine("</tr>");
 
             }
+             * */
+            #endregion
+
             sb.AppendLine("</table>");
             return sb.ToString();
         }
-
+        string BindCategory(ProductCategory pc,string nav)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<td>");
+            string catId = GlobalSettings.Encrypt(pc.CategoryID.ToString());
+            sb.AppendLine("<div><a href=\"" + nav + "&ID=" + catId + "\" target=\"_blank\">" + pc.CategoryName + "</a></div>");
+            List<ProductCategory> pcSubList = GetSubCategories(pc.CategoryID);
+            for (int j = 0; j < pcSubList.Count; j++)
+            {
+                pc = pcSubList[j];
+                catId = GlobalSettings.Encrypt(pc.CategoryID.ToString());
+                sb.AppendLine("<a href=\"" + nav + "&ID=" + catId + "\" target=\"_blank\">" + pc.CategoryName + "</a>");
+                if (j != pcSubList.Count - 1)
+                {
+                    sb.Append("&nbsp;|&nbsp;");
+                }
+            }
+            sb.AppendLine("</td>");
+            return sb.ToString();
+        }
         List<ProductCategory> GetSubCategories(int catId)
         {
             List<ProductCategory> pcList = new List<ProductCategory>();

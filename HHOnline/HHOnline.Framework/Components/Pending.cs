@@ -10,38 +10,7 @@ namespace HHOnline.Framework
         /// <summary>
         /// 创建<see cref="HHOnline.Framework.Pending"/>的新实例
         /// </summary>
-        public Pending() { 
-            
-        }
-        /// <summary>
-        /// 创建<see cref="HHOnline.Framework.Pending"/>的新实例
-        /// </summary>
-        /// <param name="_CompanyID">公司编号</param>
-        /// <param name="_CompanyType">公司类型</param>
-        /// <param name="_CreatedTime">创建时间</param>
-        /// <param name="_Status">申请审核状态</param>
-        /// <param name="_Description">更新状态描述</param>
-        public Pending(int _CompanyID, CompanyType _CompanyType, DateTime _CreatedTime, PendingStatus _Status, string _Description)
-            : this(0, _CompanyID, _CompanyType, _CreatedTime, _Status, _Description)
-        { }
-        /// <summary>
-        /// 创建<see cref="HHOnline.Framework.Pending"/>的新实例
-        /// </summary>
-        /// <param name="_ID">编号</param>
-        /// <param name="_CompanyID">公司编号</param>
-        /// <param name="_CompanyType">公司类型</param>
-        /// <param name="_CreatedTime">创建时间</param>
-        /// <param name="_Status">申请审核状态</param>
-        /// <param name="_Description">更新状态描述</param>
-        public Pending(int _ID,int _CompanyID,CompanyType _CompanyType,DateTime _CreatedTime,PendingStatus _Status,string _Description) 
-        {
-            this._ID = _ID;
-            this._CompanyID = _CompanyID;
-            this._CompanyType = _CompanyType;
-            this._CreatedTime = _CreatedTime;
-            this._Status = _Status;
-            this._Description = _Description;
-        }
+        public Pending() { }
         private int _ID;
         /// <summary>
         /// 编号
@@ -69,15 +38,6 @@ namespace HHOnline.Framework
             get { return _CompanyType; }
             set { _CompanyType = value; }
         }
-        private DateTime _CreatedTime;
-        /// <summary>
-        /// 创建日期
-        /// </summary>
-        public DateTime CreatedTime
-        {
-            get { return _CreatedTime; }
-            set { _CreatedTime = value; }
-        }
         private PendingStatus _Status;
         /// <summary>
         /// 申请审核状态
@@ -95,6 +55,51 @@ namespace HHOnline.Framework
         {
             get { return _Description; }
             set { _Description = value; }
+        }
+        private string _DenyReason;
+        /// <summary>
+        /// 状态更新描述
+        /// </summary>
+        public string DenyReason
+        {
+            get { return _DenyReason; }
+            set { _DenyReason = value; }
+        }
+        private int _CreateUser;
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        public int CreateUser
+        {
+            get { return _CreateUser; }
+            set { _CreateUser = value; }
+        }
+        private DateTime _CreateTime;
+        /// <summary>
+        /// 创建日期
+        /// </summary>
+        public DateTime CreateTime
+        {
+            get { return _CreateTime; }
+            set { _CreateTime = value; }
+        }
+        private int _UpdateUser;
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        public int UpdateUser
+        {
+            get { return _UpdateUser; }
+            set { _UpdateUser = value; }
+        }
+        private DateTime _UpdateTime;
+        /// <summary>
+        /// 更新日期
+        /// </summary>
+        public DateTime UpdateTime
+        {
+            get { return _UpdateTime; }
+            set { _UpdateTime = value; }
         }
     }
 }

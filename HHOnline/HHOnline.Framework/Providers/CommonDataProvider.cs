@@ -534,8 +534,25 @@ namespace HHOnline.Framework.Providers
 
         #region -Pending-
         public abstract List<Pending> PendingsLoad();
+        public abstract Pending PendingGet(int companyID);
         public abstract bool PendingAdd(Pending pending);
         public abstract bool PendingUpdate(Pending pending);
+        public static Pending ReadPending(IDataReader reader)
+        {
+            return new Pending()
+            {
+                ID = DataRecordHelper.GetInt32(reader, "ID"),
+                CompanyID = DataRecordHelper.GetInt32(reader, "CompanyID"),
+                CompanyType = (CompanyType)DataRecordHelper.GetInt32(reader, "CompanyType"),
+                Status = (PendingStatus)DataRecordHelper.GetInt32(reader, "Status"),
+                CreateTime = DataRecordHelper.GetDateTime(reader, "CreateTime"),
+                CreateUser = DataRecordHelper.GetInt32(reader, "CreateUser"),
+                DenyReason = DataRecordHelper.GetString(reader, "DenyReason"),
+                Description = DataRecordHelper.GetString(reader, "Description"),
+                UpdateTime = DataRecordHelper.GetDateTime(reader, "UpdateTime"),
+                UpdateUser = DataRecordHelper.GetInt32(reader, "UpdateUser")
+            };
+        }
         #endregion
     }
 }

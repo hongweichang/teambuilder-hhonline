@@ -15,10 +15,41 @@ public partial class Pages_Profiles_CompanyTypeView : HHPage
     }
     void BindCompanyType()
     {
-        User u = Profile.AccountInfo;
-        ltComType.Text = GetCompantType(u.Company.CompanyType);
+        if (Profile.AccountInfo.UserType == UserType.InnerUser)
+        {
+            mbNC.ShowMsg("内部用户无法查看客户状态！", System.Drawing.Color.Red);
+            pnlManager.Visible = false;
+        }
+        else
+        {
+            mbNC.HideMsg();
+            User u = Profile.AccountInfo;
+            if (u.Company.CompanyType == CompanyType.Agent ||
+                u.Company.CompanyType == (CompanyType.Agent | CompanyType.Ordinary) ||
+                u.Company.CompanyType == (CompanyType.Agent | CompanyType.Ordinary | CompanyType.Provider))
+            {
+                btnAgent.Visible = false;
+            }
+            if (u.Company.CompanyType == CompanyType.Provider ||
+               u.Company.CompanyType == (CompanyType.Provider | CompanyType.Ordinary) ||
+               u.Company.CompanyType == (CompanyType.Agent | CompanyType.Ordinary | CompanyType.Provider))
+            {
+                btnProvider.Visible = false;
+            }
+            ltComType.Text = GetCompantType(u.Company.CompanyType);
+
+            Pending pend = Pendings.PendingGet(u.CompanyID);
+            if (pend == null)
+            {
+                ltPendingCom.Text = "--";
+            }
+            else
+            {
+                CompanyQualification q;
+                
+            }
+        }
     }
-    object[] _arr = null;
    
     string tempUserC = "<ul class=\"companyTypeList\">{0}</ul>";
     string tempUser = "<li><span class=\"{0}\" title=\"{1}\" /></span></li>";

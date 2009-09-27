@@ -940,6 +940,19 @@ namespace HHOnline.Data
         {
             return null;
         }
+        public override Pending PendingGet(int companyID)
+        {
+            Pending pending = null;
+            using (IDataReader reader = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SPending_Get", 
+                new ELParameter("CompanyID",DbType.Int32, companyID)))
+            {
+                while (reader.Read())
+                {
+                    pending = ReadPending(reader);
+                }
+            }
+            return pending;
+        }
         public override bool PendingAdd(Pending pending)
         {
             return false;

@@ -18,6 +18,6 @@ namespace HHOnline.Framework
         /// <summary>
         /// 审核通过
         /// </summary>
-        Inspect
+        Inspect = 3
     }
 }
