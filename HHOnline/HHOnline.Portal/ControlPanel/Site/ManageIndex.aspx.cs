@@ -23,6 +23,7 @@ public partial class ControlPanel_Site_ManageIndex : HHPage
         this.IndexReportRepeater.ItemDataBound += new RepeaterItemEventHandler(IndexReportRepeater_ItemDataBound);
         this.IndexReportRepeater.ItemCommand += new RepeaterCommandEventHandler(IndexReportRepeater_ItemCommand);
         this.IndexReportRepeater.DataSource = IndexReportManager.GetIndexReports();
+        this.IndexReportRepeater.DataBind();
     }
 
     void IndexReportRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)

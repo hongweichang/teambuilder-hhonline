@@ -7,7 +7,7 @@
 <asp:Content ID="ContentOpts" ContentPlaceHolderID="cphOpts" runat="Server">
     <asp:LinkButton ID="lbBuildAllIndex" runat="server" SkinID="lnkopts" OnClick="lbBuildAllIndex_Click"
         OnClientClick="return confirm('确定要重建所有索引吗？')">
-        <span>重建所有索引</span>
+        <span>重建索引</span>
     </asp:LinkButton>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
@@ -39,12 +39,10 @@
                 <asp:Label ID="lblIndexModify" runat="server" />
             </li>
             <li>
-                <br />
                 <asp:Label ID="lblIndexKey" Visible="false" runat="server" />
-                <asp:LinkButton ID="lbBuildIndex" runat="server" SkinID="lnkopts" CommandName="BuildIndex"
-                    OnClientClick="return confirm('确定要重建索引吗？')" PostBackUrl="#">
-                    <span>重建索引</span>
-                </asp:LinkButton>
+                <asp:Button ID="lbBuildIndex" runat="server" Text="重建索引" CommandName="BuildIndex" OnClientClick="return confirm('确定要重建索引吗？')"/>
+                <br />
+                <br />
             </li>
         </ItemTemplate>
         <FooterTemplate>
