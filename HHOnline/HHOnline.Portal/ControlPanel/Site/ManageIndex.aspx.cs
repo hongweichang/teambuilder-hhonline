@@ -58,7 +58,8 @@ public partial class ControlPanel_Site_ManageIndex : HHPage
 
     protected void lbBuildAllIndex_Click(object sender, EventArgs e)
     {
-
+        IndexReportManager.BuildIndex();
+        BindData();
     }
 
     public override void OnPageLoaded()
