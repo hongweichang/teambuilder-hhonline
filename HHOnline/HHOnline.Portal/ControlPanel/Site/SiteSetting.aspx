@@ -64,7 +64,7 @@
                 <hc:Editor ID="txtService" runat="server" EditorMode="Enhanced"></hc:Editor>
             </td>
         </tr>
-        <tr>
+        <tr runat="server" visible="false">
             <th>
                 展示图像
             </th>
@@ -72,7 +72,7 @@
                 <asp:Image runat="server" ID="imgShow" Width="80" Height="80" />
             </td>
         </tr>
-        <tr>
+        <tr runat="server" visible="false">
             <th>
                 &nbsp;
             </th>
