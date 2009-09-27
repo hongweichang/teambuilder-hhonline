@@ -67,58 +67,58 @@
 
     void Application_Error(object sender, EventArgs e)
     {
+        /*
+                //在出现未处理的错误时运行的代码
+                HttpApplication application = (HttpApplication)sender;
+                HttpContext context = application.Context;
 
-        //在出现未处理的错误时运行的代码
-        HttpApplication application = (HttpApplication)sender;
-        HttpContext context = application.Context;
+                Exception ex = context.Server.GetLastError();
+                HHException hhException = null;
+                if (ex is HHException)
+                {
+                    hhException = ex as HHException;
+                }
+                else if (ex is HttpException)
+                {
+                    HttpException he = ex as HttpException;
+                    if (he.GetHttpCode() == 404)
+                        return;
+                }
 
-        Exception ex = context.Server.GetLastError();
-        HHException hhException = null;
-        if (ex is HHException)
-        {
-            hhException = ex as HHException;
-        }
-        else if (ex is HttpException)
-        {
-            HttpException he = ex as HttpException;
-            if (he.GetHttpCode() == 404)
-                return;
-        }
+                if (hhException == null)
+                {
+                    if (ex.GetBaseException() != null && ex.GetBaseException() is HHException)
+                    {
+                        hhException = ex.GetBaseException() as HHException;
+                    }
+                    else if (ex.InnerException != null && ex.InnerException is HHException)
+                    {
+                        hhException = ex.GetBaseException() as HHException;
+                    }
+                    else
+                    {
+                        if (User.Identity.IsAuthenticated)
+                            hhException = new HHException(ExceptionType.UnknownError, ex.Message, ex.InnerException);
+                        else
+                            hhException = new HHException(ExceptionType.UserUnAuthenticated, "用户未登录，无法完成所请求的操作！");
+                    }
+                }
 
-        if (hhException == null)
-        {
-            if (ex.GetBaseException() != null && ex.GetBaseException() is HHException)
-            {
-                hhException = ex.GetBaseException() as HHException;
-            }
-            else if (ex.InnerException != null && ex.InnerException is HHException)
-            {
-                hhException = ex.GetBaseException() as HHException;
-            }
-            else
-            {
-                if (User.Identity.IsAuthenticated)
-                    hhException = new HHException(ExceptionType.UnknownError, ex.Message, ex.InnerException);
+                int et = (int)hhException.ExceptionType;
+                //messages
+                if (et >= 512 && et < 1024)
+                {
+                    Server.Transfer("~/pages/messages/info.aspx");
+                }
+                else if (et == 1027)
+                {
+                    Server.Transfer("~/pages/messages/normalinfo.aspx");
+                }
                 else
-                    hhException = new HHException(ExceptionType.UserUnAuthenticated, "用户未登录，无法完成所请求的操作！");
-            }
-        }
-
-        int et = (int)hhException.ExceptionType;
-        //messages
-        if (et >= 512 && et < 1024)
-        {
-            Server.Transfer("~/pages/messages/info.aspx");
-        }
-        else if (et == 1027)
-        {
-            Server.Transfer("~/pages/messages/normalinfo.aspx");
-        }
-        else
-        {
-            hhException.Log();
-            Server.Transfer("~/pages/messages/error.aspx");
-        }
+                {
+                    hhException.Log();
+                    Server.Transfer("~/pages/messages/error.aspx");
+                }*/
     }
 
     void Session_Start(object sender, EventArgs e)

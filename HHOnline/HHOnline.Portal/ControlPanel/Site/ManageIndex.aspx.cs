@@ -18,41 +18,59 @@ public partial class ControlPanel_Site_ManageIndex : HHPage
         }
     }
 
-    void BindData()
+    protected void BindData()
     {
-        this.IndexReportRepeater.ItemDataBound += new RepeaterItemEventHandler(IndexReportRepeater_ItemDataBound);
-        this.IndexReportRepeater.ItemCommand += new RepeaterCommandEventHandler(IndexReportRepeater_ItemCommand);
         this.IndexReportRepeater.DataSource = IndexReportManager.GetIndexReports();
         this.IndexReportRepeater.DataBind();
     }
 
-    void IndexReportRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+    protected void IndexReportRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
-        if (e.CommandName == "BuildIndex")
+
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            IndexFileReport fileReport = e.Item.DataItem as IndexFileReport;
-            if (fileReport != null)
+            if (e.CommandName == "BuildIndex")
             {
+                IndexFileReport fileReport = e.Item.DataItem as IndexFileReport;
+                if (fileReport == null)
+                {
+                    string key = "";
+                    Label lblIndexKey = e.Item.FindControl("lblIndexKey") as Label;
+                    key = lblIndexKey.Text.Trim();
+                    if (string.IsNullOrEmpty(key))
+                    {
+                        Button lkBuild = e.Item.FindControl("lbBuildIndex") as Button;
+                        key = lkBuild.CommandArgument;
+                    }
+                    fileReport = new IndexFileReport(key);
+                }
                 fileReport.BuildIndex();
                 BindData();
             }
         }
     }
 
-    void IndexReportRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    protected void IndexReportRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        IndexFileReport fileReport = e.Item.DataItem as IndexFileReport;
-        if (fileReport != null)
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            Label lblIndexName = e.Item.FindControl("lblIndexName") as Label;
-            Label lblIndexPath = e.Item.FindControl("lblIndexPath") as Label;
-            Label lblIndexLength = e.Item.FindControl("lblIndexLength") as Label;
-            Label lblIndexModify = e.Item.FindControl("lblIndexModify") as Label;
-            Label lblIndexKey = e.Item.FindControl("lblIndexKey") as Label;
-            lblIndexName.Text = fileReport.SearchName;
-            lblIndexPath.Text = fileReport.PhysicalIndexDirectory;
-            lblIndexLength.Text = GlobalSettings.FormatFriendlyFileSize(fileReport.IndexFileSize);
-            lblIndexModify.Text = fileReport.LastModified.ToString("yyyy-MM-dd HH:mm");
+            IndexFileReport fileReport = e.Item.DataItem as IndexFileReport;
+            if (fileReport != null)
+            {
+                Label lblIndexName = e.Item.FindControl("lblIndexName") as Label;
+                Label lblIndexPath = e.Item.FindControl("lblIndexPath") as Label;
+                Label lblIndexLength = e.Item.FindControl("lblIndexLength") as Label;
+                Label lblIndexModify = e.Item.FindControl("lblIndexModify") as Label;
+                Label lblIndexKey = e.Item.FindControl("lblIndexKey") as Label;
+                Button lkBuild = e.Item.FindControl("lbBuildIndex") as Button;
+                lblIndexKey.Text = fileReport.SearchKey;
+                if (lkBuild != null)
+                    lkBuild.CommandArgument = fileReport.SearchKey;
+                lblIndexName.Text = fileReport.SearchName;
+                lblIndexPath.Text = fileReport.PhysicalIndexDirectory;
+                lblIndexLength.Text = GlobalSettings.FormatFriendlyFileSize(fileReport.IndexFileSize);
+                lblIndexModify.Text = fileReport.LastModified.ToString("yyyy-MM-dd HH:mm");
+            }
         }
     }
 

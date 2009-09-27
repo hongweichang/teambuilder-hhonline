@@ -21,6 +21,7 @@ namespace HHOnline.SearchBarrel
             physicalIndexDirectory = searchSetting.PhysicalIndexDirectory;
             indexFileDirectory = searchSetting.IndexFileDirectory;
             searchName = searchSetting.SearchName;
+            this.searchKey = searchKey;
             if (Directory.Exists(physicalIndexDirectory))
             {
                 FileInfo[] _indexFiles = (new DirectoryInfo(physicalIndexDirectory)).GetFiles("*.*");
@@ -112,6 +113,16 @@ namespace HHOnline.SearchBarrel
         public string SearchName
         {
             get { return searchName; }
+        }
+
+        private string searchKey = null;
+
+        /// <summary>
+        /// 查询Key
+        /// </summary>
+        public string SearchKey
+        {
+            get { return searchKey; }
         }
     }
 }

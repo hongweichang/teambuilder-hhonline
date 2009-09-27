@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/ControlPanel/Masters/ControlPanelMaster.master"
     AutoEventWireup="true" CodeFile="ManageIndex.aspx.cs" Inherits="ControlPanel_Site_ManageIndex"
-    Title="无标题页" %>
+    Title="索引管理" %>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
@@ -11,7 +11,8 @@
     </asp:LinkButton>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
-    <asp:Repeater runat="server" ID="IndexReportRepeater">
+    <asp:Repeater runat="server" ID="IndexReportRepeater" OnItemDataBound="IndexReportRepeater_ItemDataBound"
+        OnItemCommand="IndexReportRepeater_ItemCommand">
         <HeaderTemplate>
             <h3>
                 索引状态</h3>
@@ -40,7 +41,8 @@
             </li>
             <li>
                 <asp:Label ID="lblIndexKey" Visible="false" runat="server" />
-                <asp:Button ID="lbBuildIndex" runat="server" Text="重建索引" CommandName="BuildIndex" OnClientClick="return confirm('确定要重建索引吗？')"/>
+                <asp:Button ID="lbBuildIndex" runat="server" Text="重建索引" CommandName="BuildIndex"
+                    OnClientClick="return confirm('确定要重建索引吗？')" />
                 <br />
                 <br />
             </li>
