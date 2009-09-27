@@ -117,13 +117,20 @@
         <asp:Button ID="Button37" runat="server" OnClick="Button37_Click" Text="Get All Category" />
         <asp:Button ID="Button38" runat="server" OnClick="Button38_Click" Text="Get All Article" />
         <asp:Button ID="Button42" runat="server" onclick="Button42_Click" 
-            Text="Button" />
-        <hc:Editor EditorMode="Enhanced" runat="server" ID="txtEditor" />
+            Text="商品分词初始化" />
         <asp:Button ID="Button43" runat="server" onclick="Button43_Click" 
-            style="margin-bottom: 0px" Text="Button" />
+            style="margin-bottom: 0px" Text="商品查询" />
+        <br />
+        <asp:Button ID="Button44" runat="server" onclick="Button44_Click" 
+            Text="资讯分词初始化" />
+        <asp:Button ID="Button45" runat="server" onclick="Button45_Click" 
+            Text="资讯查询" />
+        <br />
+        <br />
         <a href="javascript:void(0)" onmousedown="<%=txtEditor.GetContentInsertScript("abc") %>">
             Insert Content</a> <a href="javascript:InsertContentToHtmlEditor('<b>abc</b>')">Insert
                 Content</a>
+        <hc:Editor EditorMode="Enhanced" runat="server" ID="txtEditor" />
     </div>
     </form>
 </body>

@@ -443,4 +443,14 @@ public partial class Index : HHPage
         query.ProductNameFilter = "黑 sd";
         SearchResultDataSet<Product> products = HHOnline.SearchBarrel.ProductSearchManager.Search(query);
     }
+    protected void Button44_Click(object sender, EventArgs e)
+    {
+        HHOnline.SearchBarrel.NewsSearchManager.InitializeIndex();
+    }
+    protected void Button45_Click(object sender, EventArgs e)
+    {
+        ArticleQuery query = new ArticleQuery();
+        query.Title = "化工";
+        SearchResultDataSet<Article> articles = HHOnline.SearchBarrel.NewsSearchManager.Search(query);
+    }
 }
