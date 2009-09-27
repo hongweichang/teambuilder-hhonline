@@ -353,7 +353,7 @@ namespace HHOnline.Framework
         /// <param name="planText"></param>
         /// <param name="filterPlus">是否替换特殊字符，如'+'，以免在Url传递中发生错误</param>
         /// <returns></returns>
-        public static string Encrypt(string planText,bool filterPlus)
+        public static string Encrypt(string planText, bool filterPlus)
         {
             try
             {
@@ -732,6 +732,21 @@ namespace HHOnline.Framework
             {
                 return MapPath(HHConfiguration.GetConfig()["indexDirectory"].ToString());
             }
+        }
+        #endregion
+
+        #region FileSize
+        public static string FormatFriendlyFileSize(double fileSize)
+        {
+            if (fileSize > 0.0)
+            {
+                if (fileSize > 1048576.0)
+                {
+                    return string.Format("{0:F2}M", fileSize / 1048576.0);
+                }
+                return string.Format("{0:F2}K", fileSize / 1024.0);
+            }
+            return string.Empty;
         }
         #endregion
     }

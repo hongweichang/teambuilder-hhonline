@@ -54,7 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IndexSearchReport.cs" />
+    <Compile Include="IndexReportManager.cs" />
+    <Compile Include="IndexFileReport.cs" />
     <Compile Include="NewsIndexField.cs" />
     <Compile Include="NewsIndexTask.cs" />
     <Compile Include="ProductIndexTask.cs" />

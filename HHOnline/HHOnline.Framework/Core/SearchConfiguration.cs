@@ -127,6 +127,7 @@ namespace HHOnline.Framework
                                 throw new HHException(ExceptionType.TypeInitFail, itemType + "初始化异常", new TypeInitializationException(t.ToString(), null));
                             setting.IndexFileDirectory = indexFileDirectory;
                             setting.SearchName = itemText;
+                            setting.SearchKey = itemName;
                             searchSettings.Add(itemName, setting);
                         }
                     }

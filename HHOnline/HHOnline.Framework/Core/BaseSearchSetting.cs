@@ -31,6 +31,11 @@ namespace HHOnline.Framework
         }
 
         /// <summary>
+        /// 查询设置Key
+        /// </summary>
+        public virtual string SearchKey { get; set; }
+
+        /// <summary>
         /// 查询名称
         /// </summary>
         public virtual string SearchName { get; set; }
