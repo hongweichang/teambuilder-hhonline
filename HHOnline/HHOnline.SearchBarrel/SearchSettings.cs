@@ -83,7 +83,7 @@ namespace HHOnline.SearchBarrel
 
         public override void InitializeIndex(string indexPath)
         {
-
+            NewsSearchManager.InitializeIndex(indexPath);
         }
     }
 }

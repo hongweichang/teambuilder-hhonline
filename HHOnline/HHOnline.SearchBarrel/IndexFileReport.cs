@@ -20,6 +20,7 @@ namespace HHOnline.SearchBarrel
 
             physicalIndexDirectory = searchSetting.PhysicalIndexDirectory;
             indexFileDirectory = searchSetting.IndexFileDirectory;
+            searchName = searchSetting.SearchName;
             if (Directory.Exists(physicalIndexDirectory))
             {
                 FileInfo[] _indexFiles = (new DirectoryInfo(physicalIndexDirectory)).GetFiles("*.*");
