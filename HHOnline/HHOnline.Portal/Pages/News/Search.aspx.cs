@@ -73,7 +73,7 @@ public partial class Pages_News_Search : HHPage
 		}
 	}
 
-	void BindSearchs()
+	private void BindSearchs()
 	{
 		string query = Request.QueryString["w"];
 		if (!string.IsNullOrEmpty(query))
