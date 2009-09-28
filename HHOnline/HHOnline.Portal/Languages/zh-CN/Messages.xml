@@ -119,6 +119,21 @@
     <title>模块初始化异常</title>
     <body>抱歉，模块初始化发生异常，请检查配置。</body>
   </message>
+  <message id="130">
+    <!--TypeNotFount-->
+    <title>类型未找到</title>
+    <body>程序执行过程中发生了异常，Type 值未找到。</body>
+  </message>
+  <message id="131">
+    <!--TypeInitFail-->
+    <title>类型初始化异常</title>
+    <body>程序执行过程中发生了异常，类型初始化异常。</body>
+  </message>
+  <message id="132">
+    <!--OperationError-->
+    <title>操作失败</title>
+    <body>程序执行过程中发生了异常，您所请求的操作无法完成。</body>
+  </message>
 
 
   <message id="512">

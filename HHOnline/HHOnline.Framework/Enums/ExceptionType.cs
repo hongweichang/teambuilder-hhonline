@@ -134,6 +134,10 @@ namespace HHOnline.Framework
         /// 类型初始化异常
         /// </summary>
         TypeInitFail =131,
+        /// <summary>
+        /// 操作失败
+        /// </summary>
+        OperationError=132,
         #endregion
 
         #region -信息提示512~1023-
