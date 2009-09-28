@@ -13,7 +13,7 @@
             <div class="search-search search-m search">
                 <div class="search-icon">
                     &nbsp;</div>
-                <asp:LinkButton ID="lnkSearch" runat="server" Text="搜索"></asp:LinkButton>
+                <a id="searchArticle" href="javascript:void(0)" >搜索</a>
             </div>
             <div class="search-right search">
             </div>
