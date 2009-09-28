@@ -21,6 +21,13 @@ function searchPruduct(searchText,maskText) {
     }
     window.location.href = relativeUrl + 'pages/view.aspx?product-search&w=' + encodeURIComponent(_searchText);
 }
+function searchAruduct(searchText,maskText) {
+    var _searchText = $.trim(searchText.val())
+    if (_searchText == '' || _searchText == maskText) {
+        return;
+    }
+    window.location.href = relativeUrl + 'pages/view.aspx?news-search&w=' + encodeURIComponent(_searchText);
+}
 $().ready(function() {
     var n = $('#headerNav');
     n.find('a').click(function() {
@@ -52,5 +59,10 @@ $().ready(function() {
     $('#searchProduct').click(function() {
         this.blur();
         searchPruduct(s1, mk1);
+    })
+
+    $('#searchAroduct').click(function() {
+        this.blur();
+        searchAruduct(s2, mk2);
     })
 });
