@@ -20,7 +20,7 @@
 			<asp:DataList ID="dlArticle" runat="server" OnItemDataBound="dlArticle_ItemDataBound"
 				RepeatColumns="1" RepeatDirection="Horizontal" RepeatLayout="Flow">
 				<ItemTemplate>
-					<div class="articleGridShow">
+					<div class="productGridShow">
 						<asp:Image BorderWidth="4" BorderColor="#dedede" ID="imgArticle" runat="server" />
 						<div class="productTitle">
 							<div class="productTitle-r1">
@@ -39,9 +39,9 @@
 						<%--<div class="productPrice price">
 							<asp:Literal ID="ltPrice" runat="server"></asp:Literal></div>--%>
 						<div class="productBrand">
-							分类： <a href='view.aspx?news-newslist&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("Category").ToString()) %>'
+							分类： <a href='view.aspx?news-newslist&cate=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("Category").ToString()) %>'
 								target="_blank">
-								<%# Eval("BrandName")%>
+								<%# Eval("CategoryObject")%>
 							</a>
 						</div>
 					</div>
