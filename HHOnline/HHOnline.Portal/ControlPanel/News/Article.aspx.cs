@@ -158,19 +158,35 @@ public partial class ControlPanel_News_Article : HHPage
 		if (e.Row.RowType == DataControlRowType.DataRow)
 		{
 			Article article = e.Row.DataItem as Article;
-			Image picture = e.Row.FindControl("imgPicture") as Image;
 
-			if (picture != null)
-			{
-				picture.ImageUrl = article.GetDefaultImageUrl((int)picture.Width.Value, (int)picture.Height.Value);
-			}
+            if (article != null)
+            {
+                Image image = e.Row.FindControl("imgPicture") as Image;
 
-			HyperLink hyName = e.Row.FindControl("hlName") as HyperLink;
-			if (hyName != null)
-			{
-				hyName.Text = article.Title;
-				hyName.NavigateUrl = "#";
-			}
+                if (image != null)
+                {
+                    //image.ImageUrl = article.GetDefaultImageUrl((int)image.Width.Value, (int)image.Height.Value);
+                    // 获取附件
+                    ArticleAttachment attachment = ArticleAttachments.GetAttachment(article.Image);
+                    if (attachment != null)
+                    {
+                        string imgPath = "../FileStore/" + ArticleAttachments.FileStoreKey + "/" + attachment.FileName;
+                        image.ImageUrl = imgPath;
+                        image.Visible = true;
+                    }
+                    else
+                    {
+                        image.Visible = false;
+                    }
+                }
+
+                HyperLink hyName = e.Row.FindControl("hlName") as HyperLink;
+                if (hyName != null)
+                {
+                    hyName.Text = article.Title;
+                    hyName.NavigateUrl = "#";
+                }
+            }
 		}
 	}
 
