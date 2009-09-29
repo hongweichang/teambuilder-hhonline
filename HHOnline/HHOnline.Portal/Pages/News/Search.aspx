@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Masters/HomeMasterPage.master" AutoEventWireup="true"
-	CodeFile="Search.aspx.cs" Inherits="Pages_News_Search" Title="无标题页" %>
+	CodeFile="Search.aspx.cs" Inherits="Pages_News_Search" Title="" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHeader" runat="Server">
 

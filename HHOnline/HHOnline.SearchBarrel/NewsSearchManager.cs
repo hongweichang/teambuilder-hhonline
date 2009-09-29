@@ -366,7 +366,12 @@ namespace HHOnline.SearchBarrel
             article.CopyFrom = doc.Get(NewsIndexField.CopyFrom);
             article.Date = DateTools.StringToDate(doc.Get(NewsIndexField.Date));
             string[] tagNames = doc.GetValues(NewsIndexField.Keywords);
-            article.Keywords = string.Join(";", tagNames);
+
+            if (tagNames != null)
+            {
+                article.Keywords = string.Join(";", tagNames);
+            }
+
             return article;
         }
         #endregion
