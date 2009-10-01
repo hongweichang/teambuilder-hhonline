@@ -305,5 +305,36 @@ namespace HHOnline.Shops.Providers
             return productPrice;
         }
         #endregion
+
+        #region ProductFocus
+        public abstract ProductFocus CreateUpdateFocus(ProductFocus focus, DataProviderAction action, out DataActionStatus status);
+
+        public abstract DataActionStatus DeleteFocus(int focusID);
+
+        public abstract ProductFocus GetFocus(int focusID);
+
+        public abstract List<ProductFocus> GetFocusList(FocusType focusType);
+
+
+        public static ProductFocus PopulateProductFocusFromIDataReader(IDataReader dr)
+        {
+            ProductFocus productFocus = new ProductFocus();
+            productFocus.FocusID = DataRecordHelper.GetInt32(dr, "FocusID");
+            productFocus.FocusType = (FocusType)DataRecordHelper.GetInt32(dr, "FocusType");
+            productFocus.FocusFrom = DataRecordHelper.GetDateTime(dr, "FocusFrom");
+            productFocus.FocusEnd = DataRecordHelper.GetDateTime(dr, "FocusEnd");
+            productFocus.ProductID = DataRecordHelper.GetInt32(dr, "ProductID");
+            productFocus.ModelID = DataRecordHelper.GetInt32(dr, "ModelID");
+            productFocus.DisplayOrder = DataRecordHelper.GetInt32(dr, "DisplayOrder");
+            productFocus.FocusMemo = DataRecordHelper.GetString(dr, "FocusMemo");
+            productFocus.FocusStatus = (ComponentStatus)DataRecordHelper.GetInt32(dr, "FocusStatus");
+            productFocus.CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime");
+            productFocus.CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser");
+            productFocus.UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime");
+            productFocus.UpdateUser = DataRecordHelper.GetInt32(dr, "UpdateUser");
+            productFocus.SetSerializerData(CommonDataProvider.PopulateSerializerDataIDataRecord(dr));
+            return productFocus;
+        }
+        #endregion
     }
 }

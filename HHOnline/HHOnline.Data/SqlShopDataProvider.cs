@@ -714,6 +714,73 @@ namespace HHOnline.Data
         }
         #endregion
 
+        #region ProductFocus
+        public override ProductFocus CreateUpdateFocus(ProductFocus focus, DataProviderAction action, out DataActionStatus status)
+        {
+            ELParameter paramID = null;
+            if (action == DataProviderAction.Create)
+            {
+                paramID = new ELParameter("@FocusID", DbType.Int32, 4, ParameterDirection.Output);
+            }
+            else
+            {
+                paramID = new ELParameter("@FocusID", DbType.Int32, focus.FocusID);
+            }
+            ELParameter[] elParameters = new ELParameter[]{
+                    paramID,
+                    new ELParameter("@FocusType",DbType.Int32,focus.FocusType),
+                    new ELParameter("@FocusFrom",DbType.DateTime,focus.FocusFrom),
+                    new ELParameter("@FocusEnd",DbType.DateTime,focus.FocusEnd),
+                    new ELParameter("@ProductID",DbType.Int32,focus.ProductID),
+                    new ELParameter("@ModelID",DbType.Int32,DataHelper.IntOrNull(focus.ModelID)),
+                    new ELParameter("@DisplayOrder",DbType.Int32,focus.DisplayOrder),
+                    new ELParameter("@FocusMemo",DbType.String,focus.FocusMemo),
+                    new ELParameter("@FocusStatus",DbType.Int32,focus.FocusStatus),
+                    new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
+                    new ELParameter("@PropertyNames",DbType.String,product.GetSerializerData().Keys),
+                    new ELParameter("@PropertyValues",DbType.String,product.GetSerializerData().Keys),
+                    new ELParameter("@Action",DbType.Int32,action),
+            };
+            status = (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure,
+              "sp_ProductFocus_CreateUpdate", elParameters));
+            if (action == DataProviderAction.Create && status == DataActionStatus.Success)
+                focus.FocusID = Convert.ToInt32(paramID.Value);
+            return focus;
+        }
 
+        public override DataActionStatus DeleteFocus(int focusID)
+        {
+            ELParameter paramID = new ELParameter("@FocusID", DbType.String, focusID);
+            return (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductFocus_Delete", paramID));
+        }
+
+        public override ProductFocus GetFocus(int focusID)
+        {
+            ELParameter paramID = new ELParameter("@FocusID", DbType.Int32, focusID);
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductFocus_Get", paramID))
+            {
+                ProductFocus focus = null;
+                if (dr.Read())
+                {
+                    focus = PopulateProductFocusFromIDataReader(dr);
+                }
+                return focus;
+            }
+        }
+
+        public override List<ProductFocus> GetFocusList(FocusType focusType)
+        {
+            ELParameter paramID = new ELParameter("@FocusType", DbType.Int32, focusType);
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductFocus_GetByType", paramID))
+            {
+                List<ProductFocus> focusList = new List<ProductFocus>();
+                while (dr.Read())
+                {
+                    focusList.Add(PopulateProductFocusFromIDataReader(dr));
+                }
+                return focusList;
+            }
+        }
+        #endregion
     }
 }
