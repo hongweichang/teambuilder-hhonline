@@ -21,7 +21,7 @@ namespace HHOnline.Shops
         /// <summary>
         ///最受关注 
         /// </summary>
-        Favorite = 3,
+        Recommend = 3,
 
         /// <summary>
         /// 促销产品

@@ -17,6 +17,15 @@
             </td>
         </tr>
         <tr>
+            <th style="width: 150px;">
+                关注类别(<span style="color: #ff0000">必填</span>)
+            </th>
+            <td>
+                <hc:FocusTypeList ID="ddlFocusType" runat="server">
+                </hc:FocusTypeList>
+            </td>
+        </tr>
+        <tr>
             <th>
                 关注起始日期(<span style="color: #ff0000">必填</span>)
             </th>
@@ -47,7 +56,7 @@
                 备注
             </th>
             <td>
-                <asp:TextBox ID="txtRemark" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtRemark" runat="server" TextMode="MultiLine"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -67,7 +76,7 @@
                 是否启用
             </th>
             <td>
-                <hc:ComponentStatusList ID="csPrice" runat="server" />
+                <hc:ComponentStatusList ID="csFocus" runat="server" />
             </td>
         </tr>
         <tr>

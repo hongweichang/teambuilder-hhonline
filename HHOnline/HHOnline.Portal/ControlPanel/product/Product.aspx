@@ -71,9 +71,9 @@
     </div>
     <br />
     <hc:ExtensionGridView runat="server" ID="egvProducts" OnRowDataBound="egvProducts_RowDataBound"
-        OnRowDeleting="egvProducts_RowDeleting" OnRowUpdating="egvProducts_RowUpdating"  OnRowCommand="egvProducts_RowCommand"
-        OnPageIndexChanging="egvProducts_PageIndexChanging" PageSize="5" SkinID="DefaultView"
-        AutoGenerateColumns="False" DataKeyNames="ProductID">
+        OnRowDeleting="egvProducts_RowDeleting" OnRowUpdating="egvProducts_RowUpdating"
+        OnRowCommand="egvProducts_RowCommand" OnPageIndexChanging="egvProducts_PageIndexChanging"
+        PageSize="5" SkinID="DefaultView" AutoGenerateColumns="False" DataKeyNames="ProductID">
         <Columns>
             <asp:TemplateField HeaderText="展示图片">
                 <HeaderStyle Width="100" />
@@ -119,6 +119,16 @@
                             <asp:RoleGroup Roles="ProductModule-View">
                                 <ContentTemplate>
                                     <asp:LinkButton ID="lnkViewPrice" runat="server" CommandName="ViewPrice" SkinID="lnkviewprice"
+                                        PostBackUrl="#"></asp:LinkButton>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+                        </RoleGroups>
+                    </asp:LoginView>
+                    <asp:LoginView ID="LoginView4" runat="server">
+                        <RoleGroups>
+                            <asp:RoleGroup Roles="ProductModule-View">
+                                <ContentTemplate>
+                                    <asp:LinkButton ID="lnkSetFocus" runat="server" CommandName="SetFocus" SkinID="lnksetfocus"
                                         PostBackUrl="#"></asp:LinkButton>
                                 </ContentTemplate>
                             </asp:RoleGroup>

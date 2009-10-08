@@ -265,13 +265,18 @@ public partial class ControlPanel_Product_Product : HHPage
 
     protected void egvProducts_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.CommandName == "ViewPrice")
+        GridViewRow row = ((LinkButton)e.CommandSource).Parent.Parent.Parent.Parent as GridViewRow;
+        if (row != null)
         {
-            GridViewRow row = ((LinkButton)e.CommandSource).Parent.Parent.Parent.Parent as GridViewRow;
-            if (row != null)
+            int index = row.RowIndex;
+            object productID = egvProducts.DataKeys[index].Value;
+            if (e.CommandName == "ViewPrice")
             {
-                int index = row.RowIndex;
-                Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productprice&ProductID=" + egvProducts.DataKeys[index].Value);
+                Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productprice&ProductID=" + productID);
+            }
+            else if (e.CommandName == "SetFocus")
+            {
+                Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productfocusadd&ProductID=" + productID);
             }
         }
     }

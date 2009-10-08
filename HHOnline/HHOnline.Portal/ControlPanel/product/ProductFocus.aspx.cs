@@ -14,6 +14,7 @@ public partial class ControlPanel_product_ProductFocus : HHPage
     {
         if (!IsPostBack && !IsCallback)
         {
+            BindLinkButton();
             BindData();
         }
     }
@@ -21,8 +22,50 @@ public partial class ControlPanel_product_ProductFocus : HHPage
 
     void BindData()
     {
-        this.egvProductFocus.DataSource = ProductFocusManager.GetList(FocusType.New);
+        FocusType type = FocusType.Recommend;
+        try
+        {
+
+            if (!GlobalSettings.IsNullOrEmpty(Request.QueryString["ft"]))
+                type = (FocusType)(Convert.ToInt32(Request.QueryString["ft"]));
+        }
+        catch
+        {
+            Response.Redirect(this.lnkRecomment.PostBackUrl);
+        }
+        switch (type)
+        {
+            case FocusType.Hot:
+                lnkHot.CssClass = "active";
+                break;
+            case FocusType.New:
+                lnkNew.CssClass = "active";
+                break;
+            case FocusType.Promotion:
+                lnkPromotion.CssClass = "active";
+                break;
+            case FocusType.Recommend:
+                lnkRecomment.CssClass = "active";
+                break;
+        }
+        this.egvProductFocus.DataSource = ProductFocusManager.GetList(type);
         this.egvProductFocus.DataBind();
+    }
+
+    private string destinationURL = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productfocus";
+
+    void BindLinkButton()
+    {
+        this.lnkHot.PostBackUrl = destinationURL + "&ft=" + ((int)FocusType.Hot).ToString();
+        this.lnkNew.PostBackUrl = destinationURL + "&ft=" + ((int)FocusType.New).ToString();
+        this.lnkPromotion.PostBackUrl = destinationURL + "&ft=" + ((int)FocusType.Promotion).ToString();
+        this.lnkRecomment.PostBackUrl = destinationURL + "&ft=" + ((int)FocusType.Recommend).ToString();
+    }
+
+    protected void lnk_Click(object sender, EventArgs e)
+    {
+        LinkButton link = sender as LinkButton;
+        Response.Redirect(link.PostBackUrl);
     }
 
     public override void OnPageLoaded()
