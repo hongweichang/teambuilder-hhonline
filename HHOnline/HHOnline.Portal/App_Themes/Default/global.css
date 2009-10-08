@@ -3200,7 +3200,7 @@ fieldset.fsNormal legend
     padding:5px;
     line-height:18px;    
     }
-.productDetails div.content-r1c2 table td a
+.productDetails div.content-r1c2 table td.nav a
 {
     color:#0000FF;
     margin-right:5px;
@@ -3208,7 +3208,7 @@ fieldset.fsNormal legend
     border:solid 1px #7d9edb;
     background:#dedede;
     }
-.productDetails div.content-r1c2 table td a:hover
+.productDetails div.content-r1c2 table td.nav a:hover
 {
     text-decoration:none;
     border-color:#ff0000;
@@ -3372,3 +3372,112 @@ a:hover.blueStyle
 {
     color:#ff0000;
     }
+a.favcar
+{
+    width:172px;
+    height:40px;
+    display:block;
+    background:url(../../images/default/favcar.gif) no-repeat 0 0;
+    }
+a.addfav
+{
+    background-position:0 0;
+    float:left;
+    }
+a:hover.addfav
+{
+    background-position:0 -40px;
+    }
+a.addcar
+{
+    background-position:0 -80px;
+    float:left;
+    margin-left:10px;
+    }
+a:hover.addcar
+{
+    background-position:0 -120px;
+    }
+a.addload
+{
+    background:url(../../images/default/loader04.gif) no-repeat center center;
+    float:left;
+    }
+    
+
+/*---------------->>Rating<<------------------*/
+.star-rating, .star-rating a:hover, .star-rating a:active, .star-rating a:focus, .star-rating .current-rating, .star-rating a.sel
+{
+	background: url(../../images/rate/star.gif) left -1000px repeat-x;
+}
+.star-rating
+{
+	position: relative;
+	width: 125px;
+	height: 25px;
+	overflow: hidden;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background-position: left top;
+}
+.star-rating li
+{
+	display: inline;
+}
+.star-rating a, .star-rating .current-rating
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-indent: -1000em;
+	height: 25px;
+	line-height: 25px;
+	outline: none;
+	overflow: hidden;
+	border: none;
+}
+.star-rating a:hover, .star-rating a:active, .star-rating a:focus
+{
+	background-position: left center;
+}
+ .star-rating a.sel
+ {
+	background-position: left bottom;
+}
+.star-rating .current-rating
+{
+	z-index: 1;
+	background-position: left center;
+}
+
+.inline-rating
+{
+	display: -moz-inline-block;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: middle;
+}
+.star-rating a.disabled
+{	
+	background-position: left top;
+	}
+.small-star
+{
+	width: 50px;
+	height: 10px;
+}
+.small-star, .small-star a:hover, .small-star a:active, .small-star a:focus, .small-star .current-rating
+{
+	background-image: url(../../images/rate/star_small.gif);
+	line-height: 10px;
+	height: 10px;
+}
+.star-rating-result
+{
+	color: Red;
+}
+#rateResult
+{
+	background-color:#FFF9ED;border:1px solid #FFDD99;padding:2px 5px;display:none;width:200px;
+	}

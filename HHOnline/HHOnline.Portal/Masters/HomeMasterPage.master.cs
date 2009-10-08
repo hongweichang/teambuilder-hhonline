@@ -18,6 +18,7 @@ public partial class Masters_HomeMasterPage : HHMasterPage
         base.OnPageLoaded();
         AddJavaScriptInclude("scripts/jquery.watermark.js", false, false);
         AddJavaScriptInclude("scripts/jquery.jmodal.js", false, false);
+        AddJavaScriptInclude("scripts/jquery.cookie.js", false, false);
         AddJavaScriptInclude("scripts/pages/master.aspx.js", false, false);
         SetValidator(true, true, 3);
     }

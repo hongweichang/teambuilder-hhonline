@@ -18,7 +18,12 @@ namespace HHOnline.Framework.Web.HttpHandlers
 
         public void ProcessRequest(HttpContext context)
         {
-            
+            string action = context.Request.QueryString["action"];
+            switch (action)
+            {
+                case "addproductfav":
+                    break;
+            }
         }
     }
 }

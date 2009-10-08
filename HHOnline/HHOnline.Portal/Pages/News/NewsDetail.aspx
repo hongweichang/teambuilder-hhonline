@@ -33,7 +33,9 @@
 								阅读次数: (<span id="viewcount_1560804"><asp:Label ID="lblHitTimes" runat="server" Text="Label"></asp:Label></span>)</span>
 						关键字:
 						<asp:Label ID="lblKeywords" runat="server" Text="Label"></asp:Label> 字体: <a href="javascript:fontZoomB();">大</a> <a href="javascript:fontZoomA();">小</a> 所属分类: 
-						<asp:LinkButton ID="btnCategory" runat="server">LinkButton</asp:LinkButton></div>
+						<asp:LinkButton ID="btnCategory" runat="server"></asp:LinkButton>
+						<a href="javascript:{}" id="anchorAddNews" class="addnews">+ 收藏</a>
+					</div>
 					<div class="post_item_sep_detail">
 					</div>
 					<div id="news_content_detail">

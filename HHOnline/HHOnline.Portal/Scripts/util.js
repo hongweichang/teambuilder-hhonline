@@ -101,8 +101,8 @@ function showMsg(setting) {
     $.fn.jmodal({
         title: '提示信息',
         initWidth: 600,
-        overlayColor: '#fff',
-        marginTop: 0,
+        overlayColor: setting.bgColor ? setting.bgColor : '#fff',
+        marginTop: setting.top ? setting.top : 0,
         iframe: false,
         content: function(sender) {
             sender.css('padding', '10px');

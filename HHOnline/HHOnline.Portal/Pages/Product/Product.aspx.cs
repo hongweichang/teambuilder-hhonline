@@ -30,7 +30,7 @@ public partial class Pages_Product_Product :HHPage
         {
             picStr = Newtonsoft.Json.JavaScriptConvert.SerializeObject(pics);
         }
-        base.ExecuteJs("var pictures=" + picStr + ";", true);
+        base.ExecuteJs("var pictures=" + picStr + ";var _infos={l:" + User.Identity.IsAuthenticated.ToString().ToLower() + ",d:" + p.ProductID + "}", true);
     }
     void BindProduct()
     {

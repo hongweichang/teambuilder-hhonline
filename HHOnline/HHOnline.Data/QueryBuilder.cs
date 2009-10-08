@@ -480,5 +480,30 @@ namespace HHOnline.Data
             return sb.ToString();
         }
         #endregion
+
+        #region -BuildFavorite-
+        public static string BuildFavorite(FavoriteQuery query)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SET Transaction Isolation Level Read UNCOMMITTED ");
+
+            SelectQueryBuilder builder = new SelectQueryBuilder();
+            builder.SelectFromTable("UFavorite");
+            builder.SelectColumns("FavoriteID");
+            if (!string.IsNullOrEmpty(query.FavoriteTitleFilter))
+                builder.AddWhere("FavoriteTitle", Comparison.Like, query.FavoriteTitleFilter);
+
+            if (!string.IsNullOrEmpty(query.FavoriteMemoFilter))
+                builder.AddWhere("FavoriteMemo", Comparison.Like, query.FavoriteMemoFilter);
+
+
+            builder.AddWhere("FavoriteType", Comparison.NotEquals, 0);
+
+            if (query.FavoriteType != null)
+                builder.AddWhere("FavoriteType", Comparison.Equals, (int)query.FavoriteType);
+
+            return builder.BuildQuery();
+        }
+        #endregion
     }
 }

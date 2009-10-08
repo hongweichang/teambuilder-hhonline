@@ -1,8 +1,8 @@
 ﻿/// <reference path="../jquery-vsdoc.js" />
 var nav = {
-    main:'main.aspx',
-    product:'pages/view.aspx?product-productlist',
-    news:'pages/view.aspx?news-newslist'
+    main: 'main.aspx',
+    product: 'pages/view.aspx?product-productlist',
+    news: 'pages/view.aspx?news-newslist'
 };
 var desc = {
     main: '工业自动化仪表及实验室分析仪器专业销售平台!',
@@ -59,10 +59,16 @@ $().ready(function() {
     $('#searchProduct').click(function() {
         this.blur();
         searchPruduct(s1, mk1);
-    })
+    });
 
     $('#searchArticle').click(function() {
         this.blur();
         searchArticle(s2, mk2);
+    });
+    var logUl = $('ul.logged-ul');
+    logUl.find('a.favorite').click(function() {
+        $.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_favlist' });
+        window.location.href = relativeUrl + 'pages/view.aspx?profiles-favlist';
     })
+
 });

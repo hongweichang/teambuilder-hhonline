@@ -25,8 +25,14 @@ public partial class News_NewsDetail : HHPage
 		{
 			BindData();
 		}
+        WriteInfos();
 	}
+    void WriteInfos()
+    {
+        string articleIDStr = HHOnline.Framework.GlobalSettings.Decrypt(Request.QueryString["id"]);
+        base.ExecuteJs("var _infos={l:" + User.Identity.IsAuthenticated.ToString().ToLower() + ",d:" + articleIDStr + "};", false);
 
+    }
 	private void BindData()
 	{
 		string articleIDStr = Request.QueryString["id"];

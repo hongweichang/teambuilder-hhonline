@@ -65,6 +65,16 @@ namespace HHOnline.Framework
         }
         #endregion
 
+        #region -Deletefavorite-
+        public static bool DeleteFavorite(int favId)
+        {
+            bool r = CommonDataProvider.Instance.DeleteFavorite(favId);
+            if (r)
+                RefreshCachedFavorite();
+            return r;
+        }
+        #endregion
+
         #region GetFavorites
         /// <summary>
         /// 获取Query获取收藏列表
@@ -85,6 +95,7 @@ namespace HHOnline.Framework
             if (favorites == null)
             {
                 int totalRecods;
+                favorites = new PagingDataSet<Favorite>();
                 List<Favorite> favoriteList = CommonDataProvider.Instance.GetFavorites(query, out totalRecods);
                 favorites.Records = favoriteList;
                 favorites.TotalRecords = totalRecods;

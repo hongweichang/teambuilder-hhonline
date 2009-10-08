@@ -23,15 +23,15 @@
                 </tr>
                 <tr>
                     <th style="width:70px">分类：</th>
-                    <td><asp:Literal ID="ltCategory" runat="server"></asp:Literal></td>
+                    <td class="nav"><asp:Literal ID="ltCategory" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
                     <th style="width:70px">行业：</th>
-                    <td><asp:Literal ID="ltIndustry" runat="server"></asp:Literal></td>
+                    <td class="nav"><asp:Literal ID="ltIndustry" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
                     <th style="width:70px">品牌：</th>
-                    <td><asp:Literal ID="ltBrand" runat="server"></asp:Literal></td>
+                    <td class="nav"><asp:Literal ID="ltBrand" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
                     <th valign="top">摘要：</th>
@@ -40,6 +40,13 @@
                 <tr>
                     <th valign="top">价格：</th>
                     <td valign="top" class="price"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>
+                        <a id="anchorAddFav" href="javascript:{}" onfocus="this.blur()" class="favcar addfav"></a>
+                        <a id="anchorAddCar" href="javascript:{}" onfocus="this.blur()" class="favcar addcar"></a>
+                    </td>
                 </tr>
             </table>
         </div>

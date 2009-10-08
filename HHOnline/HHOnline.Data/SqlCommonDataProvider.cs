@@ -7,6 +7,7 @@ using HHOnline.Common;
 using HHOnline.Framework;
 using HHOnline.Framework.Providers;
 using System.Diagnostics;
+using System.Text;
 
 namespace HHOnline.Data
 {
@@ -759,14 +760,13 @@ namespace HHOnline.Data
             return Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure,
                 "sp_Favorite_Delete", paramID)) == 1;
         }
-
         public override List<Favorite> GetFavorites(FavoriteQuery query, out int totalRecord)
         {
 
             ELParameter[] elParameters = new ELParameter[]{
                 new ELParameter("@PageIndex",DbType.Int32,DataHelper.GetSafeSqlInt(query.PageIndex)),
                 new ELParameter("@PageSize",DbType.Int32,DataHelper.GetSafeSqlInt(query.PageSize)),
-                new ELParameter("@SqlPopulate",DbType.String,string.Empty)
+                new ELParameter("@SqlPopulate",DbType.String,QueryGenerator.BuildFavorite(query))
             };
             using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_Favorites_Get", elParameters))
             {

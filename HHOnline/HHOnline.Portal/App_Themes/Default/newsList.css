@@ -188,6 +188,29 @@ A.lightblue:hover
 	color: #303030;
 	padding-top: 5px;
 }
+.post_item_foot a
+{
+    color:#0000ff;
+    font-weight:bold;
+    text-decoration:underline;
+    }
+.post_item_foot a.addnews
+{
+    float:right;
+    display:block;
+    height:20px;
+    line-height:20px;
+    border:solid 1px #000080;
+    padding-left:8px;
+    padding-right:8px;
+    text-decoration:none;
+    color:#0000ff;
+    }
+.post_item_foot a:hover.addnews
+{
+    border:solid 1px #ff0000;
+    color:#ff0000;
+    }
 .post_item_foot_list
 {
 	color: #303030;
