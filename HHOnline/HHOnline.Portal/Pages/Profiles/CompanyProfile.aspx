@@ -82,6 +82,10 @@
         </tr>
         <tr>
             <th>&nbsp;</th>
+            <td class="needed">如非必要，请勿随意修改公司相关信息！</td>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
             <td><asp:Button ID="btnSave" runat="server" Text=" 保存 " OnClick="btnSave_Click" /></td>
         </tr>
     </table>

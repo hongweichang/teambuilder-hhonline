@@ -23,8 +23,33 @@ public partial class Pages_Profiles_CompanyTypeView : HHPage
             throw new HHException(ExceptionType.OperationError, "操作失败，进行申请前请进入【公司信息】页完善公司相关信息，包括【联系电话】，【组织结构代码】，【工商注册号】等。");
         }
         else
-        { 
-            
+        {
+            Pending p = new Pending();
+            p.CompanyID = c.CompanyID;
+            switch ((sender as Button).PostBackUrl)
+            {
+                case "#Agent":
+                    p.CompanyType = CompanyType.Agent | CompanyType.Ordinary;
+                    break;
+                case "#Provider":
+                    p.CompanyType = CompanyType.Provider | CompanyType.Ordinary;
+                    break;
+            }
+            p.CreateTime = DateTime.Now;
+            p.CreateUser = u.UserID;
+            p.DenyReason = string.Empty;
+            p.Status = PendingStatus.Pending;
+            p.UpdateTime = DateTime.Now;
+            p.UpdateUser = u.UserID;
+            bool r = Pendings.PendingAdd(p);
+            if (r)
+            {
+                BindCompanyType();
+            }
+            else
+            {
+                throw new HHException(ExceptionType.OperationError, "操作失败，申请过程中发生了错误，请联系管理员！"); 
+            }
         }
     }
     void BindCompanyType()

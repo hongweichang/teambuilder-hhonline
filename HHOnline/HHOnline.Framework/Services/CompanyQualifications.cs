@@ -14,6 +14,11 @@ namespace HHOnline.Framework
     {
         public static string FileStoreKey = "CompanyQualification";
 
+        public static bool DeleteQualification(int qualifyID)
+        {
+            return CommonDataProvider.Instance.DeleteQualification(qualifyID);
+        }
+
         #region GetCompanyQualifacations
         public static CompanyQualification GetCompanyQualification(int qualificationID)
         {
@@ -54,15 +59,37 @@ namespace HHOnline.Framework
         #region AddFile
         public static void AddFile(CompanyQualification qualification, Stream contentStream)
         {
-            qualification.QualificationName = GlobalSettings.EnsureHtmlEncoded(qualification.QualificationName);
-
+            string name = GlobalSettings.EnsureHtmlEncoded(qualification.QualificationName) + ".rar";
             qualification.QualificationFile = MakePath(qualification.CompanyID);
             //事件触发
             FileStorageProvider fs = new FileStorageProvider(FileStoreKey);
 
-            fs.AddUpdateFile(MakePath(qualification.CompanyID), qualification.QualificationName, contentStream);
+            fs.AddUpdateFile(MakePath(qualification.CompanyID), name, contentStream);
+
+
 
             qualification.QualificationID = CommonDataProvider.Instance.CreateQualification(qualification);
+
+            HHCache.Instance.Remove(CacheKeyManager.GetQualificationKey(qualification.QualificationID));
+
+            //事件触发
+        }
+        public static void EditFile(CompanyQualification qualification, Stream contentStream)
+        {
+            string name = GlobalSettings.EnsureHtmlEncoded(qualification.QualificationName) + ".rar";
+            if (contentStream == null)
+            {
+                IStorageFile file = FileStorageProvider.Instance(CompanyQualifications.FileStoreKey)
+                            .GetFile(CompanyQualifications.MakePath(qualification.CompanyID), GlobalSettings.EnsureHtmlEncoded(qualification.QualificationFile) + ".rar");
+                contentStream = file.OpenReadStream();
+            }
+            //事件触发
+            FileStorageProvider fs = new FileStorageProvider(FileStoreKey);
+
+            fs.AddUpdateFile(MakePath(qualification.CompanyID), name, contentStream);
+
+            qualification.QualificationFile = MakePath(qualification.CompanyID);
+            CommonDataProvider.Instance.UpdateQualification(qualification);
 
             HHCache.Instance.Remove(CacheKeyManager.GetQualificationKey(qualification.QualificationID));
 

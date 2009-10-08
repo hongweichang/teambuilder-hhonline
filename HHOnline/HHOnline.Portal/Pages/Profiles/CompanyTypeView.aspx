@@ -14,8 +14,8 @@
     <tr>
         <th>申请状态</th>
         <td>
-            <asp:Literal ID="ltPendingCom" runat="server"></asp:Literal>    
-            <asp:Literal ID="ltStatus" runat="server"></asp:Literal>        
+            <asp:Literal ID="ltPendingCom" runat="server"></asp:Literal> 
+            <asp:Literal ID="ltStatus" runat="server"></asp:Literal>    
             <asp:Literal ID="ltDenyUser" runat="server"></asp:Literal>
         </td>
     </tr>

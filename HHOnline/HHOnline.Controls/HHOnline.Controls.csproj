@@ -88,6 +88,9 @@
     <Compile Include="Controls\CompanyList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Controls\PendingList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\HtmlEditorMode.cs" />

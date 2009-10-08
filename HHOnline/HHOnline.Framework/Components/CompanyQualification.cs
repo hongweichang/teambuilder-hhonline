@@ -50,7 +50,7 @@ namespace HHOnline.Framework
                     if (this.CompanyID > 0)
                     {
                         _file = FileStorageProvider.Instance(CompanyQualifications.FileStoreKey)
-                            .GetFile(CompanyQualifications.MakePath(this._companyID), this._qualificationName);
+                            .GetFile(CompanyQualifications.MakePath(this._companyID), GlobalSettings.EnsureHtmlEncoded(this._qualificationName) + ".rar");
                     }
                 }
                 return _file;

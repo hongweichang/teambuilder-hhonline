@@ -62,6 +62,11 @@ namespace HHOnline.Framework
         public static readonly string ActivityPrefix = FrameworkPrefix + "Activity/";
 
         /// <summary>
+        /// 待办审核前缀
+        /// </summary>
+        public static readonly string PendingPrefix = ProductPrefix + "Pendings/";
+
+        /// <summary>
         /// 站点地图前缀
         /// </summary>
         //[Description("站点地图")]

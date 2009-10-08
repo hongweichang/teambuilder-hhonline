@@ -9,5 +9,11 @@
            <hc:CompanyList ID="clCompany" runat="server" />
         </div>
     </div>
+     <div class="fieldset_m">
+        <h4>待审核客户类型变更</h4>
+        <div class="clPending">
+            <hc:PendingList ID="plCompany" runat="server" />
+        </div>
+    </div>
 </asp:Content>
 

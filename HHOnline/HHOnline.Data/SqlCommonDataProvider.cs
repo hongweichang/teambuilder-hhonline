@@ -416,6 +416,20 @@ namespace HHOnline.Data
             DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_CompanyQualification_Create", elParameters);
             return Convert.ToInt32(paramID.Value);
         }
+        public override int UpdateQualification(CompanyQualification qualification)
+        {
+            ELParameter[] elParameters = new ELParameter[]{
+                new ELParameter("@CompanyID",DbType.Int32,qualification.CompanyID),
+                new ELParameter("@QualificationFile",DbType.String,qualification.QualificationFile),
+                new ELParameter("@QualificationName",DbType.String,qualification.QualificationName),
+                new ELParameter("@QualificationDesc",DbType.String,qualification.QualificationDesc),
+                new ELParameter("@QualificationMemo",DbType.String,qualification.QualificationMemo),
+                new ELParameter("@QualificationStatus",DbType.Int32,qualification.QualificationStatus),
+                new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
+                new ELParameter("@QualificationID", DbType.Int32, qualification.QualificationID)
+            };
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_CompanyQualification_Update", elParameters);
+        }
 
         public override CompanyQualification GetQualification(int qualificationID)
         {
@@ -938,7 +952,17 @@ namespace HHOnline.Data
         #region -Pending-
         public override List<Pending> PendingsLoad()
         {
-            return null;
+            List<Pending> pendings = new List<Pending>();
+            Pending pending = null;
+            using (IDataReader reader = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SPending_Load"))
+            {
+                while (reader.Read())
+                {
+                    pending = ReadPending(reader);
+                    pendings.Add(pending);
+                }
+            }
+            return pendings;
         }
         public override Pending PendingGet(int companyID)
         {
@@ -953,9 +977,31 @@ namespace HHOnline.Data
             }
             return pending;
         }
+        public override Pending PendingGetById(int pendingId)
+        {
+            Pending pending = null;
+            using (IDataReader reader = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SPending_GetById",new ELParameter("PendingID",DbType.Int32,pendingId)))
+            {
+                while (reader.Read())
+                {
+                    pending = ReadPending(reader);
+                }
+            }
+            return pending;
+        }
         public override bool PendingAdd(Pending pending)
         {
-            return false;
+            return (DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SPending_Add", new ELParameter[]{
+                new ELParameter("CompanyID",DbType.Int32,pending.CompanyID),
+                new ELParameter("CompanyType",DbType.Int32,(int)pending.CompanyType),
+                new ELParameter("Status",DbType.Int32,(int)pending.Status),
+                new ELParameter("Description",DbType.String,pending.Description),
+                new ELParameter("DenyReason",DbType.String,pending.DenyReason),
+                new ELParameter("CreateTime",DbType.DateTime,pending.CreateTime),
+                new ELParameter("CreateUser",DbType.Int32,DataHelper.IntOrNull(pending.CreateUser)),
+                new ELParameter("UpdateTime",DbType.DateTime,pending.UpdateTime),
+                new ELParameter("UpdateUser",DbType.Int32,DataHelper.IntOrNull( pending.UpdateUser))
+            }) > 0);
         }
         public override bool PendingUpdate(Pending pending)
         {

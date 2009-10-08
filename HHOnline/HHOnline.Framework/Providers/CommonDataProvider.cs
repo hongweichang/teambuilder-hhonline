@@ -258,6 +258,7 @@ namespace HHOnline.Framework.Providers
 
         #region CompanyQualification
         public abstract int CreateQualification(CompanyQualification qualification);
+        public abstract int UpdateQualification(CompanyQualification qualification);
 
         public abstract CompanyQualification GetQualification(int qualificationID);
 
@@ -535,6 +536,7 @@ namespace HHOnline.Framework.Providers
         #region -Pending-
         public abstract List<Pending> PendingsLoad();
         public abstract Pending PendingGet(int companyID);
+        public abstract Pending PendingGetById(int pendingId);
         public abstract bool PendingAdd(Pending pending);
         public abstract bool PendingUpdate(Pending pending);
         public static Pending ReadPending(IDataReader reader)
