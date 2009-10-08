@@ -29,10 +29,10 @@ public partial class Pages_Profiles_CompanyTypeView : HHPage
             switch ((sender as Button).PostBackUrl)
             {
                 case "#Agent":
-                    p.CompanyType = CompanyType.Agent | CompanyType.Ordinary;
+                    p.CompanyType = CompanyType.Agent | c.CompanyType;
                     break;
                 case "#Provider":
-                    p.CompanyType = CompanyType.Provider | CompanyType.Ordinary;
+                    p.CompanyType = CompanyType.Provider | c.CompanyType;
                     break;
             }
             p.CreateTime = DateTime.Now;
@@ -68,25 +68,26 @@ public partial class Pages_Profiles_CompanyTypeView : HHPage
             ltComType.Text = GetCompantType(u.Company.CompanyType);
 
             Pending pend = Pendings.PendingGet(u.CompanyID);
-            if (pend == null || pend.Status == PendingStatus.Deny)
+            if (pend == null)
             {
                 ltPendingCom.Text = "--";
             }
             else
             {
-                btnProvider.Visible = false;
-                btnAgent.Visible = false;
-                ltCS.Text = "<span style='color:#888'>等待管理员进行申请审批。。。</span>";
                 ltPendingCom.Text = GetCompantType(pend.CompanyType);
                 ltStatus.Text = GetStatus(pend.Status);
-                if (!string.IsNullOrEmpty(pend.DenyReason))
+                if (pend.Status == PendingStatus.Deny && !string.IsNullOrEmpty(pend.DenyReason))
                 {
                     ltDenyUser.Text = "<span style='color:#ff0000'>" +
                                     Users.GetUser(pend.UpdateUser).DisplayName +
                                     ": </span>" +
                                     pend.DenyReason;
                 }
-
+                if (pend.Status == PendingStatus.Pending)
+                {
+                    btnAgent.Visible = false;
+                    btnProvider.Visible = false;
+                }
             }
         }
     }
@@ -99,7 +100,7 @@ public partial class Pages_Profiles_CompanyTypeView : HHPage
                 r = "审核中。。。";
                 break;
             case PendingStatus.Deny:
-                r = "<span style='color:#ff0000'>审核未通过！</span>";
+                r = "<span style='color:#0000ff'>审核未通过！</span>";
                 break;
             case PendingStatus.Inspect:
                 r = "审核通过！";

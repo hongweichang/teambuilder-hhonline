@@ -34,5 +34,9 @@ namespace HHOnline.Framework
         {
             return CommonDataProvider.Instance.PendingGetById(pendingId);
         }
+        public static bool PendingUpdate(Pending p)
+        {
+            return CommonDataProvider.Instance.PendingUpdate(p);
+        }
     }
 }

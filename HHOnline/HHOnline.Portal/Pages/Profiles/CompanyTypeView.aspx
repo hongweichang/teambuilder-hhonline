@@ -12,17 +12,23 @@
         <td><asp:Literal ID="ltComType" runat="server"></asp:Literal></td>
     </tr>
     <tr>
-        <th>申请状态</th>
+        <th >申请状态</th>
         <td>
-            <asp:Literal ID="ltPendingCom" runat="server"></asp:Literal> 
-            <asp:Literal ID="ltStatus" runat="server"></asp:Literal>    
-            <asp:Literal ID="ltDenyUser" runat="server"></asp:Literal>
+            <asp:Literal ID="ltPendingCom" runat="server"></asp:Literal>
+        </td>
+    </tr><tr>
+        <th >&nbsp;</th>
+        <td>
+            <asp:Literal ID="ltStatus" runat="server"></asp:Literal>  </td>
+    </tr><tr>
+        <th>&nbsp;</th>
+        <td>
+            <div><asp:Literal ID="ltDenyUser" runat="server"></asp:Literal>
         </td>
     </tr>
     <tr>
         <th>&nbsp;</th>
         <td>
-            <asp:Literal ID="ltCS" runat="server"></asp:Literal>
             <asp:Button ID="btnAgent" runat="server" PostBackUrl="#Agent" Text="申请代理商" OnClientClick="return confirm('申请代理商前请确保【公司信息】填写完整并有效！')" OnClick="btnAgentProvider_Click" />
             <asp:Button ID="btnProvider" runat="server" PostBackUrl="#Provider" Text="申请供应商"  OnClientClick="return confirm('申请供应商前请确保【公司信息】填写完整并有效！')" OnClick="btnAgentProvider_Click" />
         </td>

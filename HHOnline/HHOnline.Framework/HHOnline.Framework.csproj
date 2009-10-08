@@ -71,6 +71,7 @@
     <Compile Include="Algorithm\FastRelaceAlgorithm\ReplaceKeyValue.cs" />
     <Compile Include="Components\CompanyDeposit.cs" />
     <Compile Include="Components\SupplierCredit.cs" />
+    <Compile Include="Components\CompanyCredit.cs" />
     <Compile Include="Enums\CompanyTypeKeyValue.cs" />
     <Compile Include="Components\ActivityItem.cs" />
     <Compile Include="Components\Area.cs" />
@@ -178,6 +179,8 @@
     <Compile Include="Core\BaseViews.cs" />
     <Compile Include="Services\WordSearchManager.cs" />
     <Compile Include="Services\Pendings.cs" />
+    <Compile Include="Services\CompanyDeposits.cs" />
+    <Compile Include="Services\CompanyCredits.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HHOnline.Cache\HHOnline.Cache.csproj">

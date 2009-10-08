@@ -159,6 +159,11 @@
             </th>
             <td colspan="2">
                <asp:Button ID="btnEdit" runat="server" Text="保存" CausesValidation="true" OnClick="btnEdit_Click" />
+               &nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="btnUpdateQualify" runat="server" Text="资质文件管理" />
+                <asp:Button ID="btnUpdateDeposit" runat="server" Text="保证金管理" />
+                <asp:Button ID="btnUpdateCredit" runat="server" Text="信用管理" />
+              &nbsp;&nbsp;&nbsp;&nbsp;
                <asp:Button ID="btnCancel" runat="server" Text="关闭" OnClientClick="return cancel();" CausesValidation="false" />
             </td>
         </tr>

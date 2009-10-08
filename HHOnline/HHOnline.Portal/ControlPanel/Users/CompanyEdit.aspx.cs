@@ -38,6 +38,9 @@ public partial class ControlPanel_Users_CompanyEdit : HHPage
         {
             int id = int.Parse(Request.QueryString["ID"]);
             lbAdd.PostBackUrl = "UserEdit.aspx?ID=" + id + "&Mode=Add";
+            btnUpdateQualify.PostBackUrl = "CompanyQualify.aspx?ID=" + id;
+            btnUpdateDeposit.PostBackUrl = "CompanyDeposit.aspx?ID=" + id;
+            btnUpdateCredit.PostBackUrl = "CompanyCredit.aspx?ID=" + id;
             c = Companys.GetCompany(id);
             txtCompanyName.Text = c.CompanyName;
             try

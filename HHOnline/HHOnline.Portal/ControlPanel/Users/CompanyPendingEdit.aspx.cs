@@ -17,11 +17,30 @@ public partial class ControlPanel_Users_CompanyPendingEdit : HHPage
         }
     }
 
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        int pId = int.Parse(Request.QueryString["PendingID"]);
+        Pending p = Pendings.PendingGetById(pId);
+        if (ynblPending.SelectedValue)
+            p.Status = PendingStatus.Inspect;
+        else
+            p.Status = PendingStatus.Deny;
+        p.DenyReason = txtDesc.Text.Trim();
+        p.UpdateUser = Profile.AccountInfo.UserID;
+        p.UpdateTime = DateTime.Now;
+        if (Pendings.PendingUpdate(p))
+            base.ExecuteJs("msg('审核成功！',true)", false);
+        else
+            base.ExecuteJs("msg('审核失败！')", false);
+    }
+
     void BindCompany()
     {
         int comId = int.Parse(Request.QueryString["CompanyID"]);
         int pId=  int.Parse(Request.QueryString["PendingID"]);
         btnUpdateQualify.PostBackUrl = "CompanyQualify.aspx?ID=" + comId;
+        btnUpdateDeposit.PostBackUrl = "CompanyDeposit.aspx?ID=" + comId;
+        btnUpdateCredit.PostBackUrl = "CompanyCredit.aspx?ID=" + comId;
         Company c = Companys.GetCompany(comId);
         ltCompanyName.Text = c.CompanyName;
         ltAddress.Text = c.Address;

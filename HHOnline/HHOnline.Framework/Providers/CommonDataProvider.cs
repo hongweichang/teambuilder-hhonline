@@ -284,6 +284,47 @@ namespace HHOnline.Framework.Providers
         }
         #endregion
 
+        #region -CompanyDeposit-
+        public abstract CompanyDeposit DepositSelect(int companyID);
+        public abstract bool DepositSave(CompanyDeposit deposit);
+        public static CompanyDeposit ReadCompanyDeposit(IDataReader dr)
+        {
+            return new CompanyDeposit()
+            {
+                CompanyID = DataRecordHelper.GetInt32(dr, "CompanyID"),
+                CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
+                CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser"),
+                DepositAmount = DataRecordHelper.GetDecimal(dr, "DepositAmount"),
+                DepositDate = DataRecordHelper.GetDateTime(dr, "DepositDate"),
+                DepositDelta = DataRecordHelper.GetDecimal(dr, "DepositDelta"),
+                DepositDesc = DataRecordHelper.GetString(dr, "DepositDesc"),
+                DepositID = DataRecordHelper.GetInt32(dr, "DepositID"),
+                DepositMemo = DataRecordHelper.GetString(dr, "DepositMemo"),
+                DepositType = (DepositType)DataRecordHelper.GetInt32(dr, "DepositType")
+            };
+        }
+        #endregion
+
+        #region -CompanyCredit-
+        public abstract CompanyCredit CreditSelect(int companyID);
+        public abstract bool CreditSave(CompanyCredit credit);
+        public static CompanyCredit ReadCompanyCredit(IDataReader dr)
+        {
+            return new CompanyCredit()
+            {
+                CreditID = DataRecordHelper.GetInt32(dr, "CreditID"),
+                SupplierID = DataRecordHelper.GetInt32(dr, "SupplierID"),
+                CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
+                CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser"),
+                CreditAmount = DataRecordHelper.GetDecimal(dr, "CreditAmount"),
+                CreditDate = DataRecordHelper.GetDateTime(dr, "CreditDate"),
+                CreditDelta = DataRecordHelper.GetDecimal(dr, "CreditDelta"),
+                CreditDesc = DataRecordHelper.GetString(dr, "CreditDesc"),
+                CreditMemo = DataRecordHelper.GetString(dr, "CreditMemo")
+            };
+        }
+        #endregion
+
         #region Tag
         public abstract List<Tag> GetTags();
 

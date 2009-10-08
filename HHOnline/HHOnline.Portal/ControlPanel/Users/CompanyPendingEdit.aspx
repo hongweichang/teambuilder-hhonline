@@ -92,10 +92,23 @@
             </td>
         </tr>
         <tr>
+            <th>审批是否通过</th>
+            <td colspan="3">
+                <hc:YesNoRadioButtonList ID="ynblPending" runat="server"></hc:YesNoRadioButtonList>
+            </td>
+        </tr>
+        <tr>
+            <th>相关说明</th>
+            <td colspan="3">
+                <asp:TextBox ID="txtDesc" runat="server" Width="400px" TextMode="MultiLine" Height="50px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
             <th>
                 &nbsp;
             </th>
             <td colspan="3">
+                <asp:Button ID="btnSave" runat="server" Text="提交" OnClick="btnSave_Click" />
                <asp:Button ID="btnCancel" runat="server" Text="关闭" OnClientClick="return cancel();" CausesValidation="false" />
             </td>
         </tr>

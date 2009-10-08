@@ -474,6 +474,63 @@ namespace HHOnline.Data
         }
         #endregion
 
+        #region -CompanyDeposit-
+        public override CompanyDeposit DepositSelect(int companyID)
+        {
+            CompanyDeposit cp = null;
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_CompanyDeposit_Select", new ELParameter("CompanyID", DbType.Int32, companyID)))
+            {
+                while (dr.Read())
+                {
+                    cp = ReadCompanyDeposit(dr);
+                }
+            }
+            return cp;
+        }
+        public override bool DepositSave(CompanyDeposit deposit)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_CompanyDeposit_Save", new ELParameter[]{
+                new ELParameter("CompanyID",DbType.Int32,deposit.CompanyID),
+			new ELParameter("DepositType",DbType.Int32,deposit.DepositType),
+			new ELParameter("DepositDate",DbType.DateTime,deposit.DepositDate),
+			new ELParameter("DepositDelta",DbType.Decimal,deposit.DepositDelta),
+			new ELParameter("DepositAmount",DbType.Decimal,deposit.DepositAmount),
+			new ELParameter("DepositDesc",DbType.String,deposit.DepositDesc),
+			new ELParameter("DepositMemo",DbType.String,deposit.DepositMemo),
+			new ELParameter("CreateTime",DbType.DateTime,deposit.CreateTime),
+			new ELParameter("CreateUser",DbType.Int32,deposit.CreateUser)
+            }) > 0;
+        }
+        #endregion
+
+        #region -CompanyCredit-
+        public override CompanyCredit CreditSelect(int companyID)
+        {
+            CompanyCredit cc = null;
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_CompanyCredit_Select", new ELParameter("CompanyID", DbType.Int32, companyID)))
+            {
+                while (dr.Read())
+                {
+                    cc = ReadCompanyCredit(dr);
+                }
+            }
+            return cc;
+        }
+        public override bool CreditSave(CompanyCredit credit)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_CompanyCredit_Save", new ELParameter[]{
+                new ELParameter("SupplierID",DbType.Int32,credit.SupplierID),
+			new ELParameter("CreditDate",DbType.DateTime,credit.CreditDate),
+			new ELParameter("CreditDelta",DbType.Decimal,credit.CreditDelta),
+			new ELParameter("CreditAmount",DbType.Decimal,credit.CreditAmount),
+			new ELParameter("CreditDesc",DbType.String,credit.CreditDesc),
+			new ELParameter("CreditMemo",DbType.String,credit.CreditMemo),
+			new ELParameter("CreateTime",DbType.DateTime,credit.CreateTime),
+			new ELParameter("CreateUser",DbType.Int32,credit.CreateUser)
+            }) > 0;
+        }
+        #endregion
+
         #region Tag
         public override List<Tag> GetTags()
         {
@@ -1005,7 +1062,15 @@ namespace HHOnline.Data
         }
         public override bool PendingUpdate(Pending pending)
         {
-            return false;
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SPending_Update", new ELParameter[]{
+                new ELParameter("Status",DbType.Int32,(int)pending.Status),
+                new ELParameter("UpdateTime",DbType.DateTime,pending.UpdateTime),
+                new ELParameter("UpdateUser",DbType.Int32,pending.UpdateUser),
+                new ELParameter("CompanyID",DbType.Int32,pending.CompanyID),
+                new ELParameter("CompanyType",DbType.Int32,(int)pending.CompanyType),
+                new ELParameter("DenyReason",DbType.String,pending.DenyReason),
+                new ELParameter("ID",DbType.Int32,pending.ID)
+            }) > 0;
         }
         #endregion
     }
