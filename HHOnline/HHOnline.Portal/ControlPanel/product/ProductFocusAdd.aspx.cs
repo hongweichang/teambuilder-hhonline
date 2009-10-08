@@ -31,6 +31,12 @@ public partial class ControlPanel_product_ProductFocusAdd : HHPage
         if (!IsPostBack && !IsCallback)
         {
             BindData();
+            if (Request.UrlReferrer != null)
+            {
+                btnPostBack.PostBackUrl = Request.UrlReferrer.ToString();
+                btnPostBack.Visible = true;
+            }
+            btnPost.Visible = true;
         }
     }
 
@@ -39,11 +45,13 @@ public partial class ControlPanel_product_ProductFocusAdd : HHPage
         ProductFocus productFocus = ProductFocusManager.Get(focusID);
         if (productFocus == null)
             productFocus = new ProductFocus();
+        else
+            productID = productFocus.ProductID;
         Product product = Products.GetProduct(productID);
         if (product != null)
         {
             this.hyProductName.Text = product.ProductName;
-            this.hyProductName.NavigateUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product&&di=" + productID;
+            this.hyProductName.NavigateUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product&di=" + productID;
         }
         else
         {
@@ -51,9 +59,13 @@ public partial class ControlPanel_product_ProductFocusAdd : HHPage
         }
         if (productFocus.FocusEnd != DateTime.MinValue)
             this.txtFocusEnd.Text = productFocus.FocusEnd.ToString("yyyy年MM月dd日");
+        else
+            this.txtFocusEnd.Text = string.Empty;
         if (productFocus.FocusFrom != DateTime.MinValue)
             this.txtFocusFrom.Text = productFocus.FocusFrom.ToString("yyyy年MM月dd日");
-        ListItem item = this.ddlFocusType.Items.FindByValue(productFocus.FocusType.ToString());
+        else
+            this.txtFocusFrom.Text = string.Empty;
+        ListItem item = this.ddlFocusType.Items.FindByValue(((int)productFocus.FocusType).ToString());
         if (item != null)
             item.Selected = true;
         this.txtRemark.Text = productFocus.FocusMemo;
@@ -101,5 +113,28 @@ public partial class ControlPanel_product_ProductFocusAdd : HHPage
         }
         if (status == DataActionStatus.Success)
             BindData();
+    }
+
+
+    public override void OnPageLoaded()
+    {
+        if (action == OperateType.Add)
+            this.ShortTitle = "设定分类";
+        else
+            this.ShortTitle = "设定分类";
+        this.SetTitle();
+        this.SetTabName(this.ShortTitle);
+        this.PageInfoType = InfoType.PopWinInfo;
+        AddJavaScriptInclude("scripts/jquery.datepick.js", false, false);
+        AddJavaScriptInclude("scripts/pages/productfocusadd.aspx.js", false, false);
+    }
+
+    protected override void OnPagePermissionChecking()
+    {
+        if (action == OperateType.Add)
+            this.PagePermission = "ProductModule-Add";
+        else
+            this.PagePermission = "ProductModule-Edit";
+        base.OnPagePermissionChecking();
     }
 }

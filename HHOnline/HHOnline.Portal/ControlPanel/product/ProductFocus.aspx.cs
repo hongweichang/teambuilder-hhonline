@@ -70,15 +70,57 @@ public partial class ControlPanel_product_ProductFocus : HHPage
 
     public override void OnPageLoaded()
     {
-        this.PagePermission = "FocusModule-View";
-        this.ShortTitle = "分类栏目管理";
+        this.PagePermission = "ProductModule-View";
+        this.ShortTitle = "分类栏目";
         this.SetTitle();
         this.SetTabName(this.ShortTitle);
     }
 
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
     {
-        this.PagePermission = "FocusModule-View";
+        this.PagePermission = "ProductModule-View";
         base.OnPermissionChecking(e);
+    }
+
+    protected void egvProductFocus_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        egvProductFocus.PageIndex = e.NewPageIndex;
+        BindData();
+    }
+
+    protected void egvProductFocus_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            ProductFocus focus = e.Row.DataItem as ProductFocus;
+            HyperLink hyName = e.Row.FindControl("hlProductName") as HyperLink;
+            Product product = Products.GetProduct(focus.ProductID);
+            if (hyName != null && product != null)
+            {
+                hyName.Text = product.ProductName;
+                hyName.NavigateUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product&di=" + focus.ProductID;
+            }
+        }
+    }
+
+    protected void egvProductFocus_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productfocusadd&focusID=" + egvProductFocus.DataKeys[e.RowIndex].Value);
+
+    }
+
+    protected void egvProductFocus_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        int focusID = (int)egvProductFocus.DataKeys[e.RowIndex].Value;
+        DataActionStatus status = ProductFocusManager.Delete(focusID);
+        switch (status)
+        {
+            case DataActionStatus.Success:
+                BindData();
+                break;
+            default:
+            case DataActionStatus.UnknownFailure:
+                throw new HHException(ExceptionType.Failed, "删除失败，请确认此条记录存在，并状态正常！");
+        }
     }
 }

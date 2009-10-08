@@ -31,11 +31,11 @@
             </th>
             <td>
                 <asp:TextBox ID="txtFocusFrom" rel="datepicker1" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revQuoteFrom" runat="server" ControlToValidate="txtQuoteFrom"
+                <asp:RegularExpressionValidator ID="revQuoteFrom" runat="server" ControlToValidate="txtFocusFrom"
                     ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
                 </asp:RegularExpressionValidator>
-                <asp:RequiredFieldValidator ID="rfv1" runat="server" ErrorMessage="报价起始日期不能为空。" Display="Dynamic"
-                    ControlToValidate="txtQuoteFrom"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfv1" runat="server" ErrorMessage="关注起始日期不能为空。" Display="Dynamic"
+                    ControlToValidate="txtFocusFrom"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -44,11 +44,11 @@
             </th>
             <td>
                 <asp:TextBox ID="txtFocusEnd" rel="datepicker2" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revQuoteEnd" runat="server" ControlToValidate="txtQuoteEnd"
+                <asp:RegularExpressionValidator ID="revQuoteEnd" runat="server" ControlToValidate="txtFocusEnd"
                     ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
                 </asp:RegularExpressionValidator>
-                <asp:RequiredFieldValidator ID="rfv2" runat="server" ErrorMessage="报价截止日期不能为空。" Display="Dynamic"
-                    ControlToValidate="txtQuoteEnd"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfv2" runat="server" ErrorMessage="关注截止日期不能为空。" Display="Dynamic"
+                    ControlToValidate="txtFocusEnd"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
                 备注
             </th>
             <td>
-                <asp:TextBox ID="txtRemark" runat="server" TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="txtRemark" runat="server" TextMode="MultiLine"  Width="450"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -97,4 +97,5 @@
                 <asp:Button ID="btnPostBack" runat="server" Text="返 回" Visible="false" CausesValidation="false" />
             </td>
         </tr>
+    </table>
 </asp:Content>

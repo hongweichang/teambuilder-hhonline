@@ -19,7 +19,7 @@ namespace HHOnline.Shops
         Hot = 2,
 
         /// <summary>
-        ///最受关注 
+        ///推荐产品 
         /// </summary>
         Recommend = 3,
 
