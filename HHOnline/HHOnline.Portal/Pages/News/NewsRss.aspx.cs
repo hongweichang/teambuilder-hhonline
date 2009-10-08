@@ -18,9 +18,6 @@ using System.IO;
 
 public partial class Pages_News_NewsRss : System.Web.UI.Page
 {
-	private string hostUrl;
-	private string httpHead;
-
 	protected void Page_Load(object sender, EventArgs e)
 	{
 		ArticleQuery query = new ArticleQuery();
@@ -30,9 +27,6 @@ public partial class Pages_News_NewsRss : System.Web.UI.Page
 		List<Article> articles = ArticleManager.GetArticles(query).Records;
 
 		HttpContext context = HttpContext.Current;
-		hostUrl = context.Request.Url.ToString();
-		hostUrl = hostUrl.Substring(0, hostUrl.IndexOf("/", 8));
-
 		XmlTextWriter writer = new XmlTextWriter(context.Response.OutputStream, System.Text.Encoding.UTF8);
 		
 		WriteRSSPrologue(writer);
@@ -74,7 +68,7 @@ public partial class Pages_News_NewsRss : System.Web.UI.Page
 	{
 		writer.WriteStartElement("channel");
 		writer.WriteElementString("title", "华宏在线 - 最新资讯");
-		writer.WriteElementString("link", hostUrl + "/　");
+		writer.WriteElementString("link", "view.aspx?news-newslist");
 		writer.WriteElementString("description", "华宏在线");
 		writer.WriteElementString("copyright", "2009 华宏在线");
 		writer.WriteElementString("generator", "华宏在线");
