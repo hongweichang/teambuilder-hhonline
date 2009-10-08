@@ -104,56 +104,56 @@ namespace HHOnline.Data
                 builder.AddWhere("CategoryID", Comparison.Equals, query.CategoryID.Value);
             }
 
-			if (query.Title != null)
-			{
-				builder.AddWhere("ArticleTitle", Comparison.Like, "%" + query.Title + "%");
-			}
+            if (query.Title != null)
+            {
+                builder.AddWhere("ArticleTitle", Comparison.Like, "%" + query.Title + "%");
+            }
 
-			if (query.HitStartTimes.HasValue)
-			{
-				builder.AddWhere("HitTimes", Comparison.GreaterOrEquals, query.HitStartTimes.Value);
-			}
+            if (query.HitStartTimes.HasValue)
+            {
+                builder.AddWhere("HitTimes", Comparison.GreaterOrEquals, query.HitStartTimes.Value);
+            }
 
-			if (query.HitEndTimes.HasValue)
-			{
-				builder.AddWhere("HitTimes", Comparison.LessOrEquals, query.HitEndTimes.Value);
-			}
+            if (query.HitEndTimes.HasValue)
+            {
+                builder.AddWhere("HitTimes", Comparison.LessOrEquals, query.HitEndTimes.Value);
+            }
 
-			if (query.CreateStartTime.HasValue)
-			{
-				builder.AddWhere("CreateTime", Comparison.GreaterOrEquals, query.CreateStartTime);
-			}
+            if (query.CreateStartTime.HasValue)
+            {
+                builder.AddWhere("CreateTime", Comparison.GreaterOrEquals, query.CreateStartTime);
+            }
 
-			if (query.CreateEndTime.HasValue)
-			{
-				builder.AddWhere("CreateTime", Comparison.LessOrEquals, query.CreateEndTime);
-			}
+            if (query.CreateEndTime.HasValue)
+            {
+                builder.AddWhere("CreateTime", Comparison.LessOrEquals, query.CreateEndTime);
+            }
 
-			// 添加OrderBy
-			switch (query.ArticleOrderBy)
-			{
-				case HHOnline.News.enums.ArticleOrderBy.Category:
-					builder.AddOrderBy("CategoryID", (Sorting)query.SortOrder);
-					break;
+            // 添加OrderBy
+            switch (query.ArticleOrderBy)
+            {
+                case HHOnline.News.enums.ArticleOrderBy.Category:
+                    builder.AddOrderBy("CategoryID", (Sorting)query.SortOrder);
+                    break;
 
-				case HHOnline.News.enums.ArticleOrderBy.HitTimes:
-					builder.AddOrderBy("HitTimes", (Sorting)query.SortOrder);
-					break;
+                case HHOnline.News.enums.ArticleOrderBy.HitTimes:
+                    builder.AddOrderBy("HitTimes", (Sorting)query.SortOrder);
+                    break;
 
-				case HHOnline.News.enums.ArticleOrderBy.CreateTime:
-					builder.AddOrderBy("CreateTime", (Sorting)query.SortOrder);
-					break;
+                case HHOnline.News.enums.ArticleOrderBy.CreateTime:
+                    builder.AddOrderBy("CreateTime", (Sorting)query.SortOrder);
+                    break;
 
-				case HHOnline.News.enums.ArticleOrderBy.Title:
-					builder.AddOrderBy("ArticleTitle", (Sorting)query.SortOrder);
-					break;
+                case HHOnline.News.enums.ArticleOrderBy.Title:
+                    builder.AddOrderBy("ArticleTitle", (Sorting)query.SortOrder);
+                    break;
 
-				case HHOnline.News.enums.ArticleOrderBy.UpdateTime:
-					builder.AddOrderBy("UpdateTime", (Sorting)query.SortOrder);
-					break;
-			}
-			
-			return builder.BuildQuery();
+                case HHOnline.News.enums.ArticleOrderBy.UpdateTime:
+                    builder.AddOrderBy("UpdateTime", (Sorting)query.SortOrder);
+                    break;
+            }
+
+            return builder.BuildQuery();
         }
         #endregion
 
@@ -306,6 +306,20 @@ namespace HHOnline.Data
                 builder.AddWhere("pc.CategoryID", Comparison.Equals, query.CategoryID.Value);
             }
 
+            //FocusType
+            if (query.FocusType.HasValue)
+            {
+                SelectQueryBuilder builderFocus = new SelectQueryBuilder();
+                builderFocus.Distinct = true;
+                builderFocus.SelectFromTable("PProductFocus pf");
+                builderFocus.SelectColumn("pf.ProductID");
+                builderFocus.AddWhere("pf.FocusType", Comparison.Equals, (int)query.FocusType.Value);
+                builderFocus.AddWhere("pf.FocusStatus", Comparison.GreaterThan, 0);
+                builderFocus.AddWhere("pf.FocusFrom", Comparison.LessOrEquals, new SqlLiteral("getdate()"));
+                builderFocus.AddWhere("pf.FocusEnd", Comparison.GreaterThan, new SqlLiteral("getdate()"));
+                builder.AddWhere("p.ProductID", Comparison.In, new SqlLiteral(builderFocus.BuildQuery()));
+            }
+
             //HasPictures
             if (query.HasPictures.HasValue)
             {
@@ -397,7 +411,7 @@ namespace HHOnline.Data
                 case ProductOrderBy.BrandName:
                     builder.AddJoin(JoinType.InnerJoin, "PBrand pb", "pb.BrandID", Comparison.Equals, "p", "BrandID");
                     builder.AddOrderBy("pb.BrandName", (Sorting)query.SortOrder);
-                    break; 
+                    break;
                 default:
                 case ProductOrderBy.DisplayOrder:
                     builder.AddOrderBy("p.DisplayOrder", (Sorting)query.SortOrder);

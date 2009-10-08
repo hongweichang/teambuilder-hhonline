@@ -23,6 +23,7 @@ namespace HHOnline.Shops
         private bool? hasPrice;
         private decimal? productBeginPrice;
         private decimal? productEndPrice;
+        private FocusType? focusType;
 
         /// <summary>
         /// 产品排序依据
@@ -110,6 +111,21 @@ namespace HHOnline.Shops
             set
             {
                 hasPrice = value;
+            }
+        }
+
+        /// <summary>
+        /// 关注类型
+        /// </summary>
+        public FocusType? FocusType
+        {
+            get
+            {
+                return focusType;
+            }
+            set
+            {
+                focusType = value;
             }
         }
 
@@ -259,7 +275,7 @@ namespace HHOnline.Shops
         public string GetQueryKey()
         {
             return CacheKeyManager.ProductListKey + string.Format(
-                "PI{0}PS{1}SB{2}SO{3}PN{4}PK{5}DI{6}BI{7}CI{8}HP{9}PR{10}PB{11}",
+                "PI{0}PS{1}SB{2}SO{3}PN{4}PK{5}DI{6}BI{7}CI{8}HP{9}PR{10}PB{11}FT{12}",
                 this.PageIndex,
                 this.PageSize,
                 this.ProductOrderBy,
@@ -271,7 +287,9 @@ namespace HHOnline.Shops
                 this.CategoryID.HasValue ? this.CategoryID.Value : -1,
                 this.HasPictures.HasValue ? Convert.ToInt32(this.HasPictures.Value) : -1,
                 this.HasPrice.HasValue ? Convert.ToInt32(this.HasPrice.Value) : -1,
-                this.HasPublished.HasValue ? Convert.ToInt32(this.HasPublished.Value) : -1);
+                this.HasPublished.HasValue ? Convert.ToInt32(this.HasPublished.Value) : -1,
+                this.FocusType.HasValue ? ((int)this.FocusType.Value) : -1
+                );
         }
 
         /// <summary>

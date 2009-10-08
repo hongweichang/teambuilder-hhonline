@@ -411,7 +411,10 @@ public partial class Index : HHPage
     }
     protected void Button38_Click(object sender, EventArgs e)
     {
-        List<Article> articles = ArticleManager.GetAllArticles();
+        ProductQuery query = new ProductQuery();
+        query.FocusType = FocusType.New;
+        lblCacheTip.Text = Products.GetProductList(query).Count.ToString();
+        //List<Article> articles = ArticleManager.GetAllArticles();
     }
     protected void Button39_Click(object sender, EventArgs e)
     {
@@ -421,7 +424,7 @@ public partial class Index : HHPage
     }
     protected void Button40_Click(object sender, EventArgs e)
     {
-        string path ="~/Utility/IndexDictionary/";
+        string path = "~/Utility/IndexDictionary/";
         new HHException(ExceptionType.UnknownError,
             GlobalSettings.PhysicalPath(path.Replace("/", System.IO.Path.DirectorySeparatorChar.ToString()).Replace("~", ""))).Log();
         new HHException(ExceptionType.UnknownError, GlobalSettings.MapPath(path)).Log();
