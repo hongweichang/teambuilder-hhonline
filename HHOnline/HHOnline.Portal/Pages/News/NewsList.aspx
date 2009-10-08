@@ -23,7 +23,7 @@
             <div class="clear">
             </div>
         </div>
-        <a class="rss_link" href="javascript:void(0)" title="订阅Rss">&nbsp;</a> <a href="<% Response.Write("view.aspx?news-newslist&v=1&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]); %>"
+        <a class="rss_link" href="view.aspx?news-newsrss" target="_blank" title="订阅Rss">&nbsp;</a> <a href="<% Response.Write("view.aspx?news-newslist&v=1&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]); %>"
             title="查看方式 - 列表" class="news_list">&nbsp;</a> <a href="<%Response.Write("view.aspx?news-newslist&v=0&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]);%>"
                 class="news_detail" title="查看方式 - 详细资料">&nbsp;</a>
         <div id="post_list">
