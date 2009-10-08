@@ -16,7 +16,7 @@ namespace HHOnline.Shops
         /// 创建关注类型
         /// </summary>
         /// <param name="focus"></param>
-        public DataActionStatus Create(ProductFocus focus)
+        public static DataActionStatus Create(ProductFocus focus)
         {
             DataActionStatus status;
             focus = ShopDataProvider.Instance.CreateUpdateFocus(focus, DataProviderAction.Create, out status);
@@ -28,7 +28,7 @@ namespace HHOnline.Shops
         /// </summary>
         /// <param name="focus"></param>
         /// <returns></returns>
-        public DataActionStatus Update(ProductFocus focus)
+        public static DataActionStatus Update(ProductFocus focus)
         {
             DataActionStatus status;
             focus = ShopDataProvider.Instance.CreateUpdateFocus(focus, DataProviderAction.Update, out status);
@@ -40,7 +40,7 @@ namespace HHOnline.Shops
         /// </summary>
         /// <param name="focus"></param>
         /// <returns></returns>
-        public DataActionStatus Delete(int focusID)
+        public static DataActionStatus Delete(int focusID)
         {
             DataActionStatus status = ShopDataProvider.Instance.DeleteFocus(focusID);
             return status;
@@ -51,7 +51,7 @@ namespace HHOnline.Shops
         /// </summary>
         /// <param name="focusID"></param>
         /// <returns></returns>
-        public ProductFocus Get(int focusID)
+        public static ProductFocus Get(int focusID)
         {
             return ShopDataProvider.Instance.GetFocus(focusID);
         }
@@ -61,7 +61,7 @@ namespace HHOnline.Shops
         /// </summary>
         /// <param name="type">关注类型</param>
         /// <returns></returns>
-        public List<ProductFocus> GetList(FocusType type)
+        public static List<ProductFocus> GetList(FocusType type)
         {
             return ShopDataProvider.Instance.GetFocusList(type);
         }
