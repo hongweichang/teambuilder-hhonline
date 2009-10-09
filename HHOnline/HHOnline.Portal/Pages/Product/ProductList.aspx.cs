@@ -26,10 +26,10 @@ public partial class Pages_Product_ProductList :HHPage
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
             Product product = e.Item.DataItem as Product;
-            Image productPicture = e.Item.FindControl("imgProduct") as Image;
-            if (productPicture != null)
+            Literal ltImage = e.Item.FindControl("ltImage") as Literal;
+            if (ltImage != null)
             {
-                productPicture.ImageUrl = GlobalSettings.RelativeWebRoot + product.GetDefaultImageUrl(100, 100);
+                ltImage.Text = "<div class=\"productImage\" style=\"background-image:url(" + GlobalSettings.RelativeWebRoot + product.GetDefaultImageUrl(100, 100) + ")\"></div>";
             }
             Literal ltPrice = e.Item.FindControl("ltPrice") as Literal;
             if (ltPrice != null)
@@ -39,34 +39,13 @@ public partial class Pages_Product_ProductList :HHPage
                 if (!User.Identity.IsAuthenticated)
                 {
                     price = ProductPrices.GetPriceDefault(product.ProductID);
-                    priceText = (price == null ? "需询价" : price.Value.ToString("c"));
+                    priceText = GlobalSettings.GetPrice(price);
                 }
                 else
                 {
                     price = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, product.ProductID);
                     decimal? price1 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, product.ProductID);
-                    if (price == null)
-                    {
-                        priceText = (price1 == null ? "需询价" : price1.Value.ToString("c"));
-                    }
-                    else
-                    {
-                        if (price1 == null)
-                        {
-                            priceText = (price == null ? "需询价" : price.Value.ToString("c"));
-                        }
-                        else
-                        {
-                            if (price == price1)
-                            {
-                                priceText = price.Value.ToString("c");
-                            }
-                            else
-                            {
-                                priceText = "<s>" + price.Value.ToString("c") + "</s><br />" + price1.Value.ToString("c");
-                            }
-                        }
-                    }
+                    priceText = GlobalSettings.GetPrice(true, price, price1);
                 }
                 ltPrice.Text = priceText;
             }
