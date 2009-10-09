@@ -18,7 +18,13 @@ namespace HHOnline.Controls
             {
                 brands = ProductBrands.GetProductBrands();
             }
-        }  
+        }
+        private int _Max = 10;
+        public int Max
+        {
+            get { return _Max; }
+            set { _Max = value; }
+        }
         private int _Columns = 2;
         public int Columns
         {
@@ -40,6 +46,8 @@ namespace HHOnline.Controls
                 return "<div><span>没有显示的品牌信息！</span></div>";
             }
             List<string> brandGroup = ProductBrands.GetBrandGroup();
+            int curCount = brandGroup.Count;
+            brandGroup = brandGroup.GetRange(0, Math.Min(_Max, curCount));
             List<ProductBrand> pb = null;
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<table cellpadding=\"0\" cellspacing=\"0\" class=\"" + _CssClass + "\">");
@@ -65,11 +73,14 @@ namespace HHOnline.Controls
                 }
                 sb.AppendLine("</td>");
 
-                if (i % _Columns == 1)
+                if (i % _Columns == _Columns-1)
                     sb.AppendLine("</tr>");
 
             }
             sb.AppendLine("</table>");
+
+            if (curCount > _Max)
+                sb.Append("<div class=\"list-more\"><a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand\" title=\"查看全部。。。\"></a></div>");
             return sb.ToString();
         }
         private List<ProductBrand> GetSubBrand(string groupName)

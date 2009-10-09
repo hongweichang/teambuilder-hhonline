@@ -62,13 +62,29 @@
             </div>
             <br />
             <div class="tab-nav">
-                <ul>
-                    <li class="active">促销</li>
-                    <li>推荐</li>
-                    <li>热卖</li>
+                <ul id="productNavigator2">
+                    <li class="active" rel="promotion">促销</li>
+                    <li rel="hot">热卖</li>
+                    <li rel="new">新品</li>
+                    <li rel="recommend">推荐</li>
                 </ul>
             </div>
             <div class="tab-content">
+                <div id="promotionTabContent" class="productTabContent">
+                    <hc:ProductPromotionList ID="pplMain" runat="server" ProductType="Promotion" CssClass="productPromotionList" Columns="4" />
+                </div>
+                
+                <div id="recommendTabContent" class="productTabContent" style="display:none">
+                    <hc:ProductPromotionList ID="ProductPromotionList1" runat="server" ProductType="Recommend" CssClass="productPromotionList" Columns="4" />
+                </div>
+                
+                <div id="hotTabContent" class="productTabContent" style="display:none">
+                    <hc:ProductPromotionList ID="ProductPromotionList2" runat="server" ProductType="Hot" CssClass="productPromotionList" Columns="4" />
+                </div>
+                
+                <div id="newTabContent" class="productTabContent" style="display:none">
+                    <hc:ProductPromotionList ID="ProductPromotionList3" runat="server" ProductType="New" CssClass="productPromotionList" Columns="4" />
+                </div>
             </div>
         </div>
         <div class="main-r4c2">

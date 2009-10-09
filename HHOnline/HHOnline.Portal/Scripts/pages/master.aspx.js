@@ -17,7 +17,7 @@ function changeHeaderTab(navigate,tabName) {
 function searchPruduct(searchText,maskText) {
     var _searchText = $.trim(searchText.val())
     if (_searchText == '' || _searchText == maskText) {
-        return;
+        _searchText = '';
     }
     window.location.href = relativeUrl + 'pages/view.aspx?product-search&w=' + encodeURIComponent(_searchText);
 }
@@ -32,7 +32,6 @@ $().ready(function() {
     var n = $('#headerNav');
     n.find('a').click(function() {
         var m = $(this);
-        if (typeof activeTab != 'undefined' && activeTab == m.attr('rel')) { return; }
         window.location.href = relativeUrl + eval('(nav.' + m.attr('rel') + ')');
         m.blur();
     });
@@ -71,4 +70,7 @@ $().ready(function() {
         window.location.href = relativeUrl + 'pages/view.aspx?profiles-favlist';
     })
 
+    logUl.find('a.dashboard').click(function() {
+        window.location.href = relativeUrl + 'pages/view.aspx?profiles-dashboard';
+    })
 });

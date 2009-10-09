@@ -21,7 +21,7 @@
                 关注类别(<span style="color: #ff0000">必填</span>)
             </th>
             <td>
-                <hc:FocusTypeList ID="ddlFocusType" runat="server">
+                <hc:FocusTypeList ID="ddlFocusType" runat="server" RepeatDirection="Horizontal" SelectedValue="New" CssClass="focusType">
                 </hc:FocusTypeList>
             </td>
         </tr>
@@ -30,7 +30,7 @@
                 关注起始日期(<span style="color: #ff0000">必填</span>)
             </th>
             <td>
-                <asp:TextBox ID="txtFocusFrom" rel="datepicker1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFocusFrom" rel="datepicker1" runat="server" Width="200px"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="revQuoteFrom" runat="server" ControlToValidate="txtFocusFrom"
                     ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
                 </asp:RegularExpressionValidator>
@@ -43,7 +43,7 @@
                 关注截止日期(<span style="color: #ff0000">必填</span>)
             </th>
             <td>
-                <asp:TextBox ID="txtFocusEnd" rel="datepicker2" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFocusEnd" rel="datepicker2" runat="server" Width="200px"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="revQuoteEnd" runat="server" ControlToValidate="txtFocusEnd"
                     ValidationExpression="\d{4}年\d{1,2}月\d{1,2}日" ErrorMessage="必须为日期格式 - yyyy年MM月dd日！">
                 </asp:RegularExpressionValidator>
@@ -56,7 +56,7 @@
                 备注
             </th>
             <td>
-                <asp:TextBox ID="txtRemark" runat="server" TextMode="MultiLine"  Width="450"></asp:TextBox>
+                <asp:TextBox ID="txtRemark" runat="server" Height="50px" TextMode="MultiLine"  Width="200px"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -64,7 +64,7 @@
                 排序序号
             </th>
             <td>
-                <asp:TextBox ID="txtDisplayOrder" runat="server" MaxLength="8" Text="0"></asp:TextBox>
+                <asp:TextBox ID="txtDisplayOrder" runat="server" MaxLength="8" Text="0" Width="200px"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="rev1" runat="server" ControlToValidate="txtDisplayOrder"
                     ValidationExpression="(\d){1,3}" ErrorMessage="必须为0-999的数字"></asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="rfv3" Display="Dynamic" runat="server" ControlToValidate="txtDisplayOrder"

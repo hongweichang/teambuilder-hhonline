@@ -3,7 +3,7 @@ function changeTab() {
     var me = $(this);
     if (me.hasClass('active')) { return; }
     var tabName = me.attr('rel');
-    var last = $('#productNavigator1').find('li.active');
+    var last = me.parent().find('li.active');
 
     last.removeClass('active');
     me.addClass('active');
@@ -16,4 +16,5 @@ $().ready(function() {
     });
 
     $('#productNavigator1').find('li').click(changeTab);
+    $('#productNavigator2').find('li').click(changeTab);
 });

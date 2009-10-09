@@ -36,16 +36,16 @@ public partial class ControlPanel_product_ProductFocus : HHPage
         switch (type)
         {
             case FocusType.Hot:
-                lnkHot.CssClass = "active";
+                lnkHot.CssClass = "hot active";
                 break;
             case FocusType.New:
-                lnkNew.CssClass = "active";
+                lnkNew.CssClass = "new active";
                 break;
             case FocusType.Promotion:
-                lnkPromotion.CssClass = "active";
+                lnkPromotion.CssClass = "promotion active";
                 break;
             case FocusType.Recommend:
-                lnkRecomment.CssClass = "active";
+                lnkRecomment.CssClass = "recommend active";
                 break;
         }
         this.egvProductFocus.DataSource = ProductFocusManager.GetList(type);

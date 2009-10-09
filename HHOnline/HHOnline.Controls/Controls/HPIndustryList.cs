@@ -25,6 +25,12 @@ namespace HHOnline.Controls
             get { return _Columns; }
             set { _Columns = value; }
         }
+        private int _Max = 10;
+        public int Max
+        {
+            get { return _Max; }
+            set { _Max = value; }
+        }
         private string _CssClass;
         public string CssClass
         {
@@ -44,6 +50,8 @@ namespace HHOnline.Controls
             ProductIndustry pi = null;
             StringBuilder sb = new StringBuilder();
             string indId = null;
+            int curCount = inds.Count;
+            inds = inds.GetRange(0, Math.Min(_Max, curCount));
             sb.AppendLine("<table cellpadding=\"0\" cellspacing=\"0\" class=\"" + _CssClass + "\">");
             for (int i = 0; i < inds.Count; i++)
             {
@@ -67,11 +75,13 @@ namespace HHOnline.Controls
                 }
                 sb.AppendLine("</td>");
 
-                if (i % _Columns == 1)
+                if (i % _Columns == _Columns-1)
                     sb.AppendLine("</tr>");
 
             }
             sb.AppendLine("</table>");
+            if (curCount > _Max)
+                sb.Append("<div class=\"list-more\"><a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry\" title=\"查看全部。。。\"></a></div>");
             return sb.ToString();
         }
         public override void RenderControl(HtmlTextWriter writer)

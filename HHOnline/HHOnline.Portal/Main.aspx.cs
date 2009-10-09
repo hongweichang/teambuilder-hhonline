@@ -5,6 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
 using HHOnline.Framework;
+using HHOnline.Shops;
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net.config", Watch = true)]
 
 public partial class Main : HHPage
@@ -16,6 +17,9 @@ public partial class Main : HHPage
             SetSettings();
         }
         BindPictures();
+    }
+    void BindProducts() {
+      
     }
     void BindPictures()
     {

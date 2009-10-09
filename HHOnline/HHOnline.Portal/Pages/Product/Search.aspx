@@ -10,37 +10,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderContent" Runat="Server">
 <div class="homemastercontent">
-    <div class="searchDuration"><asp:Literal ID="ltSearchDuration" runat="server"></asp:Literal></div>
-    
-    <div style="padding:5px;">
-        <hc:MsgBox ID="msgBox" SkinID="msgBox" runat="server"></hc:MsgBox>
-            <asp:DataList ID="dlProduct" runat="server" OnItemDataBound="dlProduct_ItemDataBound" RepeatColumns="1" 
-                RepeatDirection="Horizontal" RepeatLayout="Flow" >
-                <ItemTemplate>
-                    <div class="productGridShow">
-                        <asp:Image BorderWidth="4" BorderColor="#dedede" ID="imgProduct" runat="server" />
-                        <div class="productTitle">
-                            <div class="productTitle-r1">
-                                <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
-                            </div>
-                            <div class="productTitle-r2">
-                                <%# Eval("ProductAbstract")%>
-                            </div>
-                            <div class="productTitle-r3">
-                                关键字：<%# Eval("ProductKeywords")%>
-                            </div>
-                            <br />
-                        </div>
-                        <div class="productPrice price"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></div>
-                        <div class="productBrand">品牌：
-                        <a href='view.aspx?product-brand&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("BrandID").ToString()) %>' target="_blank">
-                            <%# Eval("BrandName")%>
-                        </a></div>
-                    </div>
-                </ItemTemplate>
-            </asp:DataList>
-            <hc:CollectionPager ID="cpProduct" PageSize="10" runat="server"></hc:CollectionPager>
-        </div>
+    <huc:UCProductList ID="ucpProducts" runat="server" />
 </div>
 </asp:Content>
 

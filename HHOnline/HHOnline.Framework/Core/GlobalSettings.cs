@@ -749,5 +749,50 @@ namespace HHOnline.Framework
             return string.Empty;
         }
         #endregion
+
+        #region -Prices-
+        public static string GetPrice(params decimal?[] price)
+        {
+            return GetPrice(false, string.Empty, price);
+        }
+        public static string GetPrice(bool breakWord, params decimal?[] price)
+        {
+            return GetPrice(breakWord, string.Empty, price);
+        }
+        public static string GetPrice(string stringFormat, params decimal?[] price)
+        {
+            return GetPrice(false, stringFormat, price);
+        }
+        public static string GetPrice(bool breakWord, string stringFormat, params decimal?[] price)
+        {
+            if (string.IsNullOrEmpty(stringFormat))
+                stringFormat = "<s>{0}</s>" + (breakWord ? "<br />" : "") + "{1}";
+            if (price.Length == 1)
+            {
+                return (price[0] == null ? "需询价" : price[0].Value.ToString("c"));
+            }
+            else
+            {
+                decimal? p1 = price[0];
+                decimal? p2 = price[1];
+                if (p1 == null && p2 == null)
+                    return "需询价";
+                else
+                {
+                    if (p1 == null) return p2.Value.ToString("c");
+                    else if (p2 == null) return p1.Value.ToString("c");
+                    else
+                    {
+                        if (p1 < p2)
+                            return string.Format(stringFormat, p2.Value.ToString("c"), p1.Value.ToString("c"));
+                        else if (p1 > p2)
+                            return string.Format(stringFormat, p1.Value.ToString("c"), p2.Value.ToString("c"));
+                        else
+                            return p1.Value.ToString("c");
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -11,6 +11,7 @@ using HHOnline.Framework.Web.Pages;
 using HHOnline.Framework;
 using System.Configuration;
 
+
 /**
  * *by Jericho
  * */
@@ -34,26 +35,35 @@ namespace HHOnline.Controls
         private string RenderMenu()
         {
             List<HF.Menu> menus = HF.MenuManager.GetProfileMenus();
-
-            StringBuilder sb = new StringBuilder();
-
+            List<string> roles = new List<string>();
+            roles.Add("All");
             SettingsPropertyValueCollection spvc = this.Context.Profile.PropertyValues;
             User u = spvc["AccountInfo"].PropertyValue as User;
+            if (u.IsManager==1)
+                roles.Add("Manager");
+            Company c  = u.Company;
+            if (c != null)
+            {
+                if (((c.CompanyType == (CompanyType.Ordinary | CompanyType.Provider)) ||
+                    (c.CompanyType == (CompanyType.Ordinary | CompanyType.Provider | CompanyType.Agent))) && u.IsManager == 1)
+                {
+                    roles.Add("ProviderManager");
+                }
+            }
+            
+            StringBuilder sb = new StringBuilder();
+
 
             string _cpMenu = string.Empty;
             string _item = string.Empty;
             string relative = GlobalSettings.RelativeWebRoot;
-            int role = 2;
             foreach (HF.Menu m in menus)
             {
-                role = 2;
-                if (m.Roles == "Manager") role = 1;
-                if (role == 1 && u.IsManager == 2) continue;
+                if (!roles.Contains(m.Roles)) continue;
                 _item = string.Empty;
                 foreach (HF.MenuItem item in m.MenuItems)
                 {
-                    role = 2; if (item.Roles == "Manager") role = 1;
-                    if (role == 1 && u.IsManager == 2) continue;
+                    if (!roles.Contains(item.Roles)) continue;
                     _item += string.Format(items, item.ItemTitle, relative + item.Url, item.Name, item.ParentName);
                 }
                 if (!string.IsNullOrEmpty(_item))

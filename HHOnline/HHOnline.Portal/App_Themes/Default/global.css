@@ -76,6 +76,10 @@ a.add
     background-repeat: no-repeat;
     background-position: -6px -6px;
     }
+a.focus
+{
+    background:url(../../images/default/flaggreen.gif) no-repeat center 2px;
+    }
 a:hover.opts 
 {
     background-color:#4169E1;
@@ -3055,11 +3059,17 @@ fieldset.fsNormal legend
     width:100%;
     float:left;
     border-bottom:dashed 1px #dedede;
+    padding-bottom:5px;
     }
-.productGridShow img
+.productGridShow .productImage
 {
     float:left;
-    margin:5px;
+    margin:5px 15px 5px 5px;
+    width:100px;
+    height:100px;
+    border:solid 1px #dedede;
+    background-position:center center;
+    background-repeat:no-repeat;
     }
 .productGridShow .productTitle
 {
@@ -3071,8 +3081,14 @@ fieldset.fsNormal legend
 .productGridShow a,
 .productGridShow2 a
 {
-    color:#0000ff;
+    color:#000080;
     font-weight:bold;
+    }
+.productGridShow a:hover,
+.productGridShow2 a:hover
+{
+    color:#ff0000;
+    text-decoration:underline;
     }
 .productGridShow .productTitle-r1,
 .productGridShow .productTitle-r3
@@ -3109,12 +3125,14 @@ fieldset.fsNormal legend
     text-align:center;
     float:left;
     }
-.productGridShow2 .imgborder
+.productGridShow2 .productImage
 {
-    width:100%;
-    height:110px;
-    text-align:center;
-    vertical-align:middle;
+    width:100px;
+    height:100px;
+    margin:auto;
+    background-position:center center;
+    background-repeat:no-repeat;
+    border:solid 1px #dedede;
     }
 .productPriceNav
 {
@@ -3481,3 +3499,97 @@ a.addload
 {
 	background-color:#FFF9ED;border:1px solid #FFDD99;padding:2px 5px;display:none;width:200px;
 	}
+
+
+.productPromotionList
+{
+    }
+.productPromotionList td
+{
+    text-align:center;
+    padding:15px 5px 0 5px;
+    width:160px;
+    }
+.productPromotionList .piThumbnail
+{
+    text-align:center;
+    }
+.productPromotionList .piThumbnail a
+{
+    width:100px;
+    height:100px;
+    display:block;
+    text-decoration:none;
+    background:#eee;
+    padding:5px;
+    line-height:100px;
+    margin:auto;
+    }
+.productPromotionList .piThumbnail a:hover
+{
+    background:#F08080;
+    }
+.productPromotionList .piThumbnail a div
+{
+    border:0;
+    width:100px;
+    height:100px;
+    background-position:center center;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    background-color:#fff;
+    }
+.productPromotionList .piPrice
+{
+    color:#CD5C5C;
+    }
+.productPromotionList .piPrice s
+{
+    color:#888;
+    }
+.productTabContent .nopiInfo
+{
+    padding:10px 5px;
+    color:#888;
+    }
+.focusType td
+{
+    width:40px;
+    height:20px;
+    }
+.focusType input,
+.focusType label
+{
+    float:left;
+    }
+.focusType .opts
+{    
+    width:20px;
+    height:20px;
+    display:block;
+    }
+.focusType .new,.productNav .new
+{
+    background:url(../../images/default/new.gif) no-repeat 1px center;
+    }
+.focusType .hot,.productNav .hot
+{
+    background:url(../../images/default/hot.gif) no-repeat 1px center;
+    }
+.focusType .promotion,.productNav .promotion
+{
+    background:url(../../images/default/promotion.gif) no-repeat 1px center;
+    }
+.focusType .recommend,.productNav .recommend
+{
+    background:url(../../images/default/recommend.gif) no-repeat 1px center;
+    }
+.promotionNav
+{
+    margin-bottom:10px;
+    }
+.promotionNav a
+{
+    padding-left:18px;
+    }
+
