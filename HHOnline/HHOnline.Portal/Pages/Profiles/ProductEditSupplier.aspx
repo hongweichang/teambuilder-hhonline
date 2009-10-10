@@ -5,4 +5,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cphOpts" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="Server">
+	<table class="postform" cellspacing="10" cellpadding="10">
+	</table>
 </asp:Content>

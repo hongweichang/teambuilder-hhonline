@@ -21,6 +21,7 @@ public partial class Pages_Profiles_ProductEditSupplier : HHPage
 		if (!IsPostBack)
 		{
 			CheckPermission();
+			BindData();
 		}
 	}
 
@@ -38,11 +39,20 @@ public partial class Pages_Profiles_ProductEditSupplier : HHPage
 
 	public override void OnPageLoaded()
 	{
-		ShortTitle = "供应商信息";
+		ShortTitle = "供应信息";
 		SetTitle();
 		SetTabName(ShortTitle);
 
 		//AddJavaScriptInclude("scripts/jquery.cookie.js", false, false);
 		//base.ExecuteJs("$.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_productmanage' });", false);
+	}
+
+	/// <summary>
+	/// 绑定信息
+	/// </summary>
+	public void BindData()
+	{
+		int productID = Convert.ToInt32(Request.QueryString["ProductID"]);
+
 	}
 }

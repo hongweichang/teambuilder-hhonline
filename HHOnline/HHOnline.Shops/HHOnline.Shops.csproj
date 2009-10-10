@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EAF0EF22-8AD4-4772-A9D7-61EB86080B07}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -51,9 +51,12 @@
     <Compile Include="Components\ProductPrice.cs" />
     <Compile Include="Components\ProductProperty.cs" />
     <Compile Include="Components\ProductQuery.cs" />
+    <Compile Include="Components\ProductSupply.cs" />
     <Compile Include="Enums\FocusType.cs" />
+    <Compile Include="Enums\FreightIncludeType.cs" />
     <Compile Include="Enums\PriceIncludeType.cs" />
     <Compile Include="Enums\ProductOrderBy.cs" />
+    <Compile Include="Enums\TaxIncludeType.cs" />
     <Compile Include="GradeStrategy\BrandStrategy.cs" />
     <Compile Include="GradeStrategy\CategoryStrategy.cs" />
     <Compile Include="GradeStrategy\IndustryStrategy.cs" />
