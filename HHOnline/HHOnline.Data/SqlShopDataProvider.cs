@@ -523,6 +523,30 @@ namespace HHOnline.Data
 		/// <summary>
 		/// 获取产品供应信息
 		/// </summary>
+		/// <param name="productID"></param>
+		/// <param name="supplierID"></param>
+		/// <returns></returns>
+		public override ProductSupply GetProductSupply(int productID, int supplierID)
+		{
+			ELParameter paramID1 = new ELParameter("@ProductID", DbType.Int32, productID);
+			ELParameter paramID2 = new ELParameter("@SupplierID", DbType.Int32, supplierID);
+
+			using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductSupply_GetByProductAndSupplier", paramID1, paramID2))
+			{
+				ProductSupply result = null;
+
+				if (dr.Read())
+				{
+					result = PopulateProductSupplyFromIDataReader(dr);
+				}
+
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// 获取产品供应信息
+		/// </summary>
 		/// <param name="supplyID"></param>
 		/// <returns></returns>
 		public override ProductSupply GetProductSupply(int supplyID)

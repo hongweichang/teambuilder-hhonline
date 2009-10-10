@@ -48,6 +48,11 @@ namespace HHOnline.Framework
         /// 查找未知错误
         /// </summary>
         SearchUnknownError = 8,
+
+		/// <summary>
+		/// 产品供应信息未找到
+		/// </summary>
+		ProductSupplyNotFound = 9,
         #endregion
 
         #region -账户异常32~63-

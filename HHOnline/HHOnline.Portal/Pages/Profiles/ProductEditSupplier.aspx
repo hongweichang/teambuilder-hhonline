@@ -6,14 +6,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="Server">
 	<table class="postform" cellspacing="10" cellpadding="10">
-		<tr>
+		<%--<tr>
 			<th style="width: 180px;">
 				供应商
 			</th>
 			<td>
 				<asp:Label ID="lblSupplierName" runat="server" Text="Label"></asp:Label>
 			</td>
-		</tr>
+		</tr>--%>
 		<tr>
 			<th style="width: 180px;">
 				产品名称
@@ -83,7 +83,7 @@
 		</tr>
 		<tr>
 			<th style="width: 180px;">
-				供货税率%(<span class="needed">必填</span>)
+				供货税率(<span class="needed">必填</span>)
 			</th>
 			<td>
 				<asp:TextBox Width="230px" ID="txtApplyTaxRate" runat="server"></asp:TextBox>
@@ -96,10 +96,10 @@
 				供应区域(<span class="unneeded">可选</span>)
 			</th>
 			<td>
-				<asp:TextBox Width="230px" ID="txtRegion" runat="server" ReadOnly="true"></asp:TextBox>
+				<asp:TextBox Width="230px" ID="txtRegion" runat="server" ReadOnly="true" Text="全国"></asp:TextBox>
 				<img id="showArea" src="../images/default/choosearea.gif" alt="选择区域" title="选择区域"
 					style="cursor: pointer" />
-				<asp:HiddenField ID="hfRegionCode" runat="server" />
+				<asp:HiddenField ID="hfRegionCode" runat="server" Value="0" />
 				<a id="clearArea" href="javascript:{}">清空</a>
 			</td>
 		</tr>
@@ -154,7 +154,7 @@
 				&nbsp;
 			</th>
 			<td>
-				<asp:Button ID="btnSave" runat="server" Text=" 保存 " />
+				<asp:Button ID="btnSave" runat="server" Text=" 保存 " onclick="btnSave_Click" />
 			</td>
 		</tr>
 	</table>

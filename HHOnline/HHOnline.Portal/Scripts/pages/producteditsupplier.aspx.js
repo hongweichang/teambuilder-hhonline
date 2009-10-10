@@ -16,8 +16,8 @@ function getRegion(target) {
 }
 function clearArea() {
 	var sa = $('#showArea');
-	sa.prev().val('');
-	sa.next().val('');
+	sa.prev().val('全国');
+	sa.next().val('0');
 }
 function selectArea() {
     var me = $(this);
