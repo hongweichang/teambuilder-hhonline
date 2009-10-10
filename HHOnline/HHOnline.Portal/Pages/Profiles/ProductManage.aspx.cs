@@ -289,14 +289,14 @@ public partial class Pages_Profiles_ProductManage : HHPage
 
 	protected void egvProducts_RowCommand(object sender, GridViewCommandEventArgs e)
 	{
-		GridViewRow row = ((LinkButton)e.CommandSource).Parent.Parent.Parent.Parent as GridViewRow;
+		GridViewRow row = ((LinkButton)e.CommandSource).Parent.Parent as GridViewRow;
 		
 		if (row != null)
 		{
 			int index = row.RowIndex;
 			object productID = egvProducts.DataKeys[index].Value;
 
-			if (e.CommandName == "ViewPrice")
+			if (e.CommandName == "EditSupply")
 			{
 				Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productprice&ProductID=" + productID);
 			}

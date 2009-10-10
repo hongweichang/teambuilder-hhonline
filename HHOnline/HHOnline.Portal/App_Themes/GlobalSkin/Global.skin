@@ -7,6 +7,7 @@
 <asp:LinkButton runat="server" CssClass="cancel opts" SkinID="lnkcancel" Text=" " ToolTip="取消"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="view opts" SkinID="lnkview" Text=" " ToolTip="查看详细"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="price opts" SkinID="lnkviewprice" Text=" " ToolTip="查看报价"></asp:LinkButton>
+<asp:LinkButton runat="server" CssClass="price opts" SkinID="lnkeditsupply" Text=" " ToolTip="编辑供应信息"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="focus opts" SkinID="lnksetfocus" Text=" " ToolTip="设置分类栏目"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="add opts" SkinID="lnkadd" Text=" " ToolTip="新增"></asp:LinkButton>
 <asp:LinkButton runat="server" CssClass="add opts" SkinID="lnkaddchild" Text=" " ToolTip="新增子信息"></asp:LinkButton>

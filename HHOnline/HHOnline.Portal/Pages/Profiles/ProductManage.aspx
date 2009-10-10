@@ -97,7 +97,7 @@
 					</asp:LinkButton>
 					<asp:LinkButton ID="lnkSetFocus" runat="server" CommandName="SetFocus" SkinID="lnksetfocus"
 						PostBackUrl="#"></asp:LinkButton>
-					<asp:LinkButton ID="lnkViewPrice" runat="server" CommandName="ViewPrice" SkinID="lnkviewprice"
+					<asp:LinkButton ID="lnkEditSupply" runat="server" CommandName="EditSupply" SkinID="lnkeditsupply"
 						PostBackUrl="#"></asp:LinkButton>
 					<asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" SkinID="lnkdelete"
 						OnClientClick="return confirm('确定要删除此记录吗？')" PostBackUrl="#"></asp:LinkButton>
