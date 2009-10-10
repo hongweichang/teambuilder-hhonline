@@ -6,12 +6,11 @@ using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
 using HHOnline.Framework;
 using HHOnline.Shops;
-using HHOnline.Framework.Web;
 using Image = System.Web.UI.WebControls.Image;
 
 public partial class Pages_Profiles_ProductManage : HHPage
 {
-	private string destinationURL = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product";
+	private string destinationURL = GlobalSettings.RelativeWebRoot + "pages/view.aspx?profiles-productmanage";
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
@@ -198,7 +197,9 @@ public partial class Pages_Profiles_ProductManage : HHPage
 
 	private void BindLinkButton()
 	{
+		// TODO: 此处添加添加产品代码
 		lbNewProduct.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd";
+		
 		lnkAll.PostBackUrl = destinationURL;
 		lnkNoPicture.PostBackUrl = destinationURL + "&hp=0";
 		lnkNoPriced.PostBackUrl = destinationURL + "&pr=0";
@@ -262,6 +263,7 @@ public partial class Pages_Profiles_ProductManage : HHPage
 
 	protected void egvProducts_RowUpdating(object sender, GridViewUpdateEventArgs e)
 	{
+		// TODO: 此处添加更新代码
 		Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd&ID=" + egvProducts.DataKeys[e.RowIndex].Value);
 	}
 
@@ -298,7 +300,7 @@ public partial class Pages_Profiles_ProductManage : HHPage
 
 			if (e.CommandName == "EditSupply")
 			{
-				Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productprice&ProductID=" + productID);
+				Response.Redirect(GlobalSettings.RelativeWebRoot + "pages/view.aspx?profiles-producteditsupplier&ProductID=" + productID);
 			}
 			else if (e.CommandName == "SetFocus")
 			{
