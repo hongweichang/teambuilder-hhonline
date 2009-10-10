@@ -4,7 +4,7 @@ using System.Text;
 using HHOnline.Shops.Enums;
 using HHOnline.Framework;
 
-namespace HHOnline.Shops.Components
+namespace HHOnline.Shops
 {
 	/// <summary>
 	/// 产品供应表

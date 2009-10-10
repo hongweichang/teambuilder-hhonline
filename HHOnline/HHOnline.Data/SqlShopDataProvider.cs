@@ -518,8 +518,23 @@ namespace HHOnline.Data
         }
         #endregion
 
-        #region ProductPicture
-        public override ProductPicture CreateUpdatePicture(ProductPicture picture, DataProviderAction action, out DataActionStatus status)
+		#region ProductSupply
+
+		/// <summary>
+		/// 更新产品供应信息
+		/// </summary>
+		/// <param name="ps"></param>
+		/// <param name="status"></param>
+		/// <returns></returns>
+		public override ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+
+		#region ProductPicture
+		public override ProductPicture CreateUpdatePicture(ProductPicture picture, DataProviderAction action, out DataActionStatus status)
         {
             ELParameter paramID = null;
             if (action == DataProviderAction.Create)

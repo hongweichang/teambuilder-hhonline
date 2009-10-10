@@ -256,8 +256,14 @@ namespace HHOnline.Shops.Providers
         }
         #endregion
 
-        #region ProductPrice
-        public abstract ProductPrice CreateUpdatePrice(ProductPrice price, DataProviderAction action, out DataActionStatus status);
+		#region ProductSupply
+
+		public abstract ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status);
+
+		#endregion
+
+		#region ProductPrice
+		public abstract ProductPrice CreateUpdatePrice(ProductPrice price, DataProviderAction action, out DataActionStatus status);
 
         public abstract DataActionStatus DeletePrice(int priceID);
 
