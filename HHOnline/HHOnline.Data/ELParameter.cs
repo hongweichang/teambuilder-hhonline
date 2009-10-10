@@ -40,7 +40,7 @@ namespace HHOnline.Data
         {
             this.ParameterName = parameterName;
             this.DbType = dbType;
-            this.Value = value;
+            this.Value = value == null ? DBNull.Value : value;
             this.Direction = ParameterDirection.Input;
         }
 
@@ -48,7 +48,7 @@ namespace HHOnline.Data
         {
             this.ParameterName = parameterName;
             this.DbType = dbType;
-            this.Value = value;
+            this.Value = value == null ? DBNull.Value : value;
             this.Size = size;
             this.Direction = ParameterDirection.Input;
         }

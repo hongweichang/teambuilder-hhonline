@@ -521,6 +521,27 @@ namespace HHOnline.Data
 		#region ProductSupply
 
 		/// <summary>
+		/// 获取产品供应信息
+		/// </summary>
+		/// <param name="supplyID"></param>
+		/// <returns></returns>
+		public override ProductSupply GetProductSupply(int supplyID)
+		{
+			ELParameter paramID = new ELParameter("@SupplyID", DbType.Int32, supplyID);
+			using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductSupply_Get", paramID))
+			{
+				ProductSupply result = null;
+
+				if (dr.Read())
+				{
+					result = PopulateProductSupplyFromIDataReader(dr);
+				}
+
+				return result;
+			}
+		}
+
+		/// <summary>
 		/// 更新产品供应信息
 		/// </summary>
 		/// <param name="ps"></param>
@@ -528,7 +549,34 @@ namespace HHOnline.Data
 		/// <returns></returns>
 		public override ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status)
 		{
-			throw new NotImplementedException();
+			SerializerData data = ps.GetSerializerData();
+
+			ELParameter[] parms = new ELParameter[]
+			{
+				new ELParameter("@SupplyID", DbType.Int32, ps.SupplyID),
+				new ELParameter("@SupplierID", DbType.Int32, ps.SupplierID),
+				new ELParameter("@ProductID", DbType.Int32, ps.ProductID),
+				new ELParameter("@ModelID", DbType.Int32, ps.ModelID),
+				new ELParameter("@DeliverySpan", DbType.String, ps.DeliverySpan),
+				new ELParameter("@WarrantySpan", DbType.String, ps.WarrantySpan),
+				new ELParameter("@QuotePrice", DbType.Decimal, ps.QuotePrice),
+				new ELParameter("@QuoteMOQ", DbType.Int32, ps.QuoteMOQ),
+				new ELParameter("@IncludeFreight", DbType.Int32, ps.IncludeFreight),
+				new ELParameter("@IncludeTax", DbType.Int32, ps.IncludeTax),
+				new ELParameter("@ApplyTaxRate", DbType.Decimal, ps.ApplyTaxRate),
+				new ELParameter("@SupplyRegion", DbType.Int32, ps.SupplyRegion),
+				new ELParameter("@QuoteFrom", DbType.DateTime, ps.QuoteFrom),
+				new ELParameter("@QuoteEnd", DbType.DateTime, ps.QuoteEnd),
+				new ELParameter("@QuoteRenewal", DbType.Int32, ps.QuoteRenewal),
+				new ELParameter("@SupplyStatus", DbType.Int32, ps.SupplyStatus),
+				new ELParameter("@UpdateUser", DbType.Int32, ps.UpdateUser),
+				new ELParameter("@PropertyNames", DbType.String, data.Keys),
+				new ELParameter("@PropertyValues", DbType.String, data.Values),
+			};
+
+			status = (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductSupply_Update", parms));
+
+			return ps;
 		}
 
 		#endregion

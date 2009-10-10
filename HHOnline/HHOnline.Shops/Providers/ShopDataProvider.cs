@@ -259,6 +259,8 @@ namespace HHOnline.Shops.Providers
 
 		#region ProductSupply
 
+		public abstract ProductSupply GetProductSupply(int supplyID);
+
 		public abstract ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status);
 
 		public static ProductSupply PopulateProductSupplyFromIDataReader(IDataReader dr)
