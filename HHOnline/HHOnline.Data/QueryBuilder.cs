@@ -306,6 +306,13 @@ namespace HHOnline.Data
                 builder.AddWhere("pc.CategoryID", Comparison.Equals, query.CategoryID.Value);
             }
 
+			//CompanyID
+			if (query.CompanyID.HasValue)
+			{
+				builder.AddJoin(JoinType.InnerJoin, "PProductSupply ps", "ps.ProductID", Comparison.Equals, "p", "ProductID");
+				builder.AddWhere("ps.SupplyID", Comparison.Equals, query.CompanyID.Value);
+			}
+
             //FocusType
             if (query.FocusType.HasValue)
             {
