@@ -30,7 +30,7 @@
             <div class="main-r3c1-r2 main-r3c1-r4">
                 <asp:Literal ID="ltService" runat="server"></asp:Literal></div>
         </div>
-        <div class="main-r3c2" id="divAdLogo">
+        <div class="main-r3c2 loader04" id="divAdLogo">
         </div>
         <div class="main-r3c3">
             <hc:HHLoginView ID="hhView" runat="server" PanelLeftCss="main-r3c3-c1 access-point"

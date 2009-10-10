@@ -14,23 +14,24 @@
         <asp:Literal ID="ltDescription" runat="server"></asp:Literal>
     </div>
     <div class="content">
+        <a href="javascript:{}" id="anchorAddFav" title="加为收藏" class="addProductFav">&nbsp;</a>
         <div class="content-r1c1" id="divPics"></div>
         <div class="content-r1c2" >
             <table cellpadding="0" cellspacing="0">
                 <tr>
-                    <th style="width:70px">编码：</th>
+                    <th style="width:60px">编码：</th>
                     <td><asp:Literal ID="ltProductCode" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
-                    <th style="width:70px">分类：</th>
+                    <th>分类：</th>
                     <td class="nav"><asp:Literal ID="ltCategory" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
-                    <th style="width:70px">行业：</th>
+                    <th>行业：</th>
                     <td class="nav"><asp:Literal ID="ltIndustry" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
-                    <th style="width:70px">品牌：</th>
+                    <th>品牌：</th>
                     <td class="nav"><asp:Literal ID="ltBrand" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
@@ -44,8 +45,13 @@
                 <tr>
                     <th>&nbsp;</th>
                     <td>
-                        <a id="anchorAddFav" href="javascript:{}" onfocus="this.blur()" class="favcar addfav"></a>
-                        <a id="anchorAddCar" href="javascript:{}" onfocus="this.blur()" class="favcar addcar"></a>
+                        <div class="productPriceOpts">
+                            <div class="ppo-r1">购买：<input type="text" id="txtAmount" value="1" maxlength="4" />&nbsp;件。&nbsp;<span id="spnMsg">**请填写正确的数目！</span></div>
+                            <div class="ppo-r2">
+                                <a href="javascript:{}" onfocus="this.blur()" class="favcar addprice"></a>
+                                <a id="anchorAddCar" href="javascript:{}" onfocus="this.blur()" class="favcar addcar"></a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </table>

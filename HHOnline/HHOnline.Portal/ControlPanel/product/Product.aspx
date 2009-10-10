@@ -104,12 +104,12 @@
                             </asp:RoleGroup>
                         </RoleGroups>
                     </asp:LoginView>
-                    <asp:LoginView ID="LoginView2" runat="server">
+                    <asp:LoginView ID="LoginView4" runat="server">
                         <RoleGroups>
-                            <asp:RoleGroup Roles="ProductModule-Delete">
+                            <asp:RoleGroup Roles="ProductModule-Edit">
                                 <ContentTemplate>
-                                    <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" SkinID="lnkdelete"
-                                        OnClientClick="return confirm('确定要删除此记录吗？')" PostBackUrl="#"></asp:LinkButton>
+                                    <asp:LinkButton ID="lnkSetFocus" runat="server" CommandName="SetFocus" SkinID="lnksetfocus"
+                                        PostBackUrl="#"></asp:LinkButton>
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>
@@ -124,12 +124,12 @@
                             </asp:RoleGroup>
                         </RoleGroups>
                     </asp:LoginView>
-                    <asp:LoginView ID="LoginView4" runat="server">
+                    <asp:LoginView ID="LoginView2" runat="server">
                         <RoleGroups>
-                            <asp:RoleGroup Roles="ProductModule-View">
+                            <asp:RoleGroup Roles="ProductModule-Delete">
                                 <ContentTemplate>
-                                    <asp:LinkButton ID="lnkSetFocus" runat="server" CommandName="SetFocus" SkinID="lnksetfocus"
-                                        PostBackUrl="#"></asp:LinkButton>
+                                    <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" SkinID="lnkdelete"
+                                        OnClientClick="return confirm('确定要删除此记录吗？')" PostBackUrl="#"></asp:LinkButton>
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>

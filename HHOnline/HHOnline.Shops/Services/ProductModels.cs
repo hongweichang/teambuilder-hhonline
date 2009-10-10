@@ -32,7 +32,7 @@ namespace HHOnline.Shops
         /// <param name="model"></param>
         public static void Update(ProductModel model)
         {
-            ShopDataProvider.Instance.CreateUpdateModel(model, DataProviderAction.Delete);
+            ShopDataProvider.Instance.CreateUpdateModel(model, DataProviderAction.Update);
             HHCache.Instance.Remove(CacheKeyManager.GetModelKeyByID(model.ModelID));
             HHCache.Instance.Remove(CacheKeyManager.GetModelKeyByProductID(model.ProductID));
         }

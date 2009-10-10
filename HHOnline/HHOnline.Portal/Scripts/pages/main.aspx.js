@@ -10,10 +10,24 @@ function changeTab() {
     $('#' + last.attr('rel') + 'TabContent').hide();
     $('#' + tabName + 'TabContent').show();
 }
+function loadPictures() {
+    var picsContainer = $('#divAdLogo');
+    $.ajax({
+        dataType: 'json',
+        url: 'ads.axd',
+        error: function(error) {
+            var msg = error.responseText != '' ? error.responseText : '图片加载失败';
+            picsContainer.html(msg);
+        },
+        success: function(json) {
+            picsContainer.hrzAccordion({
+                pictures: json
+            });
+        }
+    })    
+}
 $().ready(function() {
-    $('#divAdLogo').hrzAccordion({
-        pictures: _showPictures
-    });
+    loadPictures();
 
     $('#productNavigator1').find('li').click(changeTab);
     $('#productNavigator2').find('li').click(changeTab);

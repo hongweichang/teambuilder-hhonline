@@ -350,11 +350,11 @@ namespace HHOnline.Data
             ELParameter paramID = null;
             if (action == DataProviderAction.Create)
             {
-                paramID = new ELParameter("@IndustryID", DbType.Int32, 4, ParameterDirection.Output);
+                paramID = new ELParameter("@ModelID", DbType.Int32, 4, ParameterDirection.Output);
             }
             else
             {
-                paramID = new ELParameter("@IndustryID", DbType.Int32, model.ModelID);
+                paramID = new ELParameter("@ModelID", DbType.Int32, model.ModelID);
             }
 
             ELParameter[] elParameters = new ELParameter[]{
@@ -367,7 +367,7 @@ namespace HHOnline.Data
                 new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
                 new ELParameter("@PropertyNames",DbType.String,model.GetSerializerData().Keys),
                 new ELParameter("@PropertyValues",DbType.String,model.GetSerializerData().Values),
-                new ELParameter("@Action",DbType.Int32,action)
+                new ELParameter("@Action",DbType.Int32,(int)action)
             };
             DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ProductModel_CreateUpdate", elParameters);
             if (action == DataProviderAction.Create)
@@ -378,13 +378,13 @@ namespace HHOnline.Data
         public override bool DeleteModel(int modelID)
         {
             ELParameter paramID = new ELParameter("@ModelID", DbType.Int32, modelID);
-            return Convert.ToInt32(DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ProductBrand_Delete", paramID)) == 1;
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ProductModel_Delete", paramID) == 1;
         }
 
         public override ProductModel GetModel(int modelID)
         {
             ELParameter paramID = new ELParameter("@ModelID", DbType.Int32, modelID);
-            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModel_Get"))
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModel_Get",paramID))
             {
                 ProductModel model = new ProductModel();
                 if (dr.Read())
@@ -398,7 +398,7 @@ namespace HHOnline.Data
         public override List<ProductModel> GetModelsByProductID(int productID)
         {
             ELParameter paramID = new ELParameter("@ProductID", DbType.Int32, productID);
-            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModels_GetByProductID"))
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModels_GetByProductID",paramID))
             {
                 List<ProductModel> models = new List<ProductModel>();
                 while (dr.Read())

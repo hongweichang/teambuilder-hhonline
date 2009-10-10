@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using HHOnline.Framework.Web.Pages;
 using HHOnline.Shops;
+using System.Configuration;
 
 namespace HHOnline.Framework.Web.HttpHandlers
 {
@@ -18,10 +19,16 @@ namespace HHOnline.Framework.Web.HttpHandlers
 
         public void ProcessRequest(HttpContext context)
         {
+            string msg = string.Empty;
+            bool suc = false;
+            string formatStr = "{msg:'{0}',suc:{1}}";
+            SettingsPropertyValueCollection spvc = context.Profile.PropertyValues;
+            User u = spvc["AccountInfo"].PropertyValue as User;
             string action = context.Request.QueryString["action"];
             switch (action)
             {
-                case "addproductfav":
+                case "addShopcar":
+
                     break;
             }
         }

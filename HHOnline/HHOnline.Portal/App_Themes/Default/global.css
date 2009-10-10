@@ -39,6 +39,24 @@ a.opts
     margin-left:5px;
     }
 /*endregion*/
+
+/* forms */
+.postform
+{
+    width:100%;
+    height:auto;
+    }
+.postform th
+{
+    font-weight:normal;
+    color:#000080;
+    text-align:right;
+    padding-right:10px;
+    }
+postform td
+{
+    text-align:left;
+    }
 a.delete,a.edit,a.view,a.add,
 /*.cp-head .head-r1c2 a,*/
 .cp-head .head-r1c3 a,
@@ -79,6 +97,18 @@ a.add
 a.focus
 {
     background:url(../../images/default/flaggreen.gif) no-repeat center 2px;
+    }
+a.cancel
+{
+    background:url(../../images/default/canceledit.gif) no-repeat center 2px;
+    }
+a.save
+{
+    background:url(../../images/default/done.gif) no-repeat center 2px;
+    }
+a.price
+{
+    background:url(../../images/default/price.gif) no-repeat center 2px;
     }
 a:hover.opts 
 {
@@ -737,23 +767,6 @@ a:active#login
 	font: bold 10px "Trebuchet MS" , Verdana, Arial, Helvetica, sans-serif;
 	color: #797268;
 }
-/* forms */
-.postform
-{
-    width:100%;
-    height:auto;
-    }
-.postform th
-{
-    font-weight:normal;
-    color:#000080;
-    text-align:right;
-    padding-right:10px;
-    }
-postform td
-{
-    text-align:left;
-    }
 /* validator */
 .aspx-validator
 {
@@ -1786,8 +1799,6 @@ postform td
     width:448px;
     height:183px;
     border:solid 1px #cccccc;
-    background-repeat:no-repeat;
-    background-position: center center;
     margin-left:3px;
     }
 .main-r3c3
@@ -2212,7 +2223,7 @@ a:hover.register-access
     background:#dedede;
     }
 
-.cpStep .stepOne,.cpStep .stepTwo
+.cpStep .stepOne,.cpStep .stepTwo,.cpStep .stepThree
 {
     height:30px;
     float:left;
@@ -2227,15 +2238,24 @@ a:hover.register-access
 {
     background:url(../../images/default/two_grown.gif) no-repeat 10px center;    
     }
+.cpStep .stepThree
+{
+    background:url(../../images/default/three_grown.gif) no-repeat 10px center;    
+    }
 .cpStep .stepOneSelected
 {
     background:url(../../images/default/one_blue.gif) no-repeat 10px center;    
-    color:#07536d;
+    color:#ff0000;
     }
 .cpStep .stepTwoSelected
 {
     background:url(../../images/default/two_blue.gif) no-repeat 10px center;    
-    color:#07536d;
+    color:#ff0000;
+    }
+.cpStep .stepThreeSelected
+{
+    background:url(../../images/default/three_blue.gif) no-repeat 10px center;    
+    color:#ff0000;
     }
 .cpAdd
 {
@@ -3266,7 +3286,8 @@ fieldset.fsNormal legend
     line-height:25px;
     color:#000080;
     border:solid 1px #7d9edb;
-    background:url(../../images/default/titles_bg.gif) repeat-x left center;
+    background:#dedede;
+    /*background:url(../../images/default/titles_bg.gif) repeat-x left center;*/
     }
 .propertyForm
 {    
@@ -3397,12 +3418,12 @@ a.favcar
     display:block;
     background:url(../../images/default/favcar.gif) no-repeat 0 0;
     }
-a.addfav
+a.addprice
 {
     background-position:0 0;
     float:left;
     }
-a:hover.addfav
+a:hover.addprice
 {
     background-position:0 -40px;
     }
@@ -3420,8 +3441,57 @@ a.addload
 {
     background:url(../../images/default/loader04.gif) no-repeat center center;
     float:left;
+    margin-left:10px;
+    }    
+.addProductFav
+{
+    color:#000080;
+    text-decoration:none;
+    width:54px;
+    height:18px;
+    font-size:0;
+    background:url(../../images/default/addfav_btn.gif) no-repeat 0 0;
+    display:block;
+    float:right;
     }
-    
+.loader04
+{    
+    background:url(../../images/default/loader04.gif) no-repeat center center;
+    }
+a:hover.addProductFav
+{
+    background-position:0 -18px;
+    }
+.productPriceOpts
+{
+    padding:10px;
+    background-color:#E8F5FE;
+    border:1px solid #A9C9E2;
+    float:left;
+    clear:both;
+    }
+.productPriceOpts .ppo-r1
+{
+    padding:5px 0 10px 0;
+    }
+.productPriceOpts .ppo-r1 input
+{
+    padding:2px;
+    font-size:10px;
+    border:solid 1px #7d9edb;
+    }
+.productPriceOpts .ppo-r1 span
+{
+    padding:4px;
+    background-color:#FFF5FA;
+    border:1px solid #F8B3D0;
+    display:none;
+    }
+.productPriceOpts .ppo-r2
+{
+    float:left;
+    clear:both;
+    }
 
 /*---------------->>Rating<<------------------*/
 .star-rating, .star-rating a:hover, .star-rating a:active, .star-rating a:focus, .star-rating .current-rating, .star-rating a.sel
@@ -3592,4 +3662,3 @@ a.addload
 {
     padding-left:18px;
     }
-

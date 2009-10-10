@@ -155,6 +155,8 @@ public partial class ControlPanel_Product_Product : HHPage
 
         query.PageSize = this.egvProducts.PageSize;
         query.PageIndex = this.egvProducts.PageIndex;
+        query.ProductOrderBy = ProductOrderBy.DataCreated;
+        query.SortOrder = SortOrder.Descending;
         List<Product> products = Products.GetProductList(query);
         this.egvProducts.DataSource = products;
         this.egvProducts.DataBind();

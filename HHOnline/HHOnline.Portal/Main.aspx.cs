@@ -16,16 +16,6 @@ public partial class Main : HHPage
         {
             SetSettings();
         }
-        BindPictures();
-    }
-    void BindProducts() {
-      
-    }
-    void BindPictures()
-    {
-        List<ShowPicture> picTemp = ShowPictures.GetShowPictures();
-        List<ShowPicture> pics = picTemp.GetRange(0, Math.Min(5, picTemp.Count));
-        base.ExecuteJs("var _showPictures = " + Newtonsoft.Json.JavaScriptConvert.SerializeObject(pics) + ";", true);
     }
     void SetSettings()
     {

@@ -16,6 +16,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
 {
     OperateType action = OperateType.Add;
     int productID = 0;
+    static string _url = string.Empty;
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -29,6 +30,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
 
         if (!IsPostBack && !IsCallback)
         {
+            if (Request.UrlReferrer != null) _url = Request.UrlReferrer.ToString();
             BindTreeView();
             BindDetail();
             if (!string.IsNullOrEmpty(hfTradeList.Value))
@@ -43,6 +45,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
         if (productID != 0)
         {
             action = OperateType.Edit;
+            btnModel.Visible = true;
             this.mvProductAdd.SetActiveView(vwProductDetail);
             if (!IsPostBack)
             {
@@ -56,7 +59,12 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
 
         BindCategory();
     }
-
+    void BindModels()
+    {
+        gvCurrentModel.DataSource = ProductModels.GetModelsByProductID(productID);
+        gvCurrentModel.DataBind();
+  
+    }
     #region BindJson
     void BindJson()
     {
@@ -372,6 +380,76 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
     #endregion
 
     #region Button Event
+    void BindToModel()
+    {
+        mvProductAdd.SetActiveView(vwProductModel);
+        BindModels();
+    }
+    protected void btnSaveModel_Click(object sender, EventArgs e)
+    {
+        ProductModel pm = new ProductModel();
+        pm.CreateTime = DateTime.Now;
+        pm.CreateUser = Profile.AccountInfo.UserID;
+        pm.ModelCode = txtCode.Text.Trim();
+        pm.ModelDesc = txtModelDesc.Text.Trim();
+        pm.ModelName = txtModelName.Text.Trim();
+        pm.ModelStatus = ComponentStatus.Enabled;
+        pm.ProductID = productID;
+        pm.UpdateTime = DateTime.Now;
+        pm.UpdateUser = Profile.AccountInfo.UserID;
+        ProductModels.Create(pm);
+        txtModelDesc.Text = string.Empty;
+        txtModelName.Text = string.Empty;
+        txtCode.Text = string.Empty;
+        txtCode.Focus();
+        BindToModel();
+        }
+
+    protected void gvCurrentModel_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        gvCurrentModel.EditIndex = -1;
+        BindToModel();
+    }
+
+    protected void gvCurrentModel_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        GridViewRow gvr = gvCurrentModel.Rows[e.RowIndex];
+        int k = int.Parse(gvCurrentModel.DataKeys[e.RowIndex].Value.ToString());
+        string name = (gvr.FindControl("txtInnerModelName") as TextBox).Text.Trim();
+        string code = (gvr.FindControl("txtInnerModelCode") as TextBox).Text.Trim();
+        string desc = (gvr.FindControl("txtInnerDesc") as TextBox).Text.Trim();
+        ProductModel pm = ProductModels.GetModel(k);
+        pm.ModelName = name;
+        pm.ModelCode = code;
+        pm.ModelDesc = desc;
+        pm.UpdateUser = Profile.AccountInfo.UserID;
+        pm.UpdateTime = DateTime.Now;
+        ProductModels.Update(pm);
+        gvCurrentModel.EditIndex = -1;
+        BindToModel();
+    }
+
+    protected void gvCurrentModel_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        gvCurrentModel.EditIndex = e.NewEditIndex;
+        BindToModel();
+        SetValidator(true, true, 5);
+    }
+
+    protected void gvCurrentModel_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        ProductModels.Delete(int.Parse(gvCurrentModel.DataKeys[e.RowIndex].Value.ToString()));
+        BindToModel();
+    }
+    protected void btnBackProductInfo_Click(object sender, EventArgs e)
+    {
+        mvProductAdd.SetActiveView(vwProductDetail);
+    }
+    protected void btnModel_Click(object sender, EventArgs e)
+    {
+        BindToModel();
+        txtCode.Focus();
+    }
     protected void btnNext_Click(object sender, EventArgs e)
     {
         if (this.tvCategories.CheckedNodes.Count == 0)
@@ -393,9 +471,9 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
     }
     protected void btnBackToProduct_Click(object sender, EventArgs e)
     {
-        if (Request.UrlReferrer != null && Request.UrlReferrer.ToString().ToLower().IndexOf(Request.RawUrl.ToLower())<0)
+        if (!string.IsNullOrEmpty(_url) && _url.ToLower().IndexOf(Request.RawUrl.ToLower()) < 0)
         {
-            Response.Redirect(Request.UrlReferrer.ToString());
+            Response.Redirect(_url);
         }
         else
         {
@@ -427,7 +505,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
                 case DataActionStatus.Success:
                 default:
                     this.mvProductAdd.SetActiveView(vwProductCategoies);
-                    throw new HHException(ExceptionType.Success, "新增产品信息成功，可继续填写新产品信息！");
+                    throw new HHException(ExceptionType.Success, "新增产品信息成功，可继续【填写新产品信息】或通过产品管理面板进入【产品编辑】页对此产品进行【型号管理】！");
             }
         }
         else
