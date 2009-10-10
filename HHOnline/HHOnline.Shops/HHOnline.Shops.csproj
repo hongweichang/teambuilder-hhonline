@@ -73,6 +73,7 @@
     <Compile Include="Services\ProductPrices.cs" />
     <Compile Include="Services\ProductProperties.cs" />
     <Compile Include="Services\Products.cs" />
+    <Compile Include="Services\ProductSupplyManager.cs" />
     <Compile Include="Services\SortProductPrice.cs" />
   </ItemGroup>
   <ItemGroup>
