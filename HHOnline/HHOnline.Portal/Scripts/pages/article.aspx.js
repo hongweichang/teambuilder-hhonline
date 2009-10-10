@@ -72,3 +72,18 @@ function articleAjax(data) {
         }
     })
 }
+
+
+$().ready(function() {
+    $('input[rel=ArticleDateStart]').datepick({
+        year: '-40:5',
+        popTo: 'input[rel=ArticleDateStart]',
+        dateFormat: 'yyyy年MM月dd日'
+    });
+    
+    $('input[rel=ArticleDateEnd]').datepick({
+        year: '-40:5',
+        popTo: 'input[rel=ArticleDateEnd]',
+        dateFormat: 'yyyy年MM月dd日'
+    });
+});

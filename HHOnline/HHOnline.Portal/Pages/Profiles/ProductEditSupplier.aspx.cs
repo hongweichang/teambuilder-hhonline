@@ -45,6 +45,8 @@ public partial class Pages_Profiles_ProductEditSupplier : HHPage
 
 		//AddJavaScriptInclude("scripts/jquery.cookie.js", false, false);
 		//base.ExecuteJs("$.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_productmanage' });", false);
+		AddJavaScriptInclude("scripts/jquery.datepick.js", false, false);
+		AddJavaScriptInclude("scripts/pages/producteditsupplier.aspx.js", false, false);
 	}
 
 	/// <summary>

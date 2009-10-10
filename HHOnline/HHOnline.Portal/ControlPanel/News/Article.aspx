@@ -33,14 +33,14 @@
 					开始时间
 				</th>
 				<td>
-					<asp:TextBox ID="txtCreateStartTime" rel="DatePickerStart" runat="server" Width="200px"
+					<asp:TextBox ID="txtCreateStartTime" rel="ArticleDateStart" runat="server" Width="200px"
 						></asp:TextBox>
 				</td>
 				<th>
 					结束时间
 				</th>
 				<td>
-					<asp:TextBox ID="txtCreateEndTime" rel="DatePickerEnd" runat="server" Width="200px"
+					<asp:TextBox ID="txtCreateEndTime" rel="ArticleDateEnd" runat="server" Width="200px"
 						></asp:TextBox>
 				</td>
 			</tr>
