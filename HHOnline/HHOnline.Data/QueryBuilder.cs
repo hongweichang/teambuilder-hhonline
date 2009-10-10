@@ -310,7 +310,7 @@ namespace HHOnline.Data
 			if (query.CompanyID.HasValue)
 			{
 				builder.AddJoin(JoinType.InnerJoin, "PProductSupply ps", "ps.ProductID", Comparison.Equals, "p", "ProductID");
-				builder.AddWhere("ps.SupplyID", Comparison.Equals, query.CompanyID.Value);
+				builder.AddWhere("ps.SupplierID", Comparison.Equals, query.CompanyID.Value);
 			}
 
             //FocusType

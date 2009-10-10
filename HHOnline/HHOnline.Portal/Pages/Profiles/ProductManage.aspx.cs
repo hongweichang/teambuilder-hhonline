@@ -11,6 +11,8 @@ using Image = System.Web.UI.WebControls.Image;
 
 public partial class Pages_Profiles_ProductManage : HHPage
 {
+	private string destinationURL = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product";
+
 	protected void Page_Load(object sender, EventArgs e)
 	{
 		if (!IsPostBack)
@@ -26,7 +28,7 @@ public partial class Pages_Profiles_ProductManage : HHPage
 	{
 		User u = Profile.AccountInfo;
 		if (u.UserType != UserType.CompanyUser ||
-			(u.Company.CompanyType == CompanyType.Ordinary || 
+			(u.Company.CompanyType == CompanyType.Ordinary ||
 			(u.Company.CompanyType == (CompanyType.Ordinary | CompanyType.Agent)))
 			|| u.IsManager != 1)
 		{
@@ -36,20 +38,23 @@ public partial class Pages_Profiles_ProductManage : HHPage
 
 	public override void OnPageLoaded()
 	{
-		this.ShortTitle = "产品管理";
-		this.SetTitle();
-		this.SetTabName(this.ShortTitle);
+		ShortTitle = "产品管理";
+		SetTitle();
+		SetTabName(ShortTitle);
 
 		//AddJavaScriptInclude("scripts/jquery.cookie.js", false, false);
 		//base.ExecuteJs("$.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_productmanage' });", false);
 	}
 
 	#region Bind
-	void BindData()
+	private void BindData()
 	{
 		ProductQuery query = ProductQuery.GetQueryFromQueryString(Request.QueryString);
+		query.CompanyID = Profile.AccountInfo.CompanyID;
+
 		lnkAll.CssClass = "active";
 		lblTip.Text = "“全部”";
+
 		if (query.HasPictures.HasValue)
 		{
 			if (query.HasPictures.Value)
@@ -97,6 +102,7 @@ public partial class Pages_Profiles_ProductManage : HHPage
 				lblTip.Text = "“未发布”";
 			}
 		}
+
 		bool flag = false;
 		if (!GlobalSettings.IsNullOrEmpty(query.ProductNameFilter))
 		{
@@ -104,6 +110,7 @@ public partial class Pages_Profiles_ProductManage : HHPage
 			lblTip.Text = "名称中包含“" + query.ProductNameFilter + "”";
 			flag = true;
 		}
+
 		//BrandID
 		ddlBrands.DataSource = ProductBrands.GetProductBrands();
 		ddlBrands.DataTextField = "BrandName";
@@ -153,12 +160,14 @@ public partial class Pages_Profiles_ProductManage : HHPage
 				}
 			}
 		}
+
 		//IndustryID
 		ddlIndustry.DataSource = ProductIndustries.GetHierarchyIndustries();
 		ddlIndustry.DataTextField = "IndustryName";
 		ddlIndustry.DataValueField = "IndustryID";
 		ddlIndustry.DataBind();
 		ddlIndustry.Items.Insert(0, new ListItem("=所有行业=", "0"));
+
 		if (query.IndustryID.HasValue && query.IndustryID.Value != 0)
 		{
 			ListItem item = ddlIndustry.Items.FindByValue(query.IndustryID.Value.ToString());
@@ -177,28 +186,26 @@ public partial class Pages_Profiles_ProductManage : HHPage
 			}
 		}
 
-		query.PageSize = this.egvProducts.PageSize;
-		query.PageIndex = this.egvProducts.PageIndex;
+		query.PageSize = egvProducts.PageSize;
+		query.PageIndex = egvProducts.PageIndex;
 		query.ProductOrderBy = ProductOrderBy.DataCreated;
 		query.SortOrder = SortOrder.Descending;
+
 		List<Product> products = Products.GetProductList(query);
-		this.egvProducts.DataSource = products;
-		this.egvProducts.DataBind();
+		egvProducts.DataSource = products;
+		egvProducts.DataBind();
 	}
 
-	private string destinationURL = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product";
-
-	void BindLinkButton()
+	private void BindLinkButton()
 	{
-		this.lbNewProduct.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd";
-		this.lnkAll.PostBackUrl = destinationURL;
-		this.lnkNoPicture.PostBackUrl = destinationURL + "&hp=0";
-		this.lnkNoPriced.PostBackUrl = destinationURL + "&pr=0";
-		this.lnkPicture.PostBackUrl = destinationURL + "&hp=1";
-		this.lnkPriced.PostBackUrl = destinationURL + "&pr=1";
-		this.lnkPublished.PostBackUrl = destinationURL + "&pb=1";
-		this.lnkUnPublishied.PostBackUrl = destinationURL + "&pb=0";
-
+		lbNewProduct.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd";
+		lnkAll.PostBackUrl = destinationURL;
+		lnkNoPicture.PostBackUrl = destinationURL + "&hp=0";
+		lnkNoPriced.PostBackUrl = destinationURL + "&pr=0";
+		lnkPicture.PostBackUrl = destinationURL + "&hp=1";
+		lnkPriced.PostBackUrl = destinationURL + "&pr=1";
+		lnkPublished.PostBackUrl = destinationURL + "&pb=1";
+		lnkUnPublishied.PostBackUrl = destinationURL + "&pb=0";
 	}
 
 	protected void lnk_Click(object sender, EventArgs e)
@@ -210,16 +217,21 @@ public partial class Pages_Profiles_ProductManage : HHPage
 	protected void lnkSearch_Click(object sender, EventArgs e)
 	{
 		string url = destinationURL;
-		if (!GlobalSettings.IsNullOrEmpty(this.txtProductName.Text))
-			url += "&pn=" + this.txtProductName.Text;
+		if (!GlobalSettings.IsNullOrEmpty(txtProductName.Text))
+			url += "&pn=" + txtProductName.Text;
+
 		if (ddlBrands.SelectedValue != "0")
-			url += "&bi=" + this.ddlBrands.SelectedValue;
+			url += "&bi=" + ddlBrands.SelectedValue;
+
 		if (ddlCategory.SelectedValue != "0")
-			url += "&ci=" + this.ddlCategory.SelectedValue;
+			url += "&ci=" + ddlCategory.SelectedValue;
+
 		if (ddlIndustry.SelectedValue != "0")
-			url += "&ii=" + this.ddlIndustry.SelectedValue;
+			url += "&ii=" + ddlIndustry.SelectedValue;
+
 		Response.Redirect(url);
 	}
+
 	#endregion
 
 	#region Event
@@ -231,8 +243,10 @@ public partial class Pages_Profiles_ProductManage : HHPage
 		{
 			case DataActionStatus.RelationshipExist:
 				throw new HHException(ExceptionType.Failed, "此产品信息下存在关联数据，无法直接删除！");
+
 			case DataActionStatus.UnknownFailure:
 				throw new HHException(ExceptionType.Failed, "删除产品信息失败，请联系管理人员！");
+
 			default:
 			case DataActionStatus.Success:
 				BindData();
@@ -257,11 +271,14 @@ public partial class Pages_Profiles_ProductManage : HHPage
 		{
 			Product product = e.Row.DataItem as Product;
 			Image productPicture = e.Row.FindControl("ProductPicture") as Image;
+
 			if (productPicture != null)
 			{
 				productPicture.ImageUrl = product.GetDefaultImageUrl((int)productPicture.Width.Value, (int)productPicture.Height.Value);
 			}
+
 			HyperLink hyName = e.Row.FindControl("hlProductName") as HyperLink;
+
 			if (hyName != null)
 			{
 				hyName.Text = product.ProductName;
@@ -273,10 +290,12 @@ public partial class Pages_Profiles_ProductManage : HHPage
 	protected void egvProducts_RowCommand(object sender, GridViewCommandEventArgs e)
 	{
 		GridViewRow row = ((LinkButton)e.CommandSource).Parent.Parent.Parent.Parent as GridViewRow;
+		
 		if (row != null)
 		{
 			int index = row.RowIndex;
 			object productID = egvProducts.DataKeys[index].Value;
+
 			if (e.CommandName == "ViewPrice")
 			{
 				Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productprice&ProductID=" + productID);
