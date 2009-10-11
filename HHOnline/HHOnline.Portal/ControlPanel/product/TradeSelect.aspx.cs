@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using HHOnline.Framework;
 using HHOnline.Framework.Web;
 using HHOnline.Framework.Web.Enums;
 using HHOnline.Shops;
 
-public partial class ControlPanel_product_TradeSelect :HHPage
+public partial class ControlPanel_product_TradeSelect : HHPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,6 +23,13 @@ public partial class ControlPanel_product_TradeSelect :HHPage
     public override void OnPageLoaded()
     {
         this.PageInfoType = InfoType.PopWinInfo;
-        this.PagePermission = "ProductModule-Add";
+        User u = Profile.AccountInfo;
+        if (u.UserType != UserType.CompanyUser ||
+            (u.Company.CompanyType == CompanyType.Ordinary ||
+            (u.Company.CompanyType == (CompanyType.Ordinary | CompanyType.Agent)))
+            || u.IsManager != 1)
+        {
+            this.PagePermission = "ProductModule-Add";
+        }
     }
 }
