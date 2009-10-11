@@ -871,5 +871,47 @@ namespace HHOnline.Data
             }
         }
         #endregion
+
+        #region -Shopping-
+        public override bool ShoppingAdd(Shopping shop)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Shopping_Add", new ELParameter[]{
+             new ELParameter("UserID",DbType.String,shop.UserID),
+             new ELParameter("ProductID",DbType.Int32,shop.ProductID),
+             new ELParameter("ModelID",DbType.Int32,DataHelper.IntOrNull(shop.ModelID)),
+             new ELParameter("Quantity",DbType.Int32,shop.Quantity),
+             new ELParameter("ShoppingMemo",DbType.String,shop.ShoppingMemo),
+             new ELParameter("CreateTime",DbType.DateTime,shop.CreateTime),
+             new ELParameter("UpdateTime",DbType.DateTime,shop.UpdateTime)   
+            }) > 0;
+        }
+        public override List<Shopping> ShoppingLoad(string userID)
+        {
+            List<Shopping> shops=new List<Shopping>();
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_Shopping_Load", new ELParameter("UserID", DbType.String, userID)))
+            {
+                while (dr.Read())
+                {
+                    shops.Add(ReadShopping(dr));
+                }
+            }
+            return shops;
+        }
+        public override bool ShoppingTransfer(string oldUserID, string newUserID)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Shopping_Transfer", new ELParameter[]{
+                            new ELParameter("OldUserID",  DbType.String, oldUserID),
+                            new ELParameter("NewUserID",DbType.String,newUserID)
+                            }) > 0;
+        }
+        public override bool ShoppingDelete(int shopID)
+        {
+            return false;
+        }
+        public override bool ShoppingUpdate(Shopping shop)
+        {
+            return false;
+        }
+        #endregion
     }
 }
