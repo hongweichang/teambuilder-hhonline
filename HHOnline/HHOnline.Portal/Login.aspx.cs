@@ -11,19 +11,19 @@ public partial class Login : HHPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (User.Identity.IsAuthenticated)
+            throw new HHException(ExceptionType.Failed, "您已经登录，请勿重复操作！");
+        HttpCookie c = HHCookie.GetCookie("HHOnline-UserInfo");
+        if (c != null)
         {
-            if (User.Identity.IsAuthenticated)
-                throw new HHException(ExceptionType.Failed, "您已经登录，请勿重复操作！");
-            HttpCookie c = HHCookie.GetCookie("HHOnline-UserInfo");
-            if (c != null)
-            {
-                string uid = GlobalSettings.Decrypt(c.Values["UserName"]);
-                string pwd = GlobalSettings.Decrypt(c.Values["Password"]);
-                base.ExecuteJs("window.$userinfo={uid:'" + uid + "',pwd:'" + pwd + "'};", false);
-            }
+            string uid = GlobalSettings.Decrypt(c.Values["UserName"]);
+            string pwd = GlobalSettings.Decrypt(c.Values["Password"]);
+            base.ExecuteJs("window.$userinfo={uid:'" + uid + "',pwd:'" + pwd + "'};", false);
         }
-
+        string oldUrl = string.Empty;
+        if (Request.UrlReferrer != null)
+            oldUrl = Request.UrlReferrer.ToString();
+        base.ExecuteJs("window.$url='" + oldUrl + "';", true);
     }
 
     public override void OnPageLoaded()

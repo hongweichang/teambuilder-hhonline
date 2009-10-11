@@ -22,7 +22,7 @@ function _showMsg(msg) {
 function addCar() {
     var v = $.trim($('#txtAmount').val());
     var t = $('#anchorAddCar');
-    if (t.hasClass('addcar')) { return; }
+    if (t.hasClass('addload')) { return; }
     if (v == '' || isNaN(v) || v <= 0) {
         return;
     }
@@ -32,6 +32,7 @@ function addCar() {
         $.ajax({
             data: { action: 'addShopcart', d: _infos.d, c: v, m: ms > 0 ? ms.val() : 0 },
             dataType: 'json',
+            url: 'product.axd?t=' + Math.random(),
             error: function(msg) {
                 _showMsg('此物品无法被正常添加到购物车，请联系管理员！');
                 t.removeClass('addload').addClass('addcar');
@@ -42,7 +43,7 @@ function addCar() {
                         title: '消息提示',
                         bgColor: '#888',
                         marginTop: 100,
-                        url: relativeUrl + 'pages/profiles/AddCartSuccess.aspx?type=p&&id=' + _infos.d + "&&t=" + Math.random()
+                        url: relativeUrl + 'pages/shopcart/AddCartSuccess.aspx?t=' + Math.random()
                     });
                 }
                 else {

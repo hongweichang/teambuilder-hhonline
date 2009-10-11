@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
     <siteMapNode url="main.aspx" title="首页"  description="点击返回首页">
+        <siteMapNode url="pages/shopcart/cartitems.aspx" title="我的购物车"  description="" />
         <siteMapNode url="register.aspx" title="用户注册"  description="" />
         <siteMapNode url="" title=""  description="" />
     </siteMapNode>

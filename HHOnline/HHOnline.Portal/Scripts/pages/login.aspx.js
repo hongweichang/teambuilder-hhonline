@@ -27,6 +27,7 @@ function signUp() {
             password: $('#txtPassword').val(),
             rememberMe: $('#chkRememberMe').is('[checked=true]'),
             validCode: vc.val(),
+            url: window.$url,
             action: 'ValidUser',
             t: Math.random()
         };
@@ -58,7 +59,7 @@ function signUp() {
 }
 window.onload = function() {
     var un = $('#txtUserName');
-    var pwd = $('#txtPassword'); 
+    var pwd = $('#txtPassword');
     var vc = $('#txtValidCode');
     un.focus(function() {
         $(this).select();
@@ -72,6 +73,10 @@ window.onload = function() {
     if (typeof window.$userinfo != 'undefined') {
         un.val($userinfo.uid);
         pwd.val($userinfo.pwd);
+        un.keyup(function() {
+            if (un.val() != $userinfo.uid) { pwd.val(''); }
+            else { pwd.val($userinfo.pwd); }
+        })
         $('#chkRememberMe').attr('checked', true);
     }
     $('#userLogin').find('input').keyup(function(e) {

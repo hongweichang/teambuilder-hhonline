@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="CartMasterPage.master.cs" Inherits="Masters_CartMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Cart</title>
+</head>
+<body class="shopcart_bg">
+    <form id="form1" runat="server">
+    <div class="shopcart_wrap">
+        <div class="shopcart_head">
+            <div class="shopcart_head1">
+               <asp:ContentPlaceHolder id="ContentPlaceHolderHeadName" runat="server">
+                    
+                </asp:ContentPlaceHolder> 
+            </div>
+        </div>
+        <div class="shopcart_content">
+            <asp:ContentPlaceHolder id="ContentPlaceHolderCart" runat="server">
+            
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="shopcart_foot"><%= this.CopyRight %></div>
+    </div>
+    </form>
+</body>
+</html>

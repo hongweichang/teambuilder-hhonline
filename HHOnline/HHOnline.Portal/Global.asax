@@ -121,7 +121,12 @@
         }
          * */
     }
-
+    void Profile_MigrateAnonymous(Object sender, ProfileMigrateEventArgs e)
+    {
+        HHOnline.Shops.Shoppings.ShoppingTransfer(e.AnonymousID, Profile.AccountInfo.UserID.ToString());
+        
+        AnonymousIdentificationModule.ClearAnonymousIdentifier();
+    }
     void Session_Start(object sender, EventArgs e)
     {
         //在新会话启动时运行的代码
