@@ -4,6 +4,7 @@ using System.Text;
 using System.Web.Profile;
 using System.Configuration;
 using HHOnline.Framework;
+using HHOnline.Shops;
 
 namespace HHOnline.Security
 {
@@ -11,7 +12,7 @@ namespace HHOnline.Security
     {
         private static string applicationName = "HHProfileProvider";
         private const string accountInfo = "AccountInfo";
-        private const string shoppingCart = "ShopingCart";
+        private const string shoppingCart = "ShoppingCart";
 
         public override string ApplicationName
         {
@@ -100,7 +101,7 @@ namespace HHOnline.Security
                 switch (spv.Property.Name)
                 {
                     case shoppingCart:
-                        //spv.PropertyValue = //user
+                        spv.PropertyValue = GetShoppings(isAuthenticated, userName);
                         break;
                     case accountInfo:
                         if (isAuthenticated)
@@ -127,6 +128,7 @@ namespace HHOnline.Security
                     switch (spv.Property.Name)
                     { 
                         case shoppingCart:
+                            SetShoppingCartInfo(isAuthenticated, userName, uniqueId,(ShoppingCart)spv.PropertyValue);
                             break;
                         case accountInfo:
                             if (isAuthenticated)
@@ -144,10 +146,25 @@ namespace HHOnline.Security
         {
             return Users.GetUniqueId(userName);
         }
-
+        ShoppingCart GetShoppings(bool isAuthenticated, string userName)
+        {
+            ShoppingCart sc = new ShoppingCart();
+            if (isAuthenticated)
+                sc.Shoppings = Shoppings.ShoppingLoad(GetUniqueId(userName).ToString());
+            else
+                sc.Shoppings = Shoppings.ShoppingLoad(userName);
+            return sc;
+        }
         User GetAccountInfo(string userName)
         {
             return Users.GetUser(userName);
+        }
+        void SetShoppingCartInfo(bool isAuthenticated,string userName,int uniqueId,ShoppingCart sc)
+        {
+            if (isAuthenticated)
+                sc.Shoppings = Shoppings.ShoppingLoad(GetUniqueId(userName).ToString());
+            else
+                sc.Shoppings = Shoppings.ShoppingLoad(userName);
         }
         void SetAccountInfo(int uniqueId, User user)
         {

@@ -56,6 +56,10 @@
       <Project>{6A7F2A2A-6788-4F11-B3B6-F4799CCA77AF}</Project>
       <Name>HHOnline.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HHOnline.Shops\HHOnline.Shops.csproj">
+      <Project>{EAF0EF22-8AD4-4772-A9D7-61EB86080B07}</Project>
+      <Name>HHOnline.Shops</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
