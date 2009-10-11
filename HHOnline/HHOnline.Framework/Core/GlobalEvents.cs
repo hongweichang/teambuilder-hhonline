@@ -33,5 +33,14 @@ namespace HHOnline.Framework
         {
             GlobalApplication.Instance.ExecuteUserValidated(user);
         }
+
+        /// <summary>
+        /// 引发用户查询事件
+        /// </summary>
+        /// <param name="searchWord"></param>
+        public static void UserSearch(string searchWord)
+        {
+            GlobalApplication.Instance.ExecuteUserSearch(searchWord);
+        }
     }
 }

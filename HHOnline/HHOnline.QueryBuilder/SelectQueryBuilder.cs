@@ -443,10 +443,13 @@ namespace HHOnline.QueryBuilder
             // Output column names
             if (_selectedColumns.Count == 0)
             {
-                if (_selectedTables.Count == 1)
-                    Query += _selectedTables[0] + "."; // By default only select * from the table that was selected. If there are any joins, it is the responsibility of the user to select the needed columns.
 
-                Query += "*";
+                if (_selectedTables.Count == 1)
+                    Query += GetColumnSql(_selectedTables[0], "*");
+                //Query += _selectedTables[0] + ".";
+                // By default only select * from the table that was selected. If there are any joins, it is the responsibility of the user to select the needed columns.
+                else
+                    Query += "*";
             }
             else
             {

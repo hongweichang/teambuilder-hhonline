@@ -8,6 +8,7 @@ using HHOnline.Cache;
 namespace HHOnline.Framework
 {
     public delegate void UserEventHandler(User user, HHEventArgs e);
+    public delegate void UserSearchEventHandler(string searchWord);
 
     public class GlobalApplication : BaseApplication
     {
@@ -55,6 +56,7 @@ namespace HHOnline.Framework
         private static object EventUserRemove = new object();
         private static object EventUserKnown = new object();
         private static object EventUserValidated = new object();
+        private static object EventUserSearch = new object();
         #endregion
 
         #region --User Event--
@@ -85,6 +87,14 @@ namespace HHOnline.Framework
             remove { _events.RemoveHandler(EventPostUserUpdate, value); }
         }
 
+        /// <summary>
+        /// 用户查询事件
+        /// </summary>
+        public event UserSearchEventHandler UserSearchWord
+        {
+            add { _events.AddHandler(EventUserSearch, value); }
+            remove { _events.RemoveHandler(EventUserSearch, value); }
+        }
 
         internal void ExecutePreUserUpdate(User user, ObjectState state)
         {
@@ -101,9 +111,23 @@ namespace HHOnline.Framework
             ExecuteUserEvent(EventUserValidated, user);
         }
 
+        internal void ExecuteUserSearch(string searchWord)
+        {
+            ExecuteUserSearchEvent(EventUserSearch, searchWord);
+        }
+
         protected void ExecuteUserEvent(object EventKey, User user)
         {
             ExecuteUserEvent(EventKey, user, ObjectState.None);
+        }
+
+        protected void ExecuteUserSearchEvent(object EventKey, string searchWord)
+        {
+            UserSearchEventHandler handler = _events[EventKey] as UserSearchEventHandler;
+            if (handler != null)
+            {
+                handler(searchWord);
+            }
         }
 
         protected void ExecuteUserEvent(object EventKey, User user, ObjectState state)
@@ -114,8 +138,6 @@ namespace HHOnline.Framework
                 handler(user, new HHEventArgs(state));
             }
         }
-
-
         #endregion
 
 

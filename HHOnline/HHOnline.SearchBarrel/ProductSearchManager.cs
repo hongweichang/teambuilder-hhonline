@@ -61,6 +61,9 @@ namespace HHOnline.SearchBarrel
         #region Search
         public static SearchResultDataSet<Product> Search(ProductQuery query)
         {
+            //触发事件
+            GlobalEvents.UserSearch(query.ProductNameFilter);
+
             //索引文件不存在时，返回null
             if (!GlobalSettings.CheckFileExist(PhysicalIndexDirectory))
                 return new SearchResultDataSet<Product>();

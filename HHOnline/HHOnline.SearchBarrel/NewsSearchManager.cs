@@ -56,6 +56,9 @@ namespace HHOnline.SearchBarrel
         #region Search
         public static SearchResultDataSet<Article> Search(ArticleQuery query)
         {
+            //触发事件
+            GlobalEvents.UserSearch(query.Title);
+
             //索引文件不存在时，返回null
             if (!GlobalSettings.CheckFileExist(PhysicalIndexDirectory))
                 return new SearchResultDataSet<Article>();
@@ -358,7 +361,7 @@ namespace HHOnline.SearchBarrel
         public static Article ConvertDocumentToArticle(Document doc)
         {
             Article article = new Article();
-            
+
             article.ID = Convert.ToInt32(doc.Get(NewsIndexField.ArticleID));
             article.Title = doc.Get(NewsIndexField.Title);
             article.SubTitle = doc.Get(NewsIndexField.SubTitle);
@@ -368,7 +371,7 @@ namespace HHOnline.SearchBarrel
             article.Category = Convert.ToInt32(doc.Get(NewsIndexField.CategoryID));
             article.CopyFrom = doc.Get(NewsIndexField.CopyFrom);
             article.Date = DateTools.StringToDate(doc.Get(NewsIndexField.Date));
-            
+
             string[] tagNames = doc.GetValues(NewsIndexField.Keywords);
 
             if (tagNames != null)

@@ -407,7 +407,8 @@ public partial class Index : HHPage
     }
     protected void Button37_Click(object sender, EventArgs e)
     {
-        List<ArticleCategory> categories = ArticleManager.GetAllCategories();
+        lblCacheTip.Text = WordSearchManager.GetWordSuggest("t", 5).Count.ToString();
+        //List<ArticleCategory> categories = ArticleManager.GetAllCategories();
     }
     protected void Button38_Click(object sender, EventArgs e)
     {

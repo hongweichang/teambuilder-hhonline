@@ -306,12 +306,12 @@ namespace HHOnline.Data
                 builder.AddWhere("pc.CategoryID", Comparison.Equals, query.CategoryID.Value);
             }
 
-			//CompanyID
-			if (query.CompanyID.HasValue)
-			{
-				builder.AddJoin(JoinType.InnerJoin, "PProductSupply ps", "ps.ProductID", Comparison.Equals, "p", "ProductID");
-				builder.AddWhere("ps.SupplierID", Comparison.Equals, query.CompanyID.Value);
-			}
+            //CompanyID
+            if (query.CompanyID.HasValue)
+            {
+                builder.AddJoin(JoinType.InnerJoin, "PProductSupply ps", "ps.ProductID", Comparison.Equals, "p", "ProductID");
+                builder.AddWhere("ps.SupplierID", Comparison.Equals, query.CompanyID.Value);
+            }
 
             //FocusType
             if (query.FocusType.HasValue)
@@ -509,6 +509,21 @@ namespace HHOnline.Data
             if (query.FavoriteType != null)
                 builder.AddWhere("FavoriteType", Comparison.Equals, (int)query.FavoriteType);
 
+            return builder.BuildQuery();
+        }
+        #endregion
+
+        #region BuildSearch
+
+        public static string BuildSearch(string startLetter, int topCount)
+        {
+            SelectQueryBuilder builder = new SelectQueryBuilder();
+            builder.SelectFromTable("SWordStatistic ws");
+            builder.SelectAllColumns();
+            builder.TopRecords = topCount;
+            if (!GlobalSettings.IsNullOrEmpty(startLetter))
+                builder.AddWhere("ws.SearchWord", Comparison.Like, startLetter + "%");
+            builder.AddOrderBy("ws.HitCount", Sorting.Descending);
             return builder.BuildQuery();
         }
         #endregion

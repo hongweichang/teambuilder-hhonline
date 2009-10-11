@@ -19,9 +19,28 @@ namespace HHOnline.Framework
         /// 查询关键字入库
         /// </summary>
         /// <param name="keyword"></param>
-        public void Insert(string keyword)
+        public static void Insert(string keyword)
         {
             CommonDataProvider.Instance.InsertWordSearch(keyword);
+        }
+
+        /// <summary>
+        /// 查询关键字统计
+        /// </summary>
+        public static void Statistic()
+        {
+            CommonDataProvider.Instance.StatisticWordSearch();
+        }
+
+        /// <summary>
+        /// 获取WordSuggest，根据Hitcount排序
+        /// </summary>
+        /// <param name="startLetter">首字母</param>
+        /// <param name="topCount">Length</param>
+        /// <returns></returns>
+        public static List<string> GetWordSuggest(string startLetter, int topCount)
+        {
+            return CommonDataProvider.Instance.GetWordSuggest(startLetter, topCount);
         }
     }
 }

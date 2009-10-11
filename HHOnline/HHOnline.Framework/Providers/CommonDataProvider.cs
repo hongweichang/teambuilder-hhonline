@@ -569,9 +569,7 @@ namespace HHOnline.Framework.Providers
 
         public abstract void StatisticWordSearch();
 
-        public abstract List<string> GetWordSuggest(string startLetter);
-
-        public abstract List<string> GetHotWordSearch(int topCount);
+        public abstract List<string> GetWordSuggest(string startLetter, int topCount);
         #endregion
 
         #region -Pending-

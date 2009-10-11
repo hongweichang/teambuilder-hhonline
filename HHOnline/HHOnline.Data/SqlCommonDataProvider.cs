@@ -981,10 +981,9 @@ namespace HHOnline.Data
         #region WordSearch
         public override void InsertWordSearch(string keyword)
         {
-
             ELParameter[] elParameters = new ELParameter[]{
-	                new ELParameter("@SearchID", DbType.Int32, 4, ParameterDirection.Output),
-                    new ELParameter("@SearchWord",DbType.Int32,keyword),
+	                new ELParameter("@SearchID", DbType.Decimal, 18, ParameterDirection.Output),
+                    new ELParameter("@SearchWord",DbType.String,keyword),
                     new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
             };
             DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_WordSearch_Insert", elParameters);
@@ -992,17 +991,21 @@ namespace HHOnline.Data
 
         public override void StatisticWordSearch()
         {
-            throw new NotImplementedException();
+            DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_WordSearch_Statistic");
         }
 
-        public override List<string> GetWordSuggest(string startLetter)
+        public override List<string> GetWordSuggest(string startLetter, int topCount)
         {
-            throw new NotImplementedException();
-        }
-
-        public override List<string> GetHotWordSearch(int topCount)
-        {
-            throw new NotImplementedException();
+            ELParameter paramSql = new ELParameter("@SqlPopulate", DbType.String, QueryGenerator.BuildSearch(startLetter, topCount));
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_WordSearch_GetSuggest", paramSql))
+            {
+                List<string> words = new List<string>();
+                while (dr.Read())
+                {
+                    words.Add(DataRecordHelper.GetString(dr, "SearchWord"));
+                }
+                return words;
+            }
         }
         #endregion
 
@@ -1024,8 +1027,8 @@ namespace HHOnline.Data
         public override Pending PendingGet(int companyID)
         {
             Pending pending = null;
-            using (IDataReader reader = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SPending_Get", 
-                new ELParameter("CompanyID",DbType.Int32, companyID)))
+            using (IDataReader reader = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SPending_Get",
+                new ELParameter("CompanyID", DbType.Int32, companyID)))
             {
                 while (reader.Read())
                 {
@@ -1037,7 +1040,7 @@ namespace HHOnline.Data
         public override Pending PendingGetById(int pendingId)
         {
             Pending pending = null;
-            using (IDataReader reader = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SPending_GetById",new ELParameter("PendingID",DbType.Int32,pendingId)))
+            using (IDataReader reader = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SPending_GetById", new ELParameter("PendingID", DbType.Int32, pendingId)))
             {
                 while (reader.Read())
                 {
