@@ -493,8 +493,8 @@ public partial class Pages_Profiles_ProductAdd : HHPage, ICallbackEventHandler
         product.ProductContent = txtProductContent.Text;
         product.ProductKeywords = txtKeyWords.Text;
         product.ProductName = txtProductName.Text;
-        product.ProductStatus = csProduct.SelectedValue;
-
+        //product.ProductStatus = csProduct.SelectedValue;
+        product.ProductStatus = ComponentStatus.Disabled;
         DataActionStatus status;
         if (productID == 0)
         {

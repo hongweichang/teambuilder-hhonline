@@ -331,7 +331,7 @@ namespace HHOnline.Framework
         {
             get
             {
-                return new DateTime(2999, 12, 31);
+                return new DateTime(2999, 12, 31, 23, 59, 59);
             }
         }
         #endregion

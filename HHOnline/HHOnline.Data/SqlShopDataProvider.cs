@@ -384,7 +384,7 @@ namespace HHOnline.Data
         public override ProductModel GetModel(int modelID)
         {
             ELParameter paramID = new ELParameter("@ModelID", DbType.Int32, modelID);
-            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModel_Get",paramID))
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModel_Get", paramID))
             {
                 ProductModel model = new ProductModel();
                 if (dr.Read())
@@ -398,7 +398,7 @@ namespace HHOnline.Data
         public override List<ProductModel> GetModelsByProductID(int productID)
         {
             ELParameter paramID = new ELParameter("@ProductID", DbType.Int32, productID);
-            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModels_GetByProductID",paramID))
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductModels_GetByProductID", paramID))
             {
                 List<ProductModel> models = new List<ProductModel>();
                 while (dr.Read())
@@ -423,8 +423,10 @@ namespace HHOnline.Data
             {
                 paramID = new ELParameter("@ProductID", DbType.Int32, product.ProductID);
             }
+            ELParameter paramReturn = new ELParameter("@ReturnValue", DbType.Int32, 4, ParameterDirection.ReturnValue);
             ELParameter[] elParameters = new ELParameter[]{
                     paramID,
+                    paramReturn,
                     new ELParameter("@ProductCode",DbType.String,product.ProductCode),
                     new ELParameter("@ProductName",DbType.String,product.ProductName),
                     new ELParameter("@ProductDesc",DbType.String,product.ProductDesc),
@@ -433,7 +435,7 @@ namespace HHOnline.Data
                     new ELParameter("@BrandID",DbType.Int32,DataHelper.IntOrNull(product.BrandID)),
                     new ELParameter("@ProductKeywords",DbType.String,product.ProductKeywords),
                     new ELParameter("@ProductStatus",DbType.Int32,product.ProductStatus),
-                      new ELParameter("@DisplayOrder",DbType.Int32,product.DisplayOrder),
+                    new ELParameter("@DisplayOrder",DbType.Int32,product.DisplayOrder),
                     new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
                     new ELParameter("@PropertyNames",DbType.String,product.GetSerializerData().Keys),
                     new ELParameter("@PropertyValues",DbType.String,product.GetSerializerData().Values),
@@ -442,8 +444,8 @@ namespace HHOnline.Data
                     new ELParameter("@PropertyIDList",DbType.String,ConvertProductPropertiesToXML(properties)),
                     new ELParameter("@Action",DbType.Int32,action),
                 };
-            status = (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure,
-                "sp_Product_CreateUpdate", elParameters));
+            DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Product_CreateUpdate", elParameters);
+            status = (DataActionStatus)Convert.ToInt32(paramReturn.Value);
             if (action == DataProviderAction.Create && status == DataActionStatus.Success)
                 product.ProductID = Convert.ToInt32(paramID.Value);
             return product;
@@ -518,64 +520,64 @@ namespace HHOnline.Data
         }
         #endregion
 
-		#region ProductSupply
+        #region ProductSupply
 
-		/// <summary>
-		/// 获取产品供应信息
-		/// </summary>
-		/// <param name="productID"></param>
-		/// <param name="supplierID"></param>
-		/// <returns></returns>
-		public override ProductSupply GetProductSupply(int productID, int supplierID)
-		{
-			ELParameter paramID1 = new ELParameter("@ProductID", DbType.Int32, productID);
-			ELParameter paramID2 = new ELParameter("@SupplierID", DbType.Int32, supplierID);
+        /// <summary>
+        /// 获取产品供应信息
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <param name="supplierID"></param>
+        /// <returns></returns>
+        public override ProductSupply GetProductSupply(int productID, int supplierID)
+        {
+            ELParameter paramID1 = new ELParameter("@ProductID", DbType.Int32, productID);
+            ELParameter paramID2 = new ELParameter("@SupplierID", DbType.Int32, supplierID);
 
-			using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductSupply_GetByProductAndSupplier", paramID1, paramID2))
-			{
-				ProductSupply result = null;
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductSupply_GetByProductAndSupplier", paramID1, paramID2))
+            {
+                ProductSupply result = null;
 
-				if (dr.Read())
-				{
-					result = PopulateProductSupplyFromIDataReader(dr);
-				}
+                if (dr.Read())
+                {
+                    result = PopulateProductSupplyFromIDataReader(dr);
+                }
 
-				return result;
-			}
-		}
+                return result;
+            }
+        }
 
-		/// <summary>
-		/// 获取产品供应信息
-		/// </summary>
-		/// <param name="supplyID"></param>
-		/// <returns></returns>
-		public override ProductSupply GetProductSupply(int supplyID)
-		{
-			ELParameter paramID = new ELParameter("@SupplyID", DbType.Int32, supplyID);
-			using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductSupply_Get", paramID))
-			{
-				ProductSupply result = null;
+        /// <summary>
+        /// 获取产品供应信息
+        /// </summary>
+        /// <param name="supplyID"></param>
+        /// <returns></returns>
+        public override ProductSupply GetProductSupply(int supplyID)
+        {
+            ELParameter paramID = new ELParameter("@SupplyID", DbType.Int32, supplyID);
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductSupply_Get", paramID))
+            {
+                ProductSupply result = null;
 
-				if (dr.Read())
-				{
-					result = PopulateProductSupplyFromIDataReader(dr);
-				}
+                if (dr.Read())
+                {
+                    result = PopulateProductSupplyFromIDataReader(dr);
+                }
 
-				return result;
-			}
-		}
+                return result;
+            }
+        }
 
-		/// <summary>
-		/// 更新产品供应信息
-		/// </summary>
-		/// <param name="ps"></param>
-		/// <param name="status"></param>
-		/// <returns></returns>
-		public override ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status)
-		{
-			SerializerData data = ps.GetSerializerData();
+        /// <summary>
+        /// 更新产品供应信息
+        /// </summary>
+        /// <param name="ps"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public override ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status)
+        {
+            SerializerData data = ps.GetSerializerData();
 
-			ELParameter[] parms = new ELParameter[]
+            ELParameter[] parms = new ELParameter[]
 			{
 				new ELParameter("@SupplyID", DbType.Int32, ps.SupplyID),
 				new ELParameter("@SupplierID", DbType.Int32, ps.SupplierID),
@@ -598,15 +600,15 @@ namespace HHOnline.Data
 				new ELParameter("@PropertyValues", DbType.String, data.Values),
 			};
 
-			status = (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductSupply_Update", parms));
+            status = (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductSupply_Update", parms));
 
-			return ps;
-		}
+            return ps;
+        }
 
-		#endregion
+        #endregion
 
-		#region ProductPicture
-		public override ProductPicture CreateUpdatePicture(ProductPicture picture, DataProviderAction action, out DataActionStatus status)
+        #region ProductPicture
+        public override ProductPicture CreateUpdatePicture(ProductPicture picture, DataProviderAction action, out DataActionStatus status)
         {
             ELParameter paramID = null;
             if (action == DataProviderAction.Create)
