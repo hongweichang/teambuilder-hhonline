@@ -64,7 +64,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
     {
         gvCurrentModel.DataSource = ProductModels.GetModelsByProductID(productID);
         gvCurrentModel.DataBind();
-  
+
     }
     #region BindJson
     void BindJson()
@@ -334,7 +334,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
 
     private string GetIndustryIDList()
     {
-        Regex regex = new Regex(@"[(\d)*]", RegexOptions.None);
+        Regex regex = new Regex(@"\[(\d)*\]", RegexOptions.None);
         List<string> industryIDList = new List<string>();
         string industryID = hfTrade.Value;
         MatchCollection matchs = regex.Matches(industryID);
@@ -343,7 +343,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
             if (match.Success)
             {
                 GroupCollection gc = match.Groups;
-                industryIDList.Add(gc[0].Value);
+                industryIDList.Add(gc[0].Value.TrimStart('[').TrimEnd(']'));
             }
         }
         return string.Join(",", industryIDList.ToArray());
@@ -404,7 +404,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
         txtCode.Text = string.Empty;
         txtCode.Focus();
         BindToModel();
-        }
+    }
 
     protected void gvCurrentModel_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {

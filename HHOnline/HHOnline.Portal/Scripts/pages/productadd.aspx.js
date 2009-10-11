@@ -10,7 +10,6 @@ var selectedTrades = null;
 function selectTrade() {
     selectedTrades = null;
     selectedTrades = $('#tradeNames').next().val();
-    alert(relativeUrl);
     showPage({
         title:'选择产品行业',
         url: relativeUrl +'controlpanel/product/TradeSelect.aspx?t=' + Math.random(),

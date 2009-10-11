@@ -334,7 +334,7 @@ public partial class Pages_Profiles_ProductAdd : HHPage, ICallbackEventHandler
 
     private string GetIndustryIDList()
     {
-        Regex regex = new Regex(@"[(\d)*]", RegexOptions.None);
+        Regex regex = new Regex(@"\[(\d)*\]", RegexOptions.None);
         List<string> industryIDList = new List<string>();
         string industryID = hfTrade.Value;
         MatchCollection matchs = regex.Matches(industryID);
@@ -343,7 +343,7 @@ public partial class Pages_Profiles_ProductAdd : HHPage, ICallbackEventHandler
             if (match.Success)
             {
                 GroupCollection gc = match.Groups;
-                industryIDList.Add(gc[0].Value);
+                industryIDList.Add(gc[0].Value.TrimStart('[').TrimEnd(']'));
             }
         }
         return string.Join(",", industryIDList.ToArray());
