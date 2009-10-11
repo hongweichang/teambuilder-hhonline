@@ -43,6 +43,13 @@
                     <td valign="top" class="price"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
+                    <th>型号：</th>
+                    <td valign="top" id="modelTracer">
+                        <asp:Literal ID="ltModel" runat="server"></asp:Literal>
+                        <asp:RadioButtonList ID="rbModel" RepeatLayout="Flow" runat="server" ></asp:RadioButtonList>
+                    </td>
+                </tr>
+                <tr>
                     <th>&nbsp;</th>
                     <td>
                         <div class="productPriceOpts">

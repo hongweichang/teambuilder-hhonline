@@ -18,11 +18,13 @@ function loadPictures() {
         error: function(error) {
             var msg = error.responseText != '' ? error.responseText : '图片加载失败';
             picsContainer.html(msg);
+            picsContainer.removeClass('loader04');
         },
         success: function(json) {
             picsContainer.hrzAccordion({
                 pictures: json
             });
+            picsContainer.removeClass('loader04');
         }
     })    
 }

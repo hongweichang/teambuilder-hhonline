@@ -22,16 +22,40 @@ function _showMsg(msg) {
 function addCar() {
     var v = $.trim($('#txtAmount').val());
     var t = $('#anchorAddCar');
-    if (isNaN(v)) {
+    if (t.hasClass('addcar')) { return; }
+    if (v == '' || isNaN(v) || v <= 0) {
         return;
     }
     else {
         t.removeClass('addcar').addClass('addload');
+        var ms = $('#modelTracer').find('input[checked=checked]');
+        $.ajax({
+            data: { action: 'addShopcart', d: _infos.d, c: v, m: ms > 0 ? ms.val() : 0 },
+            dataType: 'json',
+            error: function(msg) {
+                _showMsg('此物品无法被正常添加到购物车，请联系管理员！');
+                t.removeClass('addload').addClass('addcar');
+            },
+            success: function(json) {
+                if (json.suc) {
+                    showPage({
+                        title: '消息提示',
+                        bgColor: '#888',
+                        marginTop: 100,
+                        url: relativeUrl + 'pages/profiles/AddCartSuccess.aspx?type=p&&id=' + _infos.d + "&&t=" + Math.random()
+                    });
+                }
+                else {
+                    _showMsg(json.msg);
+                }
+                t.removeClass('addload').addClass('addcar');
+            }
+        });
     }
 }
 function checkAmount() {
     var v = $.trim(this.value);
-    if (isNaN(v)) {
+    if (v == '' || isNaN(v) || v <= 0) {
         if (!$$ErrorMsg.is(':visible')) {
             $$ErrorMsg.show();
         }

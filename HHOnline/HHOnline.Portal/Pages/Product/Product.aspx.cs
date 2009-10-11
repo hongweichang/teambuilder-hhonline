@@ -48,6 +48,23 @@ public partial class Pages_Product_Product :HHPage
         BindPrice(p.ProductID);
         ltDescription1.Text = p.ProductContent;
         BindProperty(p.ProductID);
+        List<ProductModel> models = ProductModels.GetModelsByProductID(p.ProductID);
+        if (models.Count == 0)
+        {
+            rbModel.Visible = false;
+            ltModel.Text = "——";
+        }
+        else
+        {
+            ListItem li = null;
+            foreach (ProductModel m in models)
+            {
+                li = new ListItem(m.ModelName, m.ModelID.ToString());
+                li.Attributes.Add("title", m.ModelDesc);
+                rbModel.Items.Add(li);
+            }
+            rbModel.SelectedIndex = 0;
+        }
     }
     void BindCategory(int pId)
     {

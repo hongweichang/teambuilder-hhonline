@@ -57,7 +57,7 @@ public partial class Pages_Profiles_ProductAdd : HHPage, ICallbackEventHandler
         }
         else
             action = OperateType.Add;
-
+        base.ExecuteJs("var relativeUrl='" + GlobalSettings.RelativeWebRoot + "';", true);
         BindCategory();
     }
     void BindModels()

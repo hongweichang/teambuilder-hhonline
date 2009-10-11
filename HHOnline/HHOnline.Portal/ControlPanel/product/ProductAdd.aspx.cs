@@ -57,6 +57,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
         else
             action = OperateType.Add;
 
+        base.ExecuteJs("var relativeUrl='" + GlobalSettings.RelativeWebRoot + "';", true);
         BindCategory();
     }
     void BindModels()

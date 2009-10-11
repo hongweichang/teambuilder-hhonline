@@ -22,12 +22,21 @@ namespace HHOnline.Framework.Web.HttpHandlers
             string msg = string.Empty;
             bool suc = false;
             string formatStr = "{msg:'{0}',suc:{1}}";
-            SettingsPropertyValueCollection spvc = context.Profile.PropertyValues;
-            User u = spvc["AccountInfo"].PropertyValue as User;
+            string curUser = string.Empty;
+            if (context.Profile.IsAnonymous)
+            {
+                curUser = context.Profile.UserName;
+            }
+            else
+            {
+                SettingsPropertyValueCollection spvc = context.Profile.PropertyValues;
+                User u = spvc["AccountInfo"].PropertyValue as User;
+                curUser = u.UserID.ToString();
+            }
             string action = context.Request.QueryString["action"];
             switch (action)
             {
-                case "addShopcar":
+                case "addShopcart":
 
                     break;
             }
