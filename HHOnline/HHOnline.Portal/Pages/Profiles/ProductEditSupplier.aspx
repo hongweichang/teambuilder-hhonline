@@ -22,7 +22,7 @@
 				<asp:Label ID="lblProductName" runat="server" Text="Label"></asp:Label>
 			</td>
 		</tr>
-		<tr>
+		<%--<tr>
 			<th style="width: 180px;">
 				产品型号(<span class="unneeded">可选</span>)
 			</th>
@@ -30,7 +30,7 @@
 				<asp:DropDownList ID="ddlModel" runat="server">
 				</asp:DropDownList>
 			</td>
-		</tr>
+		</tr>--%>
 		<tr>
 			<th style="width: 180px;">
 				最短供货时间（时长格式）(<span class="unneeded">可选</span>)

@@ -95,8 +95,8 @@
 					<asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" SkinID="lnkedit"
 						PostBackUrl="#">
 					</asp:LinkButton>
-					<asp:LinkButton ID="lnkSetFocus" runat="server" CommandName="SetFocus" SkinID="lnksetfocus"
-						PostBackUrl="#"></asp:LinkButton>
+					<%--<asp:LinkButton ID="lnkSetFocus" runat="server" CommandName="SetFocus" SkinID="lnksetfocus"
+						PostBackUrl="#"></asp:LinkButton>--%>
 					<asp:LinkButton ID="lnkEditSupply" runat="server" CommandName="EditSupply" SkinID="lnkeditsupply"
 						PostBackUrl="#"></asp:LinkButton>
 					<asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" SkinID="lnkdelete"

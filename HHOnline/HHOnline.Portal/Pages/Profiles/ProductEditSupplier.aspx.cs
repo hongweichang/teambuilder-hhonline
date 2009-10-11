@@ -113,10 +113,24 @@ public partial class Pages_Profiles_ProductEditSupplier : HHPage
 				}
 
 				// 报价起始日期
-				txtQuoteFrom.Text = ps.QuoteFrom.ToString("yyyy年MM月dd日");
+				if (ps.QuoteFrom == DateTime.MinValue)
+				{
+					txtQuoteFrom.Text = string.Empty;
+				}
+				else
+				{
+					txtQuoteFrom.Text = ps.QuoteFrom.ToString("yyyy年MM月dd日");
+				}
 
 				// 报价截止日期
-				txtQuoteEnd.Text = ps.QuoteEnd.ToString("yyyy年MM月dd日");
+				if (ps.QuoteEnd == DateTime.MinValue)
+				{
+					txtQuoteEnd.Text = string.Empty;
+				}
+				else
+				{
+					txtQuoteEnd.Text = ps.QuoteEnd.ToString("yyyy年MM月dd日");
+				}
 
 				// 报价自动续期周期
 				txtQuoteRenewal.Text = ps.QuoteRenewal.ToString();
@@ -216,7 +230,7 @@ public partial class Pages_Profiles_ProductEditSupplier : HHPage
 				if (state == DataActionStatus.Success)
 					throw new HHException(ExceptionType.Success, "修改成功！");
 				else
-					throw new HHException(ExceptionType.Failed, "修改失败，请确认信息是否正确！"); 
+					throw new HHException(ExceptionType.Failed, "修改失败，请确认信息是否正确！");
 			}
 		}
 	}
