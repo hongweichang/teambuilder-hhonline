@@ -129,6 +129,7 @@ namespace HHOnline.Framework.Web.HttpHandlers
             string pwd = req["password"];
             bool rememberMe = bool.Parse(req["rememberMe"]);
             string validCode = req["validCode"];
+            string oldUrl = req["url"];
             if (context.Session["Vcode"] == null)
             {
                 throw new Exception("验证码已过期，请点击刷新！");
@@ -173,13 +174,18 @@ namespace HHOnline.Framework.Web.HttpHandlers
                                 HHCookie.AddCookie(c);
                             }
 
-                            switch (u.UserType)
+                            if (string.IsNullOrEmpty(oldUrl))
                             {
-                                case UserType.CompanyUser:
-                                    return GlobalSettings.RelativeWebRoot + "main.aspx";
-                                case UserType.InnerUser:
-                                    return GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx";
+                                switch (u.UserType)
+                                {
+                                    case UserType.CompanyUser:
+                                        return GlobalSettings.RelativeWebRoot + "main.aspx";
+                                    case UserType.InnerUser:
+                                        return GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx";
+                                }
                             }
+                            else
+                                return oldUrl;
                             break;
                         case LoginUserStatus.AccountPending:
                             throw new Exception("账号正在审核中，请稍后重试！");

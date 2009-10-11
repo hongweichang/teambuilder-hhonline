@@ -375,5 +375,27 @@ namespace HHOnline.Shops.Providers
             return productFocus;
         }
         #endregion
+
+        #region -Shopping-
+        public abstract bool ShoppingAdd(Shopping shop);
+        public abstract bool ShoppingTransfer(string oldUserID, string newUserID);
+        public abstract bool ShoppingDelete(int shopID);
+        public abstract bool ShoppingUpdate(Shopping shop);
+        public abstract List<Shopping> ShoppingLoad(string userID);
+        public static Shopping ReadShopping(IDataReader dr)
+        {
+            return new Shopping()
+            {
+                CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
+                ModelID = DataRecordHelper.GetInt32(dr, "ModelID"),
+                ProductID = DataRecordHelper.GetInt32(dr, "ProductID"),
+                Quantity = DataRecordHelper.GetInt32(dr, "Quantity"),
+                ShoppingMemo = DataRecordHelper.GetString(dr, "ShoppingMemo"),
+                ShopppingID = DataRecordHelper.GetInt32(dr, "ShoppingID"),
+                UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime"),
+                UserID = DataRecordHelper.GetString(dr, "UserID"),
+            };
+        }
+        #endregion
     }
 }

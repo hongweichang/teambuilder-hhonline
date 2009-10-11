@@ -19,11 +19,11 @@ namespace HHOnline.Shops
             get { return _ShoppingID; }
             set { _ShoppingID = value; }
         }
-        private int _UserID;
+        private string _UserID;
         /// <summary>
         /// 用户ID
         /// </summary>
-        public int UserID
+        public string UserID
         {
             get { return _UserID; }
             set { _UserID = value; }
@@ -37,11 +37,11 @@ namespace HHOnline.Shops
             get { return _ProductID; }
             set { _ProductID = value; }
         }
-        private int? _ModelID;
+        private int _ModelID;
         /// <summary>
         /// 型号编码
         /// </summary>
-        public int? ModelID
+        public int ModelID
         {
             get { return _ModelID; }
             set { _ModelID = value; }

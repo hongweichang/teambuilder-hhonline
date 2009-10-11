@@ -77,6 +77,7 @@
     <Compile Include="Services\Products.cs" />
     <Compile Include="Services\ProductSupplyManager.cs" />
     <Compile Include="Services\SortProductPrice.cs" />
+    <Compile Include="Services\Shoppings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HHOnline.Cache\HHOnline.Cache.csproj">
