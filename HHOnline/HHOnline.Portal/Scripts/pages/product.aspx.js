@@ -28,9 +28,9 @@ function addCar() {
     }
     else {
         t.removeClass('addcar').addClass('addload');
-        var ms = $('#modelTracer').find('input[checked=checked]');
+        var ms = $('#modelTracer').find('input[checked]');
         $.ajax({
-            data: { action: 'addShopcart', d: _infos.d, c: v, m: ms > 0 ? ms.val() : 0 },
+            data: { action: 'addShopcart', d: _infos.d, c: v, m: ms.length > 0 ? ms.val() : 0 },
             dataType: 'json',
             url: 'product.axd?t=' + Math.random(),
             error: function(msg) {

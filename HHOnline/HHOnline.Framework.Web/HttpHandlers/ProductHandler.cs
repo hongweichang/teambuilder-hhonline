@@ -31,9 +31,7 @@ namespace HHOnline.Framework.Web.HttpHandlers
                 }
                 else
                 {
-                    SettingsPropertyValueCollection spvc = context.Profile.PropertyValues;
-                    User u = spvc["AccountInfo"].PropertyValue as User;
-                    curUser = u.UserID.ToString();
+                    curUser = Users.GetUniqueId(context.Profile.UserName).ToString();
                 }
                 NameValueCollection req = context.Request.QueryString;
                 string action = req["action"];
