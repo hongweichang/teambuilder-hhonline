@@ -535,7 +535,7 @@ public partial class Pages_Profiles_ProductAdd : HHPage, ICallbackEventHandler
         this.SetTitle();
         this.SetTabName(this.ShortTitle);
         this.PageInfoType = InfoType.PopWinInfo;
-        this.AddJavaScriptInclude("scripts/pages/productSupplierAdd.js", false, false);
+        this.AddJavaScriptInclude("scripts/pages/productadd.aspx.js", false, false);
     }
 
     protected override void OnPagePermissionChecking()

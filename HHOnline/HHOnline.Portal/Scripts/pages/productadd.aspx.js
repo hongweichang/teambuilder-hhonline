@@ -10,10 +10,10 @@ var selectedTrades = null;
 function selectTrade() {
     selectedTrades = null;
     selectedTrades = $('#tradeNames').next().val();
-   
+    alert(relativeUrl);
     showPage({
         title:'选择产品行业',
-        url: 'product/TradeSelect.aspx?t=' + Math.random(),
+        url: relativeUrl +'controlpanel/product/TradeSelect.aspx?t=' + Math.random(),
         closable:false,
         marginTop:150,
         bgColor:'#888'
@@ -40,7 +40,7 @@ function uploadImage() {
         marginTop: 20,
         bgColor:'#888',
         title: '产品图片管理',
-        url: 'product/productpicturemanager.aspx?t=' + Math.random(),
+        url: relativeUrl +'controlpanel/product/productpicturemanager.aspx?t=' + Math.random(),
         closable:true
     });
 }
