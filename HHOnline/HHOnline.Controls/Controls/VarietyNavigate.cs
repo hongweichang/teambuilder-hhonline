@@ -11,22 +11,47 @@ namespace HHOnline.Controls
     {
         static VarietyNavigate()
         {
-            if (brands == null)
-            {
-                brands = ProductBrands.GetProductBrands();
-            }
+            ProductBrands.Updated += delegate { _Html = null; };
         }
-        private static List<ProductBrand> brands = null;
+        private List<ProductBrand> brands = null;
         private int _BrandID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand{0}\">{1}</a>";
         public int BrandID
         {
             get { return _BrandID; }
-            set { _BrandID = value; }
+            set {
+                if (_BrandID != value)
+                {
+                    _Html = null;
+                }
+                _BrandID = value; }
         }
 
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
         string RenderHTML()
         {
+            if (brands == null)
+            {
+                brands = ProductBrands.GetProductBrands();
+            }
             StringBuilder sb = new StringBuilder();
             if (_BrandID == 0)
             {
@@ -59,9 +84,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderHTML();
-
-            writer.Write(html);
+            writer.Write(HTML);
             writer.WriteLine(Environment.NewLine);
         }
     }

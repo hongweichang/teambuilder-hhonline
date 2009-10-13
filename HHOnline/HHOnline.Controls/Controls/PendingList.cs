@@ -9,11 +9,11 @@ namespace HHOnline.Controls
 {
     public class PendingList:UserControl
     {
-        public PendingList()
+        static PendingList()
         {
-            cs = Pendings.PendingsLoad();
+            Pendings.Updated += delegate { _Html = null; };
         }
-        private static List<Pending> cs = null;
+        private List<Pending> cs = null;
         private int _ItemCount = 10;
         private string _format = "<li><div class=\"companyList_col1\" title=\"{0}\">{1}</div><div class=\"companyList_col2\">{2}</div></li>";
         public int ItemCount
@@ -21,8 +21,28 @@ namespace HHOnline.Controls
             get { return _ItemCount; }
             set { _ItemCount = value; }
         }
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
         public string RenderHTML()
         {
+            cs = Pendings.PendingsLoad();
             string nav = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?users-pendinglist";
            
             StringBuilder sb = new StringBuilder();
@@ -87,9 +107,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderHTML();
-
-            writer.Write(html);
+            writer.Write(HTML);
             writer.WriteLine(Environment.NewLine);
         }
     }

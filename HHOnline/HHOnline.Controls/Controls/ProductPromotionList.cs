@@ -12,13 +12,19 @@ namespace HHOnline.Controls
     {
         public ProductPromotionList()
         {
+            Products.Updated += delegate { _Html = null; };
         }
         private List<Product> ps = null;
         private FocusType? _ProductType = null;
         public FocusType? ProductType
         {
             get { return _ProductType; }
-            set { _ProductType = value; }
+            set {
+                if (value != _ProductType)
+                {
+                    _Html = null;
+                }
+                _ProductType = value; }
         }
         private int _Columns = 5;
         public int Columns
@@ -37,6 +43,25 @@ namespace HHOnline.Controls
         {
             get { return _CssClass; }
             set { _CssClass = value; }
+        }
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
         }
         public string RenderHTML()
         {
@@ -123,9 +148,7 @@ namespace HHOnline.Controls
         {
             if (this.Visible)
             {
-                string html = RenderHTML();
-
-                writer.Write(html);
+                writer.Write(HTML);
                 writer.WriteLine(Environment.NewLine);
             }
         }

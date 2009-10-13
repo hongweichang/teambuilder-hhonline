@@ -9,16 +9,11 @@ namespace HHOnline.Controls
 {
     public class SupplyList:UserControl
     {
-        public SupplyList()
+        static SupplyList()
         {
-            ProductQuery q = new ProductQuery();
-            q.PageSize = int.MaxValue;
-            q.Filter = ProviderFilter.Deny;
-            q.SortOrder = SortOrder.Descending;
-            q.ProductOrderBy = ProductOrderBy.DataCreated;
-            cs = Products.GetProductList(q);
+            Products.Updated += delegate { _Html = null; };
         }
-        private static List<Product> cs = null;
+        private List<Product> cs = null;
         private int _ItemCount = 10;
         private string _format = "<li><div class=\"companyList_col1\" title=\"{0}\">{1}</div><div class=\"companyList_col2\">{2}</div></li>";
         public int ItemCount
@@ -26,8 +21,33 @@ namespace HHOnline.Controls
             get { return _ItemCount; }
             set { _ItemCount = value; }
         }
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
         public string RenderHTML()
         {
+            ProductQuery q = new ProductQuery();
+            q.PageSize = int.MaxValue;
+            q.Filter = ProviderFilter.Deny;
+            q.SortOrder = SortOrder.Descending;
+            q.ProductOrderBy = ProductOrderBy.DataCreated;
+            cs = Products.GetProductList(q);
             string nav = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product";
            
             StringBuilder sb = new StringBuilder();
@@ -63,9 +83,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderHTML();
-
-            writer.Write(html);
+            writer.Write(HTML);
             writer.WriteLine(Environment.NewLine);
         }
     }
