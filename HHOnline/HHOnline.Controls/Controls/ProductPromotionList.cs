@@ -20,10 +20,6 @@ namespace HHOnline.Controls
         {
             get { return _ProductType; }
             set {
-                if (value != _ProductType)
-                {
-                    _Html = null;
-                }
                 _ProductType = value; }
         }
         private int _Columns = 5;
@@ -45,21 +41,17 @@ namespace HHOnline.Controls
             set { _CssClass = value; }
         }
         public static object _lock = new object();
-        private static string _Html;
+        private string _Html;
         public string HTML
         {
             get
             {
+
                 if (string.IsNullOrEmpty(_Html))
                 {
-                    lock (_lock)
-                    {
-                        if (string.IsNullOrEmpty(_Html))
-                        {
-                            _Html = RenderHTML();
-                        }
-                    }
+                    _Html = RenderHTML();
                 }
+
                 return _Html;
             }
         }

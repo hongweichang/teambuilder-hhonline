@@ -109,6 +109,11 @@ namespace HHOnline.Shops
         #endregion
 
         #region GetProductIndustries
+
+        public static List<ProductIndustry> GetIndustriesByPY(string firstLetter)
+        {
+            return ShopDataProvider.Instance.GetIndustriesByPY(firstLetter);
+        }
         /// <summary>
         /// 获取产品行业信息
         /// </summary>

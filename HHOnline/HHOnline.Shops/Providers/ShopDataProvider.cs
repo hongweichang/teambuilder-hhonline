@@ -42,6 +42,7 @@ namespace HHOnline.Shops.Providers
         public abstract ProductBrand GetBrand(int brandID);
 
         public abstract List<ProductBrand> GetBrands();
+        public abstract List<ProductBrand> GetBrandsByPY(string firstLetter);
 
         public static ProductBrand PopulateBrandFromIDataReader(IDataReader dr)
         {
@@ -68,6 +69,8 @@ namespace HHOnline.Shops.Providers
         public abstract List<ProductIndustry> GetIndustries();
 
         public abstract List<ProductIndustry> GetIndustriesByProductID(int productID);
+
+        public abstract List<ProductIndustry> GetIndustriesByPY(string firstLetter);
 
         public abstract ProductIndustry CreateUpdateIndustry(ProductIndustry industry, DataProviderAction action, out DataActionStatus status);
 

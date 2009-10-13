@@ -51,12 +51,21 @@
             </div>
             <div class="tab-content">
                 <div id="productTabContent" class="productTabContent">
+                    <div class="lclBorder">
+                    <hc:LettersCollectionList ID="lclListCategory" LetterType="Category" runat="Server" CssName="lettersCL"></hc:LettersCollectionList>
+                    </div>
                     <hc:CategoryList ID="clProduct" runat="server" CssClass="hpCategoryList"></hc:CategoryList>
                 </div>
                 <div id="varietyTabContent" class="productTabContent" style="display:none">
+                    <div class="lclBorder">
+                    <hc:LettersCollectionList ID="LettersCollectionList1" LetterType="Brand" runat="Server" CssName="lettersCL"></hc:LettersCollectionList>
+                    </div>
                     <hc:HPVarietyList ID="hpvlProduct" runat="server" CssClass="hpCategoryList"></hc:HPVarietyList>
                 </div>
                 <div id="tradeTabContent" class="productTabContent" style="display:none">
+                    <div class="lclBorder">
+                    <hc:LettersCollectionList ID="LettersCollectionList2" LetterType="Industry" runat="Server" CssName="lettersCL"></hc:LettersCollectionList>
+                    </div>
                     <hc:HPIndustryList ID="hpilProduct" runat="server" CssClass="hpCategoryList"></hc:HPIndustryList>
                 </div>
             </div>

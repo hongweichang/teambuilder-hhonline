@@ -515,7 +515,7 @@ namespace HHOnline.Data
                 builder.AddWhere("FavoriteTitle", Comparison.Like, query.FavoriteTitleFilter);
 
             if (!string.IsNullOrEmpty(query.FavoriteMemoFilter))
-                builder.AddWhere("FavoriteMemo", Comparison.Like, query.FavoriteMemoFilter);
+                builder.AddWhere("FavoriteMemo", Comparison.Like, "%" + query.FavoriteMemoFilter + "%");
 
             if (query.UserID != 0)
                 builder.AddWhere("UserID", Comparison.Equals, query.UserID);

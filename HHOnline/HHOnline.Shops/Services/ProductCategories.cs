@@ -22,7 +22,10 @@ namespace HHOnline.Shops
             DataActionStatus status;
             category = ShopDataProvider.Instance.CreateUpdateCategory(category, DataProviderAction.Create, out status);
             if (status == DataActionStatus.Success)
+            {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductCategoryXpath);
+                OnUpdated();
+            }
             return status;
         }
         #endregion
@@ -38,7 +41,10 @@ namespace HHOnline.Shops
             DataActionStatus status;
             category = ShopDataProvider.Instance.CreateUpdateCategory(category, DataProviderAction.Update, out status);
             if (status == DataActionStatus.Success)
+            {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductCategoryXpath);
+                OnUpdated();
+            }
             return status;
         }
         #endregion
@@ -51,6 +57,7 @@ namespace HHOnline.Shops
         /// <returns></returns>
         public static DataActionStatus Delete(int categoryID)
         {
+            OnUpdated();
             return Delete(categoryID.ToString());
             //DataActionStatus status = ShopDataProvider.Instance.DeleteCategory(categoryID);
             //if (status == DataActionStatus.Success)
@@ -67,7 +74,10 @@ namespace HHOnline.Shops
         {
             DataActionStatus status = ShopDataProvider.Instance.DeleteCategory(categoryIDList);
             if (status != DataActionStatus.UnknownFailure)
+            {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductCategoryXpath);
+                OnUpdated();
+            }
             return status;
         }
         #endregion
@@ -196,6 +206,17 @@ namespace HHOnline.Shops
             {
                 valueRange.Add(new KeyValue(chid.CategoryID.ToString(), block + chid.CategoryName));
                 AddChildCategory(chid, deps + 1, ref valueRange);
+            }
+        }
+        #endregion
+
+        #region -EventHandler-
+        public static EventHandler<EventArgs> Updated;
+        protected static void OnUpdated()
+        {
+            if (Updated != null)
+            {
+                Updated(null, EventArgs.Empty);
             }
         }
         #endregion

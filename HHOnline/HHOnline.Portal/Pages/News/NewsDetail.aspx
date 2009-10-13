@@ -7,6 +7,7 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSearch" runat="Server">
+ <huc:ArticleSearch ID="asNews" runat="server" />
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderContent" runat="Server">
 	<div id="content">

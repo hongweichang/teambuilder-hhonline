@@ -14,7 +14,7 @@
         <hc:IndustryNavigate ID="inProduct" runat="server"></hc:IndustryNavigate>
     </div>
     <div style="padding-left:20px;">
-        <hc:HPIndustryList ID="hpilProduct" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
+        <hc:HPIndustryList ID="hpilProduct" Max="99999" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
     </div>
     <div class="navigateData">相关行业</div>
     <div>

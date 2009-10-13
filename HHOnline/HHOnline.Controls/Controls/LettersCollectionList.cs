@@ -25,16 +25,12 @@ namespace HHOnline.Controls
             get { return _CssName; }
             set { _CssName = value; }
         }
-        private LettersType _LetterType=LettersType.Category;
+        private LettersType _LetterType = LettersType.Category;
         public LettersType LetterType
         {
             get { return _LetterType; }
             set
             {
-                if (value != _LetterType)
-                {
-                    _Html = null;
-                }
                 _LetterType = value;
             }
         }
@@ -45,22 +41,13 @@ namespace HHOnline.Controls
             ul.RenderControl(new HtmlTextWriter(sw));
             _Html = sw.ToString();
         }
-        public static object _lock = new object();
-        private static string _Html;
+        public  object _lock = new object();
+        private  string _Html;
         public string HTML
         {
             get
             {
-                if (string.IsNullOrEmpty(_Html))
-                {
-                    lock (_lock)
-                    {
-                        if (string.IsNullOrEmpty(_Html))
-                        {
-                            Refresh();
-                        }
-                    }
-                }
+                Refresh();
                 return _Html;
             }
         }

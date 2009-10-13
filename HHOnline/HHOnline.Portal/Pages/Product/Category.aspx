@@ -13,8 +13,8 @@
     <div class="cdCatNavigate">
         <hc:CategoryNavigate ID="cnProduct" runat="server"></hc:CategoryNavigate>
     </div>
-    <div style="padding-left:20px;">
-        <hc:CategoryList ID="clProduct" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
+    <div style="padding-left:10px 20px;">
+        <hc:CategoryList ID="clProduct" Max="999999" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
     </div>
     <div class="navigateData">相关类别</div>
     <div>

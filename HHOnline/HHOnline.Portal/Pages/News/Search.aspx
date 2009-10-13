@@ -4,12 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHeader" runat="Server">
 
 	<script type="text/javascript">
-    var activeTab = 'article';
+	    var activeTab = 'news';
 	</script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderSearch" runat="Server">
-	<huc:Search ID="sArticle" runat="server" />
+	<huc:ArticleSearch ID="sArticle" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderContent" runat="Server">
 	<div class="homemastercontent">

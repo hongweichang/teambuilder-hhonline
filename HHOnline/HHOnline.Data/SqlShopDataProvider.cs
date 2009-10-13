@@ -82,6 +82,22 @@ namespace HHOnline.Data
                 return brands;
             }
         }
+
+        public override List<ProductBrand> GetBrandsByPY(string firstLetter)
+        {
+            ELParameter[] elParameters = new ELParameter[]{
+                new ELParameter("@FirstLetter",DbType.String,firstLetter)
+            };
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductBrands_GetByPY", elParameters))
+            {
+                List<ProductBrand> brands = new List<ProductBrand>();
+                while (dr.Read())
+                {
+                    brands.Add(PopulateBrandFromIDataReader(dr));
+                }
+                return brands;
+            }
+        }
         #endregion
 
         #region Industry
@@ -149,6 +165,22 @@ namespace HHOnline.Data
         {
             ELParameter paramID = new ELParameter("@IndustryID", DbType.Int32, industryID);
             return (DataActionStatus)Convert.ToInt32(DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_ProductIndustry_Delete", paramID));
+        }
+
+        public override List<ProductIndustry> GetIndustriesByPY(string firstLetter)
+        {
+            ELParameter[] elParameters = new ELParameter[]{
+                new ELParameter("@FirstLetter",DbType.String,firstLetter)
+            };
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductIndustries_GetByPY", elParameters))
+            {
+                List<ProductIndustry> inds = new List<ProductIndustry>();
+                while (dr.Read())
+                {
+                    inds.Add(PopulateIndustryFromIDataReader(dr));
+                }
+                return inds;
+            }
         }
         #endregion
 

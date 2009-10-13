@@ -14,7 +14,7 @@
         <hc:VarietyNavigate ID="vnProduct" runat="server"></hc:VarietyNavigate>
     </div>
     <div style="padding-left:20px;">
-        <hc:HPVarietyList ID="hpvlList" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
+        <hc:HPVarietyList ID="hpvlList" Max="99999" runat="server" CssClass="hpCategoryList pdCategoryList" Columns="1" />
     </div>
     <div class="navigateData">相关品牌</div>
     <div>

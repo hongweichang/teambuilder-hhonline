@@ -53,6 +53,12 @@ namespace HHOnline.Framework.Web.HttpHandlers
                         };
                         suc = Shoppings.ShoppingAdd(shop);
                         break;
+                    case "getPSuggestion":
+                        string v = req["value"];
+                        List<string> sw = WordSearchManager.GetWordSuggest(v, 10);
+                        suc = true;
+                        msg = Newtonsoft.Json.JavaScriptConvert.SerializeObject(sw);
+                        break;
                 }
 
                 context.Response.Write("{msg:'" + msg + "',suc:" + suc.ToString().ToLower() + "}");

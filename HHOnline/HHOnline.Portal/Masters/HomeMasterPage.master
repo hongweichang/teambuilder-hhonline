@@ -20,6 +20,12 @@
         </asp:ContentPlaceHolder>
         <huc:Footer ID="fMain" runat="Server" />
     </div>
+    <script type="text/html" id="Script1">
+        <# var suggestions = eval(msg); #>
+        <# for(var i=0;i<suggestions.length;i++) {#>
+        <li><#= suggestions[i] #></li>
+        <# }#>
+    </script>
     </form>
 </body>
 </html>

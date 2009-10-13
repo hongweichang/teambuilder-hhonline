@@ -16,6 +16,7 @@ namespace HHOnline.Shops
     {
         public static string FileStoreKey = "ProductBrand";
 
+
         #region Create
         /// <summary>
         /// 添加品牌信息
@@ -113,6 +114,11 @@ namespace HHOnline.Shops
         #endregion
 
         #region GetProductBrands
+
+        public static List<ProductBrand> GetBrandsByPY(string firstLetter)
+        {
+            return ShopDataProvider.Instance.GetBrandsByPY(firstLetter);
+        }
         /// <summary>
         /// 获取所有品牌
         /// </summary>

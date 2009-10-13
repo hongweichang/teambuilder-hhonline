@@ -3669,6 +3669,44 @@ a:hover.addProductFav
     }
 /*endregion*/
 
+/*region*/
+/*autocomplete*/
+.jquery-autoComplete
+{
+    position: absolute;
+    overflow-y: auto;
+    background-color: #f7f7ff;
+    border: 1px solid #cacaff;
+    padding: 1px;
+    z-index:99999;
+}
+.jquery-autoComplete ul
+{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.jquery-autoComplete li
+{
+    border: solid 1px #f7f7ff;
+    background-color: #f7f7ff;
+    padding: 7px 5px;
+    list-style-type: none;
+    margin: 0;
+}
+.jquery-autoComplete li.itemNormal
+{   
+    border: solid 1px #f7f7ff;
+    background-color: #f7f7ff; 
+    }
+.jquery-autoComplete li.itemHover
+{
+    background-color: #D0E5FC;
+    border: 1px solid #7DA2CE;
+}
+/*endregion*/
+
+/*region*/
 /*shopcart*/
 .shopcart_bg
 {
@@ -3802,4 +3840,44 @@ a:hover.navCompany .companyDetailsRemark_s
     color:#fff;
     text-decoration:none;
     display:none;
+    }
+/*endregion*/
+
+
+.lclBorder
+{
+    height:25px;
+    padding:3px;
+    border-bottom:dashed 1px #ccc;
+    }
+.lettersCL
+{
+    list-style-position:outside;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    }
+.lettersCL li
+{
+    list-style-type:none;
+    float:left;    
+    }
+.lettersCL li a
+{
+    width:22px;
+    height:22px;
+    display:block;
+    float:left;
+    text-align:center;
+    border:solid 1px #fff;
+    text-decoration:none;
+    color:#888;
+    }
+.lettersCL li a:hover
+{
+    background:#AAAAFF;
+    color:#fff;
+    border:solid 1px #888;
+    text-decoration:none;
+    font-weight:bold;
     }

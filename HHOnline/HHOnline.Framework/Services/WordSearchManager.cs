@@ -42,5 +42,13 @@ namespace HHOnline.Framework
         {
             return CommonDataProvider.Instance.GetWordSuggest(startLetter, topCount);
         }
+        /// <summary>
+        /// 获取热字
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetHotWords()
+        {
+            return CommonDataProvider.Instance.GetHotWords();
+        }
     }
 }

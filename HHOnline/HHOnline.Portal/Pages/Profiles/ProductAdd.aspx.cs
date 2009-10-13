@@ -506,7 +506,7 @@ public partial class Pages_Profiles_ProductAdd : HHPage, ICallbackEventHandler
                 case DataActionStatus.Success:
                 default:
                     this.mvProductAdd.SetActiveView(vwProductCategoies);
-                    throw new HHException(ExceptionType.Success, "新增产品信息成功，可继续【填写新产品信息】或通过产品管理面板进入【产品编辑】页对此产品进行【型号管理】！");
+                    throw new HHException(ExceptionType.Success, "新增产品信息成功，可继续【填写新产品信息】或通过产品管理面板进入【产品编辑】页对此产品进行【型号管理】和【供应管理】！");
             }
         }
         else

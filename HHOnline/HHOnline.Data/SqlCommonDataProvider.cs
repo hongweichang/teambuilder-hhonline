@@ -1007,6 +1007,18 @@ namespace HHOnline.Data
                 return words;
             }
         }
+        public override List<string> GetHotWords()
+        {
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_WordSearch_GetHotWords"))
+            {
+                List<string> words = new List<string>();
+                while (dr.Read())
+                {
+                    words.Add(DataRecordHelper.GetString(dr, "SearchWord"));
+                }
+                return words;
+            }
+        }
         #endregion
 
         #region -Pending-

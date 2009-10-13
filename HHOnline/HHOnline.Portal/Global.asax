@@ -67,7 +67,6 @@
 
     void Application_Error(object sender, EventArgs e)
     {
-        /*
         //在出现未处理的错误时运行的代码
         HttpApplication application = (HttpApplication)sender;
         HttpContext context = application.Context;
@@ -119,7 +118,6 @@
             hhException.Log();
             Server.Transfer("~/pages/messages/error.aspx");
         }
-         * */
     }
     void Profile_MigrateAnonymous(Object sender, ProfileMigrateEventArgs e)
     {
@@ -139,7 +137,6 @@
         // 注意: 只有在 Web.config 文件中的 sessionstate 模式设置为
         // InProc 时，才会引发 Session_End 事件。如果会话模式 
         //设置为 StateServer 或 SQLServer，则不会引发该事件。
-
     }
        
 </script>

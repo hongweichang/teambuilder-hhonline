@@ -7,7 +7,7 @@
             <div class="search-title search-m search">
                 产品搜索：</div>
             <div class="search-input search-m">
-                <asp:TextBox ID="txtSearch" rel="searchproduct" runat="server" Width="450px" MaxLength="255"
+                <asp:TextBox ID="txtSearch" rel="searchproduct"  AutoComplete="false" AutoCompleteType="None" runat="server" Width="450px" MaxLength="255"
                     Style="padding: 3px;"></asp:TextBox>
             </div>
             <div class="search-search search-m search">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="search-hot">
-            热门搜索：<a href="#">AND</a><a href="#">精密天平</a>
+            热门搜索：<asp:Literal ID="ltHotSearch" runat="server"></asp:Literal>
         </div>
     </div>
 </div>

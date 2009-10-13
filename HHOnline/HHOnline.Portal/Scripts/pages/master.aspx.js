@@ -50,17 +50,29 @@ $().ready(function() {
             return false;
         }
     })
+    s1.autoComplete({
+        highLight: '<b class="needed"><u>{0}</u></b>',
+        template: 'Script1',
+        url: 'product.axd',
+        data: { action: 'getPSuggestion' }
+    });
+
     var s2 = $('input[rel=searcharticle]');
     s2.watermark({
         markText: mk2
+    });
+    s2.autoComplete({
+        highLight: '<b class="needed"><u>{0}</u></b>',
+        template: 'Script1',
+        url: 'product.axd',
+        data: { action: 'getPSuggestion' }
     });
     s2.keydown(function(e) {
         if ((e.keyCode || e.which) == 13) {
             searchArticle($(this), mk2);
             return false;
         }
-    })
-
+    });
     $('#searchProduct').click(function() {
         this.blur();
         searchPruduct(s1, mk1);
@@ -70,4 +82,5 @@ $().ready(function() {
         this.blur();
         searchArticle(s2, mk2);
     });
+
 });

@@ -29,6 +29,7 @@ namespace HHOnline.Shops
                 properties, DataProviderAction.Create, out status);
             if (status == DataActionStatus.Success)
             {
+                OnUpdated();
                 //处理临时附件信息  
                 SavePicturesAndFilterBody(product);
                 //处理缓存信息
@@ -109,6 +110,7 @@ namespace HHOnline.Shops
                 properties, DataProviderAction.Update, out status);
             if (status == DataActionStatus.Success)
             {
+                OnUpdated();
                 HHCache.Instance.Remove(CacheKeyManager.GetProductKey(product.ProductID));
                 HHCache.Instance.Remove(CacheKeyManager.ProductListKey);
             }
@@ -127,6 +129,7 @@ namespace HHOnline.Shops
             DataActionStatus status = ShopDataProvider.Instance.DeleteProduct(productID);
             if (status == DataActionStatus.Success)
             {
+                OnUpdated();
                 HHCache.Instance.Remove(CacheKeyManager.GetProductKey(productID));
                 HHCache.Instance.Remove(CacheKeyManager.ProductListKey);
             }
@@ -186,6 +189,17 @@ namespace HHOnline.Shops
             products.Records = productList;
             products.TotalRecords = totalRecords;
             return products;
+        }
+        #endregion 
+        
+        #region -EventHandler-
+        public static EventHandler<EventArgs> Updated;
+        protected static void OnUpdated()
+        {
+            if (Updated != null)
+            {
+                Updated(null, EventArgs.Empty);
+            }
         }
         #endregion
     }

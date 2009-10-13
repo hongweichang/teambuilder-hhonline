@@ -7,7 +7,7 @@
             <div class="search-title search-m search">
                 资讯搜索：</div>
             <div class="search-input search-m">
-                <asp:TextBox ID="txtSearch" rel="searcharticle" runat="server" Width="450px" MaxLength="255"
+                <asp:TextBox ID="txtSearch" rel="searcharticle" AutoComplete="false" AutoCompleteType="None" runat="server" Width="450px" MaxLength="255"
                     Style="padding: 3px;"></asp:TextBox>
             </div>
             <div class="search-search search-m search">
@@ -17,9 +17,6 @@
             </div>
             <div class="search-right search">
             </div>
-        </div>
-        <div class="search-hot">
-            热门搜索：<a href="#">AND</a><a href="#">行业信息</a>
         </div>
     </div>
 </div>
