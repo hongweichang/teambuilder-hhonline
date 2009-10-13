@@ -115,6 +115,9 @@ public partial class ControlPanel_Users_Corps : HHPage
     }
     void BindCorps()
     {
+        string name = Request.QueryString["CorpName"];
+        if (!string.IsNullOrEmpty(name))
+            txtCompanyName.Text = name;
         egvCorps.DataSource = Companys.GetCompanys(GetComStatus(), CompanyType.None, txtCompanyName.Text.Trim());
         egvCorps.DataBind();
     }

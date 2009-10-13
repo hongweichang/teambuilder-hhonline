@@ -288,11 +288,11 @@ namespace HHOnline.Data
             sb.Append("SET Transaction Isolation Level Read UNCOMMITTED ");
 
             SelectQueryBuilder builder = new SelectQueryBuilder();
-
             builder.SelectFromTable("PProduct p");
             builder.SelectColumns("p.ProductID");
             builder.AddWhere("p.ProductStatus", Comparison.NotEquals, 0);
 
+           
             //BrandID
             if (query.BrandID.HasValue)
             {
@@ -305,14 +305,28 @@ namespace HHOnline.Data
                 builder.AddJoin(JoinType.InnerJoin, "PProductCategory pc", "pc.ProductID", Comparison.Equals, "p", "ProductID");
                 builder.AddWhere("pc.CategoryID", Comparison.Equals, query.CategoryID.Value);
             }
-
+            bool isJoin = false;
             //CompanyID
             if (query.CompanyID.HasValue)
             {
+                isJoin = true;
                 builder.AddJoin(JoinType.InnerJoin, "PProductSupply ps", "ps.ProductID", Comparison.Equals, "p", "ProductID");
                 builder.AddWhere("ps.SupplierID", Comparison.Equals, query.CompanyID.Value);
             }
-
+            if (query.Filter != null)
+            {
+                if (!isJoin)
+                    builder.AddJoin(JoinType.InnerJoin, "PProductSupply ps", "ps.ProductID", Comparison.Equals, "p", "ProductID");
+                switch (query.Filter)
+                {
+                    case ProviderFilter.Deny:
+                        builder.AddWhere("p.ProductStatus", Comparison.Equals, 2);
+                        break;
+                    case ProviderFilter.Inspect:
+                        builder.AddWhere("p.ProductStatus", Comparison.Equals, 1);
+                        break;
+                }
+            }
             //FocusType
             if (query.FocusType.HasValue)
             {
@@ -503,7 +517,9 @@ namespace HHOnline.Data
             if (!string.IsNullOrEmpty(query.FavoriteMemoFilter))
                 builder.AddWhere("FavoriteMemo", Comparison.Like, query.FavoriteMemoFilter);
 
-
+            if (query.UserID != 0)
+                builder.AddWhere("UserID", Comparison.Equals, query.UserID);
+                
             builder.AddWhere("FavoriteType", Comparison.NotEquals, 0);
 
             if (query.FavoriteType != null)

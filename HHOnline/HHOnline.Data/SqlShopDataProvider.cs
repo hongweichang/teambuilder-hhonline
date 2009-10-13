@@ -541,9 +541,23 @@ namespace HHOnline.Data
                 {
                     result = PopulateProductSupplyFromIDataReader(dr);
                 }
-
                 return result;
             }
+        }
+
+        public override List<ProductSupply> GetPendingProductSupply()
+        {
+            List<ProductSupply> pss = new List<ProductSupply>();
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductSupply_GetPendingSupply"))
+            {
+
+                while (dr.Read())
+                {
+                    pss.Add(PopulateProductSupplyFromIDataReader(dr));
+                }
+
+            }
+            return pss;
         }
 
         /// <summary>
@@ -906,11 +920,17 @@ namespace HHOnline.Data
         }
         public override bool ShoppingDelete(int shopID)
         {
-            return false;
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Shopping_Delete", new ELParameter[]{
+                    new ELParameter("ShoppingID",DbType.Int32,shopID)
+               }) > 0;
         }
         public override bool ShoppingUpdate(Shopping shop)
         {
-            return false;
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Shopping_Update", new ELParameter[]{
+                    new ELParameter("ShoppingID",DbType.Int32,shop.ShoppingID),
+                    new ELParameter("Quantity",DbType.Int32,shop.Quantity),
+                    new ELParameter("UpdateTime",DbType.DateTime,shop.UpdateTime)
+               }) > 0;
         }
         #endregion
     }

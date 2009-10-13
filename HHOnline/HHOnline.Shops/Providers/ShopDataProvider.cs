@@ -265,6 +265,8 @@ namespace HHOnline.Shops.Providers
 
 		public abstract ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status);
 
+        public abstract List<ProductSupply> GetPendingProductSupply();
+
 		public static ProductSupply PopulateProductSupplyFromIDataReader(IDataReader dr)
 		{
 			ProductSupply result = new ProductSupply();
@@ -391,7 +393,7 @@ namespace HHOnline.Shops.Providers
                 ProductID = DataRecordHelper.GetInt32(dr, "ProductID"),
                 Quantity = DataRecordHelper.GetInt32(dr, "Quantity"),
                 ShoppingMemo = DataRecordHelper.GetString(dr, "ShoppingMemo"),
-                ShopppingID = DataRecordHelper.GetInt32(dr, "ShoppingID"),
+                ShoppingID = DataRecordHelper.GetInt32(dr, "ShoppingID"),
                 UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime"),
                 UserID = DataRecordHelper.GetString(dr, "UserID"),
             };

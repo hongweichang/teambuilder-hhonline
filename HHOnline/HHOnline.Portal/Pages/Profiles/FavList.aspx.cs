@@ -75,5 +75,6 @@ public partial class Pages_Profiles_FavList : HHPage
         this.ShortTitle = "收藏夹";
         this.SetTabName(this.ShortTitle);
         this.SetTitle();
+        this.AddJavaScriptInclude("scripts/pages/favlist.aspx.js", false, false);
     }
 }

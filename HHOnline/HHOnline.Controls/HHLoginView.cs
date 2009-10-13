@@ -86,7 +86,7 @@ namespace HHOnline.Controls
                 sb1.AppendFormat(_detailPanel, "登录名", u.UserName);
                 sb1.AppendFormat(_detailPanel, "显示昵称", u.DisplayName);
                 sb1.AppendFormat(_detailPanel, "注册时间", u.CreateTime.ToString("yyyy/MM/dd HH:mm:ss"));
-                sb1.AppendFormat(_detailPanel, "我的华宏", "<a href=\"" + GlobalSettings.RelativeWebRoot + this.ProfileUrl + "\">[控制面板]</a>");
+                //sb1.AppendFormat(_detailPanel, "我的华宏", "<a href=\"" + GlobalSettings.RelativeWebRoot + this.ProfileUrl + "\">[控制面板]</a>");
                 sb.AppendFormat(_middlePanel, this.PanelMiddleCss,
                                     string.Format(_infoPanel, this.InfoCss, sb1.ToString())
                                     );

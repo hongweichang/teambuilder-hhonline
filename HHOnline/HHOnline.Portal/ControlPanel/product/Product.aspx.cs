@@ -26,6 +26,25 @@ public partial class ControlPanel_Product_Product : HHPage
         ProductQuery query = ProductQuery.GetQueryFromQueryString(Request.QueryString);
         lnkAll.CssClass = "active";
         lblTip.Text = "“全部”";
+        if (query.Filter !=null)
+        { 
+                lnkAll.CssClass = "";
+                switch (query.Filter)
+                {
+                    case ProviderFilter.All:
+                        lnProvider.CssClass = "active";
+                        lblTip.Text = "查找“供应商提供产品”";
+                        break;
+                    case ProviderFilter.Deny:
+                        lnProviderDeny.CssClass = "active";
+                        lblTip.Text = "查找“供应商已发布产品”";
+                        break;
+                    case ProviderFilter.Inspect:
+                        lnProviderInspect.CssClass = "active";
+                        lblTip.Text = "查找“供应商未发布产品”";
+                        break;
+                }
+        }
         if (query.HasPictures.HasValue)
         {
             if (query.HasPictures.Value)
@@ -175,6 +194,10 @@ public partial class ControlPanel_Product_Product : HHPage
         this.lnkPublished.PostBackUrl = destinationURL + "&pb=1";
         this.lnkUnPublishied.PostBackUrl = destinationURL + "&pb=0";
 
+        this.lnProvider.PostBackUrl = destinationURL + "&p=1";
+        this.lnProviderInspect.PostBackUrl = destinationURL + "&p=2";
+        this.lnProviderDeny.PostBackUrl = destinationURL + "&p=3";
+
     }
 
     protected void lnk_Click(object sender, EventArgs e)
@@ -207,6 +230,7 @@ public partial class ControlPanel_Product_Product : HHPage
         this.SetTitle();
         this.SetTabName(this.ShortTitle);
         base.ExecuteJs("$.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_productmanage' });", false);
+        this.AddJavaScriptInclude("scripts/pages/cpproduct.aspx.js", false, false);
     }
 
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
@@ -252,15 +276,28 @@ public partial class ControlPanel_Product_Product : HHPage
         {
             Product product = e.Row.DataItem as Product;
             Image productPicture = e.Row.FindControl("ProductPicture") as Image;
+            Literal ltComming = e.Row.FindControl("ltComming") as Literal;
+
             if (productPicture != null)
             {
                 productPicture.ImageUrl = product.GetDefaultImageUrl((int)productPicture.Width.Value, (int)productPicture.Height.Value);
             }
             HyperLink hyName = e.Row.FindControl("hlProductName") as HyperLink;
+            Company c = Users.GetUser(product.CreateUser).Company;
+            if (c != null && c.CompanyID != 0)
+            {
+                ProductSupply ps = ProductSupplyManager.GetProductSupply(product.ProductID, c.CompanyID);
+                ltComming.Text = "[<a class=\"navCompany\" href='javascript:{}' onclick=\"showSupply(" + ps.SupplyID + ")\">"+c.CompanyName+"</a>]&nbsp;&nbsp;";
+            }
+            else
+            {
+                ltComming.Text = "华宏";
+            }
+
             if (hyName != null)
             {
                 hyName.Text = product.ProductName;
-                hyName.NavigateUrl = "#";
+                hyName.NavigateUrl = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-product&ID=" + GlobalSettings.Encrypt(product.ProductID.ToString());
             }
         }
     }

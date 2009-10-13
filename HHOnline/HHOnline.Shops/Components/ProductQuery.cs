@@ -4,6 +4,12 @@ using HHOnline.Framework;
 
 namespace HHOnline.Shops
 {
+    public enum ProviderFilter
+    {
+        All = 1,
+        Inspect = 2,
+        Deny = 3
+    }
 	/// <summary>
 	/// 产品查询类
 	/// </summary>
@@ -25,7 +31,12 @@ namespace HHOnline.Shops
 		private decimal? productEndPrice;
 		private FocusType? focusType;
 		private int? companyID;
-
+        private ProviderFilter? providerFilter = null;
+        public ProviderFilter? Filter
+        {
+            get { return providerFilter; }
+            set { providerFilter = value; }
+        }
 		/// <summary>
 		/// 产品排序依据
 		/// </summary>
@@ -311,6 +322,17 @@ namespace HHOnline.Shops
 		public static ProductQuery GetQueryFromQueryString(NameValueCollection queryString)
 		{
 			ProductQuery query = new ProductQuery();
+            if (!GlobalSettings.IsNullOrEmpty(queryString["p"]))
+            {
+                try
+                {
+                    query.Filter = (ProviderFilter)(int.Parse(queryString["p"]));
+                }
+                catch
+                {
+                    query.Filter = null;
+                }
+            }
 			//ProductName
 			if (!GlobalSettings.IsNullOrEmpty(queryString["pn"]))
 				query.ProductNameFilter = queryString["pn"];

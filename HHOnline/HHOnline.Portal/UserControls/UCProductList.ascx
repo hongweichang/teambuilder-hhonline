@@ -29,10 +29,12 @@
             <asp:Literal ID="ltImage" runat="server"></asp:Literal>
             <div class="productTitle">
                 <div class="productTitle-r1">
-                    <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
+                    <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank">
+                        <%# Eval("ProductName") %>
+                    </a>
                 </div>
                 <div class="productTitle-r2">
-                    <%# Eval("ProductAbstract") %>
+                    <%# Eval("ProductAbstract")%>
                 </div>
                 <div class="productTitle-r3">
                     关键字：<%# Eval("ProductKeywords")%>

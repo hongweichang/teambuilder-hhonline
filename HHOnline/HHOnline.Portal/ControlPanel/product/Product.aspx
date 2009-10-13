@@ -41,7 +41,7 @@
                 </td>
             </tr>
             <tr>
-                <th>
+                <th rowspan="2">
                     快速过滤
                 </th>
                 <td colspan="6">
@@ -55,8 +55,17 @@
                         <asp:LinkButton ID="lnkNoPicture" runat="server" OnClick="lnk_Click">无图商品</asp:LinkButton>
                     </div>
                 </td>
-                <td rowspan="2">
-                    <asp:Button ID="lnkSearch" runat="server" Text="查找产品" OnClick="lnkSearch_Click" />
+                <td rowspan="3">
+                    <asp:Button ID="lnkSearch" runat="server" Text="查找产品" Height="50px" OnClick="lnkSearch_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="productNav">       
+                        <asp:LinkButton ID="lnProvider" runat="server" OnClick="lnk_Click">供应商提供产品</asp:LinkButton>                 
+                        <asp:LinkButton ID="lnProviderInspect" runat="server" OnClick="lnk_Click">供应商已发布产品</asp:LinkButton>
+                        <asp:LinkButton ID="lnProviderDeny" runat="server" OnClick="lnk_Click">供应商未发布产品</asp:LinkButton>
+                    </div>                    
                 </td>
             </tr>
             <tr>
@@ -73,24 +82,26 @@
     <hc:ExtensionGridView runat="server" ID="egvProducts" OnRowDataBound="egvProducts_RowDataBound"
         OnRowDeleting="egvProducts_RowDeleting" OnRowUpdating="egvProducts_RowUpdating"
         OnRowCommand="egvProducts_RowCommand" OnPageIndexChanging="egvProducts_PageIndexChanging"
-        PageSize="5" SkinID="DefaultView" AutoGenerateColumns="False" DataKeyNames="ProductID">
+        PageSize="10" SkinID="DefaultView" AutoGenerateColumns="False" DataKeyNames="ProductID">
         <Columns>
-            <asp:TemplateField HeaderText="展示图片">
-                <HeaderStyle Width="100" />
+            <asp:TemplateField HeaderText="图片">
+                <HeaderStyle Width="60" />
                 <ItemTemplate>
                     <asp:Image ID="ProductPicture" Style="border: double 3px #7d9edb;" Width="40" Height="40"
                         runat="server" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="产品名称">
-                <ItemTemplate>
-                    <asp:HyperLink ID="hlProductName" runat="server"></asp:HyperLink>
-                </ItemTemplate>
-            </asp:TemplateField>
+            <asp:BoundField DataField="ProductName" HeaderText="产品名称"  DataFormatString="{0:S40}"/>
             <asp:BoundField HeaderText="产品品牌" DataField="BrandName" />
             <asp:BoundField HeaderText="介绍摘要" DataField="ProductAbstract" DataFormatString="{0:S20}" />
+             <asp:TemplateField HeaderText="来源">
+                <HeaderStyle Width="60" />
+                <ItemTemplate>
+                    <asp:Literal ID="ltComming" runat="server"></asp:Literal>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField>
-                <HeaderStyle Width="200" />
+                <HeaderStyle Width="130" />
                 <HeaderTemplate>
                     操作</HeaderTemplate>
                 <ItemTemplate>

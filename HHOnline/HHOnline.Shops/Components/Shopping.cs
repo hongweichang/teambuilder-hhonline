@@ -14,7 +14,7 @@ namespace HHOnline.Shops
         /// <summary>
         /// 购物信息编号
         /// </summary>
-        public int ShopppingID
+        public int ShoppingID
         {
             get { return _ShoppingID; }
             set { _ShoppingID = value; }

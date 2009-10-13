@@ -41,5 +41,11 @@ namespace HHOnline.Shops
 		{
 			return ShopDataProvider.Instance.GetProductSupply(productID, supplierID);
 		}
+
+
+        public static List<ProductSupply> GetPendingProductSupply()
+        {
+            return ShopDataProvider.Instance.GetPendingProductSupply();
+        }
 	}
 }

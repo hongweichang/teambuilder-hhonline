@@ -12,16 +12,16 @@
                     <asp:LoginView ID="lvUser" runat="server">
                         <AnonymousTemplate>
                             <ul class="logged-ul">
-                                <li><a href="#" class="shoppingcard">购物车</a></li>
-                                <li><a href="#" class="basket">直接询价</a></li>
+                                <li><a href='<%= HHOnline.Framework.GlobalSettings.RelativeWebRoot %>pages/view.aspx?shopcart-cartitems' class="shoppingcard" target="_blank">购物车</a></li>
+                                <li><a href="javascript:{}" class="basket">直接询价</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="logged-ul">
-                                <li><a href="#" class="shoppingcard">购物车</a></li>
-                                <li><a href="#" class="favorite">收藏夹</a></li>
-                                <li><a href="#" class="basket">直接询价</a></li>
-                                <li><a href="#" class="dashboard">我的华宏</a></li>
+                                <li><a href='<%= HHOnline.Framework.GlobalSettings.RelativeWebRoot %>pages/view.aspx?shopcart-cartitems' target="_blank" class="shoppingcard">购物车</a></li>
+                                <li><a href='<%= HHOnline.Framework.GlobalSettings.RelativeWebRoot %>pages/view.aspx?profiles-favlist' target="_blank" class="favorite">收藏夹</a></li>
+                                <li><a href="javascript:{}" class="basket">直接询价</a></li>
+                                <li><a href='<%= HHOnline.Framework.GlobalSettings.RelativeWebRoot %>pages/view.aspx?profiles-dashboard' class="dashboard">我的华宏</a></li>
                             </ul>
                         </LoggedInTemplate>
                     </asp:LoginView>

@@ -64,13 +64,4 @@ $().ready(function() {
         this.blur();
         searchArticle(s2, mk2);
     });
-    var logUl = $('ul.logged-ul');
-    logUl.find('a.favorite').click(function() {
-        $.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_favlist' });
-        window.location.href = relativeUrl + 'pages/view.aspx?profiles-favlist';
-    })
-
-    logUl.find('a.dashboard').click(function() {
-        window.location.href = relativeUrl + 'pages/view.aspx?profiles-dashboard';
-    })
 });

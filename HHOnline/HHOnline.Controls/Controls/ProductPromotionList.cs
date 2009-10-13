@@ -26,7 +26,7 @@ namespace HHOnline.Controls
             get { return _Columns; }
             set { _Columns = value; }
         }
-        private int _Max = 10;
+        private int _Max = 12;
         public int Max
         {
             get { return _Max; }
@@ -97,7 +97,7 @@ namespace HHOnline.Controls
             sb.AppendLine("</table>");
 
             if (curCount > _Max)
-                sb.Append("<div class=\"list-more\"><a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category\" title=\"查看全部。。。\"></a></div>");
+                sb.Append("<div class=\"list-more\"><a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-productfocus&&t="+(int)this.ProductType+"\" title=\"查看全部。。。\"></a></div>");
             return sb.ToString();
         }
         string GetPrice(int pId)

@@ -52,7 +52,7 @@
                             产品名称
                         </th>
                         <td>
-                            <asp:TextBox ID="txtProductName" runat="server" Width="300px"></asp:TextBox>
+                            <asp:TextBox ID="txtProductName" runat="server" Width="300px" MaxLength="100"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfv1" runat="server" ErrorMessage="产品名称不能为空。" Display="Dynamic"
                                 ControlToValidate="txtProductName"></asp:RequiredFieldValidator>
                         </td>

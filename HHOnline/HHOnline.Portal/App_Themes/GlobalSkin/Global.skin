@@ -26,7 +26,6 @@
        无法获取相关信息，信息可能不存在或已经被删除！
     </EmptyDataTemplate>
 </hc:ExtensionGridView>
-
 <asp:SiteMapPath runat="server" PathSeparator="&nbsp;" CssClass="sitemappath" SkinID="mappath">
         <NodeStyle CssClass="allnode"/>
         <CurrentNodeStyle CssClass="curnode" />
