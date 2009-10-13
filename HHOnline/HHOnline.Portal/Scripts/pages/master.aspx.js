@@ -54,6 +54,12 @@ $().ready(function() {
     s2.watermark({
         markText: mk2
     });
+    s2.keydown(function(e) {
+        if ((e.keyCode || e.which) == 13) {
+            searchArticle($(this), mk2);
+            return false;
+        }
+    })
 
     $('#searchProduct').click(function() {
         this.blur();
