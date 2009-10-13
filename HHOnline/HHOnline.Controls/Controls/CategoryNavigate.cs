@@ -9,22 +9,41 @@ namespace HHOnline.Controls
 {
     public class CategoryNavigate:UserControl
     {
-        static CategoryNavigate()
+        public CategoryNavigate()
         {
-            if (pcs == null)
-            {
-                pcs = ProductCategories.GetCategories();
-            }
+            
         }
-        private static List<ProductCategory> pcs = null;
         private int _CategoryID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category{0}\">{1}</a>";
         public int CategoryID
         {
             get { return _CategoryID; }
-            set { _CategoryID = value; }
+            set {
+                if (value != _CategoryID)
+                {
+                    _Html = null;
+                }
+                _CategoryID = value; }
         }
-
+       public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
         string RenderHTML()
         {
             StringBuilder sb = new StringBuilder();
@@ -51,9 +70,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderHTML();
-
-            writer.Write(html);
+            writer.Write(HTML);
             writer.WriteLine(Environment.NewLine);
         }
     }

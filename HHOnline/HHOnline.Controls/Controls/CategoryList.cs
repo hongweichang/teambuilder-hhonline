@@ -11,12 +11,9 @@ namespace HHOnline.Controls
     {
         static CategoryList()
         {
-            if (pcs == null)
-            {
-                pcs = ProductCategories.GetCategories();
-            }
+            ProductCategories.Updated += delegate { _Html = null; };
         }
-        private static List<ProductCategory> pcs = null;
+        private List<ProductCategory> pcs = null;
 
         private int _Columns = 2;
         public int Columns
@@ -36,8 +33,31 @@ namespace HHOnline.Controls
             get { return _CssClass; }
             set { _CssClass = value; }
         }
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
         public string RenderHTML()
         {
+            if (pcs == null)
+            {
+                pcs = ProductCategories.GetCategories();
+            }
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category";
             if (pcs == null || pcs.Count == 0)
             {
