@@ -11,18 +11,20 @@ namespace HHOnline.Controls
     {
         static IndustrySubList()
         {
-            if (inds == null)
-            {
-                inds = ProductIndustries.GetChildIndustries(0);
-            }
+            ProductIndustries.Updated += delegate { _Html = null; };
         }
-        private static List<ProductIndustry> inds = null;
+        private List<ProductIndustry> inds = null;
         private int _IndustryID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry&ID={0}\">{1}</a>";
         public int IndustryID
         {
             get { return _IndustryID; }
-            set { _IndustryID = value; }
+            set {
+                if (value != _IndustryID)
+                {
+                    _Html = null;
+                }
+                _IndustryID = value; }
         }
         private string _CssClass;
         public string CssClass
@@ -30,8 +32,31 @@ namespace HHOnline.Controls
             get { return _CssClass; }
             set { _CssClass = value; }
         }
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
         string RenderHTML()
         {
+            if (inds == null)
+            {
+                inds = ProductIndustries.GetChildIndustries(0);
+            }
             StringBuilder sb = new StringBuilder();
             if (_IndustryID == 0)
             {
@@ -68,9 +93,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderHTML();
-
-            writer.Write(html);
+            writer.Write(HTML);
             writer.WriteLine(Environment.NewLine);
         }
     }

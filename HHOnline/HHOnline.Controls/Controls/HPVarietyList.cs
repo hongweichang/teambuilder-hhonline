@@ -14,10 +14,7 @@ namespace HHOnline.Controls
     {
         static HPVarietyList()
         {
-            if (brands == null)
-            {
-                brands = ProductBrands.GetProductBrands();
-            }
+            ProductBrands.Updated += delegate { _Html = null; };  
         }
         private int _Max = 10;
         public int Max
@@ -37,9 +34,32 @@ namespace HHOnline.Controls
             get { return _CssClass; }
             set { _CssClass = value; }
         }
-        private static  List<ProductBrand> brands = null;
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
+        private  List<ProductBrand> brands = null;
         string RenderHTML()
         {
+            if (brands == null)
+            {
+                brands = ProductBrands.GetProductBrands();
+            }
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand";
             if (brands == null || brands.Count == 0)
             {
@@ -96,9 +116,7 @@ namespace HHOnline.Controls
         {
             if (this.Visible)
             {
-                string html = RenderHTML();
-
-                writer.Write(html);
+                writer.Write(HTML);
                 writer.WriteLine(Environment.NewLine);
             }
         }
