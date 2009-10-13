@@ -11,18 +11,20 @@ namespace HHOnline.Controls
     {
         static CategorySubList()
         {
-            if (pcs == null)
-            {
-                pcs = ProductCategories.GetCategories();
-            }
+            ProductCategories.Updated += delegate { _Html = null; };
         }
-        private static List<ProductCategory> pcs = null;
+        private List<ProductCategory> pcs = null;
         private int _CategoryID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category&ID={0}\">{1}</a>";
         public int CategoryID
         {
             get { return _CategoryID; }
-            set { _CategoryID = value; }
+            set {
+                if (value != _CategoryID)
+                {
+                    _Html = null;
+                }
+                _CategoryID = value; }
         }
         private string _CssClass;
         public string CssClass
@@ -30,8 +32,31 @@ namespace HHOnline.Controls
             get { return _CssClass; }
             set { _CssClass = value; }
         }
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
         string RenderHTML()
         {
+            if (pcs == null)
+            {
+                pcs = ProductCategories.GetCategories();
+            }
             StringBuilder sb = new StringBuilder();
             if (_CategoryID == 0)
             {
@@ -68,9 +93,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderHTML();
-
-            writer.Write(html);
+            writer.Write(HTML);
             writer.WriteLine(Environment.NewLine);
         }
     }

@@ -14,10 +14,7 @@ namespace HHOnline.Controls
     {
         static HPIndustryList()
         {
-            if (inds == null)
-            {
-                inds = ProductIndustries.GetChildIndustries(0);
-            }
+            ProductIndustries.Updated += delegate { _Html = null; };
         }  
         private int _Columns = 2;
         public int Columns
@@ -37,9 +34,32 @@ namespace HHOnline.Controls
             get { return _CssClass; }
             set { _CssClass = value; }
         }
-        private static  List<ProductIndustry> inds = null;
+        public static object _lock = new object();
+        private static string _Html;
+        public string HTML
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_Html))
+                {
+                    lock (_lock)
+                    {
+                        if (string.IsNullOrEmpty(_Html))
+                        {
+                            _Html = RenderHTML();
+                        }
+                    }
+                }
+                return _Html;
+            }
+        }
+        private  List<ProductIndustry> inds = null;
         string RenderHTML()
         {
+            if (inds == null)
+            {
+                inds = ProductIndustries.GetChildIndustries(0);
+            }
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry";
             if (inds == null || inds.Count == 0)
             {
@@ -88,9 +108,7 @@ namespace HHOnline.Controls
         {
             if (this.Visible)
             {
-                string html = RenderHTML();
-
-                writer.Write(html);
+                writer.Write(HTML);
                 writer.WriteLine(Environment.NewLine);
             }
         }
