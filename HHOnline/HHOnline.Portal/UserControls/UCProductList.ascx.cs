@@ -116,18 +116,18 @@ public partial class UserControls_UCProductList : System.Web.UI.UserControl
                 case "grid":
                     lnkGrid.CssClass = "showByGrid showBy showByGridActive";
                     lnkList.CssClass = "showByList showBy";
-                    cpProduct.PageSize = 20;
+                    cpProduct.PageSize = 10;
                     break;
                 case "list":
                     lnkList.CssClass = "showByList showBy showByListActive";
                     lnkGrid.CssClass = "showByGrid showBy";
-                    cpProduct.PageSize = 100;
+                    cpProduct.PageSize = 50;
                     break;
             }
         }
         else
         {
-            cpProduct.PageSize = 20;
+            cpProduct.PageSize = 10;
             s = "grid";
             lnkGrid.CssClass = "showByGrid showBy showByGridActive";
             lnkList.CssClass = "showByList showBy";

@@ -21,11 +21,11 @@ public partial class UserControls_Search : System.Web.UI.UserControl
         else
         {
             searchWords = searchWords.GetRange(0,Math.Min(5, searchWords.Count));
-            string src = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-search&w={0}\" title=\"{0}\">{1}</a>";
+            string src = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-search&w={2}\" title=\"{0}\">{1}</a>";
             StringBuilder sb=new StringBuilder();
             foreach (string s in searchWords)
             {
-                sb.AppendFormat(src, s,GlobalSettings.SubString(s, 10));
+                sb.AppendFormat(src, s, GlobalSettings.SubString(s, 10), HttpUtility.UrlEncode(s));
             }
             ltHotSearch.Text = sb.ToString();
         }

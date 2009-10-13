@@ -56,12 +56,14 @@
             <div class="productGridShow2">
                 <asp:Literal ID="ltImage" runat="server"></asp:Literal>
                 <div class="productTitle">
-                        <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank"><%# Eval("ProductName") %></a>
+                        <a href='view.aspx?product-product&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ProductID").ToString()) %>' target="_blank">
+                            <div style="width:70%;height:20px;overflow:hidden;margin:auto;" ><%# Eval("ProductName") %></div>
+                        </a>
                 </div>
                 <div class="productPrice price"><asp:Literal ID="ltPrice" runat="server"></asp:Literal></div>
             </div>
         </ItemTemplate>
     </asp:DataList>
 </div>
-<hc:CollectionPager ID="cpProduct" PageSize="10" runat="server"></hc:CollectionPager>
+<hc:CollectionPager ID="cpProduct" runat="server"></hc:CollectionPager>
 </div>
