@@ -30,6 +30,7 @@ public partial class Pages_Profiles_CompanyUsers : HHPage
         User u = Profile.AccountInfo;
         if (u.UserType == UserType.InnerUser || u.IsManager == 2)
         {
+            lbNewRole.Visible = false;
             mbNC.ShowMsg("内部用户或非领导级别用户无法查看此页面！", System.Drawing.Color.Red);
         }
         else
