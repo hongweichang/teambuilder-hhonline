@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HHMembershipProvider.cs" />
+    <Compile Include="HHOnlineProfile.cs" />
     <Compile Include="HHProfileProvider.cs" />
     <Compile Include="HHSiteMapProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
