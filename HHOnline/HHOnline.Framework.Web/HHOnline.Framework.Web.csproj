@@ -97,6 +97,10 @@
       <Project>{6A7F2A2A-6788-4F11-B3B6-F4799CCA77AF}</Project>
       <Name>HHOnline.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HHOnline.News\HHOnline.News.csproj">
+      <Project>{AC741F63-A885-458A-82BC-B69114F6ACE4}</Project>
+      <Name>HHOnline.News</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HHOnline.Permission\HHOnline.Permission.csproj">
       <Project>{1B6E0537-805B-4C48-935E-59FB53D3D113}</Project>
       <Name>HHOnline.Permission</Name>

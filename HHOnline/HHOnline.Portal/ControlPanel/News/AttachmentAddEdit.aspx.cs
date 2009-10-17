@@ -52,7 +52,7 @@ public partial class ControlPanel_News_AttachmentAddEdit : HHPage
             BindDetail();
         }
 
-        attachmentLocalPath = Server.MapPath("~") + "/FileStore/" + ArticleAttachments.FileStoreKey;
+        attachmentLocalPath = Server.MapPath("~") + "\\FileStore\\" + ArticleAttachments.FileStoreKey + "\\";
     }
 
     private void BindDetail()
@@ -198,6 +198,7 @@ public partial class ControlPanel_News_AttachmentAddEdit : HHPage
                 string ext = Path.GetExtension(fuLocal.FileName);
 
                 attachment.FileName = Guid.NewGuid().ToString() + ext;
+                
                 string filePath = attachmentLocalPath + attachment.FileName;
 
                 fuLocal.SaveAs(filePath);

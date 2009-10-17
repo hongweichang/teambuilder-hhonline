@@ -68,11 +68,17 @@
             </td>
         </tr>
         <tr>
+            <th>&nbsp;</th>
+            <td id="tdTitleImg">
+            <asp:Image ID="imgTitleImg" runat="server" Width="40px" Height="40px" />
+            </td>
+        </tr>
+        <tr>
             <th>
                 标题图像(<span style="color: #4682B4">可选</span>)
             </th>
-            <td>
-				<asp:DropDownList ID="ddlArticleImages" runat="server">
+            <td id="selTitlePic">
+				<asp:DropDownList ID="ddlArticleImages" runat="server" onchange="showTitlePics(this)">
 				</asp:DropDownList>
             </td>
         </tr>

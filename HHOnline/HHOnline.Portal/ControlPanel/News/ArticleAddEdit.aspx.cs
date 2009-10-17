@@ -14,6 +14,7 @@ using HHOnline.News.Services;
 using HHOnline.Framework.Web;
 using HHOnline.Framework.Web.Enums;
 using HHOnline.Framework;
+using System.Text;
 
 public partial class ControlPanel_News_ArticleAddEdit : HHPage
 {
@@ -66,10 +67,33 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 		ddlArticleImages.DataBind();
 	}
 
+    void WritePics()
+    {
+        AttachmentQuery aq = new AttachmentQuery();
+        List<ArticleAttachment> items = ArticleAttachments.GetAttachments(aq).Records;
+        if (items != null && items.Count > 0)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (ArticleAttachment a in items)
+            {
+                if (a.IsRemote)
+                {
+                    sb.Append("item" + a.ID.ToString() + ":'" + a.FileName + "',");
+                }
+                else
+                {
+                    sb.Append("item" + a.ID.ToString() + ":'" + a.GetDefaultImageUrl(40, 40) + "',");
+                }
+            }
+            ArticleAttachment aa = items[0];
+            imgTitleImg.ImageUrl = (aa.IsRemote ? aa.FileName : aa.GetDefaultImageUrl(40, 40));
+            base.ExecuteJs("var titlePics = {" + sb.ToString().Remove(sb.ToString().Length - 1) + "};", true);
+        }
+    }
 	protected void Page_Load(object sender, EventArgs e)
 	{
 		isEdit = Request.QueryString["act"].ToLower() == "edit";
-
+        WritePics();
 		if (!IsPostBack && !IsCallback)
 		{
 			BindArticleAttachment();

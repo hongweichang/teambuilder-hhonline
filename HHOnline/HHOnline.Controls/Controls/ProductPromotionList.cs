@@ -122,9 +122,10 @@ namespace HHOnline.Controls
         {
             decimal? price1 = null;
             decimal? price2 = null;
-
+            decimal? price3 = null;
             if (Context.User.Identity.IsAuthenticated)
             {
+                
                 SettingsPropertyValueCollection spvc = this.Context.Profile.PropertyValues;
                 User u = spvc["AccountInfo"].PropertyValue as User;
                 price1 = ProductPrices.GetPriceMarket(u.UserID, pId);

@@ -24,7 +24,7 @@
 				</p>
 				<div id="news_content">
 					<div class="articleimg">
-						<asp:Image ID="imgAttachment" runat="server" />
+						<asp:Image ID="imgAttachment" Width="100px" Height="100px" runat="server" />
 					</div>
 					<div class="post_item_foot">
 						发布于:

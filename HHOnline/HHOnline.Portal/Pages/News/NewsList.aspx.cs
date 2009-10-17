@@ -112,8 +112,14 @@ public partial class News_NewsList : HHPage
 					ArticleAttachment attachment = ArticleAttachments.GetAttachment(article.Image);
 					if (attachment != null)
 					{
-						string imgPath = "../FileStore/" + ArticleAttachments.FileStoreKey + "/" + attachment.FileName;
-						image.ImageUrl = imgPath;
+                        if (attachment.IsRemote)
+                        {
+                            image.ImageUrl = attachment.FileName;
+                        }
+                        else
+                        {
+                            image.ImageUrl = attachment.GetDefaultImageUrl(100,100);
+                        }
 						image.Visible = true;
 					}
 					else

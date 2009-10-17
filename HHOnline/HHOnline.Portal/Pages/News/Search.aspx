@@ -18,10 +18,10 @@
 		<div style="padding: 5px;">
 			<hc:MsgBox ID="msgBox" SkinID="msgBox" runat="server"></hc:MsgBox>
 			<asp:DataList ID="dlArticle" runat="server" OnItemDataBound="dlArticle_ItemDataBound"
-				RepeatColumns="1" RepeatDirection="Horizontal" RepeatLayout="Flow">
+				RepeatColumns="1" RepeatDirection="Horizontal" RepeatLayout="Flow" DataKeyField="ID">
 				<ItemTemplate>
 					<div class="productGridShow">
-						<asp:Image BorderWidth="4" BorderColor="#dedede" ID="imgArticle" runat="server" />
+						<asp:Image BorderWidth="4" Width="100px" Height="100px" BorderColor="#dedede" ID="imgArticle" runat="server" />
 						<div class="productTitle">
 							<div class="productTitle-r1">
 								<a href='view.aspx?news-newsdetail&ID=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>'
