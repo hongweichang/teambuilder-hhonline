@@ -32,21 +32,21 @@
 					<asp:TextBox ID="txtCreateEndTime" rel="DatePickerEnd" runat="server" Width="150px"
 						></asp:TextBox>
 				</td>
+				<td rowspan="2">
+					<asp:Button ID="btnSearch" runat="server" Text="查找附件" OnClick="btnSearch_Click" />
+				</td>
 			</tr>
 			<tr>
 				<th>
 					快速过滤
 				</th>
-				<td colspan="6">
+				<td colspan="5">
 					<div class="productNav">
                         <asp:LinkButton ID="btnAll" runat="server" OnClick="btnQuickSearch_Click">全部</asp:LinkButton>
                         <asp:LinkButton	ID="btnSmallSizeFile" runat="server" OnClick="btnQuickSearch_Click">小文件（&lt;=1M）</asp:LinkButton>
                         <asp:LinkButton ID="btnMediumSizeFile" runat="server" OnClick="btnQuickSearch_Click">中等文件（&gt;1M）</asp:LinkButton>
                         <asp:LinkButton ID="btnLargeSizeFile" runat="server" OnClick="btnQuickSearch_Click">大文件（&gt;10M）</asp:LinkButton>
 					</div>
-				</td>
-				<td rowspan="2">
-					<asp:Button ID="btnSearch" runat="server" Text="查找附件" OnClick="btnSearch_Click" />
 				</td>
 			</tr>
 			<tr>
@@ -77,7 +77,6 @@
 				</ItemTemplate>
 			</asp:TemplateField>
 			<asp:BoundField HeaderText="类型" DataField="ContentType" />
-			<asp:BoundField HeaderText="大小" DataField="ContentSize" />
 			<asp:BoundField HeaderText="创建时间" DataField="CreateTime" />
 			<asp:TemplateField>
 				<HeaderStyle Width="200" />

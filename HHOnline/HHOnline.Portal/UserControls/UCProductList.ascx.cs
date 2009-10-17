@@ -150,6 +150,7 @@ public partial class UserControls_UCProductList : System.Web.UI.UserControl
         query.ProductOrderBy = orderBy;
         query.SortOrder = sortOrder;
         query.PageSize = int.MaxValue;
+        query.HasPublished = true;
         List<Product> prods = null;
         if (!IsSearch) prods = Products.GetProducts(query).Records;
         else

@@ -143,10 +143,6 @@
       <Project>{6A7F2A2A-6788-4F11-B3B6-F4799CCA77AF}</Project>
       <Name>HHOnline.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HHOnline.News\HHOnline.News.csproj">
-      <Project>{28CD568A-3866-4D3F-963E-D6C0CE367D93}</Project>
-      <Name>HHOnline.News</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HHOnline.Shops\HHOnline.Shops.csproj">
       <Project>{EAF0EF22-8AD4-4772-A9D7-61EB86080B07}</Project>
       <Name>HHOnline.Shops</Name>

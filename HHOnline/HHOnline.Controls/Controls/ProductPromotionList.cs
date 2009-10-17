@@ -63,6 +63,7 @@ namespace HHOnline.Controls
                 pq.FocusType = _ProductType;
                 ps = Products.GetProductList(pq);
             }
+            
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-product";
             if (ps == null || ps.Count == 0)
             {

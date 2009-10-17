@@ -145,7 +145,14 @@ public partial class ControlPanel_News_Attachment : HHPage
 
 			if (picture != null)
 			{
-				picture.ImageUrl = attachment.GetDefaultImageUrl((int)picture.Width.Value, (int)picture.Height.Value);
+                if (attachment.IsRemote)
+                {
+                    picture.ImageUrl = attachment.FileName;
+                }
+                else
+                {
+                    picture.ImageUrl = attachment.GetDefaultImageUrl((int)picture.Width.Value, (int)picture.Height.Value);
+                }
 			}
 
 			HyperLink hyName = e.Row.FindControl("hlName") as HyperLink;

@@ -73,8 +73,7 @@ namespace HHOnline.News.Components
 		/// </summary>
 		public int UpdateUser { get; set; }
 
-		private IStorageFile defaultImageFile;
-		private IStorageFile file;
+        private IStorageFile file = null;
 
 		/// <summary>
 		/// 存储文件信息
@@ -83,35 +82,14 @@ namespace HHOnline.News.Components
 		{
 			get
 			{
-				if (file == null)
-				{
-					if (this.ID > 0)
-					{
-						file = FileStorageProvider.Instance(ArticleAttachments.FileStoreKey)
-							.GetFile(ArticleAttachments.MakePath(this.ID), this.FileName);
-					}
-				}
-
+                if (file == null && ID > 0)
+                    file = FileStorageProvider.Instance(ArticleAttachments.FileStoreKey)
+                        .GetFile(ArticleAttachments.MakePath(this.ID), this.FileName);
 				return file;
 			}
 			set
 			{
 				file = value;
-			}
-		}
-
-		/// <summary>
-		/// 默认图片文件
-		/// </summary>
-		public IStorageFile DefaultImageFile
-		{
-			get
-			{
-				if (defaultImageFile == null)
-				{
-					defaultImageFile = File;
-				}
-				return defaultImageFile;
 			}
 		}
 
@@ -125,20 +103,20 @@ namespace HHOnline.News.Components
 		{
 			if (width == 0 || height == 0)
 			{
-				if (DefaultImageFile != null)
-					return FileStorageProvider.GetGenericDownloadUrl(DefaultImageFile);
+				if (File != null)
+                    return FileStorageProvider.GetGenericDownloadUrl(File);
 				else
 					return SiteUrlManager.GetNoPictureUrl();
 			}
 			else
 			{
-				if (DefaultImageFile == null)
+                if (File == null)
 				{
 					return SiteUrlManager.GetNoPictureUrl(width, height);
 				}
 				else
 				{
-					return SiteUrlManager.GetResizedImageUrl(DefaultImageFile, width, height);
+                    return SiteUrlManager.GetResizedImageUrl(File, width, height);
 				}
 			}
 		}

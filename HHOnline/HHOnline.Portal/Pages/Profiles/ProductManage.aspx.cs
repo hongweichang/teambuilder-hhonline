@@ -17,7 +17,7 @@ public partial class Pages_Profiles_ProductManage : HHPage
         if (!IsPostBack)
         {
             CheckPermission();
-
+         
             BindData();
             BindLinkButton();
         }
