@@ -260,48 +260,48 @@ namespace HHOnline.Shops.Providers
         }
         #endregion
 
-		#region ProductSupply
+        #region ProductSupply
 
-		public abstract ProductSupply GetProductSupply(int supplyID);
+        public abstract ProductSupply GetProductSupply(int supplyID);
 
-		public abstract ProductSupply GetProductSupply(int productID, int supplierID);
+        public abstract ProductSupply GetProductSupply(int productID, int supplierID);
 
-		public abstract ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status);
+        public abstract ProductSupply UpdateProductSupply(ProductSupply ps, out DataActionStatus status);
 
         public abstract List<ProductSupply> GetPendingProductSupply();
 
-		public static ProductSupply PopulateProductSupplyFromIDataReader(IDataReader dr)
-		{
-			ProductSupply result = new ProductSupply();
+        public static ProductSupply PopulateProductSupplyFromIDataReader(IDataReader dr)
+        {
+            ProductSupply result = new ProductSupply();
 
-			result.ApplyTaxRate = DataRecordHelper.GetDecimal(dr, "ApplyTaxRate");
-			result.CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime");
-			result.CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser");
-			result.DeliverySpan = DataRecordHelper.GetString(dr, "DeliverySpan");
-			result.IncludeFreight = (FreightIncludeType?)DataRecordHelper.GetNullableInt32(dr, "IncludeFreight");
-			result.IncludeTax = (TaxIncludeType)DataRecordHelper.GetInt32(dr, "IncludeTax");
-			result.ModelID = DataRecordHelper.GetNullableInt32(dr, "ModelID");
-			result.ProductID = DataRecordHelper.GetInt32(dr, "ProductID");
-			result.QuoteEnd = DataRecordHelper.GetDateTime(dr, "QuoteEnd");
-			result.QuoteFrom = DataRecordHelper.GetDateTime(dr, "QuoteFrom");
-			result.QuoteMOQ = DataRecordHelper.GetNullableInt32(dr, "QuoteMOQ");
-			result.QuotePrice = DataRecordHelper.GetNullableDecimal(dr, "QuotePrice");
-			result.QuoteRenewal = DataRecordHelper.GetInt32(dr, "QuoteRenewal");
-			result.SupplierID = DataRecordHelper.GetInt32(dr, "SupplierID");
-			result.SupplyID = DataRecordHelper.GetInt32(dr, "SupplyID");
-			result.SupplyRegion = DataRecordHelper.GetNullableInt32(dr, "SupplyRegion");
-			result.SupplyStatus = (ComponentStatus)DataRecordHelper.GetInt32(dr, "SupplyStatus");
-			result.UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime");
-			result.UpdateUser = DataRecordHelper.GetInt32(dr, "UpdateUser");
-			result.WarrantySpan = DataRecordHelper.GetString(dr, "WarrantySpan");
+            result.ApplyTaxRate = DataRecordHelper.GetDecimal(dr, "ApplyTaxRate");
+            result.CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime");
+            result.CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser");
+            result.DeliverySpan = DataRecordHelper.GetString(dr, "DeliverySpan");
+            result.IncludeFreight = (FreightIncludeType?)DataRecordHelper.GetNullableInt32(dr, "IncludeFreight");
+            result.IncludeTax = (TaxIncludeType)DataRecordHelper.GetInt32(dr, "IncludeTax");
+            result.ModelID = DataRecordHelper.GetNullableInt32(dr, "ModelID");
+            result.ProductID = DataRecordHelper.GetInt32(dr, "ProductID");
+            result.QuoteEnd = DataRecordHelper.GetDateTime(dr, "QuoteEnd");
+            result.QuoteFrom = DataRecordHelper.GetDateTime(dr, "QuoteFrom");
+            result.QuoteMOQ = DataRecordHelper.GetNullableInt32(dr, "QuoteMOQ");
+            result.QuotePrice = DataRecordHelper.GetNullableDecimal(dr, "QuotePrice");
+            result.QuoteRenewal = DataRecordHelper.GetInt32(dr, "QuoteRenewal");
+            result.SupplierID = DataRecordHelper.GetInt32(dr, "SupplierID");
+            result.SupplyID = DataRecordHelper.GetInt32(dr, "SupplyID");
+            result.SupplyRegion = DataRecordHelper.GetNullableInt32(dr, "SupplyRegion");
+            result.SupplyStatus = (ComponentStatus)DataRecordHelper.GetInt32(dr, "SupplyStatus");
+            result.UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime");
+            result.UpdateUser = DataRecordHelper.GetInt32(dr, "UpdateUser");
+            result.WarrantySpan = DataRecordHelper.GetString(dr, "WarrantySpan");
 
-			return result;
-		}
+            return result;
+        }
 
-		#endregion
+        #endregion
 
-		#region ProductPrice
-		public abstract ProductPrice CreateUpdatePrice(ProductPrice price, DataProviderAction action, out DataActionStatus status);
+        #region ProductPrice
+        public abstract ProductPrice CreateUpdatePrice(ProductPrice price, DataProviderAction action, out DataActionStatus status);
 
         public abstract DataActionStatus DeletePrice(int priceID);
 
@@ -310,6 +310,8 @@ namespace HHOnline.Shops.Providers
         public abstract List<ProductPrice> GetPrices(int productID);
 
         public abstract decimal? GetMarketPrice(string areaIDList, int productID);
+
+        public abstract decimal? GetPromotePrice(string areaIDList, int productID);
 
         public abstract decimal? GetGradePrice(List<string> filters, int productID, UserLevel level);
 

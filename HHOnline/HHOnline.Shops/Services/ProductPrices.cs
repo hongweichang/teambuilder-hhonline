@@ -120,6 +120,27 @@ namespace HHOnline.Shops
         }
 
         /// <summary>
+        /// 获取用户所看到的促销价
+        /// 根据客户所在区域，获取所有父区域，按照地域最近原则取促销价格
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="productID"></param>
+        /// <returns></returns>
+        public static decimal? GetPricePromote(int userID, int productID)
+        {
+            string areaIDList = string.Empty;
+            User user = Users.GetUser(userID);
+            if (user != null)
+            {
+                if (user.Company != null)
+                {
+                    areaIDList = Areas.GetParentAreaIDList(user.Company.CompanyRegion);
+                }
+            }
+            return ShopDataProvider.Instance.GetPromotePrice(areaIDList, productID);
+        }
+
+        /// <summary>
         /// 根据级别获取会员价<see cref="HHOnline.Framework.UserLevel"/>
         /// </summary>
         /// <param name="userID"></param>
