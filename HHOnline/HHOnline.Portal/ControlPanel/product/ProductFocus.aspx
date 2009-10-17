@@ -14,7 +14,7 @@
         <asp:LinkButton ID="lnkNew" runat="server" CssClass="new" OnClick="lnk_Click">新品上架</asp:LinkButton>
     </div>
     <hc:ExtensionGridView ID="egvProductFocus" runat="server" AutoGenerateColumns="False"
-        DataKeyNames="FocusID" PageSize="5" SkinID="DefaultView" OnPageIndexChanging="egvProductFocus_PageIndexChanging"
+        DataKeyNames="FocusID" PageSize="15" SkinID="DefaultView" OnPageIndexChanging="egvProductFocus_PageIndexChanging"
         OnRowDataBound="egvProductFocus_RowDataBound" OnRowDeleting="egvProductFocus_RowDeleting"
         OnRowUpdating="egvProductFocus_RowUpdating">
         <Columns>

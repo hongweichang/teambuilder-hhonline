@@ -793,6 +793,25 @@ namespace HHOnline.Framework
                 }
             }
         }
+        public static decimal? GetMinPrice(decimal? p1,decimal? p2)
+        {
+            if (p1 == null && p2 == null)
+                return null;
+            else
+            {
+                if (p1 == null) return p2;
+                else if (p2 == null) return p1;
+                else
+                {
+                    if (p1 < p2)
+                        return p1;
+                    else if (p1 > p2)
+                        return p2;
+                    else
+                        return p1;
+                }
+            }
+        }
         #endregion
     }
 }

@@ -123,6 +123,7 @@ namespace HHOnline.Controls
             decimal? price1 = null;
             decimal? price2 = null;
             decimal? price3 = null;
+            decimal? p = null;
             if (Context.User.Identity.IsAuthenticated)
             {
                 
@@ -130,11 +131,15 @@ namespace HHOnline.Controls
                 User u = spvc["AccountInfo"].PropertyValue as User;
                 price1 = ProductPrices.GetPriceMarket(u.UserID, pId);
                 price2 = ProductPrices.GetPriceMember(u.UserID, pId);
-                return GlobalSettings.GetPrice(false, price1, price2);
+                price3 = ProductPrices.GetPricePromote(u.UserID, pId);
+                p = GlobalSettings.GetMinPrice(price1, price2);
+                return GlobalSettings.GetPrice(p, price3);
             }
             else
             {
-                return GlobalSettings.GetPrice(false, ProductPrices.GetPriceDefault(pId));
+                price1 = ProductPrices.GetPriceDefault(pId);
+                price3 = ProductPrices.GetPricePromote(0, pId);
+                return GlobalSettings.GetPrice(price1, price3);
             }
         }
        

@@ -128,6 +128,7 @@ namespace HHOnline.Shops
         /// <returns></returns>
         public static decimal? GetPricePromote(int userID, int productID)
         {
+            if (userID == 0) return null;
             string areaIDList = string.Empty;
             User user = Users.GetUser(userID);
             if (user != null)

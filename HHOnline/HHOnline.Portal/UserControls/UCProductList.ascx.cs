@@ -44,18 +44,22 @@ public partial class UserControls_UCProductList : System.Web.UI.UserControl
             Literal ltPrice = e.Item.FindControl("ltPrice") as Literal;
             if (ltPrice != null)
             {
-                decimal? price = null;
+                decimal? p1 = null;
+                decimal? p2 = null;
+                decimal? p = null;
                 string priceText = string.Empty;
                 if (!Context.User.Identity.IsAuthenticated)
                 {
-                    price = ProductPrices.GetPriceDefault(product.ProductID);
-                    priceText = GlobalSettings.GetPrice(price);
+                    p1 = ProductPrices.GetPriceDefault(product.ProductID);
+                    p2 = ProductPrices.GetPricePromote(0, product.ProductID);
+                    priceText = GlobalSettings.GetPrice(p1,p2);
                 }
                 else
                 {
-                    price = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, product.ProductID);
-                    decimal? price1 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, product.ProductID);
-                    priceText = GlobalSettings.GetPrice(true, price, price1);
+                    p1 = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, product.ProductID);
+                    p2 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, product.ProductID);
+                    p = ProductPrices.GetPricePromote(Profile.AccountInfo.UserID, product.ProductID);
+                    priceText = GlobalSettings.GetPrice(true, p, GlobalSettings.GetMinPrice(p1, p2));
                 }
                 ltPrice.Text = priceText;
             }
