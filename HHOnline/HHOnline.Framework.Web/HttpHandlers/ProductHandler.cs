@@ -59,6 +59,12 @@ namespace HHOnline.Framework.Web.HttpHandlers
                         suc = true;
                         msg = Newtonsoft.Json.JavaScriptConvert.SerializeObject(sw);
                         break;
+                    case "getStatistic":
+                        List<WordStatistic> wss = WordSearchManager.GetStatistic(GlobalSettings.MinValue, GlobalSettings.MaxValue);
+                        wss = wss.GetRange(0, Math.Min(10, wss.Count));
+                        suc=true;
+                        msg = Newtonsoft.Json.JavaScriptConvert.SerializeObject(wss);
+                        break;
                 }
 
                 context.Response.Write("{msg:'" + msg + "',suc:" + suc.ToString().ToLower() + "}");

@@ -5,7 +5,11 @@ function CloseEdit() {
     return false;
 }
 function showTitlePics(m) {
-    if (typeof m == 'undefined') {m = $('#selTitlePic').find('select')[0]; }
+    if (typeof m == 'undefined') { m = $('#selTitlePic').find('select')[0]; }
+    if (m.length == 0) {
+        $('#tdTitleImg').find('img').hide();
+        return;
+    }
     var k = m.options[m.selectedIndex].value;
 
     var picUrl = eval('titlePics.item' + k);

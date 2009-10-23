@@ -989,9 +989,45 @@ namespace HHOnline.Data
             DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_WordSearch_Insert", elParameters);
         }
 
+        public override List<WordStatistic> GetStatistic(DateTime startTime,DateTime endTime)
+        {
+            List<WordStatistic> statistics = new List<WordStatistic>();
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SWordStatistic_Get", new ELParameter[]{
+                new ELParameter("StartTime",DbType.DateTime,startTime),
+                new ELParameter("EndTime",DbType.DateTime,endTime)
+            }))
+            {
+                while (dr.Read())
+                    statistics.Add(ReadStatistic(dr));
+            }
+            return statistics;
+        }
+        public override bool SaveStatistic(WordStatistic ws)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SWordStatistic_Add", new ELParameter[]{
+                 new ELParameter("Word",DbType.String,ws.SearchWord),
+                new ELParameter("Count",DbType.Decimal,ws.HitCount)
+            }) > 0;
+        }
         public override void StatisticWordSearch()
         {
             DataHelper.ExecuteScalar(CommandType.StoredProcedure, "sp_WordSearch_Statistic");
+        }
+        public override bool DeleteWords(string word)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SWordStatistic_DeleteByWord", new ELParameter("Word", DbType.String, word)) > 0;
+        }
+        public override bool DeleteWords(int statisticID)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SWordStatistic_DeleteByID", new ELParameter("ID", DbType.Int32, statisticID)) > 0;
+        }
+        public override bool UpdateWordHitCount(int statisticID, decimal hitCount)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SWordStatistic_UpdateHitCount",
+                new ELParameter[]{
+                    new ELParameter("ID", DbType.Int32, statisticID),
+                    new ELParameter("HitCount", DbType.Decimal, hitCount)
+                }) > 0;
         }
 
         public override List<string> GetWordSuggest(string startLetter, int topCount)

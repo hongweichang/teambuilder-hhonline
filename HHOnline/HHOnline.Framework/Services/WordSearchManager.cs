@@ -31,7 +31,27 @@ namespace HHOnline.Framework
         {
             CommonDataProvider.Instance.StatisticWordSearch();
         }
+        public static List<WordStatistic> GetStatistic(DateTime startTime, DateTime endTime)
+        {
+            return CommonDataProvider.Instance.GetStatistic(startTime,endTime);
+        }
+        public static bool DeleteWords(string word)
+        {
+            return CommonDataProvider.Instance.DeleteWords(word);
+        }
+        public static bool DeleteWords(int statisticID)
+        {
+            return CommonDataProvider.Instance.DeleteWords(statisticID);
+        }
+        public static bool UpdateWordHitCount(int statisticID, decimal hitCount)
+        {
+            return CommonDataProvider.Instance.UpdateWordHitCount(statisticID, hitCount);
+        }
 
+        public static bool SaveStatistic(WordStatistic ws)
+        {
+            return CommonDataProvider.Instance.SaveStatistic(ws);
+        }
         /// <summary>
         /// 获取WordSuggest，根据Hitcount排序
         /// </summary>

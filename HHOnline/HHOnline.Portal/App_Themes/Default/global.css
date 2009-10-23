@@ -3881,3 +3881,29 @@ a:hover.navCompany .companyDetailsRemark_s
     text-decoration:none;
     font-weight:bold;
     }
+.swCanvas
+{
+    width:800px;
+    height:400px;
+    }
+.swCanvasLoad
+{
+    background:url(../../images/default/loading.gif) no-repeat 0 10px;    
+    }
+.linkStyle
+{
+    padding:10px 0;
+    }
+.linkStyle a
+{
+    padding:5px 10px;
+    border:solid 1px #7d9edb;
+    background:#F0FFFF;
+    text-decoration:none;
+    }
+.linkStyle a:hover
+{
+    border:solid 1px #ff0000;
+    background:#EE82EE;
+    color:#FFFAFA;
+    }

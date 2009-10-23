@@ -568,10 +568,25 @@ namespace HHOnline.Framework.Providers
         public abstract void InsertWordSearch(string keyword);
 
         public abstract void StatisticWordSearch();
-
+        public abstract List<WordStatistic> GetStatistic(DateTime startTime, DateTime endTime);
         public abstract List<string> GetWordSuggest(string startLetter, int topCount);
 
         public abstract List<string> GetHotWords();
+        public abstract bool DeleteWords(string word);
+        public abstract bool DeleteWords(int statisticID);
+        public abstract bool UpdateWordHitCount(int statisticID, decimal hitCount);
+        public abstract bool SaveStatistic(WordStatistic ws);
+        public static WordStatistic ReadStatistic(IDataReader dr)
+        {
+            return new WordStatistic()
+            {
+                StatisticID = DataRecordHelper.GetInt32(dr, "StatisticID"),
+                HitCount = DataRecordHelper.GetDecimal(dr, "HitCount"),
+                SearchWord = DataRecordHelper.GetString(dr, "SearchWord"),
+                CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
+                UpdateTime = DataRecordHelper.GetDateTime(dr, "UpdateTime")
+            };
+        }
         #endregion
 
         #region -Pending-
