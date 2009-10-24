@@ -54,7 +54,7 @@
                     <div class="lclBorder">
                     <hc:LettersCollectionList ID="lclListCategory" LetterType="Category" runat="Server" CssName="lettersCL"></hc:LettersCollectionList>
                     </div>
-                    <hc:CategoryList ID="clProduct" runat="server" CssClass="hpCategoryList"></hc:CategoryList>
+                    <hc:CategoryList ID="clProduct" runat="server" CssClass="hpCategoryList" Max="100"></hc:CategoryList>
                 </div>
                 <div id="varietyTabContent" class="productTabContent" style="display:none">
                     <div class="lclBorder">
