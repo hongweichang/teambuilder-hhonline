@@ -491,7 +491,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
         product.ProductCode = string.Empty;
         product.ProductAbstract = txtProductAbstract.Text;
         product.ProductContent = txtProductContent.Text;
-        product.ProductKeywords = txtKeyWords.Text;
+        product.ProductKeywords = GlobalSettings.FormatKeywords(txtKeyWords.Text);
         product.ProductName = txtProductName.Text;
         product.ProductStatus = csProduct.SelectedValue;
 

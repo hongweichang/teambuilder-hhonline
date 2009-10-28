@@ -491,7 +491,7 @@ public partial class Pages_Profiles_ProductAdd : HHPage, ICallbackEventHandler
         product.ProductCode = string.Empty;
         product.ProductAbstract = txtProductAbstract.Text;
         product.ProductContent = txtProductContent.Text;
-        product.ProductKeywords = txtKeyWords.Text;
+        product.ProductKeywords = GlobalSettings.FormatKeywords(txtKeyWords.Text);
         product.ProductName = txtProductName.Text;
         //product.ProductStatus = csProduct.SelectedValue;
         product.ProductStatus = ComponentStatus.Disabled;

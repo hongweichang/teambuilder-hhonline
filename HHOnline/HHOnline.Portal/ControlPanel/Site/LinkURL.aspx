@@ -4,15 +4,28 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphOpts" runat="Server">
+<asp:LinkButton ID="lnkAdd" runat="server" PostBackUrl="#" SkinID="lnkopts" OnClientClick="return addLinkUrl();" >
+    <span>新增</span>
+</asp:LinkButton>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="linkStyle">
-        <a href="http://indexed.webmasterhome.cn/?domain=www.ehuaho.com" target="_blank">WebMasterHome收录查询</a>
-        <a href="http://alexa.chinaz.com/?domain=ehuaho.com" target="_blank">ChinaZ Alaxa排行</a>
-        <br />
-        <a href="http://www.webconfs.com/search-engine-spider-simulator.php?url=http%3A%2F%2Fwww.ehuaho.com&submit=submit" target="_blank">WebConfs 蜘蛛模拟</a>
-        <br />
-        <a href="http://internetsupervision.com/scripts/urlcheck/check.aspx?checkurl=http%3A%2F%2Fwww.ehuaho.com" target="_blank">网站访问速度测试</a>
-        <a href="http://www.myip.cn/ipreverse.php?q=www.ehuaho.com" target="_blank">MyIP服务器网站表</a>
+        <asp:Repeater ID="rpList" runat="server" OnItemCommand="rpList_ItemCommand">
+            <HeaderTemplate>
+                <ul>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <li>
+                    <a class="title" href='<%# Eval("Url") %>' target="_blank"><%# Eval("Title") %></a>
+                    <span>--<%#Eval("Desc") %></span>
+                    &nbsp;&nbsp;                    
+                    <asp:LinkButton ID="lnkDelete" CommandName="Delete" OnClientClick="return confirm('确定要删除此链接吗？');" 
+                        CommandArgument='<%# Eval("ID") %>' runat="server" CssClass="delete" Text="[删除]"></asp:LinkButton>
+                </li>
+            </ItemTemplate>
+            <FooterTemplate>
+                </ul>
+            </FooterTemplate>
+        </asp:Repeater>
     </div>
 </asp:Content>

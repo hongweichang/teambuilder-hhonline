@@ -7,6 +7,7 @@ using HHOnline.Framework;
 
 public partial class UserControls_Footer : System.Web.UI.UserControl
 {
+    public static string _url = GlobalSettings.RelativeWebRoot;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)

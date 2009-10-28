@@ -1124,5 +1124,106 @@ namespace HHOnline.Data
             }) > 0;
         }
         #endregion
+
+        #region -LinkUrl- 
+        public override bool LinkUrlAdd(LinkUrl lnk)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SLinkUrl_Add", new ELParameter[]{
+                new ELParameter("Title",DbType.String,lnk.Title),
+                new ELParameter("Desc",DbType.String,lnk.Desc),
+                new ELParameter("Url",DbType.String,lnk.Url),
+                new ELParameter("CreateUser",DbType.Int32,lnk.CreateUser),
+                new ELParameter("CreateTime",DbType.DateTime,lnk.CreateTime)
+            }) > 0;
+        }
+        public override bool LinkUrlDelete(int lnkId)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SLinkUrl_Delete", new ELParameter[]{
+                new ELParameter("ID",DbType.Int32,lnkId)
+            }) > 0; 
+        }
+        public override List<LinkUrl> LinkUrlGet()
+        {
+            List<LinkUrl> lnks = new List<LinkUrl>();
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SLinkUrl_Get", null))
+            {
+                while (dr.Read())
+                {
+                    lnks.Add(ReadLinkUrl(dr));
+                }
+            }
+            return lnks;
+        }
+        #endregion
+
+        #region -FriendLink-
+        public override bool FriendLinkAdd(FriendLink lnk)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SFriendLink_Add", new ELParameter[]{
+                new ELParameter("Title",DbType.String,lnk.Title),
+                new ELParameter("Rank",DbType.Int32,lnk.Rank),
+                new ELParameter("Url",DbType.String,lnk.Url),
+                new ELParameter("CreateUser",DbType.Int32,lnk.CreateUser),
+                new ELParameter("CreateTime",DbType.DateTime,lnk.CreateTime)
+            }) > 0;
+        }
+        public override bool FriendLinkDelete(int lnkId)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SFriendLink_Delete", new ELParameter[]{
+                new ELParameter("ID",DbType.Int32,lnkId)
+            }) > 0;
+        }
+        public override List<FriendLink> FriendLinkGet()
+        {
+            List<FriendLink> lnks = new List<FriendLink>();
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SFriendLink_Get", null))
+            {
+                while (dr.Read())
+                {
+                    lnks.Add(ReadFriendLink(dr));
+                }
+            }
+            return lnks;
+        }
+
+        public override FriendLink FriendLinkGet(int lnkId)
+        {
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SFriendLink_Load", new ELParameter("ID",DbType.Int32,lnkId)))
+            {
+                while (dr.Read())
+                {
+                    return ReadFriendLink(dr);
+                }
+            }
+            return null;
+        }
+        public override bool FriendLinkUpdate(FriendLink lnk)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SFriendLink_Update", new ELParameter[]{
+                new ELParameter("Title",DbType.String,lnk.Title),
+                new ELParameter("Rank",DbType.Int32,lnk.Rank),
+                new ELParameter("ID",DbType.Int32,lnk.ID),
+                new ELParameter("Url",DbType.String,lnk.Url)
+            }) > 0;
+        }
+        #endregion
+
+        #region -FooterInfo-
+
+        public override FooterInfo FooterInfoGet(FooterUpdateAction action,string value)
+        {
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SFooterInfo_Update", new ELParameter[]{
+                new ELParameter("Action",DbType.Int32,(int)action),
+                new ELParameter("Value",DbType.String,value)
+            }))
+            {
+                while (dr.Read())
+                {
+                    return ReadFooterInfo(dr);
+                }
+            }
+            return null;
+        }
+        #endregion
     }
 }

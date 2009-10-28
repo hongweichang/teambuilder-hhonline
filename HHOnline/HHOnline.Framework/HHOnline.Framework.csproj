@@ -72,6 +72,9 @@
     <Compile Include="Components\CompanyDeposit.cs" />
     <Compile Include="Components\SupplierCredit.cs" />
     <Compile Include="Components\CompanyCredit.cs" />
+    <Compile Include="Components\LinkUrl.cs" />
+    <Compile Include="Components\FriendLink.cs" />
+    <Compile Include="Components\FooterInfo.cs" />
     <Compile Include="Enums\CompanyTypeKeyValue.cs" />
     <Compile Include="Components\ActivityItem.cs" />
     <Compile Include="Components\Area.cs" />
@@ -129,6 +132,7 @@
     <Compile Include="Services\CacheManager.cs" />
     <Compile Include="Services\CustomerGradeManager.cs" />
     <Compile Include="Services\Favorites.cs" />
+    <Compile Include="Services\FooterInfos.cs" />
     <Compile Include="Services\MenuManager.cs" />
     <Compile Include="Services\CacheKeyManager.cs" />
     <Compile Include="Components\Company.cs" />
@@ -180,6 +184,8 @@
     <Compile Include="Services\Pendings.cs" />
     <Compile Include="Services\CompanyDeposits.cs" />
     <Compile Include="Services\CompanyCredits.cs" />
+    <Compile Include="Services\LinkUrls.cs" />
+    <Compile Include="Services\FriendLinks.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HHOnline.Cache\HHOnline.Cache.csproj">

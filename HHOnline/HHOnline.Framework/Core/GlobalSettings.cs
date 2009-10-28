@@ -21,6 +21,25 @@ namespace HHOnline.Framework
     {
         public static readonly string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private static readonly string encryptKey = HHConfiguration.GetConfig()["encryptKey"].ToString();
+        private static char[] splitChars = new char[] { ';', ',', '.', '?', ' ', '，', '；', '。', '？' };
+
+        #region -Format KeyWords-
+        /// <summary>
+        /// 格式化KeyWord
+        /// </summary>
+        /// <param name="keywords"></param>
+        /// <returns></returns>
+        public static string FormatKeywords(string keywords)
+        {
+            if (string.IsNullOrEmpty(keywords))
+                return string.Empty;
+            string[] wordList = keywords.Split(splitChars);
+            keywords = string.Join(";", wordList);
+            while (keywords.IndexOf(";;") >= 0)
+                keywords = keywords.Replace(";;", ";");
+            return keywords;
+        }
+        #endregion
 
         #region -Helper Method-
         /// <summary>

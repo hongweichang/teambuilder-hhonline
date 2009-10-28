@@ -109,7 +109,7 @@ namespace HHOnline.Controls
                 sb.Append("<tr>");
                 for (int j = left; j > 0; j--)
                 {
-                    pc = pcList[length - j];
+                    pc = pcList[dev + left - j];
                     sb.Append(BindCategory(pc, nav));
                 }
                 for (int j = 0; j < _Columns - left; j++)

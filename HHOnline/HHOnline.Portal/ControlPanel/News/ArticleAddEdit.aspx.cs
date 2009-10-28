@@ -141,13 +141,16 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 			article.Content = txtContent.Text;
 			article.CopyFrom = txtCopyFrom.Text;
 			article.Author = txtAuthor.Text;
-			article.Keywords = txtKeywords.Text;
+            article.Keywords = GlobalSettings.FormatKeywords(txtKeywords.Text);
 			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
 			article.ArticleMemo = txtMemo.Text;
 			article.Status = csArticle.SelectedValue;
             if (!string.IsNullOrEmpty(ddlArticleImages.SelectedValue))
                 article.Image = int.Parse(ddlArticleImages.SelectedValue);
-
+            if (string.IsNullOrEmpty(txtDate.Text.Trim()))
+                article.Date = DateTime.Now;
+            else
+                article.Date = DateTime.Parse(txtDate.Text.Trim());
 			article.UpdateTime = DateTime.Now;
 			article.UpdateUser = Profile.AccountInfo.UserID;
 
@@ -179,13 +182,16 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 			article.Content = txtContent.Text;
 			article.CopyFrom = txtCopyFrom.Text;
 			article.Author = txtAuthor.Text;
-			article.Keywords = txtKeywords.Text;
+            article.Keywords = GlobalSettings.FormatKeywords(txtKeywords.Text);
 			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
 			article.ArticleMemo = txtMemo.Text;
             article.Status = csArticle.SelectedValue;
             if (!string.IsNullOrEmpty(ddlArticleImages.SelectedValue))
                 article.Image = int.Parse(ddlArticleImages.SelectedValue);
-
+            if (string.IsNullOrEmpty(txtDate.Text.Trim()))
+                article.Date = DateTime.Now;
+            else
+                article.Date = DateTime.Parse(txtDate.Text.Trim());
 			article.CreateTime = DateTime.Now;
 			article.CreateUser = Profile.AccountInfo.UserID;
 			article.UpdateTime = DateTime.Now;

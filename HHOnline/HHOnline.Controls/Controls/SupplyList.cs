@@ -65,7 +65,7 @@ namespace HHOnline.Controls
 
                     sb.AppendFormat(_format,
                             cs[i].ProductName,
-                            GlobalSettings.SubString(cs[i].ProductName, 20),
+                            GlobalSettings.SubString(cs[i].ProductName, 120),
                             cs[0].CreateTime.ToShortDateString()
                             );
                 }

@@ -128,9 +128,9 @@ public partial class ControlPanel_Permission_RoleAdd : HHPage
                     break;
             }
         }
-        catch
+        catch (Exception ex)
         {
-            throw new HHException(ExceptionType.Failed, "新增用户角色时发生了错误，请联系管理员！");
+            throw new HHException(ExceptionType.Failed, "新增用户角色时发生了错误，请联系管理员！(" + ex.Message + ")");
         }
     }
     void BindData(int roleId)

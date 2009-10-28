@@ -101,7 +101,7 @@
                             关键字
                         </th>
                         <td>
-                            <asp:TextBox ID="txtKeyWords" Width="600px" runat="server" MaxLength="200" />(使用分号划分)
+                            <asp:TextBox ID="txtKeyWords" Width="600px" runat="server" MaxLength="200" />(使用分号分隔)
                         </td>
                     </tr>
                     <tr>

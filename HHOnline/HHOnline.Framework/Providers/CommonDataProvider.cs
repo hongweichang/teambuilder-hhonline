@@ -612,5 +612,60 @@ namespace HHOnline.Framework.Providers
             };
         }
         #endregion
+
+        #region -LinkUrl-
+        public abstract bool LinkUrlAdd(LinkUrl lnk);
+        public abstract bool LinkUrlDelete(int lnkId);
+        public abstract List<LinkUrl> LinkUrlGet();
+        public static LinkUrl ReadLinkUrl(IDataReader dr)
+        {
+            return new LinkUrl()
+            {
+                ID = DataRecordHelper.GetInt32(dr, "ID"),
+                CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
+                CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser"),
+                Desc = DataRecordHelper.GetString(dr, "Desc"),
+                Title = DataRecordHelper.GetString(dr, "Title"),
+                Url = DataRecordHelper.GetString(dr, "Url")
+            };
+        }
+        #endregion
+
+
+        #region -FriendLink-
+        public abstract bool FriendLinkAdd(FriendLink lnk);
+        public abstract bool FriendLinkDelete(int lnkId);
+        public abstract List<FriendLink> FriendLinkGet();
+        public abstract FriendLink FriendLinkGet(int lnkId);
+        public abstract bool FriendLinkUpdate(FriendLink lnk);
+        public static FriendLink ReadFriendLink(IDataReader dr)
+        {
+            return new FriendLink()
+            {
+                ID = DataRecordHelper.GetInt32(dr, "ID"),
+                CreateTime = DataRecordHelper.GetDateTime(dr, "CreateTime"),
+                CreateUser = DataRecordHelper.GetInt32(dr, "CreateUser"),
+                Rank = DataRecordHelper.GetInt32(dr, "Rank"),
+                Title = DataRecordHelper.GetString(dr, "Title"),
+                Url = DataRecordHelper.GetString(dr, "Url")
+            };
+        }
+        #endregion
+
+        #region -FooterInfo-
+        public abstract FooterInfo FooterInfoGet(FooterUpdateAction action, string value);
+        public static FooterInfo ReadFooterInfo(IDataReader dr)
+        {
+            return new FooterInfo()
+            {
+                ID = DataRecordHelper.GetInt32(dr, "ID"),
+                AbouteHuaho = DataRecordHelper.GetString(dr, "AbouteHuaho"),
+                ContactInfo = DataRecordHelper.GetString(dr, "ContactInfo"),
+                HonerUser = DataRecordHelper.GetString(dr, "HonerUser"),
+                RightNotice = DataRecordHelper.GetString(dr, "RightNotice"),
+                WFList = DataRecordHelper.GetString(dr, "WFList")
+            };
+        }
+        #endregion
     }
 }
