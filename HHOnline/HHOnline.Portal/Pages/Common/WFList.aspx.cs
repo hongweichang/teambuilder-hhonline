@@ -6,29 +6,31 @@ using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
 using HHOnline.Framework;
 
-public partial class ControlPanel_Common_WFList : HHPage
+public partial class Pages_Common_WFList : HHPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) BindInfo();
+        if (!IsPostBack)
+        {
+            BindInfos();
+        }
     }
-    void BindInfo()
+    void BindInfos()
     {
         FooterInfo fi = FooterInfos.FooterInfoGet();
         if (fi != null && !string.IsNullOrEmpty(fi.WFList))
         {
-            txtAbout.Text = fi.WFList;
+            ltAbout.Text = fi.WFList;
         }
-    }
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-        FooterInfos.FooterInfoUpdate(FooterUpdateAction.WFList, txtAbout.Text.Trim());
-        BindInfo();
+        else
+        {
+            ltAbout.Text = "暂无介绍。";
+        }
     }
     public override void OnPageLoaded()
     {
         this.ShortTitle = "业务流程";
-        this.SetTabName(this.ShortTitle);
         this.SetTitle();
     }
 }
+

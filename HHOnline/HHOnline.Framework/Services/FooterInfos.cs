@@ -8,9 +8,13 @@ namespace HHOnline.Framework
     public class FooterInfos
     {
 
-        public static FooterInfo FooterInfoGet(FooterUpdateAction action, string value)
+        public static bool FooterInfoUpdate(FooterUpdateAction action, string value)
         {
-            return CommonDataProvider.Instance.FooterInfoGet(action,value);
+            return CommonDataProvider.Instance.FooterInfoUpdate(action,value);
+        }
+        public static FooterInfo FooterInfoGet()
+        {
+            return CommonDataProvider.Instance.FooterInfoGet();
         }
     }
 }

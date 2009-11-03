@@ -3952,3 +3952,131 @@ a:hover.navCompany .companyDetailsRemark_s
     font-family:Tahoma;
     text-decoration:underline
     }
+.aboutContent
+{
+    padding:10px;
+    line-height:20px;
+    }
+.aboutContent a
+{
+    color:#000080;
+    text-decoration:underline;
+    }
+    
+.aboutContent a:hover
+{
+    color:#ff0000;
+    }
+.aboutContent ul,.aboutContent ol
+{
+    margin-left:20px;
+    list-style-type:decimal;
+    }
+.aboutContent ul li,.aboutContent ol li
+{
+    margin-left:20px;
+    list-style-type:decimal;
+    }
+    
+.sitemapContainer
+{
+    float:left;
+    height:auto;
+    width:100%;
+    }
+.sitemapContainer .smContainer
+{
+    width:180px;
+    height:130px;
+    float:left;
+    margin:20px 10px 50px 40px;
+    }
+.smContainer .smc_c1
+{
+    height:130px;
+    width:120px;
+    float:left;
+    }
+.smContainer .smc_c2
+{
+    height:130px;
+    width:60px;
+    float:left;
+    }
+.smc_c1 .smc_c1_r1
+{
+    height:100px;
+    margin:0 10px;
+    border:solid 1px #4d6983;
+    border-bottom:0;
+    background-repeat:no-repeat;
+    background-position:center;
+    }
+.smc_c1 .smc_c1_r2
+{
+    background:#4d6983;
+    border:solid 1px #4d6983;
+    height:30px;
+    text-align:center;
+    line-height:30px;
+    color:#fff;
+    }
+.smc_c1 .smc_index
+{
+    background-image:url(../../images/default/index.gif);
+    }
+.smc_c1 .smc_product
+{
+    background-image:url(../../images/default/product.gif);
+    }
+.smc_c1 .smc_article
+{
+    background-image:url(../../images/default/article.gif);
+    }
+.smc_c1 .smc_brand
+{
+    background-image:url(../../images/default/brand.gif);
+    }
+.smc_c1 .smc_industry
+{
+    background-image:url(../../images/default/industry.gif);
+    }
+.smc_c1 .smc_category
+{
+    background-image:url(../../images/default/category.gif);
+    }
+.smc_r2 a
+{
+    display:block;
+    height:25px;
+    float:left;
+    line-height:25px;
+    width:63px;
+    margin-left:-11px;
+    margin-top:10px;
+    color:#000080;
+    text-decoration:none;
+    border:solid 1px #000080;
+    padding-left:5px;
+    border-left:solid 1px #fff;
+    }
+.smc_r2 a.disabled,
+.smc_r2 a:hover.disabled
+{
+    color:#ccc;
+    }
+.smc_r2 a:hover
+{
+    color:#ff0000;
+    }
+.smLoader
+{
+    background:#ddd url(../../images/default/indicator.gif) no-repeat 10px center;
+    width:180px;
+    height:40px;    
+    line-height:40px;
+    text-indent:40px;
+    border:double 4px #7d9edb;
+    margin-top:20px;
+    display:none;
+    }

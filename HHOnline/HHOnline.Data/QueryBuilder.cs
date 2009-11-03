@@ -337,7 +337,7 @@ namespace HHOnline.Data
                 builderFocus.AddWhere("pf.FocusType", Comparison.Equals, (int)query.FocusType.Value);
                 builderFocus.AddWhere("pf.FocusStatus", Comparison.GreaterThan, 0);
                 builderFocus.AddWhere("pf.FocusFrom", Comparison.LessOrEquals, new SqlLiteral("getdate()"));
-                builderFocus.AddWhere("pf.FocusEnd", Comparison.GreaterThan, new SqlLiteral("getdate()"));
+                builderFocus.AddWhere("pf.FocusEnd", Comparison.GreaterOrEquals, new SqlLiteral("getdate()"));
                 builder.AddWhere("p.ProductID", Comparison.In, new SqlLiteral(builderFocus.BuildQuery()));
             }
 

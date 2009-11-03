@@ -6,29 +6,30 @@ using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
 using HHOnline.Framework;
 
-public partial class ControlPanel_Common_HonerUser : HHPage
+public partial class Pages_Common_HonerUser : HHPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) BindInfo();
+        if (!IsPostBack)
+        {
+            BindInfos();
+        }
     }
-    void BindInfo()
+    void BindInfos()
     {
         FooterInfo fi = FooterInfos.FooterInfoGet();
         if (fi != null && !string.IsNullOrEmpty(fi.HonerUser))
         {
-            txtAbout.Text = fi.HonerUser;
+            ltAbout.Text = fi.HonerUser;
         }
-    }
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-        FooterInfos.FooterInfoUpdate(FooterUpdateAction.HonerUser, txtAbout.Text.Trim());
-        BindInfo();
+        else
+        {
+            ltAbout.Text = "暂无介绍。";
+        }
     }
     public override void OnPageLoaded()
     {
         this.ShortTitle = "荣誉客户";
-        this.SetTabName(this.ShortTitle);
         this.SetTitle();
     }
 }

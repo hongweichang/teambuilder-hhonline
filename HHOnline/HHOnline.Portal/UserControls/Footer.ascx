@@ -4,13 +4,13 @@
         &nbsp;</div>
     <div class="text-bot">
         <ul>
-            <li><a href="#" target="_blank">联系我们</a></li>
-            <li><a href="#" target="_blank">了解华宏</a></li>
-            <li><a href="#" target="_blank">荣誉客户</a></li>
+            <li><a href='<%= _url %>pages/view.aspx?common-contactinfo' target="_blank">联系我们</a></li>
+            <li><a href='<%= _url %>pages/view.aspx?common-aboutehuaho' target="_blank">了解华宏</a></li>
+            <li><a href='<%= _url %>pages/view.aspx?common-honeruser' target="_blank">荣誉客户</a></li>
             <li><a href='<%= _url %>register.aspx' target="_blank">加盟华宏</a></li>
-            <li><a href="#" target="_blank">业务流程</a></li>
+            <li><a href='<%= _url %>pages/view.aspx?common-wflist' target="_blank">业务流程</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-friendlink' target="_blank">友情链接</a></li>
-            <li class="last"><a href="#" target="_blank">版权申明</a></li>
+            <li class="last"><a href='<%= _url %>pages/view.aspx?common-rightnotice' target="_blank">版权声明</a></li>
         </ul>
         <h6>
             <asp:Literal ID="ltCopyRight" runat="server"></asp:Literal>

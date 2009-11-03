@@ -1209,13 +1209,9 @@ namespace HHOnline.Data
         #endregion
 
         #region -FooterInfo-
-
-        public override FooterInfo FooterInfoGet(FooterUpdateAction action,string value)
+        public override FooterInfo FooterInfoGet()
         {
-            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SFooterInfo_Update", new ELParameter[]{
-                new ELParameter("Action",DbType.Int32,(int)action),
-                new ELParameter("Value",DbType.String,value)
-            }))
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_SFooterInfo_Get", null))
             {
                 while (dr.Read())
                 {
@@ -1223,6 +1219,13 @@ namespace HHOnline.Data
                 }
             }
             return null;
+        }
+        public override bool FooterInfoUpdate(FooterUpdateAction action,string value)
+        {
+            return (DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SFooterInfo_Update", new ELParameter[]{
+                new ELParameter("Action",DbType.Int32,(int)action),
+                new ELParameter("Value",DbType.String,value)
+            }) > 0);
         }
         #endregion
     }

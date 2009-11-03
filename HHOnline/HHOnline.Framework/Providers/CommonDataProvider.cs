@@ -653,7 +653,8 @@ namespace HHOnline.Framework.Providers
         #endregion
 
         #region -FooterInfo-
-        public abstract FooterInfo FooterInfoGet(FooterUpdateAction action, string value);
+        public abstract FooterInfo FooterInfoGet();
+        public abstract bool FooterInfoUpdate(FooterUpdateAction action, string value);
         public static FooterInfo ReadFooterInfo(IDataReader dr)
         {
             return new FooterInfo()

@@ -74,11 +74,13 @@
     <Compile Include="HttpHandlers\UpdatePictureHandler.cs" />
     <Compile Include="HttpHandlers\UploadHandler.cs" />
     <Compile Include="HttpHandlers\ValidCode.cs" />
+    <Compile Include="HttpHandlers\SiteMapHandler.cs" />
     <Compile Include="HttpModules\CompressModule.cs" />
     <Compile Include="HttpModules\UrlRewrite.cs" />
     <Compile Include="Pages\HHIdentity.cs" />
     <Compile Include="Pages\HHPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteMap\SiteMapBuilder.cs" />
     <Compile Include="Tasks\StatisticSearchWord.cs" />
     <Compile Include="Tasks\ViewsJob.cs" />
     <Compile Include="UrlRewrite\RewriteRules.cs" />
