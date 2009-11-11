@@ -1,4 +1,4 @@
-﻿<%@ control language="C#" autoeventwireup="true" inherits="UserControls_Header, App_Web_5f7hrmcw" %>
+﻿<%@ control language="C#" autoeventwireup="true" inherits="UserControls_Header" CodeFile="Header.ascx.cs" %>
 <div class="main-r1">
     <div class="main-r1c1">
         &nbsp;</div>
