@@ -7,51 +7,30 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class VarietyNavigate:UserControl
+    public class VarietyNavigate:Control
     {
         static VarietyNavigate()
         {
-            ProductBrands.Updated += delegate { _Html = null; };
+            ProductBrands.Updated += new EventHandler<EventArgs>(Brand_Updated);
         }
-        private List<ProductBrand> brands = null;
+        protected static void Brand_Updated(object sender, EventArgs e)
+        {
+            _Cache.Remove((int)sender);
+        }
         private int _BrandID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand{0}\">{1}</a>";
         public int BrandID
         {
             get { return _BrandID; }
-            set {
-                if (_BrandID != value)
-                {
-                    _Html = null;
-                }
-                _BrandID = value; }
+            set {_BrandID = value; }
         }
-
+        private static Dictionary<int, string> _Cache = new Dictionary<int, string>();
         public static object _lock = new object();
-        private static string _Html;
-        public string HTML
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_Html))
-                {
-                    lock (_lock)
-                    {
-                        if (string.IsNullOrEmpty(_Html))
-                        {
-                            _Html = RenderHTML();
-                        }
-                    }
-                }
-                return _Html;
-            }
-        }
         string RenderHTML()
         {
-            if (brands == null)
-            {
-                brands = ProductBrands.GetProductBrands();
-            }
+            if (_Cache.ContainsKey(_BrandID))
+                return _Cache[_BrandID];
+            List<ProductBrand> brands = ProductBrands.GetProductBrands();
             StringBuilder sb = new StringBuilder();
             if (_BrandID == 0)
             {
@@ -63,17 +42,21 @@ namespace HHOnline.Controls
                 sb.Append("<b>"+pb.BrandName+"</b>");
 
                 string _bId = string.Empty;
-                List<ProductBrand> bs = GetSubBrand(pb.BrandName);
+                List<ProductBrand> bs = GetSubBrand(pb.BrandName,brands);
                 foreach(ProductBrand b in bs)
                 {
                     _bId = GlobalSettings.Encrypt(b.BrandID.ToString());
                     sb.Insert(0, string.Format(_href, "&ID=" + _bId, b.BrandName) + ">>");
                 }
                 sb.Insert(0, "您的位置：" + string.Format(_href, "", "所有品牌") + ">>");
+                if (!_Cache.ContainsKey(_BrandID))
+                    lock (_lock)
+                        if (!_Cache.ContainsKey(_BrandID))
+                            _Cache.Add(_BrandID, sb.ToString());
             }
             return sb.ToString();
         }
-        private List<ProductBrand> GetSubBrand(string groupName)
+        private List<ProductBrand> GetSubBrand(string groupName,List<ProductBrand> brands)
         {
             List<ProductBrand> bs = new List<ProductBrand>();
             foreach (ProductBrand b in brands)
@@ -84,7 +67,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            writer.Write(HTML);
+            writer.Write(RenderHTML());
             writer.WriteLine(Environment.NewLine);
         }
     }

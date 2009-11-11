@@ -13,24 +13,21 @@ namespace HHOnline.Permission.Services
     /// </summary>
     public class PermissionManager
     {
-        private static string _RolesManagerCacheKey = "HHOnline/Permission/";
-        
-
-        private PermissionManager() {
-            _RolesManagerCacheKey = CacheKeyManager.PemissionPrefix;
-        }
+        private static string _RolesManagerCacheKey = CacheKeyManager.PemissionPrefix;
+        private static string _AllRolesCacheKey = _RolesManagerCacheKey + "AllRoles";
+        private static string _AllMAsCacheKey = _RolesManagerCacheKey + "AllMAs";
 
         #region -CommonMethod-
         private delegate void CacheDelegate(ref object list, params object[] args);
         private static List<T> CacheInstance<T>(CacheDelegate cacheDelegate, string cacheKey, params object[] args)
             where T : new()
         {
-            cacheKey = _RolesManagerCacheKey + cacheKey;
-            object instances = HHCache.Instance.Get(cacheKey);
+            string _cacheKey = _RolesManagerCacheKey + cacheKey;
+            object instances = HHCache.Instance.Get(_cacheKey);
             if (instances == null)
             {
                 cacheDelegate(ref instances, args);
-                HHCache.Instance.Max(cacheKey, instances);
+                HHCache.Instance.Insert(_cacheKey, instances, 30);
             }
             return instances as List<T>;
         }
@@ -56,7 +53,7 @@ namespace HHOnline.Permission.Services
         {
             RoleOpts result = PermissionDataProvider.Instance.DeleteRole(roleID);
             if (result==RoleOpts.Success)
-                HHCache.Instance.Remove(_RolesManagerCacheKey + "AllRoles");
+                HHCache.Instance.Remove(_AllRolesCacheKey);
             return result;
         }
         /// <summary>
@@ -69,7 +66,7 @@ namespace HHOnline.Permission.Services
         {
             RoleOpts result = PermissionDataProvider.Instance.EditRole(role, moduleActionId);
             if (result == RoleOpts.Success)
-                HHCache.Instance.Remove(_RolesManagerCacheKey + "AllRoles");
+                HHCache.Instance.Remove(_AllRolesCacheKey);
             return result;
         }
         /// <summary>
@@ -79,7 +76,17 @@ namespace HHOnline.Permission.Services
         /// <returns></returns>
         public static List<ModuleAction> LoadModuleAction(int roleID)
         {
-            return PermissionDataProvider.Instance.LoadModuleAction(roleID);
+            string ck = _AllMAsCacheKey + "/MA" + roleID;
+            object mas = HHCache.Instance.Get(ck);
+            List<ModuleAction> _mas = null;
+            if (mas == null)
+                _mas = PermissionDataProvider.Instance.LoadModuleAction(roleID);
+            else
+            {
+                _mas = mas as List<ModuleAction>;
+                HHCache.Instance.Insert(ck, _mas, 30);
+            }
+            return _mas;
         }
         /// <summary>
         /// 根据ID获取角色信息
@@ -97,12 +104,12 @@ namespace HHOnline.Permission.Services
         /// <returns></returns>
         public static List<ModuleActionKeyValue> ModuleActionKeyValues(string userName)
         {
-            string key = _RolesManagerCacheKey + "ModuleAction/" + userName;
+            string key = _AllMAsCacheKey + "/U" + userName;
             List<ModuleActionKeyValue> dics = HHCache.Instance.Get(key) as List<ModuleActionKeyValue>;
             if (dics == null)
             {
                 dics = PermissionDataProvider.Instance.ModuleActionKeyValues(userName);
-                HHCache.Instance.Insert(key, dics);
+                HHCache.Instance.Insert(key, dics, 30);
             }
             return dics;
         }
@@ -116,7 +123,7 @@ namespace HHOnline.Permission.Services
         {
             RoleOpts result =PermissionDataProvider.Instance.AddRole(role, moduleActionId);
             if (result == RoleOpts.Success)
-                HHCache.Instance.Remove(_RolesManagerCacheKey + "AllRoles");
+                HHCache.Instance.Remove(_AllRolesCacheKey);
             return result;
         }
         /// <summary>

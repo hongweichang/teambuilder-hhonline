@@ -10,7 +10,7 @@ namespace HHOnline.Controls
     /// <summary>
     /// HomePage VarietyList
     /// </summary>
-    public class HPVarietyList:UserControl
+    public class HPVarietyList:Control
     {
         static HPVarietyList()
         {
@@ -53,13 +53,10 @@ namespace HHOnline.Controls
                 return _Html;
             }
         }
-        private  List<ProductBrand> brands = null;
         string RenderHTML()
         {
-            if (brands == null)
-            {
-                brands = ProductBrands.GetProductBrands();
-            }
+            List<ProductBrand> brands = ProductBrands.GetProductBrands();
+
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand";
             if (brands == null || brands.Count == 0)
             {
@@ -79,7 +76,7 @@ namespace HHOnline.Controls
 
                 sb.AppendLine("<td>");
                 sb.AppendLine("<div><a href=\"javascript:void(0)\">" + brandGroup[i] + "</a></div>");
-                pb = GetSubBrand(brandGroup[i]);
+                pb = GetSubBrand(brandGroup[i],brands);
                 ProductBrand _pb = null;
                 for (int j = 0; j < pb.Count; j++)
                 {
@@ -103,7 +100,7 @@ namespace HHOnline.Controls
                 sb.Append("<div class=\"list-more\"><a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand\" title=\"查看全部。。。\"></a></div>");
             return sb.ToString();
         }
-        private List<ProductBrand> GetSubBrand(string groupName)
+        private List<ProductBrand> GetSubBrand(string groupName,List<ProductBrand> brands)
         {
             List<ProductBrand> bs = new List<ProductBrand>();
             foreach (ProductBrand b in brands)

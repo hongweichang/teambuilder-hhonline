@@ -24,7 +24,7 @@ namespace HHOnline.Shops
             if (status == DataActionStatus.Success)
             {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductCategoryXpath);
-                OnUpdated();
+                OnUpdated(category.CategoryID);
             }
             return status;
         }
@@ -43,7 +43,7 @@ namespace HHOnline.Shops
             if (status == DataActionStatus.Success)
             {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductCategoryXpath);
-                OnUpdated();
+                OnUpdated(category.CategoryID);
             }
             return status;
         }
@@ -57,7 +57,7 @@ namespace HHOnline.Shops
         /// <returns></returns>
         public static DataActionStatus Delete(int categoryID)
         {
-            OnUpdated();
+            OnUpdated(categoryID);
             return Delete(categoryID.ToString());
             //DataActionStatus status = ShopDataProvider.Instance.DeleteCategory(categoryID);
             //if (status == DataActionStatus.Success)
@@ -76,7 +76,7 @@ namespace HHOnline.Shops
             if (status != DataActionStatus.UnknownFailure)
             {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductCategoryXpath);
-                OnUpdated();
+                OnUpdated(categoryIDList);
             }
             return status;
         }
@@ -212,11 +212,11 @@ namespace HHOnline.Shops
 
         #region -EventHandler-
         public static EventHandler<EventArgs> Updated;
-        protected static void OnUpdated()
+        protected static void OnUpdated(object sender)
         {
             if (Updated != null)
             {
-                Updated(null, EventArgs.Empty);
+                Updated(sender, EventArgs.Empty);
             }
         }
         #endregion

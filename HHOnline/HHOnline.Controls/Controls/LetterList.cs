@@ -7,58 +7,32 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class LetterList:UserControl
+    public class LetterList:Control
     {
         static LetterList()
         {
-            ProductCategories.Updated += delegate { _Html = null; };
-            ProductBrands.Updated += delegate { _Html = null; };
-            ProductIndustries.Updated += delegate { _Html = null; };
+            ProductCategories.Updated += delegate { _Cache.Clear(); };
+            ProductBrands.Updated += delegate { _Cache.Clear(); };
+            ProductIndustries.Updated += delegate { _Cache.Clear(); };
         }
         #region -Properties-
+        private static readonly string prefixCat = "Category";
+        private static readonly string prefixBra = "Brand";
+        private static readonly string prefixInd = "Industry";
+        private static Dictionary<string, string> _Cache = new Dictionary<string, string>();
         private string _FirstLetter = "a";
         public string FirstLetter
         {
             get { return _FirstLetter; }
-            set {
-                if (_FirstLetter != value)
-                {
-                    _Html = null;
-                }
-                _FirstLetter = value; }
+            set {_FirstLetter = value; }
         }
         private LettersType _letterType = LettersType.Category;
         public LettersType LetterType
         {
             get { return _letterType; }
-            set
-            {
-                if (_letterType != value)
-                {
-                    _Html = null;
-                }
-                _letterType = value;
-            }
+            set {_letterType = value;}
         }
         public static object _lock = new object();
-        private static string _Html;
-        public string HTML
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_Html))
-                {
-                    lock (_lock)
-                    {
-                        if (string.IsNullOrEmpty(_Html))
-                        {
-                            _Html = RenderHTML();
-                        }
-                    }
-                }
-                return _Html;
-            }
-        }
         private string _CssClass;
         public string CssClass
         {
@@ -88,6 +62,9 @@ namespace HHOnline.Controls
         #region -RenderIndustryHTML-
         string RenderIndustryHTML()
         {
+            string ck = prefixInd+_FirstLetter;
+            if (_Cache.ContainsKey(ck))
+                return _Cache[ck];
             List<ProductIndustry> inds = ProductIndustries.GetIndustriesByPY(_FirstLetter);
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry";
             if (inds == null || inds.Count == 0)
@@ -109,7 +86,10 @@ namespace HHOnline.Controls
                 sb.AppendLine("</td></tr>");
             }
             sb.AppendLine("</table>");
-
+            if (!_Cache.ContainsKey(ck))
+                lock (_lock)
+                    if (!_Cache.ContainsKey(ck))
+                        _Cache.Add(ck, sb.ToString());
             return sb.ToString();
         }
         #endregion
@@ -117,6 +97,9 @@ namespace HHOnline.Controls
         #region -RenderBrandHTML-
         string RenderBrandHTML()
         {
+            string ck = prefixBra + _FirstLetter;
+            if (_Cache.ContainsKey(ck))
+                return _Cache[ck];
             List<ProductBrand> brands = ProductBrands.GetBrandsByPY(_FirstLetter);
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-brand";
             if (brands == null || brands.Count == 0)
@@ -139,6 +122,10 @@ namespace HHOnline.Controls
             }
             sb.AppendLine("</table>");
 
+            if (!_Cache.ContainsKey(ck))
+                lock (_lock)
+                    if (!_Cache.ContainsKey(ck))
+                        _Cache.Add(ck, sb.ToString());
             return sb.ToString();
         }
         #endregion
@@ -146,6 +133,9 @@ namespace HHOnline.Controls
         #region -RenderCategoryHTML-
         string RenderCategoryHTML()
         {
+            string ck = prefixCat + _FirstLetter;
+            if (_Cache.ContainsKey(ck))
+                return _Cache[ck];
             List<ProductCategory> pcs = ProductCategories.GetCategoreisByPY(_FirstLetter);
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category";
             if (pcs == null || pcs.Count == 0)
@@ -168,6 +158,10 @@ namespace HHOnline.Controls
             }
             sb.AppendLine("</table>");
 
+            if (!_Cache.ContainsKey(ck))
+                lock (_lock)
+                    if (!_Cache.ContainsKey(ck))
+                        _Cache.Add(ck, sb.ToString());
             return sb.ToString();
         }
         #endregion
@@ -176,9 +170,7 @@ namespace HHOnline.Controls
         {
             if (this.Visible)
             {
-                string html = RenderHTML();
-
-                writer.Write(html);
+                writer.Write(RenderHTML());
                 writer.WriteLine(Environment.NewLine);
             }
         }

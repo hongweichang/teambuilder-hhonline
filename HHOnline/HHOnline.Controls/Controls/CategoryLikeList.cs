@@ -7,11 +7,29 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class CategoryLikeList:UserControl
+    public class CategoryLikeList:Control
     {
         static CategoryLikeList()
         {
-            ProductCategories.Updated += delegate { _Html = string.Empty; };
+            ProductCategories.Updated += new EventHandler<EventArgs>(ProductCategories_Updated);
+        }
+        static void ProductCategories_Updated(object sender, EventArgs e)
+        {
+            int cId = 0;
+            try
+            {
+                cId = (int)sender;
+                _Cache.Remove(cId);
+            }
+            catch
+            {
+                string[] cidList = sender.ToString().Split(',');
+                foreach (string i in cidList)
+                {
+                    cId = int.Parse(i);
+                    _Cache.Remove(cId);
+                }
+            }
         }
         private List<ProductCategory> pcs = null;
         private int _CategoryID = 0;
@@ -19,14 +37,9 @@ namespace HHOnline.Controls
         public int CategoryID
         {
             get { return _CategoryID; }
-            set {
-                if (value != _CategoryID)
-                {
-                    _Html = null;
-                }
-                _CategoryID = value;
-            }
+            set { _CategoryID = value; }
         }
+        private static Dictionary<int, string> _Cache = new Dictionary<int, string>();
         private string _CssClass;
         public string CssClass
         {
@@ -34,26 +47,10 @@ namespace HHOnline.Controls
             set { _CssClass = value; }
         }
         public static object _lock = new object();
-        private static string _Html;
-        public string HTML
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_Html))
-                {
-                    lock (_lock)
-                    {
-                        if (string.IsNullOrEmpty(_Html))
-                        {
-                            _Html = RenderHTML();
-                        }
-                    }
-                }
-                return _Html;
-            }
-        } 
         string RenderHTML()
         {
+            if (_Cache.ContainsKey(_CategoryID))
+                return _Cache[_CategoryID];
             if (pcs == null)
             {
                 pcs = ProductCategories.GetCategories();
@@ -96,6 +93,14 @@ namespace HHOnline.Controls
                         }
                     }
                     sb.Append("</div>");
+                    if (!_Cache.ContainsKey(_CategoryID))
+                    {
+                        lock (_lock)
+                        {
+                            if (!_Cache.ContainsKey(_CategoryID))
+                                _Cache.Add(_CategoryID, sb.ToString());
+                        }
+                    }
                 }
                 else
                 {
@@ -106,9 +111,7 @@ namespace HHOnline.Controls
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            string html = RenderHTML();
-
-            writer.Write(html);
+            writer.Write(RenderHTML());
             writer.WriteLine(Environment.NewLine);
         }
     }

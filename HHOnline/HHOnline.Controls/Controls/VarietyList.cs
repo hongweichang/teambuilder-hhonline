@@ -9,7 +9,7 @@ using System.IO;
 
 namespace HHOnline.Controls
 {
-    public class VarietyList : UserControl
+    public class VarietyList : Control
     {
         static VarietyList()
         {

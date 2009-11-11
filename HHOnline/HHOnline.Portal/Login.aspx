@@ -50,7 +50,7 @@
                                 <input type="checkbox" id="chkRememberMe" value="0" /><label>下次记住我。</label>
                             </p>
                             <p class="button-container">
-                                <a href="javascript:void(0)" onclick="signUp();" id="login" ></a>
+                                <a href="javascript:signUp()" id="login" ></a>
                             </p>
                         </div>
                     </div>

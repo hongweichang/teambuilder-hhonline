@@ -89,7 +89,7 @@ $().ready(function() {
         $('#divPics').html('没有展示图片！');
     }
     window.$$ErrorMsg = $('#spnMsg');
-    $('#anchorAddFav').click(addFav);
-    $('#anchorAddCar').click(addCar);
+    $('#anchorAddFav').attr('href','javascript:addFav();');
+    $('#anchorAddCar').attr('href','javascript:addCar();');
     $('#txtAmount').keyup(checkAmount);
 });

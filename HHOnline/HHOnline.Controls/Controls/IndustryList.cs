@@ -9,7 +9,7 @@ using System.IO;
 
 namespace HHOnline.Controls
 {
-    public class IndustryList : UserControl
+    public class IndustryList :Control
     {
         static IndustryList() {
             ProductIndustries.Updated += delegate { _Html = string.Empty; };

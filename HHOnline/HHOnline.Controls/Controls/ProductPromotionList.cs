@@ -8,19 +8,17 @@ using System.Configuration;
 
 namespace HHOnline.Controls
 {
-    public class ProductPromotionList:UserControl
+    public class ProductPromotionList:Control
     {
         public ProductPromotionList()
         {
-            Products.Updated += delegate { _Html = null; };
+            Products.Updated += delegate { _Cache.Clear(); };
         }
-        private List<Product> ps = null;
         private FocusType? _ProductType = null;
         public FocusType? ProductType
         {
             get { return _ProductType; }
-            set {
-                _ProductType = value; }
+            set {_ProductType = value; }
         }
         private int _Columns = 5;
         public int Columns
@@ -40,29 +38,16 @@ namespace HHOnline.Controls
             get { return _CssClass; }
             set { _CssClass = value; }
         }
+        private static Dictionary<FocusType, string> _Cache = new Dictionary<FocusType, string>();
         public static object _lock = new object();
-        private string _Html;
-        public string HTML
-        {
-            get
-            {
-
-                if (string.IsNullOrEmpty(_Html))
-                {
-                    _Html = RenderHTML();
-                }
-
-                return _Html;
-            }
-        }
         public string RenderHTML()
         {
-            if (ps == null)
-            {
-                ProductQuery pq = new ProductQuery();
-                pq.FocusType = _ProductType;
-                ps = Products.GetProductList(pq);
-            }
+            FocusType ft = (FocusType)_ProductType;
+            if (_Cache.ContainsKey(ft))
+                return _Cache[ft];
+            ProductQuery pq = new ProductQuery();
+            pq.FocusType = _ProductType;
+            List<Product> ps = Products.GetProductList(pq);
             
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-product";
             if (ps == null || ps.Count == 0)
@@ -116,6 +101,10 @@ namespace HHOnline.Controls
 
             if (curCount > _Max)
                 sb.Append("<div class=\"list-more\"><a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-productfocus&&t="+(int)this.ProductType+"\" title=\"查看全部。。。\"></a></div>");
+            if (!_Cache.ContainsKey(ft))
+                lock (_lock)
+                    if (!_Cache.ContainsKey(ft))
+                        _Cache.Add(ft, sb.ToString());
             return sb.ToString();
         }
         string GetPrice(int pId)
@@ -125,8 +114,7 @@ namespace HHOnline.Controls
             decimal? price3 = null;
             decimal? p = null;
             if (Context.User.Identity.IsAuthenticated)
-            {
-                
+            {                
                 SettingsPropertyValueCollection spvc = this.Context.Profile.PropertyValues;
                 User u = spvc["AccountInfo"].PropertyValue as User;
                 price1 = ProductPrices.GetPriceMarket(u.UserID, pId);
@@ -147,7 +135,7 @@ namespace HHOnline.Controls
         {
             if (this.Visible)
             {
-                writer.Write(HTML);
+                writer.Write(RenderHTML());
                 writer.WriteLine(Environment.NewLine);
             }
         }

@@ -116,39 +116,20 @@ public partial class Pages_Product_Product :HHPage
     }
     void BindPrice(int pId)
     {
-        decimal? price = null;
+        decimal? p = null, p1 = null, p2 = null;
         string priceText = string.Empty;
-        if (!User.Identity.IsAuthenticated)
+        if (!Context.User.Identity.IsAuthenticated)
         {
-            price = ProductPrices.GetPriceDefault(pId);
-            priceText = (price == null ? "需询价" : price.Value.ToString("c"));
+            p1 = ProductPrices.GetPriceDefault(pId);
+            p2 = ProductPrices.GetPricePromote(0, pId);
+            priceText = GlobalSettings.GetPrice(p1, p2);
         }
         else
         {
-            price = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, pId);
-            decimal? price1 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, pId);
-            if (price == null)
-            {
-                priceText = (price1 == null ? "需询价" : price1.Value.ToString("c"));
-            }
-            else
-            {
-                if (price1 == null)
-                {
-                    priceText = (price == null ? "需询价" : price.Value.ToString("c"));
-                }
-                else
-                {
-                    if (price == price1)
-                    {
-                        priceText = price.Value.ToString("c");
-                    }
-                    else
-                    {
-                        priceText = "<s>" + price.Value.ToString("c") + "</s><br />" + price1.Value.ToString("c");
-                    }
-                }
-            }
+            p1 = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, pId);
+            p2 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, pId);
+            p = ProductPrices.GetPricePromote(Profile.AccountInfo.UserID, pId);
+            priceText = GlobalSettings.GetPrice(true, p, GlobalSettings.GetMinPrice(p1, p2));
         }
         ltPrice.Text = priceText;
     }

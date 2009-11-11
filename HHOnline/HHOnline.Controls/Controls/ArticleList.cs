@@ -11,7 +11,7 @@ using HHOnline.News.Services;
 
 namespace HHOnline.Controls
 {
-    public class ArticleList : UserControl
+    public class ArticleList : Control
     {
         static ArticleList()
         {

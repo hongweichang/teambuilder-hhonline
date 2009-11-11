@@ -79,28 +79,32 @@
         }
         else if (ex is HttpException)
         {
-            HttpException he = ex as HttpException;
-            if (he.GetHttpCode() == 404)
+            if ((ex as HttpException).GetHttpCode() == 404)
+            {
+                context.Server.ClearError();
                 return;
+            }
         }
 
         if (hhException == null)
         {
+            /*
             if (ex.GetBaseException() != null && ex.GetBaseException() is HHException)
-            {
                 hhException = ex.GetBaseException() as HHException;
-            }
-            else if (ex.InnerException != null && ex.InnerException is HHException)
-            {
-                hhException = ex.GetBaseException() as HHException;
-            }
             else
             {
-                if (User.Identity.IsAuthenticated)
-                    hhException = new HHException(ExceptionType.UnknownError, ex.Message, ex.InnerException);
-                else
-                    hhException = new HHException(ExceptionType.UserUnAuthenticated, "用户未登录，无法完成所请求的操作！");
+                if (ex.InnerException != null && ex.InnerException is HHException)
+                    hhException = ex.GetBaseException() as HHException;
             }
+
+             * */
+            if (ex is HttpUnhandledException && ex.GetBaseException() is HttpUnhandledException)
+            {
+                context.Server.ClearError();
+                return;
+            }
+            else
+                hhException = new HHException(ExceptionType.UnknownError, ex.ToString(), ex.InnerException);
         }
 
         int et = (int)hhException.ExceptionType;

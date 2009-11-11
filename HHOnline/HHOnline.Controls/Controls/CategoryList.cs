@@ -7,7 +7,7 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class CategoryList:UserControl
+    public class CategoryList:Control
     {
         static CategoryList()
         {
@@ -195,9 +195,7 @@ namespace HHOnline.Controls
         {
             if (this.Visible)
             {
-                string html = RenderHTML();
-
-                writer.Write(html);
+                writer.Write(HTML);
                 writer.WriteLine(Environment.NewLine);
             }
         }

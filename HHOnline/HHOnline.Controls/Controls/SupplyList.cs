@@ -7,13 +7,13 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class SupplyList:UserControl
+    public class SupplyList:Control
     {
         static SupplyList()
         {
             Products.Updated += delegate { _Html = null; };
         }
-        private List<Product> cs = null;
+
         private int _ItemCount = 10;
         private string _format = "<li><div class=\"companyList_col1\" title=\"{0}\">{1}</div><div class=\"companyList_col2\">{2}</div></li>";
         public int ItemCount
@@ -47,7 +47,7 @@ namespace HHOnline.Controls
             q.Filter = ProviderFilter.Deny;
             q.SortOrder = SortOrder.Descending;
             q.ProductOrderBy = ProductOrderBy.DataCreated;
-            cs = Products.GetProductList(q);
+            List<Product> cs = Products.GetProductList(q);
             string nav = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product";
            
             StringBuilder sb = new StringBuilder();

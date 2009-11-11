@@ -1420,13 +1420,12 @@ a:active#login
 {
     width:684px;
     float:left;
-    position:relative;
+    height:106px;
     }
 .main-r1c2-r1
 {
-    height:40px;
+    height:80px;
     width:100%;
-    position:absolute;
     }
 /*endregion*/
 
@@ -1439,9 +1438,6 @@ a:active#login
 /*region*/
 .main-r1c2-r1c1
 {
-    position:absolute;
-    left:0;
-    top:0;
     height:40px;
     background-position:1px 3px;
     background-repeat:no-repeat;
@@ -1450,21 +1446,23 @@ a:active#login
     font-weight:bold;
     font-family:Georgia;
     line-height:40px;
+    width:400px;
+    float:left;
     }
 .main-r1c2-r1c2
 {
-    height:40px;
-    position:absolute;
-    right:0;
-    top:0;
+    height:80px;
     text-align:right;
-    z-index:100;
+    width:260px;
+    float:left;
 }
 .top-nav
 {
     height:20px;
-    padding-top:10px;
-    padding-bottom:5px;
+    float:right;
+    padding:5px 0 5px 0;
+    width:100%;
+    margin-right:-5px;
     }
 .top-nav1
 {
@@ -1472,6 +1470,8 @@ a:active#login
     height:20px;
     padding-top:5px;
     padding-right:7px;
+    float:right;
+    width:100%;
     }
 
 .top-nav1 a
@@ -1484,6 +1484,7 @@ a:active#login
     color:#000080;
     text-decoration:none;
     }
+.logged-ul{float:right;}
 .logged-ul,.logged-ul li
 {
     list-style-type:none;
@@ -1531,14 +1532,14 @@ a:active#login
 .main-r1c2-r2
 {
     width:100%;
-    position:absolute;
-    top:40px;
-    left:0;
+    float:left;
     }
 .main-r1c2-r2r1
 {
+    margin-top:-40px;
     height:31px;
-    width:100%;
+    overflow:hidden;
+    width:400px
     }
 .nav-main,.nav-main li
 {
@@ -1576,6 +1577,7 @@ a:active#login
     line-height:31px;
     font-weight:bold;
     color:#fffff0;
+    text-decoration:none;
     background-position:-186px -46px;
     }
 .main-r1c2-r2r2
@@ -1639,22 +1641,24 @@ a:active#login
 {
     left:109px;
     right:109px;
-    padding:3px 0 3px 6px;
-    height:23px;
     position:absolute;
+    height:27px;
+    padding-top:2px;
+    padding-right:24px;
     top:10px;
     }   
 .search-bg .search-search
 {
     width:100px;
     right:9px;
+    overflow:visible;
     }
 .search-bg .search-search .search-icon
 {
     width:38px;
     height:34px;
     position:absolute;
-    bottom:0;
+    top:-5px;
     left:0;
     background-position:-368px -2px; 
     }
@@ -1728,7 +1732,6 @@ a:active#login
 {
     width:208px;
     float:left;
-    position:relative;
     }
 .main-r3c1-r1
 {
@@ -1741,8 +1744,7 @@ a:active#login
     height:22px;
     line-height:22px;
     color:#888;
-    position:absolute;
-    top:0;
+    float:left;
     }
 /*endregion*/
 .service-title
@@ -1757,20 +1759,17 @@ a:active#login
     }
 .main-r3c1-r1 .main-r3c1-r1c1
 {
-    left:0;
     width:6px;
     background:url(../../images/default/topTitL.jpg) left top;
     }
 .main-r3c1-r1 .main-r3c1-r1c2
 {
-    left:6px;
-    right:6px;
+    width:196px;
     background:url(../../images/default/topTitM.jpg) left top;
     }
 .main-r3c1-r1 .main-r3c1-r1c3
 {
     width:6px;
-    right:0;
     background:url(../../images/default/topTitR.jpg) left top;
     }
 .main-r3c1-r2
@@ -1786,7 +1785,7 @@ a:active#login
 
 .main-r3c1-r3 div
 {
-    top:92px;
+    
     }
 .main-r3c1-r4
 {    
@@ -1797,17 +1796,17 @@ a:active#login
 .main-r3c2
 {
     float:left;
-    width:448px;
+    width:450px;
     height:183px;
     border:solid 1px #cccccc;
-    margin-left:3px;
+    margin-left:2px;
     }
 .main-r3c3
 {
     float:left;
     width:285px;
     height:184px;
-    margin-left:3px;
+    margin-left:2px;
     }
 .main-r3c3 div.access-point
 {
@@ -2037,6 +2036,7 @@ a:hover.register-access
 .list-more a:hover
 {
     background-position:center -16px;
+    text-decoration:none;
     }
 .trade-search
 {

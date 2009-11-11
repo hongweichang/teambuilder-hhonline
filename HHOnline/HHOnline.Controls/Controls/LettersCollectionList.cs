@@ -17,7 +17,7 @@ namespace HHOnline.Controls
         Brand = 1,
         Industry = 2
     }
-    public class LettersCollectionList : UserControl
+    public class LettersCollectionList : Control
     {
         private string _CssName;
         public string CssName
@@ -34,27 +34,33 @@ namespace HHOnline.Controls
                 _LetterType = value;
             }
         }
-        void Refresh()
+        public object _lock = new object();
+        private  string[] letters = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+        private static Dictionary<LettersType, string> _Cache = new Dictionary<LettersType, string>();
+        string RenderHTML()
         {
-            HtmlGenericControl ul = BindLetterList();
-            StringWriter sw = new StringWriter();
-            ul.RenderControl(new HtmlTextWriter(sw));
-            _Html = sw.ToString();
-        }
-        public  object _lock = new object();
-        private  string _Html;
-        public string HTML
-        {
-            get
+            if (_Cache.ContainsKey(_LetterType))
+                return _Cache[_LetterType];
+            else
             {
-                Refresh();
-                return _Html;
+                HtmlGenericControl ul = BindLetterList();
+                StringWriter sw = new StringWriter();
+                ul.RenderControl(new HtmlTextWriter(sw));
+                string s = sw.ToString();
+
+                if (!_Cache.ContainsKey(_LetterType))
+                {
+                    lock (_lock)
+                    {
+                        if (!_Cache.ContainsKey(_LetterType))
+                            _Cache.Add(_LetterType, s);
+                    }
+                }
+                return s;
             }
         }
         HtmlGenericControl BindLetterList()
         {
-            string[] letters = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-
             HtmlGenericControl ul = new HtmlGenericControl("ul");
             ul.Attributes.Add("class", this.CssName);
 
@@ -78,7 +84,7 @@ namespace HHOnline.Controls
 
         public override void RenderControl(HtmlTextWriter writer)
         {
-            writer.Write(HTML);
+            writer.Write(RenderHTML());
             writer.Write(Environment.NewLine);
         }
     }

@@ -81,7 +81,7 @@ namespace HHOnline.Framework
             company = dp.CreateUpdateCompany(company, DataProviderAction.Create, out status);
             if (status == CreateCompanyStatus.Success)
             {
-                OnUpdated();
+                OnUpdated(company.CompanyID);
             }
             return status;
         }
@@ -109,7 +109,7 @@ namespace HHOnline.Framework
             {
                 HHCache.Instance.Remove(CacheKeyManager.GetCompanyKey(companyName));
                 HHCache.Instance.Remove(CacheKeyManager.GetCompanyKey(companyID));
-                OnUpdated();
+                OnUpdated(companyID);
                 return true;
             }
             return false;
@@ -162,18 +162,18 @@ namespace HHOnline.Framework
             CommonDataProvider.Instance.CreateUpdateCompany(company, DataProviderAction.Update, out status);
             //GlobalEvents.AfterCompany(company, ObjectState.Update);
             RefreshCachedCompany(company);
-            OnUpdated();
+            OnUpdated(company.CompanyID);
             return status == CreateCompanyStatus.Success;
         }
         #endregion 
         
         #region -EventHandler-
         public static EventHandler<EventArgs> Updated;
-        protected static void OnUpdated()
+        protected static void OnUpdated(object sender)
         {
             if (Updated != null)
             {
-                Updated(null, EventArgs.Empty);
+                Updated(sender, EventArgs.Empty);
             }
         }
         #endregion

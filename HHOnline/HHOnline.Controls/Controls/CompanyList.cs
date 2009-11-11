@@ -7,13 +7,13 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class CompanyList:UserControl
+    public class CompanyList:Control
     {
         static CompanyList()
         {
             Companys.Updated += delegate { _Html = null; };
         }
-        private List<Company> cs = null;
+
         private int _ItemCount = 10;
         private string _format = "<li><div class=\"companyList_col1\" title=\"{0}\">{1}</div><div class=\"companyList_col2\">{2}</div></li>";
         public int ItemCount
@@ -42,10 +42,8 @@ namespace HHOnline.Controls
         }
         public string RenderHTML()
         {
-            if (cs == null)
-            {
-                cs = Companys.GetCompanys(CompanyStatus.ApprovalPending, CompanyType.None, string.Empty);
-            }
+            List<Company> cs = Companys.GetCompanys(CompanyStatus.ApprovalPending, CompanyType.None, string.Empty);
+
             string nav = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?users-corps&des=authpre";
            
             StringBuilder sb = new StringBuilder();

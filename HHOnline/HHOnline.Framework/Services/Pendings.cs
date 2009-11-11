@@ -17,7 +17,7 @@ namespace HHOnline.Framework
         public static bool PendingAdd(Pending pending)
         {
             HHCache.Instance.Remove(prefix);
-            OnUpdated();
+            OnUpdated(pending.ID);
             return CommonDataProvider.Instance.PendingAdd(pending);
         }
         public static List<Pending> PendingsLoad()
@@ -37,17 +37,17 @@ namespace HHOnline.Framework
         }
         public static bool PendingUpdate(Pending p)
         {
-            OnUpdated();
+            OnUpdated(p.ID);
             return CommonDataProvider.Instance.PendingUpdate(p);
         }
         
         #region -EventHandler-
         public static EventHandler<EventArgs> Updated;
-        protected static void OnUpdated()
+        protected static void OnUpdated(object sender)
         {
             if (Updated != null)
             {
-                Updated(null, EventArgs.Empty);
+                Updated(sender, EventArgs.Empty);
             }
         }
         #endregion

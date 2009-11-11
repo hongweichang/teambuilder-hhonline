@@ -7,45 +7,21 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class CategoryNavigate:UserControl
+    public class CategoryNavigate:Control
     {
-        public CategoryNavigate()
-        {
-            
-        }
         private int _CategoryID = 0;
+        private static Dictionary<int, string> _Cache = new Dictionary<int, string>();
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category{0}\">{1}</a>";
         public int CategoryID
         {
             get { return _CategoryID; }
-            set {
-                if (value != _CategoryID)
-                {
-                    _Html = null;
-                }
-                _CategoryID = value; }
+            set { _CategoryID = value; }
         }
-       public static object _lock = new object();
-        private static string _Html;
-        public string HTML
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_Html))
-                {
-                    lock (_lock)
-                    {
-                        if (string.IsNullOrEmpty(_Html))
-                        {
-                            _Html = RenderHTML();
-                        }
-                    }
-                }
-                return _Html;
-            }
-        }
+        public static object _lock = new object();
         string RenderHTML()
         {
+            if (_Cache.ContainsKey(_CategoryID))
+                return _Cache[_CategoryID];
             StringBuilder sb = new StringBuilder();
             if (_CategoryID == 0)
             {
@@ -65,12 +41,20 @@ namespace HHOnline.Controls
                     parId = curCat.ParentID;
                 }
                 sb.Insert(0, "您的位置："+string.Format(_href, "", "所有类别") + ">>");
+                if (!_Cache.ContainsKey(_CategoryID))
+                {
+                    lock (_lock)
+                    {
+                        if (!_Cache.ContainsKey(_CategoryID))
+                            _Cache.Add(_CategoryID, sb.ToString());
+                    }
+                }
             }
             return sb.ToString();
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            writer.Write(HTML);
+            writer.Write(RenderHTML());
             writer.WriteLine(Environment.NewLine);
         }
     }

@@ -43,65 +43,45 @@
     <Compile Include="AccountStatusList.cs" />
     <Compile Include="CollectionPager.cs" />
     <Compile Include="Controls\CategoryLikeList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CategoryNavigate.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CategoryList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ComponentStatusList.cs" />
     <Compile Include="Controls\VarietyList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\IndustryList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ArticleList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CategoryPropertyList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CategorySubList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\VarietyLikeList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\VarietyNavigate.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\HPIndustryList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\IndustryLikeList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\IndustryNavigate.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\IndustrySubList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CompanyList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\PendingList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ProductPromotionList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\SupplyList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\LettersCollectionList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\LetterList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
@@ -114,7 +94,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\HPVarietyList.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="IncludeTypeList.cs" />
     <Compile Include="Menu.cs">

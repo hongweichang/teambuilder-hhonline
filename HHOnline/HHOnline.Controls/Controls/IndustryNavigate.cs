@@ -7,23 +7,15 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class IndustryNavigate:UserControl
+    public class IndustryNavigate:Control
     {
-        public IndustryNavigate()
-        {
-        }
-        private List<ProductIndustry> inds = null;
+        private static Dictionary<int, string> _Cache = new Dictionary<int, string>();
         private int _IndustryID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry{0}\">{1}</a>";
         public int IndustryID
         {
             get { return _IndustryID; }
-            set {
-                if (value != _IndustryID)
-                {
-                    _Html = null;
-                }
-                _IndustryID = value; }
+            set { _IndustryID = value; }
         }
 
         public static object _lock = new object();
@@ -47,11 +39,9 @@ namespace HHOnline.Controls
         }
         string RenderHTML()
         {
-
-            if (inds == null)
-            {
-                inds = ProductIndustries.GetChildIndustries(0);
-            }
+            if (_Cache.ContainsKey(_IndustryID))
+                return _Cache[_IndustryID];
+            List<ProductIndustry> inds = ProductIndustries.GetChildIndustries(0);
             StringBuilder sb = new StringBuilder();
             if (_IndustryID == 0)
             {
@@ -69,6 +59,11 @@ namespace HHOnline.Controls
                     parId = pi.ParentID;
                 }
                 sb.Insert(0, "您的位置：" + string.Format(_href, "", "所有行业") + ">>");
+                if (!_Cache.ContainsKey(_IndustryID))
+                    lock (_lock)
+                        if (!_Cache.ContainsKey(_IndustryID))
+                            _Cache.Add(_IndustryID, sb.ToString());
+
             }
             return sb.ToString();
         }

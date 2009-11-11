@@ -35,7 +35,7 @@ namespace HHOnline.Shops
                 }
 
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductIndustryXpath);
-                OnUpdated();
+                OnUpdated(industry.IndustryID);
             }
             return status;
         }
@@ -64,7 +64,7 @@ namespace HHOnline.Shops
                     fs.AddUpdateFile(MakePath(industry.IndustryID), industry.IndustryLogo, contentStream);
                 }
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductIndustryXpath);
-                OnUpdated();
+                OnUpdated(industry.IndustryID);
             }
             return status;
         }
@@ -81,7 +81,7 @@ namespace HHOnline.Shops
             if (status == DataActionStatus.Success)
             {
                 HHCache.Instance.RemoveByPattern(CacheKeyManager.ProductIndustryXpath);
-                OnUpdated();
+                OnUpdated(industryID);
             }
             return status;
         }
@@ -221,11 +221,11 @@ namespace HHOnline.Shops
 
         #region -EventHandler-
         public static EventHandler<EventArgs> Updated;
-        protected static void OnUpdated()
+        protected static void OnUpdated(object sender)
         {
             if (Updated != null)
             {
-                Updated(null, EventArgs.Empty);
+                Updated(sender, EventArgs.Empty);
             }
         }
         #endregion

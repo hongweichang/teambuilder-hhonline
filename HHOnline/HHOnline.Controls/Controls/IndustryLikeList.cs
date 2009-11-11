@@ -7,43 +7,38 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class IndustryLikeList:UserControl
+    public class IndustryLikeList:Control
     {
         static IndustryLikeList()
         {
-            ProductIndustries.Updated += delegate { _Html = null; };
+            ProductIndustries.Updated += new EventHandler<EventArgs>(Industry_Updated);
         }
-        public static object _lock = new object();
-        private static string _Html;
-        public string HTML
+        static void Industry_Updated(object sender, EventArgs e)
         {
-            get
+            int cId = 0;
+            try
             {
-                if (string.IsNullOrEmpty(_Html))
+                cId = (int)sender;
+                _Cache.Remove(cId);
+            }
+            catch
+            {
+                string[] cidList = sender.ToString().Split(',');
+                foreach (string i in cidList)
                 {
-                    lock (_lock)
-                    {
-                        if (string.IsNullOrEmpty(_Html))
-                        {
-                            _Html = RenderHTML();
-                        }
-                    }
+                    cId = int.Parse(i);
+                    _Cache.Remove(cId);
                 }
-                return _Html;
             }
         }
-        private List<ProductIndustry> inds = null;
+        public static object _lock = new object();
+        private static Dictionary<int, string> _Cache = new Dictionary<int, string>();
         private int _IndustryID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry&ID={0}\">{1}</a>";
         public int IndustryID
         {
             get { return _IndustryID; }
-            set {
-                if (value != _IndustryID)
-                {
-                    _Html = null;
-                }
-                _IndustryID = value; }
+            set {_IndustryID = value; }
         }
 
         private string _CssClass;
@@ -54,10 +49,9 @@ namespace HHOnline.Controls
         }
         string RenderHTML()
         {
-            if (inds == null)
-            {
-                inds = ProductIndustries.GetChildIndustries(0);
-            }
+            if (_Cache.ContainsKey(_IndustryID))
+                return _Cache[_IndustryID];
+            List<ProductIndustry>  inds = ProductIndustries.GetChildIndustries(0);
             StringBuilder sb = new StringBuilder();
             if (_IndustryID == 0)
             {
@@ -94,13 +88,17 @@ namespace HHOnline.Controls
                         sb.AppendFormat(_href, GlobalSettings.Encrypt(p.IndustryID.ToString()), p.IndustryName + "(" + count + ")");
                     }
                 }
-                    sb.Append("</div>");
+                sb.Append("</div>");
+                if (!_Cache.ContainsKey(_IndustryID))
+                    lock (_lock)
+                        if (!_Cache.ContainsKey(_IndustryID))
+                            _Cache.Add(_IndustryID, sb.ToString());
                 return sb.ToString();
             }
         }
         public override void RenderControl(HtmlTextWriter writer)
         {
-            writer.Write(HTML);
+            writer.Write(RenderHTML());
             writer.WriteLine(Environment.NewLine);
         }
     }

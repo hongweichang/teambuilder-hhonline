@@ -7,7 +7,7 @@ using HHOnline.Framework;
 
 namespace HHOnline.Controls
 {
-    public class PendingList:UserControl
+    public class PendingList:Control
     {
         static PendingList()
         {

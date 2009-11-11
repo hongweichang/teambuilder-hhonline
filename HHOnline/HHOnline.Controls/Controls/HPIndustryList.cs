@@ -10,7 +10,7 @@ namespace HHOnline.Controls
     /// <summary>
     /// HomePage VarietyList
     /// </summary>
-    public class HPIndustryList:UserControl
+    public class HPIndustryList:Control
     {
         static HPIndustryList()
         {
@@ -53,13 +53,9 @@ namespace HHOnline.Controls
                 return _Html;
             }
         }
-        private  List<ProductIndustry> inds = null;
         string RenderHTML()
         {
-            if (inds == null)
-            {
-                inds = ProductIndustries.GetChildIndustries(0);
-            }
+            List<ProductIndustry> inds = ProductIndustries.GetChildIndustries(0);
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-industry";
             if (inds == null || inds.Count == 0)
             {

@@ -37,5 +37,5 @@ function addFav() {
     }
 }
 $().ready(function() {
-    $('#anchorAddNews').click(addFav);
+    $('#anchorAddNews').attr('href','javascript:addFav()');
 })
