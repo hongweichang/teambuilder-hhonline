@@ -1,14 +1,19 @@
-﻿
+
 #
-# robots.txt for HHOnline
-# exclude access-controlled folders
+# robots.txt for eHUAHO.com
+# Exclude Access-controlled Folders
+# With Sitemap XML Links
 #
 
 User-agent: *
-
-Allow: /
-
 Disallow: /ControlPanel/
 Disallow: /Utility/
 Disallow: /Languages/
 Disallow: /Bin/
+
+Sitemap: http://www.ehuaho.com/sitemap/brands.xml
+Sitemap: http://www.ehuaho.com/sitemap/categories.xml
+Sitemap: http://www.ehuaho.com/sitemap/industries.xml
+Sitemap: http://www.ehuaho.com/sitemap/products.xml
+Sitemap: http://www.ehuaho.com/sitemap/articles.xml 
+Sitemap: http://www.ehuaho.com/sitemap/main.xml
