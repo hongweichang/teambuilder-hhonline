@@ -1,9 +1,8 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Header.ascx.cs" Inherits="UserControls_Header" %>
+﻿<%@ control language="C#" autoeventwireup="true" inherits="UserControls_Header, App_Web_5f7hrmcw" %>
 <div class="main-r1">
     <div class="main-r1c1">
         &nbsp;</div>
     <div class="main-r1c2">
-        <div class="main-r1c2-r1">
             <div class="main-r1c2-r1c1">
                 服务热线:
                 <asp:Literal ID="ltPhone" runat="server"></asp:Literal></div>
@@ -30,7 +29,6 @@
                     <asp:Literal ID="ltDescriptions" runat="server"></asp:Literal>
                 </div>
             </div>
-        </div>
         <div class="main-r1c2-r2">
             <div class="main-r1c2-r2r1">
                 <ul class="nav-main" id="headerNav">
