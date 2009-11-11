@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/HomeMasterPage.master"
     AutoEventWireup="true" CodeFile="Main.aspx.cs" Inherits="Main" %>
-
+<%@ OutputCache Duration="120" VaryByParam="*" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHeader" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderSearch" runat="Server">
