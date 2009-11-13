@@ -16,18 +16,20 @@ namespace HHOnline.Controls
         static void Industry_Updated(object sender, EventArgs e)
         {
             int cId = 0;
-            try
+            if (int.TryParse(sender.ToString(), out cId))
             {
-                cId = (int)sender;
                 _Cache.Remove(cId);
             }
-            catch
+            else
             {
                 string[] cidList = sender.ToString().Split(',');
-                foreach (string i in cidList)
+                if (cidList.Length > 0)
                 {
-                    cId = int.Parse(i);
-                    _Cache.Remove(cId);
+                    for (int i = 0; i < cidList.Length; i++)
+                    {
+                        if (int.TryParse(cidList[i], out cId))
+                            _Cache.Remove(cId);
+                    }
                 }
             }
         }
@@ -73,6 +75,7 @@ namespace HHOnline.Controls
                 sb.Append("<div class=\"" + _CssClass + "\">");
                 ProductQuery query;
                 int count = 0;
+                PagingDataSet<Product> __ps = null;
                 foreach (ProductIndustry p in pis)
                 {
                     if (p.IndustryID != _IndustryID)
@@ -80,11 +83,11 @@ namespace HHOnline.Controls
                         count = 0;
                         query = new ProductQuery();
                         query.IndustryID = p.IndustryID;
-                        try
-                        {
-                            count = Products.GetProducts(query).Records.Count;
+                        __ps = Products.GetProducts(query);
+                        if (__ps != null&&__ps.Records!=null)
+                        { 
+                           count = Products.GetProducts(query).Records.Count; 
                         }
-                        catch { count = 0; }
                         sb.AppendFormat(_href, GlobalSettings.Encrypt(p.IndustryID.ToString()), p.IndustryName + "(" + count + ")");
                     }
                 }

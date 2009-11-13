@@ -16,18 +16,20 @@ namespace HHOnline.Controls
         static void ProductCategories_Updated(object sender, EventArgs e)
         {
             int cId = 0;
-            try
+            if(int.TryParse(sender.ToString(),out cId))
             {
-                cId = (int)sender;
                 _Cache.Remove(cId);
             }
-            catch
+            else
             {
                 string[] cidList = sender.ToString().Split(',');
-                foreach (string i in cidList)
+                if (cidList.Length > 0)
                 {
-                    cId = int.Parse(i);
-                    _Cache.Remove(cId);
+                    for (int i = 0; i < cidList.Length; i++)
+                    {
+                        if (int.TryParse(cidList[i], out cId))
+                            _Cache.Remove(cId);
+                    }
                 }
             }
         }

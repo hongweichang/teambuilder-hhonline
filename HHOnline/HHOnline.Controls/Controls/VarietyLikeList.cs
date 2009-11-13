@@ -56,6 +56,7 @@ namespace HHOnline.Controls
                 sb.Append("<div class=\"" + _CssClass + "\">");
                 ProductQuery query;
                 int count = 0;
+                PagingDataSet<Product> __ps = null;
                 foreach (ProductBrand b in bs)
                 {
                     if (b.BrandID != _BrandID)
@@ -63,11 +64,10 @@ namespace HHOnline.Controls
                         count = 0;
                         query = new ProductQuery();
                         query.BrandID = b.BrandID;
-                        try
-                        {
+                        __ps = Products.GetProducts(query);
+                        if(__ps!=null&&__ps.Records!=null){
                             count = Products.GetProducts(query).Records.Count;
                         }
-                        catch { count = 0; }
                         sb.AppendFormat(_href, GlobalSettings.Encrypt(b.BrandID.ToString()), b.BrandName + "(" + count + ")");
                     }
                 }
