@@ -88,7 +88,7 @@ namespace HHOnline.Framework.Web.HttpHandlers
             }
             smb.Save(GlobalSettings.MapPath("~/sitemap/brands.xml"));
             result = true;
-            return "成功生成/更新【产品品牌】地图！";
+            return "成功生成/更新【产品行业】地图！";
         }
         string GenerateIndustry(ref bool result)
         {
