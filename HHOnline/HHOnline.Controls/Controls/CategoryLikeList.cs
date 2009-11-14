@@ -33,7 +33,6 @@ namespace HHOnline.Controls
                 }
             }
         }
-        private List<ProductCategory> pcs = null;
         private int _CategoryID = 0;
         static readonly string _href = "<a href=\"" + GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-category&ID={0}\">{1}</a>";
         public int CategoryID
@@ -53,10 +52,8 @@ namespace HHOnline.Controls
         {
             if (_Cache.ContainsKey(_CategoryID))
                 return _Cache[_CategoryID];
-            if (pcs == null)
-            {
-                pcs = ProductCategories.GetCategories();
-            }
+            List<ProductCategory> pcs = ProductCategories.GetCategories();
+
             StringBuilder sb = new StringBuilder();
             if (_CategoryID == 0)
             {

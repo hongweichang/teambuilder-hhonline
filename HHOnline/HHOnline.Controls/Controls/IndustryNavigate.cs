@@ -55,6 +55,7 @@ namespace HHOnline.Controls
                 while (parId != 0)
                 {
                     pi = ProductIndustries.GetProductIndustry(parId);
+                    if (pi == null) break;
                     sb.Insert(0, string.Format(_href, "&ID=" + GlobalSettings.Encrypt(pi.IndustryID.ToString()), pi.IndustryName) + ">>");
                     parId = pi.ParentID;
                 }

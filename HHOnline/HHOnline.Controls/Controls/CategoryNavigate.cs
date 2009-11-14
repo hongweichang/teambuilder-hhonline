@@ -37,6 +37,7 @@ namespace HHOnline.Controls
                 {
                     _catId = GlobalSettings.Encrypt(parId.ToString());
                     curCat = ProductCategories.GetCategory(parId);
+                    if (curCat == null) break;
                     sb.Insert(0, string.Format(_href, "&ID=" + _catId, curCat.CategoryName) + ">>");
                     parId = curCat.ParentID;
                 }

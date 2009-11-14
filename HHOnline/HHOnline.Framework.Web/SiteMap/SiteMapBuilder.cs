@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Web;
 /*
  * sitemap 0.9
  * <?xml version="1.0" encoding="UTF-8"?>
@@ -36,7 +37,7 @@ namespace HHOnline.Framework.Web.SiteMap
             XmlNode _url = _siteMap.CreateElement("url");
             XmlElement _xe = _siteMap.CreateElement("loc");
             _xe.InnerText = _nativeUrl + ESCTransact(loc);
-            _url.AppendChild(_xe);
+            _url.AppendChild(_xe);            
 
             _xe = _siteMap.CreateElement("lastmod");
             _xe.InnerText = lastmod.ToString("yyyy-MM-dd");
@@ -59,13 +60,15 @@ namespace HHOnline.Framework.Web.SiteMap
 
         private string ESCTransact(string str)
         {
+            /*
             string newStr = str.Replace("&", "&amp;");
             newStr = newStr.Replace("'", "&apos;");
             newStr = newStr.Replace("\"", "&quot;");
             newStr = newStr.Replace(">", "&gt;");
             newStr = newStr.Replace("<", "&lt;");
             return newStr;
-
+            */
+            return HttpUtility.UrlEncode(str);
         }
     }
 }

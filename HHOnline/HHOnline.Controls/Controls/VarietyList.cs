@@ -50,9 +50,15 @@ namespace HHOnline.Controls
         HtmlGenericControl BindVarietyList()
         {
             List<ProductBrand> brandsTemp = ProductBrands.GetProductBrands();
+            if (brandsTemp==null||brandsTemp.Count == 0)
+            {
+                HtmlGenericControl p = new HtmlGenericControl("P");
+                p.InnerText = "没有品牌信息！";
+                return p;
+            }
             List<ProductBrand> brands = brandsTemp.GetRange(0, Math.Min(_Num, brandsTemp.Count));
-           
-            if (brands.Count == 0)
+
+            if (brands==null||brands.Count == 0)
             {
                 HtmlGenericControl p = new HtmlGenericControl("P");
                 p.InnerText = "没有品牌信息！";

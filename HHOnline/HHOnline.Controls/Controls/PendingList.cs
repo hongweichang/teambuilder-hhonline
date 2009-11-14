@@ -80,7 +80,9 @@ namespace HHOnline.Controls
         }
         string GetCompanyName(int comId)
         {
-            return Companys.GetCompany(comId).CompanyName;
+            Company c = Companys.GetCompany(comId);
+            if (c == null) return "--";
+            else return c.CompanyName;
         }
         string GetCompanyType(CompanyType ct)
         {

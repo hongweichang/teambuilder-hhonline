@@ -1424,7 +1424,7 @@ a:active#login
     }
 .main-r1c2-r1
 {
-    height:80px;
+    height:40px;
     width:100%;
     }
 /*endregion*/
@@ -1451,10 +1451,11 @@ a:active#login
     }
 .main-r1c2-r1c2
 {
-    height:80px;
+    height:40px;
     text-align:right;
     width:270px;
     float:left;
+    margin-bottom:-20px;
 }
 .top-nav
 {

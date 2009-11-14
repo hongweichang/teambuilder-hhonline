@@ -29,7 +29,6 @@
                     <asp:Literal ID="ltDescriptions" runat="server"></asp:Literal>
                 </div>
             </div>
-        <div class="main-r1c2-r2">
             <div class="main-r1c2-r2r1">
                 <ul class="nav-main" id="headerNav">
                     <li><a href="javascript:void(0)" class="selected" rel="main">首页</a></li>
@@ -42,5 +41,4 @@
                 工业自动化仪表及实验室分析仪器专业销售平台!
             </div>
         </div>
-    </div>
 </div>
