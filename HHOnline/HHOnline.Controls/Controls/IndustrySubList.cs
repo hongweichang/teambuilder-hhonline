@@ -39,7 +39,7 @@ namespace HHOnline.Controls
         public int IndustryID
         {
             get { return _IndustryID; }
-            set {IndustryID = value; }
+            set {_IndustryID = value; }
         }
         private string _CssClass;
         public string CssClass
