@@ -17,9 +17,9 @@ public partial class ControlPanel_product_ProductPictureManager : HHPage
 
     public override void OnPageLoaded()
     {
-        base.ExecuteJs("var flashSrc='" + GlobalSettings.RelativeWebRoot + "images/flash/jerichoupload.swf'", true);
         this.PageInfoType = InfoType.IframeInfo;
         User u = Profile.AccountInfo;
+        base.ExecuteJs("var flashSrc='" + GlobalSettings.RelativeWebRoot + "images/flash/jerichoupload.swf',__uid=" + u.UserID + ";", true);
         if (u.UserType != UserType.CompanyUser ||
            (u.Company.CompanyType == CompanyType.Ordinary ||
            (u.Company.CompanyType == (CompanyType.Ordinary | CompanyType.Agent)))

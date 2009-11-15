@@ -18,7 +18,7 @@
                     fileCount: 20,
                     maxSize: 1 * 1024 * 1024,
                     pushFiles: 'pushFiles',
-                    postUrl: (parent.window.first ? 'upload.axd' : 'updatepicture.axd?pictureid=' + parent.window.productId),
+                    postUrl: (parent.window.first ? 'upload.axd?uid=' + __uid : 'updatepicture.axd?pictureid=' + parent.window.productId),
                     onUploadStart: 'onUploadStart',
                     onFileOpen: 'onFileOpen',
                     onCompleted: 'onCompleted',

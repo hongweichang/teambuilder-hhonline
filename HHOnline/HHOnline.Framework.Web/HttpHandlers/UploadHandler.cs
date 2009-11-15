@@ -23,7 +23,7 @@ namespace HHOnline.Framework.Web.HttpHandlers
                 HttpPostedFile f = null;
                 TemporaryAttachment ta = null;
 
-                userId = GlobalSettings.GetCurrentUser().UserID;
+                userId = int.Parse(context.Request["uid"]);
                 for (int i = 0; i < files.Count;i++ )
                 {
                     f = files[i];

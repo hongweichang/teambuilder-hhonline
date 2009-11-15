@@ -8,6 +8,8 @@
 <asp:Content ID="ContentOpts" ContentPlaceHolderID="cphOpts" runat="Server">
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
+
+    <hc:MsgBox ID="mbMessage" runat="server" SkinID="msgBox"></hc:MsgBox>
     <asp:MultiView ID="mvProductAdd" runat="server" ActiveViewIndex="0">
         <asp:View runat="server" ID="vwProductCategoies">
             <div class="cpStep">
@@ -253,5 +255,4 @@
             </div>
         </asp:View>
     </asp:MultiView>
-    <hc:MsgBox ID="mbMessage" runat="server" SkinID="msgBox"></hc:MsgBox>
 </asp:Content>
