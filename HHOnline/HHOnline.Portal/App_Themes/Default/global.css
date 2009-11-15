@@ -2655,7 +2655,6 @@ a:hover.uploadimages
     border:1px solid #ADCD3C;
     color:#ff0000;
 }
-
 .jquery-accordion
 {
     overflow:hidden;
@@ -2702,19 +2701,30 @@ a:hover.uploadimages
     }
 .jquery-accordion .jquery-accordion-navigate
 {
-    height:16px;
+    height:24px;
     position:absolute;
     right:4px;
     top:4px;
-    background:url(../../images/accordion/navigate2.gif) repeat-x left center;
     }
 .jquery-accordion .jquery-accordion-nav
 {
-    width:16px;
-    height:16px;
+    width:22px;
+    height:22px;
     top:0;
     position:absolute;    
-    background:url(../../images/accordion/navigate1.gif) no-repeat left center;
+    font-family:Georgia;
+    border:solid 1px #888;
+    text-align:center;
+    line-height:24px;
+    background:#dedede;
+    cursor:pointer;
+    
+    }
+.jquery-accordion .jquery-accordion-navHover
+{
+    background:#ff0000;
+    background:#800000;
+    color:#fff;
     }
 .registerContent
 {
