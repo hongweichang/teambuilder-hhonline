@@ -504,12 +504,14 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
                 case DataActionStatus.UnknownFailure:
                     //throw new HHException(ExceptionType.Failed, "新增产品失败，请联系管理员！");
                     mbMessage.ShowMsg("新增产品失败，请联系管理员！", Color.Red);
+                    break;
                 case DataActionStatus.Success:
                 default:
                     this.mvProductAdd.SetActiveView(vwProductCategoies);
                     //throw new HHException(ExceptionType.Success, "新增产品信息成功，可继续【填写新产品信息】或通过产品管理面板进入【产品编辑】页对此产品进行【型号管理】！");
 
                     mbMessage.ShowMsg("新增产品信息成功，修改部分信息可继续提交，无需其他操作请返回！", Color.Gray);
+                    break;
             }
         }
         else
