@@ -9,7 +9,7 @@ User-agent: *
 Disallow: /ControlPanel/
 Disallow: /Utility/
 Disallow: /Languages/
-Disallow: /Bin/
+Disallow: /bin/
 
 Sitemap: http://www.ehuaho.com/sitemap/brands.xml
 Sitemap: http://www.ehuaho.com/sitemap/categories.xml
