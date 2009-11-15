@@ -46,7 +46,7 @@ $.fn.hrzAccordion = function(settings) {
                 html += '<div class="jquery-accordion-nav ' + (i == 0 ? 'jquery-accordion-navHover' : '') + '" style="left:' + i * 26 + 'px">' + (i + 1) + '</div>';
             }
             navigator.html(html);
-            navigator.find('div').css('opacity',0.7).hover(function() {
+            navigator.find('div').css('opacity', 0.7).hover(function() {
                 $(this).addClass('jquery-accordion-navHover');
                 clearInterval(window[ps.timerId]);
                 if (parseInt(pictures.find('a:visible').attr('index')) != parseInt(this.innerHTML) - 1) {
@@ -56,7 +56,7 @@ $.fn.hrzAccordion = function(settings) {
                 if (parseInt(pictures.find('a:visible').attr('index')) != parseInt(this.innerHTML) - 1) {
                     $(this).removeClass('jquery-accordion-navHover');
                 }
-                window[ps.timerId] = setInterval(pictureBox, ps.swapSpeed);
+                window[ps.timerId] = setInterval(pictureBox1, ps.swapSpeed);
             });
         }
         if (ps.titleHeight != 0) {
@@ -75,7 +75,7 @@ $.fn.hrzAccordion = function(settings) {
         var _Last = pictures.find('a:last');
 
         function pictureBox(p) {
-            if (!p) {
+            if (p == undefined) {
                 if (_Last.is(':visible')) {
                     p = _First.fadeIn(ps.speed).addClass('jquery-accordion-visible');
                     _Last.hide();
@@ -96,8 +96,11 @@ $.fn.hrzAccordion = function(settings) {
                 title.html('<b>' + p.attr('title') + '</b>' + p.attr('description'));
             }
         }
+        function pictureBox1() {
+            pictureBox();
+        }
         if (count > 1) {
-            window[ps.timerId] = setInterval(pictureBox, ps.swapSpeed);
+            window[ps.timerId] = setInterval(pictureBox1, ps.swapSpeed);
         }
     });
 }
