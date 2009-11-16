@@ -52,7 +52,7 @@ public partial class Pages_Product_ProductFocus : HHPage
             {
                 if (k != "sortby")
                 {
-                    url += "&" + k + "=" + Request.QueryString[k];
+                    url += "&" + k + "=" + HttpUtility.UrlEncode(Request.QueryString[k]);
                 }
             }
             return url;

@@ -18,18 +18,18 @@ function changeHeaderTab(navigate, tabName) {
     return false;
 }
 function searchPruduct(searchText) {
-    var _searchText = $.trim($(searchText).val())
+    var _searchText = $.trim($('input[rel='+searchText+']').val())
     if (_searchText == '' || _searchText == mk1) {
         _searchText = '';
     }
-    window.location.href = relativeUrl + 'pages/view.aspx?product-search&w=' + encodeURIComponent(_searchText);
+    window.location.href = relativeUrl + 'pages/view.aspx?product-search&w=' + escape(_searchText);
 }
 function searchArticle(searchText) {
-    var _searchText = $.trim($(searchText).val())
+    var _searchText = $.trim($('input[rel=' + searchText + ']').val())
     if (_searchText == '' || _searchText == mk2) {
-        return;
+        _searchText = '';
     }
-    window.location.href = relativeUrl + 'pages/view.aspx?news-search&w=' + encodeURIComponent(_searchText);
+    window.location.href = relativeUrl + 'pages/view.aspx?news-search&w=' + escape(_searchText);
 }
 function navGuid(t) {
     window.location.href = relativeUrl + eval('(nav.' + t + ')');
@@ -46,7 +46,7 @@ $().ready(function() {
     });
     s1.keydown(function(e) {
         if ((e.keyCode || e.which) == 13) {
-            searchPruduct($(this), mk1);
+            searchPruduct('searchproduct');
             return false;
         }
     })
@@ -69,15 +69,12 @@ $().ready(function() {
     });
     s2.keydown(function(e) {
         if ((e.keyCode || e.which) == 13) {
-            searchArticle($(this), mk2);
+            searchArticle('searcharticle');
             return false;
         }
     });
-    $('#searchProduct').attr('href', 'javascript:searchPruduct(\'#searchproduct\')');
+    $('#searchProduct').attr('href', 'javascript:searchPruduct(\'searchproduct\')');
 
-    $('#searchArticle').click(function() {
-        this.blur();
-        searchArticle(s2, mk2);
-    });
+    $('#searchArticle').attr('href', 'javascript:searchArticle(\'searcharticle\')');
 
 });
