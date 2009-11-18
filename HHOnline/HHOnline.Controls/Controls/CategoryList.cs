@@ -77,6 +77,10 @@ namespace HHOnline.Controls
             int curCount = pcList.Count;
             pcList = pcList.GetRange(0, Math.Min(curCount, _Max));
             sb.AppendLine("<table cellpadding=\"0\" cellspacing=\"0\" class=\""+_CssClass+"\">");
+
+            StringBuilder sbLeft = new StringBuilder();
+            StringBuilder sbRight = new StringBuilder();
+
             string catId = string.Empty;
             int length = pcList.Count;
             int dev = length / _Columns;
@@ -86,11 +90,10 @@ namespace HHOnline.Controls
                 for (int i = 0; i < dev; i++)
                 {
                     pc = pcList[i];
-                    sb.Append("<tr>");
-                    sb.Append(BindCategory(pc, nav));
+                    sbLeft.Append(BindCategory(pc, nav));
+
                     pc = pcList[i + dev + left];
-                    sb.Append(BindCategory(pc, nav));
-                    sb.Append("</tr>");
+                    sbRight.Append(BindCategory(pc, nav));
                 }
             }
             else
@@ -98,25 +101,21 @@ namespace HHOnline.Controls
                 for (int i = 0; i < length; i++)
                 {
                     pc = pcList[i];
-                    sb.Append("<tr>");
-                    sb.Append(BindCategory(pc, nav));
-                    sb.Append("</tr>");
+                    sbLeft.Append("<div>");
+                    sbLeft.Append(BindCategory(pc, nav));
+                    sbLeft.Append("</div>");
                 }
             }
 
             if (left > 0)
             {
-                sb.Append("<tr>");
+                sbLeft.Append("<div>");
                 for (int j = left; j > 0; j--)
                 {
                     pc = pcList[j + dev - left];
-                    sb.Append(BindCategory(pc, nav));
+                    sbLeft.Append(BindCategory(pc, nav));
                 }
-                for (int j = 0; j < _Columns - left; j++)
-                {
-                    sb.Append("<td>&nbsp;</td>");
-                }
-                sb.Append("</tr>");
+                sbLeft.Append("</div>");
             }
 
             #region -Ignore-
@@ -148,7 +147,18 @@ namespace HHOnline.Controls
             }
              * */
             #endregion
+            sb.AppendLine("<tr>");
+            sb.AppendLine("<td>");
+            sb.AppendLine(sbLeft.ToString());
+            sb.AppendLine("</td>");
+            if (!string.IsNullOrEmpty(sbRight.ToString()))
+            {
 
+                sb.AppendLine("<td>");
+                sb.AppendLine(sbRight.ToString());
+                sb.AppendLine("</td>");
+            }
+            sb.AppendLine("</tr>");
             sb.AppendLine("</table>");
 
             if (curCount > _Max)
@@ -158,7 +168,7 @@ namespace HHOnline.Controls
         string BindCategory(ProductCategory pc,string nav)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<td>");
+            sb.Append("<div>");
             string catId = GlobalSettings.Encrypt(pc.CategoryID.ToString());
             sb.AppendLine("<div><a href=\"" + nav + "&ID=" + catId + "\" target=\"_blank\">" + pc.CategoryName + "</a></div>");
             List<ProductCategory> pcSubList = GetSubCategories(pc.CategoryID);
@@ -172,7 +182,7 @@ namespace HHOnline.Controls
                     sb.Append("&nbsp;|&nbsp;");
                 }
             }
-            sb.AppendLine("</td>");
+            sb.AppendLine("</div>");
             return sb.ToString();
         }
         List<ProductCategory> GetSubCategories(int catId)

@@ -83,13 +83,16 @@ $().ready(function() {
             width: 300,
             height: 200,
             titleHeight: 0
+        }).find('a').attr({
+            'rel': 'lightbox'
         });
+        $('[rel=lightbox]').lightBox({ txtImage: '当前图片' });
     }
     else {
         $('#divPics').html('没有展示图片！');
     }
     window.$$ErrorMsg = $('#spnMsg');
-    $('#anchorAddFav').attr('href','javascript:addFav();');
-    $('#anchorAddCar').attr('href','javascript:addCar();');
+    $('#anchorAddFav').attr('href', 'javascript:addFav();');
+    $('#anchorAddCar').attr('href', 'javascript:addCar();');
     $('#txtAmount').keyup(checkAmount);
 });

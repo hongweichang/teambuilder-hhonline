@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using HHOnline.Framework.Web;
 using HHOnline.Shops;
 using HHOnline.Framework;
+using System.Text;
 
 public partial class Pages_Product_Product :HHPage
 {
@@ -66,9 +67,15 @@ public partial class Pages_Product_Product :HHPage
             rbModel.SelectedIndex = 0;
         }
     }
+    List<ProductCategory> cat = null;
+    List<ProductCategory> GetCategories(int pId)
+    {
+        return ProductCategories.GetCategoreisByProductID(pId);
+    }
     void BindCategory(int pId)
     {
-       List<ProductCategory> cat = ProductCategories.GetCategoreisByProductID(pId);
+        if (cat == null)
+            cat = GetCategories(pId);
        if (cat.Count == 0)
        {
            ltCategory.Text = "——";
@@ -160,9 +167,25 @@ public partial class Pages_Product_Product :HHPage
     public override void OnPageLoaded()
     {
         p = GetProduct();
-        this.ShortTitle = p.ProductName;
+        cat = GetCategories(p.ProductID);
+        StringBuilder sb = new StringBuilder();
+        sb.Append(p.ProductName);
+        sb.Append(",");
+        if (cat != null && cat.Count > 0)
+        {
+            foreach (ProductCategory pc in cat)
+            {
+                sb.Append(pc.CategoryName);
+                sb.Append(",");
+            }
+        }
+        sb.Append(p.BrandName);
+        this.AddKeywords(sb.ToString());
+        this.AddDescription(p.ProductName + " 关键字: " + sb.ToString());
+        this.ShortTitle = p.ProductName + " - " + sb.ToString();
         SetTitle();
         AddJavaScriptInclude("scripts/jquery.accordion.js", true, false);
-        AddJavaScriptInclude("scripts/pages/product.aspx.js", true, false);
+        AddJavaScriptInclude("scripts/jquery.lightbox-0.5.js", true, false);
+        AddJavaScriptInclude("scripts/pages/product.aspx.js", true, false);        
     }
 }
