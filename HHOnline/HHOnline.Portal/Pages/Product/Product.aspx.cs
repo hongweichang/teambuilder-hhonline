@@ -8,7 +8,7 @@ using HHOnline.Shops;
 using HHOnline.Framework;
 using System.Text;
 
-public partial class Pages_Product_Product :HHPage
+public partial class Pages_Product_Product : HHPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -21,9 +21,9 @@ public partial class Pages_Product_Product :HHPage
     Product p = null;
     void BindPicture()
     {
-        if(p==null)
+        if (p == null)
         {
-            p=GetProduct();
+            p = GetProduct();
         }
         List<ProductPicture> pics = ProductPictures.GetPictures(p.ProductID);
         string picStr = "''";
@@ -76,20 +76,20 @@ public partial class Pages_Product_Product :HHPage
     {
         if (cat == null)
             cat = GetCategories(pId);
-       if (cat.Count == 0)
-       {
-           ltCategory.Text = "——";
-       }
-       else
-       {
-           string cats = string.Empty;
-           foreach (ProductCategory pc in cat)
-           {
-               cats += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
-                            "pages/view.aspx?product-category&ID=" + GlobalSettings.Encrypt(pc.CategoryID.ToString()) + "\">" + pc.CategoryName + "</a>";
-           }
-           ltCategory.Text = cats;
-       }
+        if (cat.Count == 0)
+        {
+            ltCategory.Text = "——";
+        }
+        else
+        {
+            string cats = string.Empty;
+            foreach (ProductCategory pc in cat)
+            {
+                cats += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
+                             "pages/view.aspx?product-category&ID=" + GlobalSettings.Encrypt(pc.CategoryID.ToString()) + "\">" + pc.CategoryName + "</a>";
+            }
+            ltCategory.Text = cats;
+        }
     }
     void BindIndustry(int pId)
     {
@@ -111,7 +111,7 @@ public partial class Pages_Product_Product :HHPage
     }
     void BindBrand(Product p)
     {
-        if (p.BrandID==0||string.IsNullOrEmpty(p.BrandName))
+        if (p.BrandID == 0 || string.IsNullOrEmpty(p.BrandName))
         {
             ltBrand.Text = "——";
         }
@@ -181,11 +181,11 @@ public partial class Pages_Product_Product :HHPage
         }
         sb.Append(p.BrandName);
         this.AddKeywords(sb.ToString());
-        this.AddDescription(p.ProductName + " 关键字: " + sb.ToString());
+        this.AddDescription(string.IsNullOrEmpty(p.ProductAbstract) ? p.ProductName : p.ProductAbstract + " 关键字: " + sb.ToString());
         this.ShortTitle = p.ProductName + " - " + sb.ToString();
         SetTitle();
         AddJavaScriptInclude("scripts/jquery.accordion.js", true, false);
         AddJavaScriptInclude("scripts/jquery.lightbox-0.5.js", true, false);
-        AddJavaScriptInclude("scripts/pages/product.aspx.js", true, false);        
+        AddJavaScriptInclude("scripts/pages/product.aspx.js", true, false);
     }
 }
