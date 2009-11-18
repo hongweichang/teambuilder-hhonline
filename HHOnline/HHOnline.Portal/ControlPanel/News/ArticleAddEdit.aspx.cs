@@ -135,12 +135,12 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 			int id = int.Parse(Request.QueryString["ID"]);
 			Article article = ArticleManager.GetArticle(id);
 
-			article.Title = txtTitle.Text;
-			article.SubTitle = txtSubTitle.Text;
+			article.Title = txtTitle.Text.Trim();
+			article.SubTitle = txtSubTitle.Text.Trim();
 			article.Abstract = txtAbstract.Text;
 			article.Content = txtContent.Text;
-			article.CopyFrom = txtCopyFrom.Text;
-			article.Author = txtAuthor.Text;
+            article.CopyFrom = txtCopyFrom.Text.Trim();
+            article.Author = txtAuthor.Text.Trim();
             article.Keywords = GlobalSettings.FormatKeywords(txtKeywords.Text);
 			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
 			article.ArticleMemo = txtMemo.Text;
@@ -176,12 +176,12 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 			int parentID = ascCategory.SelectedCategoryID;
 
 			article.Category = parentID;
-			article.Title = txtTitle.Text;
-			article.SubTitle = txtSubTitle.Text;
+			article.Title = txtTitle.Text.Trim();
+			article.SubTitle = txtSubTitle.Text.Trim();
 			article.Abstract = txtAbstract.Text;
 			article.Content = txtContent.Text;
-			article.CopyFrom = txtCopyFrom.Text;
-			article.Author = txtAuthor.Text;
+            article.CopyFrom = txtCopyFrom.Text.Trim();
+            article.Author = txtAuthor.Text.Trim();
             article.Keywords = GlobalSettings.FormatKeywords(txtKeywords.Text);
 			article.DisplayOrder = int.Parse(txtDisplayOrder.Text);
 			article.ArticleMemo = txtMemo.Text;
