@@ -492,7 +492,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
         product.ProductAbstract = txtProductAbstract.Text;
         product.ProductContent = txtProductContent.Text;
         product.ProductKeywords = GlobalSettings.FormatKeywords(txtKeyWords.Text);
-        product.ProductName = txtProductName.Text;
+        product.ProductName = txtProductName.Text.Trim();
         product.ProductStatus = csProduct.SelectedValue;
 
         DataActionStatus status;
