@@ -134,7 +134,7 @@ namespace HHOnline.Framework.Web
             HtmlMeta meta = new HtmlMeta();
             meta.Attributes.Add("content", "text/html; charset=utf-8");
             meta.Attributes.Add("http-equiv", "Content-Type");
-            Page.Header.Controls.Add(meta);
+            Page.Header.Controls.AddAt(0, meta);
         }
         /// <summary>
         /// 自定义验证控件外观
