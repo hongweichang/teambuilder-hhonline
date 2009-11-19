@@ -80,6 +80,26 @@ public partial class Pages_Product_GuidByLetter : HHPage
     public override void OnPageLoaded()
     {
         this.ShortTitle = "按字母检索";
+       //// "        按首字母<span class=\"needed\">\"" + w + "\"</span>检索【" + GetDesc(lt) + "】"
+       // string letter = this.llCategory.FirstLetter;
+       // string stype = GetDesc(this.llCategory.LetterType);
+
+       // string title = string.Empty, key = string.Format("{0}首字母检索{1}",stype,letter.ToUpper());
+
+       // switch (lt)
+       // {
+       //     case LettersType.Category:
+       //         return "产品类别";
+       //     case LettersType.Brand:
+       //         return "产品品牌";
+       //     case LettersType.Industry:
+       //         return "产品行业";
+       // }
+       // return "——";
+       
+       // this.AddKeywords(title);
+        
+        
         this.SetTitle();
     }
 }

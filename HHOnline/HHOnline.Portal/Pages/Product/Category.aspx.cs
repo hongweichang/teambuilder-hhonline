@@ -8,6 +8,7 @@ using HHOnline.Shops;
 using HHOnline.Framework;
 using SD = System.Drawing;
 using System.Collections.Specialized;
+using System.Text;
 
 public partial class Pages_Product_Category : HHPage
 {
@@ -71,18 +72,71 @@ public partial class Pages_Product_Category : HHPage
     #region -Override-
     public override void OnPageLoaded()
     {
+        string catName = string.Empty, catRelated = string.Empty;
+        StringBuilder sbRelated = new StringBuilder();
+
         string id = Request.QueryString["ID"];
         if (!string.IsNullOrEmpty(id))
         {
             int catId = int.Parse(GlobalSettings.Decrypt(id));
             ProductCategory pc = ProductCategories.GetCategory(catId);
-            this.ShortTitle = pc.CategoryName;
+            catName = pc.CategoryName;
+
+            //获取子分类
+            List<ProductCategory> childCategories = ProductCategories.GetChidCategories(pc.CategoryID);
+            if (null == childCategories || 0 == childCategories.Count)
+            { }
+            else
+            {
+                foreach (ProductCategory pcChild in childCategories)
+                {
+                    sbRelated.AppendFormat("{0},", pcChild.CategoryName);
+                }
+            }
+            //获取相关分类
+            List<ProductCategory> relateCategories = ProductCategories.GetChidCategories(pc.ParentID);
+            if (null == relateCategories || 0 == relateCategories.Count)
+            { }
+            else
+            {
+                foreach (ProductCategory pcRelate in relateCategories)
+                {
+                    sbRelated.AppendFormat("{0},", pcRelate.CategoryName);
+                }
+            }
+            catRelated = sbRelated.ToString().Replace(catName + ",", string.Empty).TrimEnd(',');
         }
         else
         {
-            this.ShortTitle = "所有分类";
+            List<ProductCategory> relateCategories = ProductCategories.GetCategories();
+            if (null == relateCategories || 0 == relateCategories.Count)
+            { }
+            else
+            {
+                foreach (ProductCategory pcRelate in relateCategories)
+                {
+                    if (pcRelate.ParentID > 0) continue;
+                    sbRelated.AppendFormat("{0},", pcRelate.CategoryName);
+                }
+            }
+            catRelated = sbRelated.ToString().TrimEnd(',');
+        }
+
+        if (string.IsNullOrEmpty(catName))
+        {
+            catName = "所有分类";
+            this.AddKeywords(catName + "," + catRelated);
+            this.AddDescription("显示所有一级和二级产品分类，选择产品分类导航到对应分类的产品列表。" + string.Format(" 关键字: {0},{1}", catName, catRelated));
+            this.ShortTitle = catName;
+        }
+        else
+        {
+            this.AddKeywords(string.Format("{0},{1}", catName, catRelated));
+            this.AddDescription(string.Format("显示{0}分类的产品列表。{1}", catName, string.Format(" 关键字: {0},{1}", catName, catRelated)));
+            this.ShortTitle = catName + " - " + catRelated;
         }
         this.SetTitle();
+
         this.AddJavaScriptInclude("scripts/pages/sortby.aspx.js", false, false);
     }
     #endregion

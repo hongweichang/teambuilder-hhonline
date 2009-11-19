@@ -305,11 +305,18 @@ namespace HHOnline.Data
                 builder.AddJoin(JoinType.InnerJoin, "PProductCategory pc", "pc.ProductID", Comparison.Equals, "p", "ProductID");
                 //构造当前分类的所有子分类
                 List<ProductCategory> listCategory = ProductCategories.GetAllChildCategories(query.CategoryID.Value);
-                StringBuilder sbCategory = new StringBuilder();
-                foreach (ProductCategory pc in listCategory)
-                    sbCategory.AppendFormat("{0},", pc.CategoryID);
-                builder.AddWhere("pc.CategoryID", Comparison.In, 
-                    new SqlLiteral(sbCategory.ToString().TrimEnd(',')));
+                if (null == listCategory || 0 == listCategory.Count)
+                {
+                    builder.AddWhere("pc.CategoryID", Comparison.Equals, query.CategoryID.Value);
+                }
+                else
+                {
+                    StringBuilder sbCategory = new StringBuilder();
+                    foreach (ProductCategory pc in listCategory)
+                        sbCategory.AppendFormat("{0},", pc.CategoryID);
+                    builder.AddWhere("pc.CategoryID", Comparison.In,
+                        new SqlLiteral(sbCategory.ToString().TrimEnd(',')));
+                }
             }
             bool isJoin = false;
             //CompanyID
