@@ -32,9 +32,9 @@ namespace HHOnline.SearchBarrel
                 }
             }
              */
-            new HHException(ExceptionType.UnknownError, "ProductIndexTask Start").Log();
+            //new HHException(ExceptionType.UnknownError, "ProductIndexTask Start").Log();
             ProductSearchManager.InitializeIndex();
-            new HHException(ExceptionType.UnknownError, "ProductIndexTask End").Log();
+            //new HHException(ExceptionType.UnknownError, "ProductIndexTask End").Log();
         }
     }
 }
