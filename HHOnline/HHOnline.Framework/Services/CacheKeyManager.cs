@@ -429,6 +429,11 @@ namespace HHOnline.Framework
         {
             return ProductPrefix + "ProductCategory/CategoryID-" + categoryID;
         }
+
+        public static string GetChildCategoryKey(int categoryID)
+        {
+            return ProductPrefix + "ProductCategory/ChildCategoryID-" + categoryID;
+        }
         #endregion
 
         #region ProductPicture

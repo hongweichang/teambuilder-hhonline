@@ -292,7 +292,7 @@ namespace HHOnline.Data
             builder.SelectColumns("p.ProductID");
             builder.AddWhere("p.ProductStatus", Comparison.NotEquals, 0);
 
-           
+
             //BrandID
             if (query.BrandID.HasValue)
             {
@@ -303,7 +303,13 @@ namespace HHOnline.Data
             if (query.CategoryID.HasValue)
             {
                 builder.AddJoin(JoinType.InnerJoin, "PProductCategory pc", "pc.ProductID", Comparison.Equals, "p", "ProductID");
-                builder.AddWhere("pc.CategoryID", Comparison.Equals, query.CategoryID.Value);
+                //构造当前分类的所有子分类
+                List<ProductCategory> listCategory = ProductCategories.GetAllChildCategories(query.CategoryID.Value);
+                StringBuilder sbCategory = new StringBuilder();
+                foreach (ProductCategory pc in listCategory)
+                    sbCategory.AppendFormat("{0},", pc.CategoryID);
+                builder.AddWhere("pc.CategoryID", Comparison.In, 
+                    new SqlLiteral(sbCategory.ToString().TrimEnd(',')));
             }
             bool isJoin = false;
             //CompanyID
@@ -519,7 +525,7 @@ namespace HHOnline.Data
 
             if (query.UserID != 0)
                 builder.AddWhere("UserID", Comparison.Equals, query.UserID);
-                
+
             builder.AddWhere("FavoriteType", Comparison.NotEquals, 0);
 
             if (query.FavoriteType != null)

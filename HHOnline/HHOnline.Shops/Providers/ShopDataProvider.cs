@@ -139,6 +139,8 @@ namespace HHOnline.Shops.Providers
 
         public abstract List<ProductCategory> GetCategoreisByProductID(int productID);
 
+        public abstract List<ProductCategory> GetAllChildCategories(int categoryID);
+
         public static ProductCategory PopulateCategoryFromIDataReader(IDataReader dr)
         {
             ProductCategory category = new ProductCategory();

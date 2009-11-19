@@ -130,6 +130,21 @@ namespace HHOnline.Shops
             return categories;
         }
 
+        /// 获取当前分类的所有子分类信息
+        /// </summary>
+        /// <returns></returns>
+        public static List<ProductCategory> GetAllChildCategories(int categoryID)
+        {
+            string cacheKey = CacheKeyManager.GetChildCategoryKey(categoryID);
+            List<ProductCategory> categories = HHCache.Instance.Get(cacheKey) as List<ProductCategory>;
+            if (categories == null)
+            {
+                categories = ShopDataProvider.Instance.GetAllChildCategories(categoryID);
+                HHCache.Instance.Insert(cacheKey, categories);
+            }
+            return categories;
+        }
+
         /// <summary>
         /// 根据首字母缩写获取分类信息
         /// </summary>

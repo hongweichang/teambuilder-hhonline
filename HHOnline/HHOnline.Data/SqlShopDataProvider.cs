@@ -281,6 +281,21 @@ namespace HHOnline.Data
                 return categories;
             }
         }
+
+        public override List<ProductCategory> GetAllChildCategories(int categoryID)
+        {
+            ELParameter paramID = new ELParameter("@CategoryID", DbType.Int32, categoryID);
+            using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_ProductCategories_GetChild", paramID))
+            {
+                List<ProductCategory> categories = new List<ProductCategory>();
+                while (dr.Read())
+                {
+                    categories.Add(PopulateCategoryFromIDataReader(dr));
+                }
+                return categories;
+            }
+        }
+
         #endregion
 
         #region Property
@@ -946,7 +961,7 @@ namespace HHOnline.Data
         }
         public override List<Shopping> ShoppingLoad(string userID)
         {
-            List<Shopping> shops=new List<Shopping>();
+            List<Shopping> shops = new List<Shopping>();
             using (IDataReader dr = DataHelper.ExecuteReader(CommandType.StoredProcedure, "sp_Shopping_Load", new ELParameter("UserID", DbType.String, userID)))
             {
                 while (dr.Read())
