@@ -167,10 +167,14 @@ public partial class Pages_Product_Product : HHPage
     public override void OnPageLoaded()
     {
         p = GetProduct();
-        cat = GetCategories(p.ProductID);
+
+        //构建产品的关键字标签
         StringBuilder sb = new StringBuilder();
-        sb.Append(p.ProductName);
+        //添加产品关键字
+        sb.Append(p.ProductKeywords.Replace(';', ','));
         sb.Append(",");
+        //添加产品所属的所有分类的关键字
+        cat = GetCategories(p.ProductID);
         if (cat != null && cat.Count > 0)
         {
             foreach (ProductCategory pc in cat)
@@ -179,11 +183,19 @@ public partial class Pages_Product_Product : HHPage
                 sb.Append(",");
             }
         }
+        //添加品牌关键字
         sb.Append(p.BrandName);
+
+        //设置页面关键字标签
         this.AddKeywords(sb.ToString());
-        this.AddDescription(string.IsNullOrEmpty(p.ProductAbstract) ? p.ProductName : p.ProductAbstract + " 关键字: " + sb.ToString());
+        
+        //设置产品页面描述信息为产品简述/名称+关键字列表
+        this.AddDescription((string.IsNullOrEmpty(p.ProductAbstract) ? p.ProductName : p.ProductAbstract) + " 关键字: " + sb.ToString());
+        
+        //设置产品页面标题为名称+" - "+关键字组合标题名
         this.ShortTitle = p.ProductName + " - " + sb.ToString();
         SetTitle();
+
         AddJavaScriptInclude("scripts/jquery.accordion.js", true, false);
         AddJavaScriptInclude("scripts/jquery.lightbox-0.5.js", true, false);
         AddJavaScriptInclude("scripts/pages/product.aspx.js", true, false);
