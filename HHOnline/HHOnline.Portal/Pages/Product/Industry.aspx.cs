@@ -73,18 +73,34 @@ public partial class Pages_Product_Industry : HHPage
     #region -Override-
     public override void OnPageLoaded()
     {
+        string industryName = string.Empty, industryAbstract = string.Empty;
         string id = Request.QueryString["ID"];
         if (!string.IsNullOrEmpty(id))
         {
             int pid = int.Parse(GlobalSettings.Decrypt(id));
             ProductIndustry pi = ProductIndustries.GetProductIndustry(pid);
-            this.ShortTitle = pi.IndustryName;
+            if (null != pi)
+            {
+                industryName = pi.IndustryName;
+                industryAbstract = pi.IndustryAbstract;
+            }
+        }
+
+        if (string.IsNullOrEmpty(industryName))
+        {
+            industryName = "所有行业";
+            this.AddKeywords(industryName);
+            this.AddDescription("分组显示所有行业列表，选择行业导航到对应行业的产品列表。");
+            this.ShortTitle = industryName;
         }
         else
         {
-            this.ShortTitle = "所有行业";
+            this.AddKeywords(industryName);
+            this.AddDescription(string.Format("显示{0}行业的产品列表。{1}{2}", industryName, industryAbstract, string.Format(" 关键字: {0}", industryName)));
+            this.ShortTitle = industryName;
         }
         this.SetTitle();
+
         this.AddJavaScriptInclude("scripts/pages/sortby.aspx.js", false, false);
     }
     #endregion

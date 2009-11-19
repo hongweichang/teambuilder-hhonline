@@ -81,31 +81,32 @@ public partial class Pages_Product_Brand : HHPage
     #region -Override-
     public override void OnPageLoaded()
     {
-        string brandName = string.Empty, brandGroup = string.Empty;
+        string brandName = string.Empty, brandGroup = string.Empty, brandAbstract = string.Empty;
         string id = Request.QueryString["ID"];
         if (!string.IsNullOrEmpty(id))
         {
             int brandId = int.Parse(GlobalSettings.Decrypt(id));
             ProductBrand pb = ProductBrands.GetProductBrand(brandId);
-            brandName = pb.BrandName;
-            brandGroup = pb.BrandGroup;
-        }
-        else
-        {
-            brandName = "所有品牌";
+            if (null != pb)
+            {
+                brandName = pb.BrandName;
+                brandGroup = pb.BrandGroup;
+                brandAbstract = pb.BrandAbstract;
+            }
         }
 
-        if (string.IsNullOrEmpty(brandGroup))
+        if (string.IsNullOrEmpty(brandName))
         {
+            brandName = "所有品牌";
             this.AddKeywords(brandName);
             this.AddDescription("分组显示所有品牌列表，选择品牌导航到对应品牌的产品列表。");
             this.ShortTitle = brandName;
         }
         else
         {
-             this.AddKeywords(string.Format("{0},{1}", brandName, brandGroup));
-             this.AddDescription(string.Format("显示{0}品牌的产品列表。{1}", brandName, string.Format(" 关键字: {0},{1}", brandName, brandGroup)));
-           this.ShortTitle = brandName + " - " + brandGroup;
+            this.AddKeywords(string.Format("{0},{1}", brandName, brandGroup));
+            this.AddDescription(string.Format("显示{0}品牌的产品列表。{1}{2}", brandName, brandAbstract, string.Format(" 关键字: {0},{1}", brandName, brandGroup)));
+            this.ShortTitle = brandName + " - " + brandGroup;
         }
         this.SetTitle();
 
