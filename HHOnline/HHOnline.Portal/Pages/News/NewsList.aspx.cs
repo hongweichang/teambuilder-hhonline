@@ -16,193 +16,205 @@ using HHOnline.Framework;
 
 public partial class News_NewsList : HHPage
 {
-	/// <summary>
-	/// 一页显示20条
-	/// </summary>
-	private int pageSize = 20;
+    /// <summary>
+    /// 一页显示20条
+    /// </summary>
+    private int pageSize = 20;
 
-	protected void Page_Load(object sender, EventArgs e)
-	{
-		if (!IsPostBack && !IsCallback)
-		{
-			BindArticles();
-		}
-	}
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack && !IsCallback)
+        {
+            BindArticles();
+        }
+    }
 
-	/// <summary>
-	/// 绑定文章列表
-	/// </summary>
-	public void BindArticles()
-	{
-		// queryString中的参数：
-		// cate: 分类id -1为最新分类
-		// p: 页码
-		// v: 查看方式, 0 详细资料 1 列表
+    /// <summary>
+    /// 绑定文章列表
+    /// </summary>
+    public void BindArticles()
+    {
+        // queryString中的参数：
+        // cate: 分类id -1为最新分类
+        // p: 页码
+        // v: 查看方式, 0 详细资料 1 列表
 
-		int categoryID = -1;
-		string categoryIDStr = Request.QueryString["cate"];
-		if (!string.IsNullOrEmpty(categoryIDStr))
-		{
-			int.TryParse(HHOnline.Framework.GlobalSettings.Decrypt(categoryIDStr), out categoryID);
-		}
+        int categoryID = -1;
+        string categoryIDStr = Request.QueryString["cate"];
+        if (!string.IsNullOrEmpty(categoryIDStr))
+        {
+            int.TryParse(HHOnline.Framework.GlobalSettings.Decrypt(categoryIDStr), out categoryID);
+        }
 
-		int pageIndex = 0;
-		string pageIDStr = Request.QueryString["p"];
-		if (!string.IsNullOrEmpty(pageIDStr))
-		{
-			int.TryParse(pageIDStr, out pageIndex);
-		}
+        int pageIndex = 0;
+        string pageIDStr = Request.QueryString["p"];
+        if (!string.IsNullOrEmpty(pageIDStr))
+        {
+            int.TryParse(pageIDStr, out pageIndex);
+        }
 
-		int viewState = 0;
-		string viewStateStr = Request.QueryString["v"];
-		if (!string.IsNullOrEmpty(viewStateStr))
-		{
-			int.TryParse(viewStateStr, out viewState);
-		}
+        int viewState = 0;
+        string viewStateStr = Request.QueryString["v"];
+        if (!string.IsNullOrEmpty(viewStateStr))
+        {
+            int.TryParse(viewStateStr, out viewState);
+        }
 
-		// 根据资讯分类绑定资讯
-		ArticleQuery query = new ArticleQuery();
+        // 根据资讯分类绑定资讯
+        ArticleQuery query = new ArticleQuery();
 
-		if (categoryID == -1)
-		{
-			lblCategoryName.Text = "最新资讯";
-			query.CategoryID = null;
-		}
-		else
-		{
-			ArticleCategory cateInfo = ArticleManager.GetArticleCategory(categoryID);
-			lblCategoryName.Text = cateInfo.Name;
-			query.CategoryID = categoryID;
-		}
+        if (categoryID == -1)
+        {
+            lblCategoryName.Text = "最新资讯";
+            query.CategoryID = null;
+        }
+        else
+        {
+            ArticleCategory cateInfo = ArticleManager.GetArticleCategory(categoryID);
+            lblCategoryName.Text = cateInfo.Name;
+            query.CategoryID = categoryID;
+        }
 
-		this.ShortTitle = "资讯 - " + lblCategoryName.Text;
+        query.PageIndex = pageIndex;
+        query.PageSize = pageSize;
+        PagingDataSet<Article> articles = ArticleManager.GetArticles(query);
 
-		query.PageIndex = pageIndex;
-		query.PageSize = pageSize;
-		PagingDataSet<Article> articles = ArticleManager.GetArticles(query);
+        if (null == articles || 0 == articles.TotalRecords)
+        {
+            msgBox.ShowMsg("没有符合条件的资讯存在！", System.Drawing.Color.Gray);
+        }
+        else
+            msgBox.HideMsg();
 
-		// 绑定
-		repArticles.DataSource = articles.Records;
-		repArticles.Visible = viewState == 0;
-		repArticles.DataBind();
+        // 绑定
+        repArticles.DataSource = articles.Records;
+        repArticles.Visible = viewState == 0;
+        repArticles.DataBind();
 
-		repArticlesList.DataSource = articles.Records;
-		repArticlesList.Visible = viewState == 1;
-		repArticlesList.DataBind();
-	}
+        repArticlesList.DataSource = articles.Records;
+        repArticlesList.Visible = viewState == 1;
+        repArticlesList.DataBind();
+    }
 
-	public override void OnPageLoaded()
-	{
-        this.ShortTitle = "资讯信息";
+    public override void OnPageLoaded()
+    {
+        string title = lblCategoryName.Text;
+        string group = "资讯中心";
+
+        this.AddKeywords(title);
+        this.AddDescription(string.Format("{0},{1}", title, group));
+
+        this.ShortTitle = title;
         this.SetTitle();
-		AddJavaScriptInclude("Scripts/Pages/newsList.aspx.js", false, false);
-	}
 
-	protected void repArticles_ItemDataBound(object sender, RepeaterItemEventArgs e)
-	{
-		if (e.Item.Controls.Count > 1)
-		{
-			Image image = e.Item.Controls[1] as Image;
-			if (image != null)
-			{
-				Article article = e.Item.DataItem as Article;
-				if (article != null)
-				{
-					// 获取附件
-					ArticleAttachment attachment = ArticleAttachments.GetAttachment(article.Image);
-					if (attachment != null)
-					{
+        AddJavaScriptInclude("Scripts/Pages/newsList.aspx.js", false, false);
+    }
+
+    protected void repArticles_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.Controls.Count > 1)
+        {
+            Image image = e.Item.Controls[1] as Image;
+            if (image != null)
+            {
+                Article article = e.Item.DataItem as Article;
+                if (article != null)
+                {
+                    // 获取附件
+                    ArticleAttachment attachment = ArticleAttachments.GetAttachment(article.Image);
+                    if (attachment != null)
+                    {
                         if (attachment.IsRemote)
                         {
                             image.ImageUrl = attachment.FileName;
                         }
                         else
                         {
-                            image.ImageUrl = attachment.GetDefaultImageUrl(100,100);
+                            image.ImageUrl = attachment.GetDefaultImageUrl(100, 100);
                         }
-						image.Visible = true;
-					}
-					else
-					{
-						image.Visible = false;
-					}
-				}
-				else
-				{
-					image.Visible = false;
-				}
-			}
-		}
-	}
+                        image.Visible = true;
+                    }
+                    else
+                    {
+                        image.Visible = false;
+                    }
+                }
+                else
+                {
+                    image.Visible = false;
+                }
+            }
+        }
+    }
 
-	/// <summary>
-	/// 写页面导航
-	/// </summary>
-	protected void WritePagesNavigator()
-	{
-		int cateID = -1;
-		string cateIDStr = Request.QueryString["cate"];
-		if (!string.IsNullOrEmpty(cateIDStr))
-		{
-			int.TryParse(HHOnline.Framework.GlobalSettings.Decrypt(cateIDStr), out cateID);
-		}
+    /// <summary>
+    /// 写页面导航
+    /// </summary>
+    protected void WritePagesNavigator()
+    {
+        int cateID = -1;
+        string cateIDStr = Request.QueryString["cate"];
+        if (!string.IsNullOrEmpty(cateIDStr))
+        {
+            int.TryParse(HHOnline.Framework.GlobalSettings.Decrypt(cateIDStr), out cateID);
+        }
 
-		int articlesCount = ArticleManager.GetCategoryArticlesCount(cateID);
-		int pagesCount = articlesCount / pageSize;
-		if (pagesCount * pageSize < articlesCount)
-		{
-			++pagesCount;
-		}
+        int articlesCount = ArticleManager.GetCategoryArticlesCount(cateID);
+        int pagesCount = articlesCount / pageSize;
+        if (pagesCount * pageSize < articlesCount)
+        {
+            ++pagesCount;
+        }
 
-		string viewStateStr = Request.QueryString["v"];
+        string viewStateStr = Request.QueryString["v"];
 
-		// 当前页
-		int pageIndex = 0;
-		string pageIDStr = Request.QueryString["p"];
-		if (!string.IsNullOrEmpty(pageIDStr))
-		{
-			int.TryParse(pageIDStr, out pageIndex);
-		}
+        // 当前页
+        int pageIndex = 0;
+        string pageIDStr = Request.QueryString["p"];
+        if (!string.IsNullOrEmpty(pageIDStr))
+        {
+            int.TryParse(pageIDStr, out pageIndex);
+        }
 
-		// 如果当前页为第一页则不显示第一页
-		if (pageIndex != 0)
-		{
+        // 如果当前页为第一页则不显示第一页
+        if (pageIndex != 0)
+        {
             Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pageIndex - 1) + "'>&lt; 上一页</a>");
-		}
+        }
 
-		// 计算开始显示的页数和未来显示的页数
-		int startIndex = Math.Max(pageIndex - 5, 0);
-		int endIndex = Math.Min(pageIndex + 5, pagesCount - 1);
+        // 计算开始显示的页数和未来显示的页数
+        int startIndex = Math.Max(pageIndex - 5, 0);
+        int endIndex = Math.Min(pageIndex + 5, pagesCount - 1);
 
-		// 是否显示首页
-		if (startIndex > 0)
-		{
+        // 是否显示首页
+        if (startIndex > 0)
+        {
             Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=0'>1</a>");
-		}
+        }
 
-		// 显示中间的页数
-		for (int n = startIndex; n <= endIndex; ++n)
-		{
-			if (n == pageIndex)
-			{
-				Response.Write("<span class='current'>" + (n + 1) + "</span>");
-			}
-			else
-			{
+        // 显示中间的页数
+        for (int n = startIndex; n <= endIndex; ++n)
+        {
+            if (n == pageIndex)
+            {
+                Response.Write("<span class='current'>" + (n + 1) + "</span>");
+            }
+            else
+            {
                 Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + n + "'>" + (n + 1) + "</a>");
-			}
-		}
+            }
+        }
 
-		// 是否显示尾页
-		if (endIndex < pagesCount - 1)
-		{
+        // 是否显示尾页
+        if (endIndex < pagesCount - 1)
+        {
             Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pagesCount - 1) + "'>" + pagesCount + "</a>");
-		}
+        }
 
-		// 如果当前页为最后一页则不显示最后一页
-		if (pageIndex != pagesCount - 1 && pagesCount > 0)
-		{
+        // 如果当前页为最后一页则不显示最后一页
+        if (pageIndex != pagesCount - 1 && pagesCount > 0)
+        {
             Response.Write("<a href='view.aspx?news-newslist&cate=" + cateIDStr + "&amp;v=" + viewStateStr + "&amp;p=" + (pageIndex + 1) + "'>下一页 &gt;</a>");
-		}
-	}
+        }
+    }
 }

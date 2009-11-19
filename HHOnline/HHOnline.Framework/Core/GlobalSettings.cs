@@ -37,7 +37,7 @@ namespace HHOnline.Framework
             keywords = string.Join(";", wordList);
             while (keywords.IndexOf(";;") >= 0)
                 keywords = keywords.Replace(";;", ";");
-            return keywords;
+            return keywords.Trim(';');
         }
         #endregion
 
@@ -812,7 +812,7 @@ namespace HHOnline.Framework
                 }
             }
         }
-        public static decimal? GetMinPrice(decimal? p1,decimal? p2)
+        public static decimal? GetMinPrice(decimal? p1, decimal? p2)
         {
             if (p1 == null && p2 == null)
                 return null;

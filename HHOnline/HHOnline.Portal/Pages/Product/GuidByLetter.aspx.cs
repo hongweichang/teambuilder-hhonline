@@ -129,10 +129,20 @@ public partial class Pages_Product_GuidByLetter : HHPage
 
         string keywords = sbKeywords.ToString().TrimEnd(',');
 
-        this.AddKeywords(keywords);
-        this.AddDescription(string.Format("按照首字母进行{0}检索，首字母是{1}，符合条件的{0}列表如下: {2}", title, letter.ToUpper(), keywords));
+        if (string.IsNullOrEmpty(keywords))
+        {
+            //this.AddKeywords(keywords);
+            this.AddDescription(string.Format("按照首字母进行{0}检索，首字母是{1}", title, letter.ToUpper()));
 
-        this.ShortTitle = string.Format("首字母{0}检索{1} - {2}", title, letter.ToUpper(), keywords);
+            this.ShortTitle = string.Format("首字母{0}检索{1}", title, letter.ToUpper());
+        }
+        else
+        {
+            this.AddKeywords(keywords);
+            this.AddDescription(string.Format("按照首字母进行{0}检索，首字母是{1}，符合条件的{0}列表如下: {2}", title, letter.ToUpper(), keywords));
+
+            this.ShortTitle = string.Format("首字母{0}检索{1} - {2}", title, letter.ToUpper(), keywords);
+        }
         this.SetTitle();
     }
 }

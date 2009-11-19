@@ -23,16 +23,19 @@
             <div class="clear">
             </div>
         </div>
-        <a class="rss_link" href="view.aspx?news-newsrss" target="_blank" title="订阅Rss">&nbsp;</a> <a href="<% Response.Write("view.aspx?news-newslist&v=1&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]); %>"
+        <a class="rss_link" href="view.aspx?news-newsrss" target="_blank" title="订阅Rss">&nbsp;</a>
+        <a href="<% Response.Write("view.aspx?news-newslist&v=1&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]); %>"
             title="查看方式 - 列表" class="news_list">&nbsp;</a> <a href="<%Response.Write("view.aspx?news-newslist&v=0&cate=" + Request.QueryString["cate"] + "&p=" + Request.QueryString["p"]);%>"
                 class="news_detail" title="查看方式 - 详细资料">&nbsp;</a>
-        <div id="post_list">
+        <div id="post_list" style="min-height: 200px">
+            <hc:MsgBox ID="msgBox" SkinID="msgBox" runat="server"></hc:MsgBox>
             <asp:Repeater ID="repArticlesList" runat="server">
                 <ItemTemplate>
                     <div class="post_item">
                         <div class="post_item_body">
                             <h3>
-                                <a class="titlelnk" href='view.aspx?news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>' target="_blank">
+                                <a class="titlelnk" href='view.aspx?news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>'
+                                    target="_blank">
                                     <%#Eval("Title") %></a>
                                 <%#Eval("SubTitle") %></h3>
                             <div class="post_item_foot_list">
@@ -49,7 +52,8 @@
                     <div class="post_item">
                         <div class="post_item_body">
                             <h3>
-                                <a class="titlelnk" href='view.aspx?news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>' target="_blank">
+                                <a class="titlelnk" href='view.aspx?news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>'
+                                    target="_blank">
                                     <%#Eval("Title") %></a>
                             </h3>
                             <div class="articleimg">
@@ -58,9 +62,9 @@
                             <div class="post_item_foot">
                                 发布于:
                                 <%#Eval("Date")%>
-                                作者: 
-                                <a class="lightblue" href='#'><%#Eval("Author")%></a> 
-                                    <span class="article_view">  <a class="grayline" href='view.aspx?news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>'>阅读(<span id="viewcount_1560804"><%#Eval("HitTimes")%></span>)</a></span></div>
+                                作者: <a class="lightblue" href='#'>
+                                    <%#Eval("Author")%></a> <span class="article_view"><a class="grayline" href='view.aspx?news-newsdetail&id=<%# HHOnline.Framework.GlobalSettings.Encrypt(Eval("ID").ToString()) %>'>
+                                        阅读(<span id="viewcount_1560804"><%#Eval("HitTimes")%></span>)</a></span></div>
                             <div class="post_item_sep">
                             </div>
                             <p class="post_item_summary">
