@@ -77,10 +77,13 @@ namespace HHOnline.Framework.Web
         /// </summary>
         public virtual void SetTitle()
         {
-            if (true == GlobalSettings.IsNullOrEmpty(_ShortTitle))
-                Page.Title = settings.SiteName;
+            if (!GlobalSettings.IsNullOrEmpty(_ShortTitle))
+            {
+                int splitIndex = _ShortTitle.IndexOf(" - ");    //判断组合标题+关键字的组合格式
+                Page.Title = 0 > splitIndex ? _ShortTitle + " - " + settings.SiteName : _ShortTitle.Substring(0, splitIndex) + " - " + settings.SiteName + _ShortTitle.Substring(splitIndex);
+            }
             else
-                Page.Title = _ShortTitle + " - " + settings.SiteName;
+                Page.Title = settings.SiteName;
         }
 
         /// <summary>
