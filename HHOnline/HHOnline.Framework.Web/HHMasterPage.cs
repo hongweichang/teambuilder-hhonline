@@ -7,7 +7,7 @@ using System.Web.UI;
 
 namespace HHOnline.Framework.Web
 {
-    public class HHMasterPage:MasterPage
+    public class HHMasterPage : MasterPage
     {
         protected override void OnLoad(EventArgs e)
         {
@@ -39,7 +39,7 @@ namespace HHOnline.Framework.Web
             HtmlMeta meta = new HtmlMeta();
             meta.Attributes.Add("content", "text/html; charset=utf-8");
             meta.Attributes.Add("http-equiv", "Content-Type");
-            Page.Header.Controls.Add(meta);
+            Page.Header.Controls.AddAt(0, meta);
         }
         /// <summary>
         /// 版权信息
@@ -77,7 +77,9 @@ namespace HHOnline.Framework.Web
         /// </summary>
         public virtual void SetTitle()
         {
-            if (!GlobalSettings.IsNullOrEmpty(_ShortTitle))
+            if (true == GlobalSettings.IsNullOrEmpty(_ShortTitle))
+                Page.Title = settings.SiteName;
+            else
                 Page.Title = _ShortTitle + " - " + settings.SiteName;
         }
 
@@ -89,8 +91,8 @@ namespace HHOnline.Framework.Web
             AddEncodeMeta();
             CompressCss();
             AddGenericLink("image/x-icon", "shortcut icon", "ICON", "images/favicon.ico");
-            AddJavaScriptInclude( "scripts/jquery-min.js", false, false);
-            AddJavaScriptInclude( "scripts/util.js", false, false);
+            AddJavaScriptInclude("scripts/jquery-min.js", false, false);
+            AddJavaScriptInclude("scripts/util.js", false, false);
             //AddJavaScriptInclude(GlobalSettings.RelativeWebRoot + "javascript/plugins/jquery-1.3.2.min.js", false, true);
 
             SetTitle();
@@ -219,7 +221,7 @@ namespace HHOnline.Framework.Web
             url = GlobalSettings.RelativeWebRoot + url;
             if (placeInBottom)
             {
-                string script = "<script type=\"text/javascript\"" + (addDeferAttribute ?  string.Empty: " defer=\"defer\"") + " src=\"" + ResolveScriptUrl(url) + "\"></script>";
+                string script = "<script type=\"text/javascript\"" + (addDeferAttribute ? string.Empty : " defer=\"defer\"") + " src=\"" + ResolveScriptUrl(url) + "\"></script>";
                 Page.ClientScript.RegisterStartupScript(GetType(), url.GetHashCode().ToString(), script);
             }
             else
@@ -263,7 +265,7 @@ namespace HHOnline.Framework.Web
                         if (GlobalSettings.CompressCss)
                             hc.Attributes["href"] = GlobalSettings.RelativeWebRoot + "jscss.axd?path=" + path;
                         else
-                            hc.Attributes["href"] = path; 
+                            hc.Attributes["href"] = path;
                         hc.EnableViewState = false;
                     }
                 }

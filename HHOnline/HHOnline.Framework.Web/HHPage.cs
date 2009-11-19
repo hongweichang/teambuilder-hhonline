@@ -14,7 +14,7 @@ namespace HHOnline.Framework.Web
     /// <summary>
     /// HHOnline.Portal 页面基类，继承自Page
     /// </summary>
-    public class HHPage:Page
+    public class HHPage : Page
     {
         protected override void OnPreRender(EventArgs e)
         {
@@ -80,7 +80,8 @@ namespace HHOnline.Framework.Web
         {
 
         }
-        static HHPage() {
+        static HHPage()
+        {
             _ControlPermissionChecked = new object();
             _ControlPermissionChecking = new object();
         }
@@ -159,7 +160,9 @@ namespace HHOnline.Framework.Web
         /// </summary>
         public virtual void SetTitle()
         {
-            if (!GlobalSettings.IsNullOrEmpty(_ShortTitle))
+            if (true == GlobalSettings.IsNullOrEmpty(_ShortTitle))
+                Page.Title = settings.SiteName;
+            else
                 Page.Title = _ShortTitle + " - " + settings.SiteName;
         }
         /// <summary>
@@ -178,7 +181,7 @@ namespace HHOnline.Framework.Web
             CompressCss();
             AddIcon();
             AddJavaScriptInclude("scripts/jquery-min.js", false, false);
-            AddJavaScriptInclude( "scripts/util.js", false, false);
+            AddJavaScriptInclude("scripts/util.js", false, false);
             //AddJavaScriptInclude(GlobalSettings.RelativeWebRoot + "javascript/plugins/jquery-1.3.2.min.js", false, true);
 
             SetTitle();
@@ -299,7 +302,7 @@ namespace HHOnline.Framework.Web
             url = GlobalSettings.RelativeWebRoot + url;
             if (placeInBottom)
             {
-                string script = "<script type=\"text/javascript\"" + (addDeferAttribute ?  string.Empty: " defer=\"defer\"") + " src=\"" + ResolveScriptUrl(url) + "\"></script>";
+                string script = "<script type=\"text/javascript\"" + (addDeferAttribute ? string.Empty : " defer=\"defer\"") + " src=\"" + ResolveScriptUrl(url) + "\"></script>";
                 ClientScript.RegisterStartupScript(GetType(), url.GetHashCode().ToString(), script);
             }
             else
@@ -327,7 +330,7 @@ namespace HHOnline.Framework.Web
             get { return _CheckedControl; }
             set { _CheckedControl = value; }
         }
-        private bool _AllowCheckPermission=true;
+        private bool _AllowCheckPermission = true;
         /// <summary>
         /// 是否允许当前页检查权限，默认为true
         /// </summary>
@@ -351,7 +354,8 @@ namespace HHOnline.Framework.Web
         /// </summary>
         public List<ModuleActionKeyValue> UserPermissionList
         {
-            get {
+            get
+            {
                 if (principal == null)
                     return null;
                 else
@@ -434,7 +438,7 @@ namespace HHOnline.Framework.Web
                 if (this.pageInfoType == InfoType.PageInfo)
                     throw new HHException(ExceptionType.ModuleInitFail, "权限代码必须形如ModuleName-ActionName。");
                 else
-                 throw new HHException(ExceptionType.NoMasterError, "权限代码必须形如ModuleName-ActionName。");
+                    throw new HHException(ExceptionType.NoMasterError, "权限代码必须形如ModuleName-ActionName。");
 
             }
             else
@@ -522,7 +526,7 @@ namespace HHOnline.Framework.Web
                         if (GlobalSettings.CompressCss)
                             hc.Attributes["href"] = GlobalSettings.RelativeWebRoot + "jscss.axd?path=" + path;
                         else
-                            hc.Attributes["href"] = path; 
+                            hc.Attributes["href"] = path;
                         hc.EnableViewState = false;
                     }
                 }
