@@ -17,12 +17,12 @@ namespace HHOnline.Framework
         private int settingsID;
         //基础设置
         private string defaultSiteName = "华宏在线";
-        private string defaultSiteDescription = "华宏在线商务平台";
+        private string defaultSiteDescription = "华宏在线电子商务平台";
         private string defaultDateFormat = "yyyy-MM-dd";
         private string defaultTimeFormat = "HH:mm";
         private string searchMetaDescription = "华宏在线";
         private string searchMetaKeywords = "华宏在线";
-        private string copyright = "CopyRight &copy; EHuaHo 2009";
+        private string copyright = "CopyRight &copy; eHUAHO 2009";
         private string termsOfServiceUrl = "";
         private string rawAdditionalHeader = "";
         private string googleAnalytics = "";
@@ -98,6 +98,7 @@ namespace HHOnline.Framework
         /// <summary>
         /// 页面头信息描述
         /// </summary>
+        [Obsolete]
         public string SearchMetaDescription
         {
             get { return searchMetaDescription; }

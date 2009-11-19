@@ -43,15 +43,15 @@ public partial class ControlPanel_Site_SiteSetting : HHPage
     public void btnPost_Click(object sender, EventArgs e)
     {
         SiteSettings settings = SiteSettingsManager.GetSiteSettings();
-        settings.Copyright = this.txtCopyright.Text;
-        settings.SearchMetaDescription = this.txtSearchMetaDescription.Text;
-        settings.SearchMetaKeywords = this.txtSearchMetaKeywords.Text;
-        settings.SiteDescription = this.txtSiteDesc.Text;
-        settings.SiteName = this.txtSiteName.Text;
+        settings.Copyright = this.txtCopyright.Text.Trim();
+        settings.SearchMetaDescription = this.txtSearchMetaDescription.Text.Trim();
+        settings.SearchMetaKeywords = this.txtSearchMetaKeywords.Text.Trim();
+        settings.SiteDescription = this.txtSiteDesc.Text.Trim();
+        settings.SiteName = this.txtSiteName.Text.Trim();
         settings.CompanyIdea = this.txtIdea.Text;
         settings.CompanyService = this.txtService.Text;
-        settings.CompanyICP = this.txtICP.Text;
-        settings.ServiceTel = this.txtServiceTel.Text;
+        settings.CompanyICP = this.txtICP.Text.Trim();
+        settings.ServiceTel = this.txtServiceTel.Text.Trim();
         if (fuShow.PostedFile != null && fuShow.PostedFile.ContentLength > 0)
         {
             settings.ShowPicture = Path.GetFileName(fuShow.PostedFile.FileName);

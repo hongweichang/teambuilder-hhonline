@@ -8,36 +8,41 @@
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
     <table class="postform" cellpadding="10" cellspacing="10">
         <tr>
-            <th style="width: 100px;">
-                站点名称
+            <th style="width: 150px;">
+                站点名称<br />
+                全局title信息
             </th>
             <td>
-                <asp:TextBox ID="txtSiteName" runat="server" Width="200" MaxLength="50"></asp:TextBox>
+                <asp:TextBox ID="txtSiteName" runat="server" Width="300" MaxLength="50"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfv1" runat="server" ErrorMessage="站点名称不能为空。" ControlToValidate="txtSiteName"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
             <th>
-                站点描述
+                站点描述<br />
+                全局description信息
             </th>
             <td>
-                <asp:TextBox ID="txtSiteDesc" runat="server" Width="500" MaxLength="200"></asp:TextBox>
+                <asp:TextBox ID="txtSiteDesc" runat="server" Width="500" MaxLength="200" TextMode="MultiLine"
+                    Height="45" Wrap="true"></asp:TextBox>
             </td>
         </tr>
         <tr>
+            <th>
+                站点关键字<br />
+                全局keywords信息
+            </th>
+            <td>
+                <asp:TextBox ID="txtSearchMetaKeywords" runat="server" Width="500" MaxLength="200"
+                    TextMode="MultiLine" Height="45" Wrap="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr runat="server" visible="false">
             <th>
                 页面头信息描述
             </th>
             <td>
                 <asp:TextBox ID="txtSearchMetaDescription" runat="server" Width="500" MaxLength="200"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                页面头信息关键字
-            </th>
-            <td>
-                <asp:TextBox ID="txtSearchMetaKeywords" runat="server" Width="500" MaxLength="200"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -53,7 +58,7 @@
                 公司理念
             </th>
             <td>
-                <hc:Editor ID="txtIdea" runat="server"></hc:Editor>
+                <hc:Editor ID="txtIdea" runat="server" Width="500"></hc:Editor>
             </td>
         </tr>
         <tr>
@@ -61,7 +66,7 @@
                 特色服务
             </th>
             <td>
-                <hc:Editor ID="txtService" runat="server" EditorMode="Enhanced"></hc:Editor>
+                <hc:Editor ID="txtService" runat="server" Width="500"></hc:Editor>
             </td>
         </tr>
         <tr runat="server" visible="false">

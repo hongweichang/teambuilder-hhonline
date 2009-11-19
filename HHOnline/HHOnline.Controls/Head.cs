@@ -86,9 +86,9 @@ namespace HHOnline.Controls
             NameValueCollection metaTags = Context.Items[metaKey] as NameValueCollection;
             if (metaTags == null)
                 metaTags = new NameValueCollection();
-            if (GlobalSettings.IsNullOrEmpty(metaTags["description"]) && !GlobalSettings.IsNullOrEmpty(settings.SearchMetaDescription))
+            if (GlobalSettings.IsNullOrEmpty(metaTags["description"]) && !GlobalSettings.IsNullOrEmpty(settings.SiteDescription))
             {
-                metaTags["description"] = settings.SearchMetaDescription;
+                metaTags["description"] = settings.SiteDescription;
             }
             if (GlobalSettings.IsNullOrEmpty(metaTags["keywords"]) && !GlobalSettings.IsNullOrEmpty(settings.SearchMetaKeywords))
             {
