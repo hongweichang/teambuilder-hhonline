@@ -75,7 +75,7 @@ namespace HHOnline.Controls
                     sb.AppendLine("<tr>");
 
                 sb.AppendLine("<td>");
-                sb.AppendLine("<div><a href=\"javascript:void(0)\">" + brandGroup[i] + "</a></div>");
+                sb.AppendLine("<div><div><a href=\"javascript:void(0)\">" + brandGroup[i] + "</a></div></div>");
                 pb = GetSubBrand(brandGroup[i],brands);
                 ProductBrand _pb = null;
                 for (int j = 0; j < pb.Count; j++)

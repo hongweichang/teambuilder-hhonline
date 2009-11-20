@@ -41,7 +41,23 @@ function signUp() {
             },
             success: function(json) {
                 if (json.suc) {
-                    window.location.href = json.msg;
+                    var _loc = json.msg.split('?');
+                    if (_loc.length > 1) {
+                        var _url = _loc[0] + "?";
+                        var params = _loc[1].split('&');
+                        var qr = [];
+                        var _q = '';
+                        for (var i in params) {
+                            qr = params[i].split('=');
+                            if (qr.length == 1) { _q += qr[0] + "&"; }
+                            else _q += qr[0] + "=" + escape(qr[1]) + "&";
+                        }
+                        _url += _q;
+                        _url = _url.substring(0, _url.length - 1);
+                        window.location.href = _url;
+                    } else {
+                        window.location.href = json.msg;
+                    }
                 }
                 else {
                     overlay.hide();

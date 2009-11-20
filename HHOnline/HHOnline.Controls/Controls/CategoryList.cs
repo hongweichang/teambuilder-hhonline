@@ -109,13 +109,11 @@ namespace HHOnline.Controls
 
             if (left > 0)
             {
-                sbLeft.Append("<div>");
                 for (int j = left; j > 0; j--)
                 {
                     pc = pcList[j + dev - left];
                     sbLeft.Append(BindCategory(pc, nav));
                 }
-                sbLeft.Append("</div>");
             }
 
             #region -Ignore-

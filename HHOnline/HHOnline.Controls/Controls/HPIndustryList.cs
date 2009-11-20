@@ -77,7 +77,7 @@ namespace HHOnline.Controls
                     sb.AppendLine("<tr>");
 
                 sb.AppendLine("<td>");
-                sb.AppendLine("<div><a href=\"" + nav + "&ID=" + indId + "\" target=\"_blank\">" + pi.IndustryName + "</a></div>");
+                sb.AppendLine("<div><div><a href=\"" + nav + "&ID=" + indId + "\" target=\"_blank\">" + pi.IndustryName + "</a></div></div>");
                 pis = ProductIndustries.GetChildIndustries(pi.IndustryID);
                 for (int j = 0; j < pis.Count;j++ )
                 {
