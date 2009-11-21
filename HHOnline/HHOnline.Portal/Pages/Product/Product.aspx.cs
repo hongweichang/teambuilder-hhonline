@@ -39,6 +39,7 @@ public partial class Pages_Product_Product : HHPage
         {
             p = GetProduct();
         }
+        pllProduct.ProductID = p.ProductID;
         ltProductName.Text = p.ProductName;
         ltDescription.Text = "最后更新：" + p.UpdateTime.ToShortDateString() + "  关键字：" + p.ProductKeywords;
         ltProductCode.Text = GetString(p.ProductCode);
@@ -47,7 +48,10 @@ public partial class Pages_Product_Product : HHPage
         BindIndustry(p.ProductID);
         BindBrand(p);
         BindPrice(p.ProductID);
-        ltDescription1.Text = p.ProductContent;
+
+        ltPAbstract.Text = p.ProductAbstract;
+        ltProductDetails.Text = p.ProductContent;
+
         BindProperty(p.ProductID);
         List<ProductModel> models = ProductModels.GetModelsByProductID(p.ProductID);
         if (models.Count == 0)
@@ -78,17 +82,19 @@ public partial class Pages_Product_Product : HHPage
             cat = GetCategories(pId);
         if (cat.Count == 0)
         {
-            ltCategory.Text = "——";
+            ltCategory.Text = "<ul><li><span>——</span></li></ul>";
         }
         else
         {
-            string cats = string.Empty;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<ul>");
             foreach (ProductCategory pc in cat)
             {
-                cats += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
-                             "pages/view.aspx?product-category&ID=" + GlobalSettings.Encrypt(pc.CategoryID.ToString()) + "\">" + pc.CategoryName + "</a>";
+                sb.Append( "<li><a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
+                             "pages/view.aspx?product-category&ID=" + GlobalSettings.Encrypt(pc.CategoryID.ToString()) + "\">" + pc.CategoryName + "</a></li>");
             }
-            ltCategory.Text = cats;
+            sb.Append("</ul>");
+            ltCategory.Text = sb.ToString();
         }
     }
     void BindIndustry(int pId)
@@ -96,29 +102,30 @@ public partial class Pages_Product_Product : HHPage
         List<ProductIndustry> pi = ProductIndustries.GetIndustriesByProductID(pId);
         if (pi.Count == 0)
         {
-            ltIndustry.Text = "——";
+            ltIndustry.Text = "<ul><li><span>——</span></li></ul>";
         }
         else
         {
-            string pis = string.Empty;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<ul>");
             foreach (ProductIndustry p in pi)
             {
-                pis += "<a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
-                            "pages/view.aspx?product-industry&ID=" + GlobalSettings.Encrypt(p.IndustryID.ToString()) + "\">" + p.IndustryName + "</a>";
+                sb.Append("<li><a target=\"_blank\" href=\"" + GlobalSettings.RelativeWebRoot +
+                           "pages/view.aspx?product-industry&ID=" + GlobalSettings.Encrypt(p.IndustryID.ToString()) + "\">" + p.IndustryName + "</a></li>");
             }
-            ltIndustry.Text = pis;
+            ltIndustry.Text = sb.ToString();
         }
     }
     void BindBrand(Product p)
     {
         if (p.BrandID == 0 || string.IsNullOrEmpty(p.BrandName))
         {
-            ltBrand.Text = "——";
+            ltBrand.Text = "无相关品牌";
         }
         else
         {
-            ltBrand.Text = "<a target=\"_blank\"  href=\"" + GlobalSettings.RelativeWebRoot +
-                                    "pages/view.aspx?product-brand&ID=" + GlobalSettings.Encrypt(p.BrandID.ToString()) + "\">" + p.BrandName + "</a>"; ;
+            ProductBrand pb = ProductBrands.GetProductBrand(p.BrandID);
+            ltBrand.Text = "<b>" + pb.BrandName + "</b>  " + pb.BrandContent;
         }
     }
     void BindPrice(int pId)
@@ -129,23 +136,39 @@ public partial class Pages_Product_Product : HHPage
         {
             p1 = ProductPrices.GetPriceDefault(pId);
             p2 = ProductPrices.GetPricePromote(0, pId);
-            priceText = GlobalSettings.GetPrice(p1, p2);
+            if (p2 != null)
+            {
+                lblPrice.Text = "促销价";
+                ltPrice1.Text = p2.Value.ToString("c");
+            }
+            else
+            {
+                ltPrice1.Text = (p1==null?"需询价":p1.Value.ToString("c"));
+            }
         }
         else
         {
             p1 = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, pId);
             p2 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, pId);
             p = ProductPrices.GetPricePromote(Profile.AccountInfo.UserID, pId);
-            priceText = GlobalSettings.GetPrice(true, p, GlobalSettings.GetMinPrice(p1, p2));
+            if (p != null)
+            {
+                lblPrice.Text = "促销价";
+                ltPrice1.Text = p.Value.ToString("c");
+            }
+            else
+            {
+                ltPrice1.Text = (p1==null?"需询价":p1.Value.ToString("c"));
+            }
+            ltPrice2.Text = (p2 == null ? "需询价" : p2.Value.ToString("c"));
         }
-        ltPrice.Text = priceText;
     }
     void BindProperty(int pId)
     {
         List<ProductProperty> props = ProductProperties.GetPropertiesByProductID(pId);
         if (props == null || props.Count == 0)
         {
-            msgBox.ShowMsg("此产品没有设置任何属性！", System.Drawing.Color.Gray);
+            msgBox.ShowMsg("--", System.Drawing.Color.Gray);
         }
         else
         {

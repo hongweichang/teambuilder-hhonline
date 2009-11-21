@@ -136,11 +136,13 @@
                 </div>
             </div>
             <div class="list-content">
-                <hc:ArticleList ID="alProduct" runat="server"></hc:ArticleList>
+                <div id="articleListContainer">
+                <hc:ArticleList ID="alProduct" runat="server" Num="100"></hc:ArticleList></div>
                 <div class="list-more">
                     <a href="pages/view.aspx?news-newslist" target="_blank" title="查看更多。。。">&nbsp;</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="main-r4plug" id="friendLinkMarque"></div>
 </asp:Content>

@@ -29,6 +29,7 @@ public partial class Main : HHPage
         this.ShortTitle = "首页";
         this.SetTitle();
         AddJavaScriptInclude("scripts/jquery.accordion.js", true, false);
+        AddJavaScriptInclude("scripts/jquery.marque.js", true, false);
         AddJavaScriptInclude("scripts/pages/main.aspx.js", true, false);
     }
 }

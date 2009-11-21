@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Controls\LetterList.cs">
     </Compile>
+    <Compile Include="Controls\ProductLikeList.cs" />
     <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\HtmlEditorMode.cs" />
@@ -125,6 +126,10 @@
     <ProjectReference Include="..\HHOnline.News\HHOnline.News.csproj">
       <Project>{AC741F63-A885-458A-82BC-B69114F6ACE4}</Project>
       <Name>HHOnline.News</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HHOnline.SearchBarrel\HHOnline.SearchBarrel.csproj">
+      <Project>{3C5587CC-4039-4E8E-B39C-3ED2A9BAE841}</Project>
+      <Name>HHOnline.SearchBarrel</Name>
     </ProjectReference>
     <ProjectReference Include="..\HHOnline.Shops\HHOnline.Shops.csproj">
       <Project>{EAF0EF22-8AD4-4772-A9D7-61EB86080B07}</Project>

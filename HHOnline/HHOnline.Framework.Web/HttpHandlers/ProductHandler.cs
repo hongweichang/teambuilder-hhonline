@@ -37,6 +37,18 @@ namespace HHOnline.Framework.Web.HttpHandlers
                 string action = req["action"];
                 switch (action)
                 {
+                    case "getFriendLinks":
+                        try
+                        {
+                            suc = true;
+                            msg = Newtonsoft.Json.JavaScriptConvert.SerializeObject(FriendLinks.FriendLinkGet());
+                        }
+                        catch (Exception ex)
+                        {
+                            suc = false;
+                            msg = ex.Message;
+                        }
+                        break;
                     case "addShopcart":
                         int pid = int.Parse(req["d"]);
                         int amount = int.Parse(req["c"]);
