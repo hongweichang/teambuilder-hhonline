@@ -8,6 +8,7 @@ using HHOnline.Shops;
 using HHOnline.Framework;
 using SD = System.Drawing;
 using System.Collections.Specialized;
+using System.Text;
 
 
 public partial class Pages_Product_Category : HHPage
@@ -80,11 +81,10 @@ public partial class Pages_Product_Category : HHPage
         {
             int catId = int.Parse(GlobalSettings.Decrypt(id));
             ProductCategory pc = ProductCategories.GetCategory(catId);
-<<<<<<< .mine            if (pc != null)
-                this.ShortTitle = pc.CategoryName;
+            if (pc != null)
+                catName = pc.CategoryName;
             else
-                this.ShortTitle = "分类信息";
-=======            catName = pc.CategoryName;
+                catName = "分类信息";
 
             //获取子分类
             List<ProductCategory> childCategories = ProductCategories.GetChidCategories(pc.CategoryID);
@@ -109,7 +109,7 @@ public partial class Pages_Product_Category : HHPage
                 }
             }
             catRelated = sbRelated.ToString().Replace(catName + ",", string.Empty).TrimEnd(',');
->>>>>>> .theirs        }
+        }
         else
         {
             List<ProductCategory> relateCategories = ProductCategories.GetCategories();
