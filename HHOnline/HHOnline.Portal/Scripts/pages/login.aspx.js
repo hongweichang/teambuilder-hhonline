@@ -45,12 +45,17 @@ function signUp() {
                     if (_loc.length > 1) {
                         var _url = _loc[0] + "?";
                         var params = _loc[1].split('&');
-                        var qr = [];
                         var _q = '';
+                        var _index = -1;
+                        var _pa = '';
                         for (var i in params) {
-                            qr = params[i].split('=');
-                            if (qr.length == 1) { _q += qr[0] + "&"; }
-                            else _q += qr[0] + "=" + escape(qr[1]) + "&";
+                            _pa = '';
+                            _index = params[i].indexOf('=');
+                            if (_index < 0) { _q += params[i] + "&"; }
+                            else {
+                                _q += params[i].substring(0, _index)+'=';
+                                _q += escape(params[i].substring(_index+1, params[i].length - _index + 2)) + '&';
+                            }
                         }
                         _url += _q;
                         _url = _url.substring(0, _url.length - 1);
