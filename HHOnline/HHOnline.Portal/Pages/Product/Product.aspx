@@ -23,6 +23,14 @@
                         <td colspan="3"><asp:Literal ID="ltProductCode" runat="server"></asp:Literal></td>
                     </tr>
                     <tr>
+                        <th>品牌：</th>
+                        <td colspan="3"><asp:Literal ID="ltBrand2" runat="server"></asp:Literal></td>
+                    </tr>
+                   <tr>
+                        <th>名称：</th>
+                        <td colspan="3"><asp:Literal ID="ltProductName2" runat="server"></asp:Literal></td>
+                    </tr>
+                    <tr runat="server" visible="false">
                         <th valign="top">摘要：</th>
                         <td colspan="3" valign="top"><asp:Literal ID="ltProductAbstract" runat="server"></asp:Literal></td>
                     </tr>
@@ -52,7 +60,7 @@
                         <th valign="top">会员价：</th>
                         <td valign="top" class="price"><asp:Literal ID="ltPrice2" runat="server" Text="登录后显示"></asp:Literal></td>
                     </tr>
-                    <tr>
+                    <tr runat="server" visible="false">
                         <th>型号：</th>
                         <td colspan="3" valign="top" id="modelTracer">
                             <asp:Literal ID="ltModel" runat="server"></asp:Literal>

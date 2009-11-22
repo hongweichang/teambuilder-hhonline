@@ -26,7 +26,7 @@ public partial class Main : HHPage
     }
     public override void OnPageLoaded()
     {
-        this.ShortTitle = "首页";
+        this.ShortTitle = "华宏仪器仪表在线";
         this.SetTitle();
         AddJavaScriptInclude("scripts/jquery.accordion.js", true, false);
         AddJavaScriptInclude("scripts/jquery.marque.js", true, false);
