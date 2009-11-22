@@ -77,15 +77,16 @@ public partial class Pages_Product_Category : HHPage
         StringBuilder sbRelated = new StringBuilder();
 
         string id = Request.QueryString["ID"];
+        ProductCategory pc = null;
         if (!string.IsNullOrEmpty(id))
         {
             int catId = int.Parse(GlobalSettings.Decrypt(id));
-            ProductCategory pc = ProductCategories.GetCategory(catId);
-            if (pc != null)
-                catName = pc.CategoryName;
-            else
-                catName = "分类信息";
+            pc = ProductCategories.GetCategory(catId);
+            if (pc != null) catName = pc.CategoryName;
+        }
 
+        if (!string.IsNullOrEmpty(catName))
+        {
             //获取子分类
             List<ProductCategory> childCategories = ProductCategories.GetChidCategories(pc.CategoryID);
             if (null == childCategories || 0 == childCategories.Count)
