@@ -416,7 +416,7 @@ namespace HHOnline.Framework
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "[" + planText + "]");
             }
         }
         #endregion
