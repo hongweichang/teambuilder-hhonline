@@ -61,7 +61,7 @@ $().ready(function() {
 
     $('#productNavigator1').find('li').click(changeTab);
     $('#productNavigator2').find('li').click(changeTab);
-    loadFriendLinks();
+    //loadFriendLinks();
 
     $('#articleListContainer').marque({
         width:280,

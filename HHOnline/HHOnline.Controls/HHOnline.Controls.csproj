@@ -84,6 +84,7 @@
     <Compile Include="Controls\LetterList.cs">
     </Compile>
     <Compile Include="Controls\ProductLikeList.cs" />
+    <Compile Include="Controls\FriendLinksList.cs" />
     <Compile Include="DateSpan.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\HtmlEditorMode.cs" />

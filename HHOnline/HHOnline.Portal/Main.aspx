@@ -144,5 +144,7 @@
             </div>
         </div>
     </div>
-    <div class="main-r4plug" id="friendLinkMarque"></div>
+    <div class="main-r4plug" id="friendLinkMarque">
+        <hc:FriendLinksList ID='fll1' runat="Server"></hc:FriendLinksList>
+    </div>
 </asp:Content>
