@@ -6,10 +6,15 @@ namespace HHOnline.Common
     public class LuceneHelper
     {
         private static readonly string[] LuceneKeywords = new string[] { @"\", "(", ")", ":", "^", "[", "]", "{", "}", "~", "*", "?", "!", "\"", "'" };
+        private static readonly string[] LuceneOperator = new string[] { "AND", "OR", "NOT" };
 
         public static string LuceneKeywordsScrubber(string str)
         {
             str = Remove(str, LuceneKeywords);
+            foreach (string op in LuceneOperator)
+            {
+                str = str.Replace(op, op.ToLower());
+            }
             return str.Trim();
         }
 
