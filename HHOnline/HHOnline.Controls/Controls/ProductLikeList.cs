@@ -70,7 +70,7 @@ namespace HHOnline.Controls
             sb.AppendLine("<table cellpadding=\"0\" cellspacing=\"0\" class=\""+_CssClass+"\">");
             string pId = string.Empty;
             int length = psList.Count;
-
+            string pn = string.Empty;
             for (int i = 0; i < psList.Count; i++)
             {
                 p = psList[i];
@@ -85,7 +85,8 @@ namespace HHOnline.Controls
                                     "</div>"+
                                 "</a>"+
                                "</div>");
-
+                pn = HtmlHelper.RemoveHtml(p.ProductName);
+                sb.AppendLine("<div class=\"piProductName\" title='" + pn + "'>" + GlobalSettings.SubString(pn, 15) + "</div>");
                 sb.AppendLine("<div class=\"piPrice\">" + GetPrice(p.ProductID) + "</div>");
                 sb.AppendLine("</td>");
 

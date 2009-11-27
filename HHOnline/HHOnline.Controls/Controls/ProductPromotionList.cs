@@ -89,6 +89,7 @@ namespace HHOnline.Controls
                                 "</a>"+
                                "</div>");
 
+                sb.AppendLine("<div class=\"piProductName\" title='"+p.ProductName+"'>" + GlobalSettings.SubString(p.ProductName,15) + "</div>");
                 sb.AppendLine("<div class=\"piPrice\">" + GetPrice(p.ProductID) + "</div>");
                 sb.AppendLine("</td>");
 
