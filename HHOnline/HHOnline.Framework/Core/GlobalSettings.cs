@@ -404,9 +404,9 @@ namespace HHOnline.Framework
         {
             try
             {
-                planText = HttpUtility.UrlDecode(planText);
-                planText = planText.Replace(plusReplacer, "+");
-                byte[] inputs = Convert.FromBase64String(planText);
+                string deText = HttpUtility.UrlDecode(planText);
+                deText = deText.Replace(plusReplacer, "+");
+                byte[] inputs = Convert.FromBase64String(deText);
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 byte[] buffer = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(encryptKey));
                 TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
@@ -416,7 +416,7 @@ namespace HHOnline.Framework
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "[" + planText + "]");
+                throw new Exception(ex.Message + "[" + planText + "]", ex);
             }
         }
         #endregion

@@ -112,15 +112,41 @@ namespace HHOnline.Framework.Web
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "regjs", js, true);
         }
         /// <summary>
-        /// 新增网站Keywords
+        /// 新增或更新页面keywords
         /// </summary>
         /// <param name="value">keywords 值</param>
         public virtual void AddKeywords(string value)
         {
-            HtmlMeta meta = new HtmlMeta();
-            meta.Name = "keywords";
-            meta.Content = value;
-            Page.Header.Controls.Add(meta);
+            bool isExist = false;
+            foreach (Control ctrl in Page.Header.Controls)
+            {
+                if (false == (ctrl is HtmlMeta))
+                    continue;
+                HtmlMeta meta = (HtmlMeta)ctrl;
+                if (meta.Name.ToLower() == "keywords")
+                {
+                    meta.Content = value + "; " + meta.Content;
+                    isExist = true;
+                    break;
+                }
+            }
+            if (false == isExist)
+            {
+                HtmlMeta meta = new HtmlMeta();
+                meta.Name = "keywords";
+                meta.Content = value;
+
+                Page.Header.Controls.Add(meta);
+            }
+        }
+        /// <summary>
+        /// 批量新增页面keywords
+        /// </summary>
+        /// <param name="values">keywords 值</param>
+        public virtual void AddKeywords(params string[] values)
+        {
+            if (null != values && 0 < values.Length)
+                AddKeywords(string.Join(",", values));
         }
         /// <summary>
         /// 执行Js语句
@@ -143,46 +169,43 @@ namespace HHOnline.Framework.Web
             }
         }
         /// <summary>
-        /// 批量新增网站Keywords
-        /// </summary>
-        /// <param name="values">keywords 值</param>
-        public virtual void AddKeywords(params string[] values)
-        {
-            HtmlMeta meta = null;
-            foreach (string v in values)
-            {
-                meta = new HtmlMeta();
-                meta.Name = "keywords";
-                meta.Content = v;
-                Page.Header.Controls.Add(meta);
-            }
-        }
-        /// <summary>
-        /// 新增网站description
+        /// 新增或更新页面description
         /// </summary>
         /// <param name="value">description 值</param>
         public virtual void AddDescription(string value)
         {
-            HtmlMeta meta = new HtmlMeta();
-            meta.Name = "description";
-            meta.Content = value;
-            Page.Header.Controls.Add(meta);
+            bool isExist = false;
+            foreach (Control ctrl in Page.Header.Controls)
+            {
+                if (false == (ctrl is HtmlMeta))
+                    continue;
+                HtmlMeta meta = (HtmlMeta)ctrl;
+                if (meta.Name.ToLower() == "description")
+                {
+                    meta.Content = value + "; " + meta.Content;
+                    isExist = true;
+                    break;
+                }
+            }
+            if (false == isExist)
+            {
+                HtmlMeta meta = new HtmlMeta();
+                meta.Name = "description";
+                meta.Content = value;
+
+                Page.Header.Controls.Add(meta);
+            }
         }
         /// <summary>
-        /// 批量新增网站description
+        /// 批量新增页面description
         /// </summary>
         /// <param name="values">description 值</param>
         public virtual void AddDescription(params string[] values)
         {
-            HtmlMeta meta = null;
-            foreach (string v in values)
-            {
-                meta = new HtmlMeta();
-                meta.Name = "description";
-                meta.Content = v;
-                Page.Header.Controls.Add(meta);
-            }
+            if (null != values && 0 < values.Length)
+                AddDescription(string.Join(",", values));
         }
+
         /// <summary>
         /// 在head中添加link标记
         /// </summary>
