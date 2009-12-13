@@ -47,6 +47,7 @@ namespace HHOnline.Controls
                 return _Cache[ft];
             ProductQuery pq = new ProductQuery();
             pq.FocusType = _ProductType;
+            pq.HasPublished = true;
             List<Product> ps = Products.GetProductList(pq);
             
             string nav = GlobalSettings.RelativeWebRoot + "pages/view.aspx?product-product";
@@ -108,6 +109,25 @@ namespace HHOnline.Controls
                         _Cache.Add(ft, sb.ToString());
             return sb.ToString();
         }
+        List<Product> __ps = null;
+        bool IsPromote(int pId)
+        {
+
+            ProductQuery pq = new ProductQuery();
+            pq.FocusType = FocusType.Promotion;
+            pq.HasPublished = true;
+            if (__ps == null)
+                __ps = Products.GetProductList(pq);
+            if (__ps == null || __ps.Count == 0) return false;
+            else
+            {
+                foreach (Product p in __ps)
+                {
+                    if (p.ProductID == pId) return true;
+                }
+            }
+            return false;
+        }
         string GetPrice(int pId)
         {
             decimal? price1 = null;
@@ -120,14 +140,14 @@ namespace HHOnline.Controls
                 User u = spvc["AccountInfo"].PropertyValue as User;
                 price1 = ProductPrices.GetPriceMarket(u.UserID, pId);
                 price2 = ProductPrices.GetPriceMember(u.UserID, pId);
-                price3 = ProductPrices.GetPricePromote(u.UserID, pId);
+                price3 = IsPromote(pId) ? ProductPrices.GetPricePromote(u.UserID, pId) : null;
                 p = GlobalSettings.GetMinPrice(price1, price2);
                 return GlobalSettings.GetPrice(p, price3);
             }
             else
             {
                 price1 = ProductPrices.GetPriceDefault(pId);
-                price3 = ProductPrices.GetPricePromote(0, pId);
+                price3 = IsPromote(pId) ? ProductPrices.GetPricePromote(0, pId) : null;
                 return GlobalSettings.GetPrice(price1, price3);
             }
         }

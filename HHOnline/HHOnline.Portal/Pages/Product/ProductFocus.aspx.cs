@@ -17,6 +17,7 @@ public partial class Pages_Product_ProductFocus : HHPage
             try { ft = (FocusType)int.Parse(Request.QueryString["t"]); }
             catch { }
             q.FocusType = ft;
+            q.HasPublished = true;
             switch (ft)
             {
                 case FocusType.New:

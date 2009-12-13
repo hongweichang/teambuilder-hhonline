@@ -132,6 +132,21 @@ public partial class Pages_Product_Product : HHPage
             ltBrand.Text = string.Format("<a target=\"_blank\" href=\"{0}pages/view.aspx?product-brand&ID={1}\"><b>{2}</b></a>{3}", GlobalSettings.RelativeWebRoot, GlobalSettings.Encrypt(p.BrandID.ToString()), pb.BrandName, pb.BrandContent);
         }
     }
+    bool IsPromote(int pId) {
+
+        ProductQuery pq = new ProductQuery();
+        pq.FocusType = FocusType.Promotion;
+        pq.HasPublished = true;
+        List<Product> ps = Products.GetProductList(pq);
+        if (ps == null || ps.Count == 0) return false;
+        else
+        {
+            foreach (Product p in ps) {
+                if (p.ProductID == pId) return true;
+            }
+        }
+        return false;
+    }
     void BindPrice(int pId)
     {
         decimal? p = null, p1 = null, p2 = null;
@@ -139,7 +154,7 @@ public partial class Pages_Product_Product : HHPage
         if (!Context.User.Identity.IsAuthenticated)
         {
             p1 = ProductPrices.GetPriceDefault(pId);
-            p2 = ProductPrices.GetPricePromote(0, pId);
+            p2 = IsPromote(pId) ? ProductPrices.GetPricePromote(0, pId) : null;
             if (p2 != null)
             {
                 lblPrice.Text = "促销价";
@@ -154,7 +169,7 @@ public partial class Pages_Product_Product : HHPage
         {
             p1 = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, pId);
             p2 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, pId);
-            p = ProductPrices.GetPricePromote(Profile.AccountInfo.UserID, pId);
+            p = IsPromote(pId) ? ProductPrices.GetPricePromote(Profile.AccountInfo.UserID, pId) : null;
             if (p != null)
             {
                 lblPrice.Text = "促销价";

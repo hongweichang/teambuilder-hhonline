@@ -186,6 +186,7 @@ public partial class ControlPanel_Product_Product : HHPage
     void BindLinkButton()
     {
         this.lbNewProduct.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd";
+        this.lbQuickNew.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productquickadd";
         this.lnkAll.PostBackUrl = destinationURL;
         this.lnkNoPicture.PostBackUrl = destinationURL + "&hp=0";
         this.lnkNoPriced.PostBackUrl = destinationURL + "&pr=0";
@@ -267,7 +268,8 @@ public partial class ControlPanel_Product_Product : HHPage
 
     protected void egvProducts_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd&ID=" + egvProducts.DataKeys[e.RowIndex].Value);
+        //Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd&ID=" + egvProducts.DataKeys[e.RowIndex].Value);
+        Response.Redirect(GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productquickadd&ID=" + egvProducts.DataKeys[e.RowIndex].Value);
     }
 
     protected void egvProducts_RowDataBound(object sender, GridViewRowEventArgs e)

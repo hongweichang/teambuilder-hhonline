@@ -7,6 +7,9 @@
     <asp:LinkButton ID="lbNewProduct" runat="server" SkinID="lnkopts">
         <span>新 增</span>
     </asp:LinkButton>
+    <asp:LinkButton ID="lbQuickNew" runat="server" SkinID="lnkopts">
+        <span>新增(快速)</span>
+    </asp:LinkButton>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="detail-r1c1" style="border: solid 1px #ccc;">
@@ -91,7 +94,7 @@
                         runat="server" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="ProductName" HeaderText="产品名称"  DataFormatString="{0:S40}"/>
+            <asp:BoundField HeaderText="产品名称" DataField="ProductName"  DataFormatString="{0:S40}" ItemStyle-Width="450"/>
             <asp:BoundField HeaderText="产品品牌" DataField="BrandName" />
             <asp:BoundField HeaderText="介绍摘要" DataField="ProductAbstract" DataFormatString="{0:S20}" />
              <asp:TemplateField HeaderText="来源">

@@ -31,6 +31,25 @@ public partial class UserControls_UCProductList : System.Web.UI.UserControl
     }
 
     #region -Events-
+    List<Product> __ps = null;
+    bool IsPromote(int pId)
+    {
+
+        ProductQuery pq = new ProductQuery();
+        pq.FocusType = FocusType.Promotion;
+        pq.HasPublished = true;
+        if (__ps == null)
+            __ps = Products.GetProductList(pq);
+        if (__ps == null || __ps.Count == 0) return false;
+        else
+        {
+            foreach (Product p in __ps)
+            {
+                if (p.ProductID == pId) return true;
+            }
+        }
+        return false;
+    }
     protected void dlProduct_ItemDataBound(object sender, DataListItemEventArgs e)
     {
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -51,14 +70,14 @@ public partial class UserControls_UCProductList : System.Web.UI.UserControl
                 if (!Context.User.Identity.IsAuthenticated)
                 {
                     p1 = ProductPrices.GetPriceDefault(product.ProductID);
-                    p2 = ProductPrices.GetPricePromote(0, product.ProductID);
+                    p2 = IsPromote(product.ProductID) ? ProductPrices.GetPricePromote(0, product.ProductID) : null;
                     priceText = GlobalSettings.GetPrice(p1,p2);
                 }
                 else
                 {
                     p1 = ProductPrices.GetPriceMarket(Profile.AccountInfo.UserID, product.ProductID);
                     p2 = ProductPrices.GetPriceMember(Profile.AccountInfo.UserID, product.ProductID);
-                    p = ProductPrices.GetPricePromote(Profile.AccountInfo.UserID, product.ProductID);
+                    p = IsPromote(product.ProductID) ?ProductPrices.GetPricePromote(Profile.AccountInfo.UserID, product.ProductID):null;
                     priceText = GlobalSettings.GetPrice(true, p, GlobalSettings.GetMinPrice(p1, p2));
                 }
                 ltPrice.Text = priceText;

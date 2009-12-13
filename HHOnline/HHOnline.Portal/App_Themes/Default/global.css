@@ -14,7 +14,7 @@ input.button,button.button{background-color:#005EAC;border-color:#D8DFEA #0E1F5B
 .linkbutton,.linkbutton span
 {background-image:url(../../images/default/hhonline_bg.gif);}
 /*region*/
-.linkbutton{height:26px;display:block;text-decoration:none;background-repeat:no-repeat;background-position:0 3px;padding-left:4px}
+.linkbutton{height:26px;display:block;text-decoration:none;background-repeat:no-repeat;background-position:0 3px;padding-left:4px;margin-left:4px;}
 .linkbutton span{cursor:pointer;height:26px;display:block;background-repeat:no-repeat;background-color:#fff;background-position:-103px 3px;width:75px;text-align:center;line-height:29px;color:#000080;font-weight:bold;}
 .labelmessage{background:url(../../images/default/information-alert.gif) no-repeat 5px center;height:24px;display:block;padding-left:18px;line-height:26px;}
 a:hover.linkbutton
@@ -29,6 +29,13 @@ a:hover.linkbutton span
     color:#fff;
     font-weight:900;
     }
+a.setting
+{
+    padding:2px;
+    text-decoration:none;
+    color:#000fff;
+    }
+a:hover.setting{color:#ff0000; text-decoration:underline}
 a.opts
 {    
     width:21px;
@@ -52,11 +59,12 @@ a.opts
     font-weight:normal;
     color:#000080;
     text-align:right;
-    padding-right:10px;
+    padding:5px 10px;
     }
-postform td
+.postform td
 {
     text-align:left;
+    padding:5px;
     }
 a.delete,a.edit,a.view,a.add,
 /*.cp-head .head-r1c2 a,*/
@@ -3710,6 +3718,10 @@ a:hover.addProductFav
     height:20px;
     display:block;
     }
+.focusType .none,.productNav .none
+{
+    background:url(../../images/default/none.gif) no-repeat 1px center;
+    }
 .focusType .new,.productNav .new
 {
     background:url(../../images/default/new.gif) no-repeat 1px center;
@@ -4228,3 +4240,35 @@ a:hover.navCompany .companyDetailsRemark_s
 	float: right;
 	padding-bottom: 0.7em;	
 }
+.sc_nav
+{
+    height:20px;
+    border-bottom:solid 1px #dedede;
+    }
+.sc_nav a{color:#0000f0; text-decoration:none}
+.sc_nav a:hover{color:#ff0000}
+#sc_list{height:270px;overflow:auto;}
+.sc_list_item{width:170px;height:25px;display:block;float:left;padding-top:3px;}
+.sc_list_item input{width:20px;height:25px;float:left;}
+.sc_list_item a{width:130px;height:23px;padding-left:5px;float:left;display:block;text-decoration:none;line-height:23px;border:solid 1px #ccc;background:#dedede}
+.sc_list_item a:hover{color:#ff0000;}
+
+.cat_list{margin-bottom:3px;white-space:nowrap;margin-right:3px;text-decoration:none;float:left;cursor:text;}
+a:link.cat_list,a:link.cat_list span,a:visited.cat_list,a:visited.cat_list span{background-image:url(../../images/default/roundbg.gif);}
+a:hover.cat_list,a:hover.cat_list span{background-image:url(../../images/default/roundbg_hover.gif);text-decoration:none}
+
+.cat_list span{background-position:right 0;display:block;}
+.cat_list span span{background-position:right bottom}
+.cat_list span span span{background-position:0 bottom}
+.cat_list span span span span{background-image:none;padding:2px 3px 2px 5px;}
+.cat_list span span span span span.close{
+    background:url(../../images/default/close_x.gif) no-repeat center 0;
+    cursor:pointer;
+    display:inline-block;
+    height:7px;
+    width:4px;
+    line-height:14px;
+}
+.cat_list span span span span span.closeHover_CL{background-position:center -10px;}
+.cat_navC a{color:#0000ff; text-decoration:underline}
+.cat_navC a:hover{color:#ff0000; text-decoration:underline}

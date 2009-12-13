@@ -20,10 +20,11 @@ namespace HHOnline.Controls
             });
              * */
             this.Items.AddRange(new ListItem[]{
+                new ListItem("<span class=\"opts none\" title=\"无\"></span>", ((int)FocusType.None).ToString()),
                 new ListItem("<span class=\"opts new\" title=\"新品上架\"></span>", ((int)FocusType.New).ToString()),
                 new ListItem("<span class=\"opts hot\" title=\"热卖产品\"></span>", ((int)FocusType.Hot).ToString()),
                 new ListItem("<span class=\"opts recommend\" title=\"推荐产品\"></span>", ((int)FocusType.Recommend).ToString()),
-                new ListItem("<span class=\"opts promotion\" title=\"促销产品\"></span>", ((int)FocusType.Promotion).ToString()),
+                new ListItem("<span class=\"opts promotion\" title=\"促销产品\"></span>", ((int)FocusType.Promotion).ToString())
             });
         }
 

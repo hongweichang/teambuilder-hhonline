@@ -497,6 +497,56 @@ namespace HHOnline.Data
                 product.ProductID = Convert.ToInt32(paramID.Value);
             return product;
         }
+        public override Product CreateUpdateProduct(Product product, int focusType, string categoryIDList, string industryIDList,
+            ProductPrice price, DataProviderAction action, out DataActionStatus status)
+        {
+            ELParameter paramID = null;
+            if (action == DataProviderAction.Create)
+            {
+                paramID = new ELParameter("@ProductID", DbType.Int32, 4, ParameterDirection.Output);
+            }
+            else
+            {
+                paramID = new ELParameter("@ProductID", DbType.Int32, product.ProductID);
+            }
+            ELParameter paramReturn = new ELParameter("@ReturnValue", DbType.Int32, 4, ParameterDirection.ReturnValue);
+            ELParameter[] elParameters = new ELParameter[]{
+                    paramID,
+                    paramReturn,
+                    new ELParameter("@ProductCode",DbType.String,product.ProductCode),
+                    new ELParameter("@ProductName",DbType.String,product.ProductName),
+                    new ELParameter("@ProductDesc",DbType.String,product.ProductDesc),
+                    new ELParameter("@ProductAbstract",DbType.String,product.ProductAbstract),
+                    new ELParameter("@ProductContent",DbType.String,product.ProductContent),
+                    new ELParameter("@BrandID",DbType.Int32,DataHelper.IntOrNull(product.BrandID)),
+                    new ELParameter("@ProductKeywords",DbType.String,product.ProductKeywords),
+                    new ELParameter("@ProductStatus",DbType.Int32,product.ProductStatus),
+                    new ELParameter("@DisplayOrder",DbType.Int32,product.DisplayOrder),
+                    new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
+                    new ELParameter("@PropertyNames",DbType.String,product.GetSerializerData().Keys),
+                    new ELParameter("@PropertyValues",DbType.String,product.GetSerializerData().Values),
+                    new ELParameter("@CategoryIDList",DbType.String,categoryIDList),
+                    new ELParameter("@IndustryIDList",DbType.String,industryIDList),
+                    
+                    new ELParameter("@PriceMarket",DbType.Decimal,price.PriceMarket),
+                    new ELParameter("@PricePromotion",DbType.Decimal,price.PricePromotion),
+                    new ELParameter("@PriceGradeA",DbType.Decimal,price.PriceGradeA),
+                    new ELParameter("@PriceGradeB",DbType.Decimal,price.PriceGradeB),
+                    new ELParameter("@PriceGradeC",DbType.Decimal,price.PriceGradeC),
+                    new ELParameter("@PriceGradeD",DbType.Decimal,price.PriceGradeD),
+                    new ELParameter("@PriceGradeE",DbType.Decimal,price.PriceGradeE),
+                    new ELParameter("@QuoteFrom",DbType.DateTime,DateTime.Now),
+                    new ELParameter("@QuoteEnd",DbType.DateTime,DateTime.Now.AddMonths(1)),
+                    new ELParameter("@FocusType",DbType.Int32,focusType),
+
+                    new ELParameter("@Action",DbType.Int32,action),
+                };
+            DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Product_CreateUpdate1", elParameters);
+            status = (DataActionStatus)Convert.ToInt32(paramReturn.Value);
+            if (action == DataProviderAction.Create && status == DataActionStatus.Success)
+                product.ProductID = Convert.ToInt32(paramID.Value);
+            return product;
+        }
 
         private static object ConvertProductPropertiesToXML(List<ProductProperty> properties)
         {

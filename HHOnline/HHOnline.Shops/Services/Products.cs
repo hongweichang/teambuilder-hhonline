@@ -37,6 +37,21 @@ namespace HHOnline.Shops
             }
             return status;
         }
+        public static DataActionStatus Create(Product product,int focusType, string categoryIDList, string industryIDList, ProductPrice price)
+        {
+            DataActionStatus status;
+            product = ShopDataProvider.Instance.CreateUpdateProduct(product, focusType,categoryIDList, industryIDList,
+                price, DataProviderAction.Create, out status);
+            if (status == DataActionStatus.Success)
+            {
+                OnUpdated();
+                //处理临时附件信息  
+                SavePicturesAndFilterBody(product);
+                //处理缓存信息
+                HHCache.Instance.Remove(CacheKeyManager.ProductListKey);
+            }
+            return status;
+        }
 
         /// <summary>
         /// 保存临时附件到产品图片表
@@ -108,6 +123,19 @@ namespace HHOnline.Shops
             DataActionStatus status;
             product = ShopDataProvider.Instance.CreateUpdateProduct(product, categoryIDList, industryIDList,
                 properties, DataProviderAction.Update, out status);
+            if (status == DataActionStatus.Success)
+            {
+                OnUpdated();
+                HHCache.Instance.Remove(CacheKeyManager.GetProductKey(product.ProductID));
+                HHCache.Instance.Remove(CacheKeyManager.ProductListKey);
+            }
+            return status;
+        }
+        public static DataActionStatus Update(Product product,int focusType, string categoryIDList, string industryIDList, ProductPrice price)
+        {
+            DataActionStatus status;
+            product = ShopDataProvider.Instance.CreateUpdateProduct(product,focusType, categoryIDList, industryIDList,
+                price, DataProviderAction.Update, out status);
             if (status == DataActionStatus.Success)
             {
                 OnUpdated();

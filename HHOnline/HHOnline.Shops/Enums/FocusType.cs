@@ -8,6 +8,7 @@ namespace HHOnline.Shops
     /// </summary>
     public enum FocusType
     {
+        None=0,
         /// <summary>
         /// 新品上架
         /// </summary>

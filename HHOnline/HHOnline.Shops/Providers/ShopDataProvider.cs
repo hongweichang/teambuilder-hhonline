@@ -234,6 +234,7 @@ namespace HHOnline.Shops.Providers
         #region Product
         public abstract Product CreateUpdateProduct(Product product, string categoryIDList, string industryIDList, List<ProductProperty> properties, DataProviderAction action, out DataActionStatus status);
 
+        public abstract Product CreateUpdateProduct(Product product,int focusType, string categoryIDList, string industryIDList, ProductPrice price, DataProviderAction action, out DataActionStatus status);
         public abstract Product GetProduct(int productID);
 
         public abstract DataActionStatus DeleteProduct(int productID);

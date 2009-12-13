@@ -65,7 +65,7 @@ public partial class ControlPanel_product_ProductPriceAdd : HHPage
         if (product != null)
         {
             this.hyProductName.Text = product.ProductName;
-            this.hyProductName.NavigateUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product&&di=" + productID;
+            this.hyProductName.NavigateUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-product&&id=" + productID;
         }
         else
         {

@@ -22,6 +22,10 @@ namespace HHOnline.Framework
         /// <summary>
         /// 编辑
         /// </summary>
-        Edit = 2
+        Edit = 2,
+        /// <summary>
+        /// 复制
+        /// </summary>
+        Copy=3
     }
 }
