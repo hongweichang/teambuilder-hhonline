@@ -4272,3 +4272,16 @@ a:hover.cat_list,a:hover.cat_list span{background-image:url(../../images/default
 .cat_list span span span span span.closeHover_CL{background-position:center -10px;}
 .cat_navC a{color:#0000ff; text-decoration:underline}
 .cat_navC a:hover{color:#ff0000; text-decoration:underline}
+
+
+/**context menu**/
+.jqcmMenu{ position:absolute;z-index:99999 }
+.jqcmMenu ul{ list-style-type:none; padding:1px;margin:0;background-color:#F0F0F0;border:solid 1px #979797;width:200px;}
+.jqcmShadow {z-index:99998;background-color:#dedede;position:absolute}
+.jqcmItem { margin:0;color:#000;display:block;cursor:default;padding:5px 3px;border:solid 1px #F0F0F0;background-color:Transparent;padding-left:20px;}
+.jqcmItemHover{ border:1px solid #AECFF7;background-color:#EBF0F7;}
+.jqcmSeperate{margin:2px; border:double 1px #dedede; height:1px;background-color:#888; overflow:hidden}
+
+.batchOpts{padding:20px 10px 20px 35px;}
+.batchOptsLoader {background:url(../../images/default/indicator.gif) no-repeat 10px center;}
+.batchDelete{background-image:url(../../images/default/cancel.gif);background-repeat: no-repeat;background-position: 2px center}

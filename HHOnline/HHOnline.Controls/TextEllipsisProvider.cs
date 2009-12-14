@@ -56,19 +56,9 @@ namespace HHOnline.Controls
                     }
                 }
             }
-            else if ('B' == str)
+            else if ('G' == str)
             {
-                try
-                {
-                    if (bool.Parse(text))
-                        text = "是";
-                    else
-                        text = "否";
-                }
-                catch
-                {
-                    text = "否";
-                }
+                text = (text.ToLower() == "enabled" ? "是" : "否");
             }
             else if ('D' == str)
             {

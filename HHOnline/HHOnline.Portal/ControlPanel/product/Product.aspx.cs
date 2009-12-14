@@ -185,7 +185,7 @@ public partial class ControlPanel_Product_Product : HHPage
 
     void BindLinkButton()
     {
-        this.lbNewProduct.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd";
+        //this.lbNewProduct.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productadd";
         this.lbQuickNew.PostBackUrl = GlobalSettings.RelativeWebRoot + "controlpanel/controlpanel.aspx?product-productquickadd";
         this.lnkAll.PostBackUrl = destinationURL;
         this.lnkNoPicture.PostBackUrl = destinationURL + "&hp=0";
@@ -231,13 +231,14 @@ public partial class ControlPanel_Product_Product : HHPage
         this.SetTitle();
         this.SetTabName(this.ShortTitle);
         base.ExecuteJs("$.fn.cookie({ action: 'set', name: 'hhonline_menu', value: 'item_productmanage' });", false);
+        this.AddJavaScriptInclude("scripts/jquery.contextmenu.js", false, false);
         this.AddJavaScriptInclude("scripts/pages/cpproduct.aspx.js", false, false);
     }
 
     protected override void OnPermissionChecking(PermissionCheckingArgs e)
     {
         this.PagePermission = "ProductModule-View";
-        e.CheckPermissionControls.Add("ProductModule-Add", lbNewProduct);
+        e.CheckPermissionControls.Add("ProductModule-Add", lbQuickNew);
         base.OnPermissionChecking(e);
     }
     #endregion

@@ -261,6 +261,9 @@ namespace HHOnline.Shops.Providers
             product.SetSerializerData(CommonDataProvider.PopulateSerializerDataIDataRecord(dr));
             return product;
         }
+
+        public abstract int BatchOperation(string Ids,int Action,int userId);
+        public abstract int BatchSetFocus(string Ids, FocusType focusType, int userId);
         #endregion
 
         #region ProductSupply

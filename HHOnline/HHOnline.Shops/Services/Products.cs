@@ -52,7 +52,31 @@ namespace HHOnline.Shops
             }
             return status;
         }
-
+        /// <summary>
+        /// Action 1: publish, 2:stop, 3:copy
+        /// </summary>
+        /// <param name="Ids"></param>
+        /// <param name="Action"></param>
+        /// <returns></returns>
+        public static int BatchOperation(string Ids, int Action,int userId)
+        {
+            int i = ShopDataProvider.Instance.BatchOperation(Ids, Action,userId);
+            if (i > 0) {
+                OnUpdated();
+                HHCache.Instance.Remove(CacheKeyManager.ProductListKey);
+            }
+            return i;
+        }
+        public static int BatchSetFocus(string Ids, FocusType focusType, int userId)
+        {
+            int i = ShopDataProvider.Instance.BatchSetFocus(Ids, focusType,userId);
+            if (i > 0)
+            {
+                OnUpdated();
+                HHCache.Instance.Remove(CacheKeyManager.ProductListKey);
+            }
+            return i;
+        }
         /// <summary>
         /// 保存临时附件到产品图片表
         /// </summary>

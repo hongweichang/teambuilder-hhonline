@@ -74,8 +74,32 @@ namespace HHOnline.Framework.Web.HttpHandlers
                     case "getStatistic":
                         List<WordStatistic> wss = WordSearchManager.GetStatistic(GlobalSettings.MinValue, GlobalSettings.MaxValue);
                         wss = wss.GetRange(0, Math.Min(10, wss.Count));
-                        suc=true;
+                        suc = true;
                         msg = Newtonsoft.Json.JavaScriptConvert.SerializeObject(wss);
+                        break;
+                    case "batchDelete":
+                        int i1 = Products.BatchOperation(req["ids"], 2, int.Parse(curUser));
+                        if (i1 < 0) { msg = "操作失败，系统数据错误，请联系管理员！"; }
+                        else { msg = "操作成功！"; }
+                        suc = true;
+                        break;
+                    case "batchPublish":
+                        int i2 = Products.BatchOperation(req["ids"], 1, int.Parse(curUser));
+                        if (i2 < 0) { msg = "操作失败，系统数据错误，请联系管理员！"; }
+                        else { msg = "操作成功！"; }
+                        suc = true;
+                        break;
+                    case "batchCopy":
+                        int i3 = Products.BatchOperation(req["ids"], 3, int.Parse(curUser));
+                        if (i3 < 0) { msg = "操作失败，系统数据错误，请联系管理员！"; }
+                        else { msg = "操作成功！"; }
+                        suc = true;
+                        break;
+                    case "batchTruncate":
+                        int i4 = Products.BatchOperation(req["ids"], 4, int.Parse(curUser));
+                        if (i4 < 0) { msg = "操作失败，系统数据错误，请联系管理员！"; }
+                        else { msg = "操作成功！"; }
+                        suc = true;
                         break;
                 }
 

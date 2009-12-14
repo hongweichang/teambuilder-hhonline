@@ -4,11 +4,8 @@
 <asp:Content ID="ContentHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="ContentOpts" ContentPlaceHolderID="cphOpts" runat="Server">
-    <asp:LinkButton ID="lbNewProduct" runat="server" SkinID="lnkopts">
-        <span>新 增</span>
-    </asp:LinkButton>
     <asp:LinkButton ID="lbQuickNew" runat="server" SkinID="lnkopts">
-        <span>新增(快速)</span>
+        <span>新增</span>
     </asp:LinkButton>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="cphContent" runat="Server">
@@ -82,29 +79,39 @@
         </table>
     </div>
     <br />
+    <div id="cmContainer">
     <hc:ExtensionGridView runat="server" ID="egvProducts" OnRowDataBound="egvProducts_RowDataBound"
         OnRowDeleting="egvProducts_RowDeleting" OnRowUpdating="egvProducts_RowUpdating"
         OnRowCommand="egvProducts_RowCommand" OnPageIndexChanging="egvProducts_PageIndexChanging"
         PageSize="10" SkinID="DefaultView" AutoGenerateColumns="False" DataKeyNames="ProductID">
         <Columns>
+            <asp:TemplateField>
+                <HeaderStyle Width="20" />
+                <HeaderTemplate>
+                    <input type="checkbox" id="chkSelAll" title="选择/取消选择全部" />
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <input type="checkbox" name="chkSelProduct" title="选择" value='<%# Eval("ProductID") %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="图片">
-                <HeaderStyle Width="60" />
+                <HeaderStyle Width="50" />
                 <ItemTemplate>
                     <asp:Image ID="ProductPicture" Style="border: double 3px #7d9edb;" Width="40" Height="40"
                         runat="server" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField HeaderText="产品名称" DataField="ProductName"  DataFormatString="{0:S40}" ItemStyle-Width="450"/>
-            <asp:BoundField HeaderText="产品品牌" DataField="BrandName" />
-            <asp:BoundField HeaderText="介绍摘要" DataField="ProductAbstract" DataFormatString="{0:S20}" />
+            <asp:BoundField HeaderText="名称" DataField="ProductName"  DataFormatString="{0:S40}" ItemStyle-Width="500"/>
+            <asp:BoundField HeaderText="品牌" DataField="BrandName" />
+            <asp:BoundField HeaderText="发布" DataField="ProductStatus" DataFormatString="{0:G}" ItemStyle-Width="40" />
              <asp:TemplateField HeaderText="来源">
-                <HeaderStyle Width="60" />
+                <HeaderStyle/>
                 <ItemTemplate>
                     <asp:Literal ID="ltComming" runat="server"></asp:Literal>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
-                <HeaderStyle Width="130" />
+                <HeaderStyle Width="120" />
                 <HeaderTemplate>
                     操作</HeaderTemplate>
                 <ItemTemplate>
@@ -152,4 +159,5 @@
             </asp:TemplateField>
         </Columns>
     </hc:ExtensionGridView>
+    </div>
 </asp:Content>

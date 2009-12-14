@@ -615,6 +615,30 @@ namespace HHOnline.Data
                 return productList;
             }
         }
+        /// <summary>
+        /// Action 1: publish, 2:stop, 3:copy
+        /// </summary>
+        /// <param name="Ids"></param>
+        /// <param name="Action"></param>
+        /// <returns></returns>
+        public override int BatchOperation(string Ids, int Action, int userId)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Product_BachOperation", new ELParameter[]{
+                new ELParameter("Ids",DbType.String,Ids),
+                new ELParameter("Action",DbType.Int32,Action),
+                new ELParameter("UserID",DbType.Int32,userId)
+            });
+        }
+        public override int BatchSetFocus(string Ids, FocusType focusType, int userId)
+        {
+            return DataHelper.ExecuteNonQuery(CommandType.StoredProcedure, "sp_Product_BachSetFocus", new ELParameter[]{
+                new ELParameter("Ids",DbType.String,Ids),
+                new ELParameter("FocusType",DbType.Int32,(int)focusType),
+                new ELParameter("QuoteFrom",DbType.DateTime,DateTime.Now),
+                new ELParameter("QuoteEnd",DbType.DateTime,DateTime.Now.AddMonths(1)),                
+                new ELParameter("UserID",DbType.Int32,userId)
+            });
+        }
         #endregion
 
         #region ProductSupply
