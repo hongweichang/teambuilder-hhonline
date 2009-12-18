@@ -9,7 +9,11 @@ namespace HHOnline.Controls
         public bool DefaultValue
         {
             get { return _defaultValue; }
-            set { _defaultValue = value; }
+            set
+            {
+                _defaultValue = value;
+                base.SelectedValue = value.ToString();
+            }
         }
 
         public YesNoRadioButtonList()
