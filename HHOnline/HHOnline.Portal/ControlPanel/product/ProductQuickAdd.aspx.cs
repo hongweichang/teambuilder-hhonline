@@ -76,19 +76,19 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
         product.ProductContent = txtContent.Text;
         product.ProductKeywords = GlobalSettings.FormatKeywords(txtKeywords.Text);
         product.ProductName = txtProductName.Text.Trim();
-        product.ProductStatus = (rdPublish.SelectedValue?ComponentStatus.Enabled:ComponentStatus.Disabled);
+        product.ProductStatus = (rdPublish.SelectedValue ? ComponentStatus.Enabled : ComponentStatus.Disabled);
 
         DataActionStatus status;
         if (productID == 0)
         {
-            ProductPrice p=new ProductPrice();
-            p.PriceMarket=decimal.Parse(txtMarketPrice.Text);
-            p.PricePromotion=decimal.Parse(txtPromotionPrice.Text);
-            p.PriceGradeA=decimal.Parse(txtPrice5.Text);
-            p.PriceGradeB=decimal.Parse(txtPrice4.Text);
-            p.PriceGradeC=decimal.Parse(txtPrice3.Text);
-            p.PriceGradeD=decimal.Parse(txtPrice2.Text);
-            p.PriceGradeE=decimal.Parse(txtPrice1.Text);
+            ProductPrice p = new ProductPrice();
+            p.PriceMarket = string.IsNullOrEmpty(txtMarketPrice.Text) ? 0m : decimal.Parse(txtMarketPrice.Text);
+            p.PricePromotion = string.IsNullOrEmpty(txtPromotionPrice.Text) ? 0m : decimal.Parse(txtPromotionPrice.Text);
+            p.PriceGradeA = string.IsNullOrEmpty(txtPrice5.Text) ? 0m : decimal.Parse(txtPrice5.Text);
+            p.PriceGradeB = string.IsNullOrEmpty(txtPrice4.Text) ? 0m : decimal.Parse(txtPrice4.Text); decimal.Parse(txtPrice4.Text);
+            p.PriceGradeC = string.IsNullOrEmpty(txtPrice3.Text) ? 0m : decimal.Parse(txtPrice3.Text);
+            p.PriceGradeD = string.IsNullOrEmpty(txtPrice2.Text) ? 0m : decimal.Parse(txtPrice2.Text);
+            p.PriceGradeE = string.IsNullOrEmpty(txtPrice1.Text) ? 0m : decimal.Parse(txtPrice1.Text);
             status = Products.Create(product, (int)ddlFocusType.SelectedValue, cats, GetIndustryIDList(), p);
             switch (status)
             {
@@ -121,7 +121,8 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
     #endregion
 
     #region -Methods-
-    void BindProductDetails() {
+    void BindProductDetails()
+    {
         Product p = Products.GetProduct(productID);
         txtProductName.Text = p.ProductName;
         ddlBrands.SelectedValue = p.BrandID.ToString();
@@ -142,11 +143,13 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
                         "<span class=\"close\" title=\"删除\" onclick=\"removeIndItem({0});\" onmouseover=\"this.className=\'close closeHover_CL\';\" onmouseout=\"this.className=\'close\';\" indId=\"{0}\"></span>" +
                     "</span></span></span></span></a>";
     #endregion
-    void RenderJsonData() {
+    void RenderJsonData()
+    {
         List<ProductCategory> pcs = ProductCategories.GetCategoreisByProductID(productID);
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
-        foreach (ProductCategory pc in pcs) {
+        foreach (ProductCategory pc in pcs)
+        {
             sb1.AppendFormat("[{0}]:", pc.CategoryID);
             sb2.AppendFormat(catHtml, pc.CategoryID, pc.CategoryName);
         }
@@ -163,10 +166,12 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
         hfIndustries.Value = sb1.ToString();
         hfIndHTML.Value = sb2.ToString();
     }
-    List<ProductProperty> GetProperties() {
+    List<ProductProperty> GetProperties()
+    {
         return ProductProperties.GetAllPropertyByCategoryIDList(GetCategoryIds());
     }
-    List<int> GetCategoryIds() {
+    List<int> GetCategoryIds()
+    {
         if (hfCategories.Value == "") return null;
         string[] ids = hfCategories.Value.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
         if (ids.Length == 0) return null;
@@ -177,7 +182,8 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
         }
         return _ids;
     }
-    string GetCategoryIDList() {
+    string GetCategoryIDList()
+    {
         if (hfCategories.Value == "") return null;
         string[] ids = hfCategories.Value.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
         if (ids.Length == 0) return null;
@@ -200,13 +206,14 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
         }
         return string.Join(",", _ids.ToArray());
     }
-    void BindBrands() {
+    void BindBrands()
+    {
         List<ProductBrand> brands = ProductBrands.GetProductBrands();
         ddlBrands.DataSource = brands;
         ddlBrands.DataTextField = "BrandName";
         ddlBrands.DataValueField = "BrandID";
         ddlBrands.DataBind();
-        ddlBrands.Items.Insert(0, new ListItem("-无-", "None"));      
+        ddlBrands.Items.Insert(0, new ListItem("-无-", "None"));
     }
     #endregion
 

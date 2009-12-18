@@ -14,7 +14,7 @@ namespace HHOnline.Framework.Web.HttpHandlers
         public void ProcessRequest(HttpContext context)
         {
             string c = GetValidCode();
-            context.Session["Vcode"] = c;
+            HHCookie.AddCookie("HHOnline_ValidateCode", GlobalSettings.Encrypt(c), DateTime.Now.AddMinutes(5));
             Bitmap bmp = DrawValidCode(c, 30, 2);
 
             context.Response.ClearContent();
@@ -133,7 +133,7 @@ namespace HHOnline.Framework.Web.HttpHandlers
         /// <returns></returns>
         string GetValidCode()
         {
-            string codes = GlobalSettings.characters;
+            string codes = "abcdefghijkmnrstuvwxyABCDEFGHJKMNPQRSTUVWXY0123456789";
             string result = string.Empty;
             Random rand = new Random((int)(DateTime.Now.Ticks));
             for (int i = 0; i < 4; i++)

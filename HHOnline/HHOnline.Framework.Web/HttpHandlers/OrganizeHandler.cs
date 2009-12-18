@@ -130,15 +130,16 @@ namespace HHOnline.Framework.Web.HttpHandlers
             bool rememberMe = bool.Parse(req["rememberMe"]);
             string validCode = req["validCode"];
             string oldUrl = req["url"];
-            if (context.Session["Vcode"] == null)
+            HttpCookie __cookie = HHCookie.GetCookie("HHOnline_ValidateCode");
+            if (__cookie == null || string.IsNullOrEmpty(__cookie.Value))
             {
                 throw new Exception("验证码已过期，请点击刷新！");
             }
             else
             {
-                if (context.Session["Vcode"].ToString().Equals(validCode, StringComparison.CurrentCultureIgnoreCase))
+                if (GlobalSettings.Decrypt(__cookie.Value).Equals(validCode, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    context.Session.Remove("Vcode");
+                    __cookie.Expires = DateTime.Now.AddMinutes(-1);
                     User u = new User()
                     {
                         UserName = userName,
