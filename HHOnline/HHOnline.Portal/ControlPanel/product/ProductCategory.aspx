@@ -48,7 +48,7 @@
                     <hc:MsgBox runat="server" ID="mbMsg" SkinID="msgBox"></hc:MsgBox>
                     <h2 class="row2-cat">
                         子分类列表</h2>
-                    <asp:Repeater ID="rpChildCategory" runat="server" >
+                    <asp:Repeater ID="rpChildCategory" runat="server">
                         <HeaderTemplate>
                             <table id="tbCat">
                         </HeaderTemplate>
@@ -58,7 +58,9 @@
                                     <input type="checkbox" rel="child-category" value='<%# Eval("CategoryID") %>' />
                                 </td>
                                 <td class="cat-c2">
-                                    <a href="javascript:void(0)" onclick='redirectToProduct(<%# Eval("CategoryID") %>)' title='<%# Eval("CategoryDesc") %>'><%# Eval("CategoryName")%></a>
+                                    <a href="javascript:void(0)" onclick='redirectToProduct(<%# Eval("CategoryID") %>)'
+                                        title='<%# Eval("CategoryDesc") %>'>
+                                        <%# Eval("CategoryName")%></a>
                                 </td>
                                 <td class="cat-c3" catid='<%# Eval("CategoryID") %>'>
                                     <asp:LoginView ID="LoginView1" runat="server">
@@ -81,6 +83,7 @@
                                             </asp:RoleGroup>
                                         </RoleGroups>
                                     </asp:LoginView>
+                                    &nbsp;排序：<%# Eval("DisplayOrder", "{0:000}")%>
                                 </td>
                             </tr>
                         </ItemTemplate>
@@ -100,7 +103,7 @@
                                 <td class="cat-c1">
                                     <input type="checkbox" rel="child-category" value='<%# Eval("PropertyID") %>' />
                                 </td>
-                                <td class="cat-c2" >
+                                <td class="cat-c2">
                                     <%# Eval("PropertyName")%>
                                 </td>
                                 <td class="cat-c3" catid='<%# Eval("PropertyID") %>'>
