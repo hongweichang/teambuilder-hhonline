@@ -46,6 +46,7 @@ namespace HHOnline.Controls
             if (_Cache.ContainsKey(ft))
                 return _Cache[ft];
             ProductQuery pq = new ProductQuery();
+            pq.PageSize = int.MaxValue;
             pq.FocusType = _ProductType;
             pq.HasPublished = true;
             List<Product> ps = Products.GetProductList(pq);
