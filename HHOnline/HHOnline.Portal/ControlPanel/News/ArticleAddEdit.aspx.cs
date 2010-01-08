@@ -65,6 +65,11 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
 		ddlArticleImages.DataValueField = "ID";
 		ddlArticleImages.DataSource = items.Records;
 		ddlArticleImages.DataBind();
+        try
+        {
+            ddlArticleImages.Items.Insert(0, new ListItem(string.Empty, string.Empty));
+        }
+        catch { }
 	}
 
     void WritePics()
