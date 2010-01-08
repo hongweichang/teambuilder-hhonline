@@ -7,7 +7,8 @@
             <li><a href='<%= _url %>pages/view.aspx?common-contactinfo' target="_blank">联系我们</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-aboutehuaho' target="_blank">了解华宏</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-honeruser' target="_blank">荣誉客户</a></li>
-            <li><a href='<%= _url %>register.aspx' target="_blank">加盟华宏</a></li>
+            <%--  <li><a href='<%= _url %>register.aspx' target="_blank">加盟华宏</a></li>--%>            
+            <li><a href='<%= _url %>pages/view.aspx?common-recruitment' target="_blank">人员招聘</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-wflist' target="_blank">业务流程</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-friendlink' target="_blank">友情链接</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-sitemap' target="_blank">站点地图</a></li>

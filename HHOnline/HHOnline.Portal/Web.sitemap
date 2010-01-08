@@ -7,6 +7,7 @@
         <siteMapNode url="pages/common/aboutehuaho.aspx" title="了解华宏"  description="" />
       <siteMapNode url="pages/common/contactinfo.aspx" title="联系我们"  description="" />
       <siteMapNode url="pages/common/honeruser.aspx" title="荣誉客户"  description="" />
+      <siteMapNode url="pages/common/recruitment.aspx" title="人员招聘"  description="" />
       <siteMapNode url="pages/common/rightnotice.aspx" title="荣誉客户"  description="" />
       <siteMapNode url="pages/common/wflist.aspx" title="业务流程"  description="" />
         <siteMapNode url="register.aspx" title="用户注册"  description="" />

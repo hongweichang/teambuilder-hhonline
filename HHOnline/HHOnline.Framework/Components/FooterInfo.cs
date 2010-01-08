@@ -10,6 +10,7 @@ namespace HHOnline.Framework
         public string HonerUser { get; set; }
         public string RightNotice { get; set; }
         public string WFList { get; set; }
+        public string Recruitment { get; set; }
     }
     public enum FooterUpdateAction
     {
@@ -17,6 +18,7 @@ namespace HHOnline.Framework
         ContactInfo = 1,
         HonerUser = 2,
         RightNotice = 3,
-        WFList = 4
+        WFList = 4,
+        Recruitment=5
     }
 }

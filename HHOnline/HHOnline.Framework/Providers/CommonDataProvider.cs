@@ -664,7 +664,8 @@ namespace HHOnline.Framework.Providers
                 ContactInfo = DataRecordHelper.GetString(dr, "ContactInfo"),
                 HonerUser = DataRecordHelper.GetString(dr, "HonerUser"),
                 RightNotice = DataRecordHelper.GetString(dr, "RightNotice"),
-                WFList = DataRecordHelper.GetString(dr, "WFList")
+                WFList = DataRecordHelper.GetString(dr, "WFList"),
+                Recruitment = DataRecordHelper.GetString(dr,"Recruitment")
             };
         }
         #endregion
