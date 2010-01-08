@@ -68,6 +68,7 @@ public partial class ControlPanel_News_ArticleAddEdit : HHPage
         try
         {
             ddlArticleImages.Items.Insert(0, new ListItem(string.Empty, string.Empty));
+            ddlArticleImages.SelectedIndex = 0;
         }
         catch { }
 	}
