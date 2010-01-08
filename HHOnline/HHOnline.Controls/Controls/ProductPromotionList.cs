@@ -43,8 +43,9 @@ namespace HHOnline.Controls
         public string RenderHTML()
         {
             FocusType ft = (FocusType)_ProductType;
-            if (_Cache.ContainsKey(ft))
+            if (_Cache.ContainsKey(ft) && DateTime.Now.Minute % 5 != 0)
                 return _Cache[ft];
+            if (_Cache.ContainsKey(ft)) _Cache.Remove(ft);
             ProductQuery pq = new ProductQuery();
             pq.PageSize = int.MaxValue;
             pq.FocusType = _ProductType;
@@ -91,7 +92,8 @@ namespace HHOnline.Controls
                                 "</a>"+
                                "</div>");
 
-                sb.AppendLine("<div class=\"piProductName\" title='"+p.ProductName+"'>" + GlobalSettings.SubString(p.ProductName,15) + "</div>");
+                sb.AppendLine("<div class=\"piProductName\" title='"+p.ProductName+"'><a href=\""+nav+
+                    "&ID=" + pId + "\" target=\"_blank\">" + GlobalSettings.SubString(p.ProductName,15) + "</a></div>");
                 sb.AppendLine("<div class=\"piPrice\">" + GetPrice(p.ProductID) + "</div>");
                 sb.AppendLine("</td>");
 

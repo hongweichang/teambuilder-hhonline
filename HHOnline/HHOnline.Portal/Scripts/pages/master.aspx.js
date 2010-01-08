@@ -35,8 +35,10 @@ function navGuid(t) {
     window.location.href = relativeUrl + eval('(nav.' + t + ')');
 }
 $().ready(function() {
-    var n = $('#headerNav');
+var n = $('#headerNav');
+    /*
     n.find('a').each(function() { var m = $(this); m.attr('href', 'javascript:navGuid(\'' + m.attr('rel') + '\');'); });
+    */
     if (typeof activeTab != 'undefined') {
         changeHeaderTab(n, activeTab);
     }

@@ -10,6 +10,7 @@
             <li><a href='<%= _url %>register.aspx' target="_blank">加盟华宏</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-wflist' target="_blank">业务流程</a></li>
             <li><a href='<%= _url %>pages/view.aspx?common-friendlink' target="_blank">友情链接</a></li>
+            <li><a href='<%= _url %>pages/view.aspx?common-sitemap' target="_blank">站点地图</a></li>
             <li class="last"><a href='<%= _url %>pages/view.aspx?common-rightnotice' target="_blank">版权声明</a></li>
         </ul>
         <h6>

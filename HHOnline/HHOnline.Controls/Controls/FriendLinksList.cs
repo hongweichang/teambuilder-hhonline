@@ -13,7 +13,7 @@ namespace HHOnline.Controls
 {
     public class FriendLinksList : Control
     {
-        private int updateTime = 20;
+        private int updateTime = 5;
         public static object _lock = new object();
         private static string _Html;
         public string HTML

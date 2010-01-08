@@ -31,9 +31,9 @@
             </div>
             <div class="main-r1c2-r2r1">
                 <ul class="nav-main" id="headerNav">
-                    <li><a href="javascript:void(0)" class="selected" rel="main">首页</a></li>
-                    <li><a href="javascript:void(0)" rel="product">产品</a></li>
-                    <li><a href="javascript:void(0)" rel="news">资讯</a></li>
+                    <li><a href='<%= HHOnline.Framework.GlobalSettings.RelativeWebRoot %>main.aspx' class="selected" rel="main">首页</a></li>
+                    <li><a href='<%= HHOnline.Framework.GlobalSettings.RelativeWebRoot %>pages/view.aspx?product-productlist' rel="product">产品</a></li>
+                    <li><a href='<%= HHOnline.Framework.GlobalSettings.RelativeWebRoot %>pages/view.aspx?news-newslist' rel="news">资讯</a></li>
                     <%--<li><a href="javascript:void(0)">解决方案</a></li>--%>
                 </ul>
             </div>
