@@ -109,7 +109,7 @@ public partial class Pages_Product_Category : HHPage
                     sbRelated.AppendFormat("{0},", pcRelate.CategoryName);
                 }
             }
-            catRelated = sbRelated.ToString().Replace(catName + ",", string.Empty).TrimEnd(',');
+            catRelated = sbRelated.ToString().TrimEnd(',');
         }
         else
         {
