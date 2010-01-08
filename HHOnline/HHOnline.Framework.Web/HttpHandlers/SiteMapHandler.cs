@@ -10,7 +10,7 @@ using HHOnline.News.Services;
 
 namespace HHOnline.Framework.Web.HttpHandlers
 {
-    public class SiteMapHandler:IHttpHandler
+    public class SiteMapHandler : IHttpHandler
     {
         public bool IsReusable
         {
@@ -62,6 +62,20 @@ namespace HHOnline.Framework.Web.HttpHandlers
             smb.AddLocalUrl("pages/view.aspx?common-wflist", DateTime.Now);
             smb.AddLocalUrl("pages/view.aspx?common-friendlink", DateTime.Now);
             smb.AddLocalUrl("pages/view.aspx?common-rightnotice", DateTime.Now);
+            smb.AddLocalUrl("pages/view.aspx?common-recruitment", DateTime.Now);
+            smb.AddLocalUrl("pages/view.aspx?common-sitemap", DateTime.Now);
+            smb.AddLocalUrl("/register.aspx", DateTime.Now);
+            smb.AddLocalUrl("/login.aspx", DateTime.Now);
+            smb.AddLocalUrl("/main.aspx", DateTime.Now);
+            smb.AddLocalUrl("/pages/view.aspx?product-productlist", DateTime.Now);
+            smb.AddLocalUrl("/pages/view.aspx?news-newslist", DateTime.Now);
+            smb.AddLocalUrl("/pages/view.aspx?product-brand", DateTime.Now);
+            smb.AddLocalUrl("/pages/view.aspx?product-category", DateTime.Now);
+            smb.AddLocalUrl("/pages/view.aspx?product-industry", DateTime.Now);
+            smb.AddLocalUrl("/Pages/Common/SiteMap.aspx", DateTime.Now);
+            smb.AddLocalUrl("/WebAdmin/ehuaho_logo.gif", DateTime.Now);
+            smb.AddLocalUrl("/WebAdmin/ehuaho_logo_s.gif", DateTime.Now);
+
             smb.Save(GlobalSettings.MapPath("~/sitemap/main.xml"));
             result = true;
             return "成功生成/更新【总目录】地图！";
@@ -104,10 +118,10 @@ namespace HHOnline.Framework.Web.HttpHandlers
         }
         string GenerateProduct(ref bool result)
         {
-            ProductQuery pq=new ProductQuery();
-            pq.HasPublished=true;
-            pq.PageIndex=0;
-            pq.PageSize=int.MaxValue;
+            ProductQuery pq = new ProductQuery();
+            pq.HasPublished = true;
+            pq.PageIndex = 0;
+            pq.PageSize = int.MaxValue;
 
             List<Product> ps = Products.GetProductList(pq);
             SiteMapBuilder smb = new SiteMapBuilder();

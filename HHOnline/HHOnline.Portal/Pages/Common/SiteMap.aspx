@@ -153,8 +153,8 @@
     <br>
     <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="105" height="28" align="center" bgcolor="990000" class="m" style="border-top: #ff3300 3px solid;
-                color: #ffffff">
+            <td style="height: 28px; background-color: #990000; text-align: center; width: 105px;
+                border-top: 3px solid rgb(255,51,0); color: #fff">
                 <a href="http://www.ehuaho.com/pages/view.aspx?product-brand" style="color: #ffffff;">
                     所有品牌</a><a name="3"></a>
             </td>
@@ -177,8 +177,8 @@
     <br>
     <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="105" height="28" align="center" bgcolor="990000" class="m" style="border-top: #ff3300 3px solid;
-                color: #ffffff">
+            <td style="height: 28px; background-color: #990000; text-align: center; width: 105px;
+                border-top: 3px solid rgb(255,51,0); color: #fff">
                 <a href="http://www.ehuaho.com/pages/view.aspx?product-category" style="color: #ffffff;">
                     产品分类</a><a name="3"></a>
             </td>
@@ -201,8 +201,8 @@
     <br>
     <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="105" height="28" align="center" bgcolor="990000" class="m" style="border-top: #ff3300 3px solid;
-                color: #ffffff">
+            <td style="height: 28px; background-color: #990000; text-align: center; width: 105px;
+                border-top: 3px solid rgb(255,51,0); color: #fff">
                 <a href="http://www.ehuaho.com/pages/view.aspx?product-industry" style="color: #ffffff;">
                     行业应用</a><a name="3"></a>
             </td>
@@ -225,8 +225,8 @@
     <br>
     <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="105" height="28" align="center" bgcolor="990000" class="m" style="border-top: #ff3300 3px solid;
-                color: #ffffff">
+            <td style="height: 28px; background-color: #990000; text-align: center; width: 105px;
+                border-top: 3px solid rgb(255,51,0); color: #fff">
                 <a href="http://www.ehuaho.com/pages/view.aspx?product-productlist" style="color: #ffffff;">
                     产品列表</a><a name="3"></a>
             </td>
@@ -249,8 +249,8 @@
     <br>
     <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="105" height="28" align="center" bgcolor="990000" class="m" style="border-top: #ff3300 3px solid;
-                color: #ffffff">
+            <td style="height: 28px; background-color: #990000; text-align: center; width: 105px;
+                border-top: 3px solid rgb(255,51,0); color: #fff">
                 <a href="http://www.ehuaho.com/pages/view.aspx?news-newslist" style="color: #ffffff;">
                     资讯中心</a><a name="3"></a>
             </td>
