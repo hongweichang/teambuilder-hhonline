@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FD0D9367-283C-4205-9D98-042B0B470832}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -84,6 +84,7 @@
     <Compile Include="Tasks\NewsGatherTask.cs" />
     <Compile Include="Tasks\StatisticSearchWord.cs" />
     <Compile Include="Tasks\ViewsJob.cs" />
+    <Compile Include="Tasks\RefreshSitemap.cs" />
     <Compile Include="UrlRewrite\RewriteRules.cs" />
     <Compile Include="UrlRewrite\UrlRewriteConfig.cs" />
     <Compile Include="TaskModules\TaskLogModule.cs" />
