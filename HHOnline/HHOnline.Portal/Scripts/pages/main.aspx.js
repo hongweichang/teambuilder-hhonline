@@ -67,7 +67,7 @@ $().ready(function() {
         width:280,
         direction:0,
         step:26,
-        height:260,
+        height:520,
         speed:2
     })
 });
