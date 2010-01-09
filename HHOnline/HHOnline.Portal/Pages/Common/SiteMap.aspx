@@ -1,14 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SiteMap.aspx.cs" Inherits="Pages_Common_SiteMap" %>
 
 <%@ OutputCache Duration="120" VaryByParam="none" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>站点地图 - 华宏在线</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="华宏在线网站地图，华宏在线 www.eHUAHO.com,华宏仪表 工业自动化仪表及实验室分析仪器专业供应商,华宏HUAHO 打造中国最优秀仪器仪表服务品牌">
-    <meta name="keywords" content="网站地图,sitemap,华宏在线,eHUAHO,华宏仪表,华宏仪器,华宏HUAHO">
+    <meta name="description" content="华宏在线站点地图，华宏在线 www.eHUAHO.com,华宏仪表 工业自动化仪表及实验室分析仪器专业供应商,华宏HUAHO 打造中国最优秀仪器仪表服务品牌">
+    <meta name="keywords" content="站点地图,sitemap,华宏在线,eHUAHO,华宏仪表,华宏仪器,华宏HUAHO">
     <link type="image/x-icon" rel="shortcut icon" title="ICON" href="/images/favicon.ico" />
     <style type="text/css" media="all">
         a:link
@@ -145,7 +144,7 @@
                 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
                         <td height="30" class="m">
-                            华宏在线 网站地图
+                            华宏在线 站点地图
                         </td>
                     </tr>
                 </table>
@@ -280,9 +279,12 @@
             <tr>
                 <td height="13" align="middle" class="s">
                     <div align="center">
-                        华宏在线 版权所有 | <a href="http://www.ehuaho.com/pages/view.aspx?common-contactinfo" target="_blank">
-                            联系我们</a>| <a href="http://www.ehuaho.com/Pages/Common/SiteMap.aspx" target="_blank">
-                                网站地图</a></div>
+                        <a href="http://www.ehuaho.com/" target="_blank">华宏在线</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+                            href="http://www.ehuaho.com/pages/view.aspx?common-contactinfo" target="_blank">
+                            联系我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.ehuaho.com/pages/view.aspx?common-sitemap"
+                                target="_blank"> 站点地图</a></div>
+                    <div style="height: 30px; margin-top: 10px; text-align: center;">
+                        <asp:Literal ID="ltCopyRight" runat="server"></asp:Literal></div>
                 </td>
             </tr>
         </tbody>

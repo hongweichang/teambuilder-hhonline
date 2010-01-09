@@ -38,7 +38,7 @@ namespace HHOnline.Framework.Web.SiteMap
 
             XmlElement _xe = _siteMap.CreateElement("loc");
             string locTmp = ESCTransact(loc);
-            _xe.InnerText = _nativeUrl + locTmp.StartsWith("/") ? locTmp.Substring(1) : locTmp;
+            _xe.InnerText = _nativeUrl + (locTmp.StartsWith("/") ? locTmp.Substring(1) : locTmp);
             _url.AppendChild(_xe);
 
             _xe = _siteMap.CreateElement("lastmod");

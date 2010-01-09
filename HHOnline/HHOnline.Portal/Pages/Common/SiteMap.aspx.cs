@@ -27,8 +27,10 @@ public partial class Pages_Common_SiteMap : System.Web.UI.Page
 
     private void InitialDataBind()
     {
+        SiteSettings ss = HHContext.Current.SiteSettings;
+        ltCopyRight.Text = ss.Copyright;
+
         StringBuilder sbItems = new StringBuilder();
-        //get all brand's ID and Name from Database
         List<ProductBrand> brands = ProductBrands.GetProductBrands();
         foreach (ProductBrand item in brands)
         {
