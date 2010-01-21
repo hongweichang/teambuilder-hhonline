@@ -53,6 +53,27 @@ namespace HHOnline.Framework.Web.HttpHandlers
             context.Response.Write("{msg:'" + msg + "',result:" + result.ToString().ToLower() + "}");
         }
 
+        public string RebuildSiteMaps(ref bool result)
+        {
+            bool[] buildResults = new bool[] { false, false, false, false, false, false };
+            string[] buildMessages = new string[]{
+                GenerateMain(ref buildResults[0]),
+                GenerateProduct(ref buildResults[1]),
+                GenerateArticle(ref buildResults[2]),
+                GenerateBrand(ref buildResults[3]),
+                GenerateCategory(ref buildResults[4]),
+                GenerateIndustry(ref buildResults[5])};
+
+            string buildMsg = string.Empty;
+            result = true;
+            for (int i = 0; i < buildResults.Length; i++)
+            {
+                result = result && buildResults[i];
+                buildMsg = buildMsg + "\n\r" + buildMessages[i];
+            }
+            return buildMsg.TrimStart('\n', '\r');
+        }
+
         string GenerateMain(ref bool result)
         {
             SiteMapBuilder smb = new SiteMapBuilder();
