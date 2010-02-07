@@ -459,7 +459,8 @@ namespace HHOnline.SearchBarrel
             product.ProductAbstract = doc.Get(ProductIndexField.ProductAbstract);
             product.CreateTime = DateTools.StringToDate(doc.Get(ProductIndexField.DateCreated));
             string[] tagNames = doc.GetValues(ProductIndexField.ProductKeywords);
-            product.ProductKeywords = string.Join(";", tagNames);
+            if (tagNames != null && tagNames.Length > 0)
+                product.ProductKeywords = string.Join(";", tagNames);
             return product;
         }
         #endregion
