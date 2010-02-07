@@ -15,7 +15,7 @@
             <li class="last"><a href='<%= _url %>pages/view.aspx?common-rightnotice' target="_blank">版权声明</a></li>
         </ul>
         <h6>
-            <asp:Literal ID="ltCopyRight" runat="server"></asp:Literal>
+            <asp:Literal ID="ltCopyRight" runat="server"></asp:Literal>&nbsp;&nbsp;<a href="http://www.inidc.net/" target="_blank">本站带宽由北京数据家公司提供</a>
         </h6>
     </div>
     <div class="icp-bot">
