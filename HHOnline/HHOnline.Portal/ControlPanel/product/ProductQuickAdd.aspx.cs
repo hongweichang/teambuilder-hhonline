@@ -73,7 +73,7 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
         product.DisplayOrder = 0;
         product.ProductCode = string.Empty;
         product.ProductAbstract = txtAbstract.Text;
-        product.ProductContent = txtContent.Text;
+        product.ProductContent = GlobalSettings.FilterRichText(txtContent.Text);
         product.ProductKeywords = GlobalSettings.FormatKeywords(txtKeywords.Text);
         product.ProductName = txtProductName.Text.Trim();
         product.ProductStatus = (rdPublish.SelectedValue ? ComponentStatus.Enabled : ComponentStatus.Disabled);
@@ -110,10 +110,14 @@ public partial class ControlPanel_product_ProductQuickAdd : HHPage, ICallbackEve
                 switch (status)
                 {
                     case DataActionStatus.UnknownFailure:
-                        throw new HHException(ExceptionType.Failed, "修改产品失败，请联系管理员！");
+                        //throw new HHException(ExceptionType.Failed, "修改产品失败，请联系管理员！");
+                        mbMsg.ShowMsg("修改产品失败，请联系管理员！", Color.Red);
+                        break;
                     case DataActionStatus.Success:
                     default:
-                        throw new HHException(ExceptionType.Success, "修改产品信息成功！");
+                        //throw new HHException(ExceptionType.Success, "修改产品信息成功！");
+                        mbMsg.ShowMsg("修改产品信息成功！", Color.Gray);
+                        break;
                 }
             }
         }

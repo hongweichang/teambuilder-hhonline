@@ -490,7 +490,7 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
         product.DisplayOrder = Convert.ToInt32(txtDisplayOrder.Text.Trim());
         product.ProductCode = string.Empty;
         product.ProductAbstract = txtProductAbstract.Text;
-        product.ProductContent = txtProductContent.Text;
+        product.ProductContent = GlobalSettings.FilterRichText(txtProductContent.Text);
         product.ProductKeywords = GlobalSettings.FormatKeywords(txtKeyWords.Text);
         product.ProductName = txtProductName.Text.Trim();
         product.ProductStatus = csProduct.SelectedValue;
@@ -520,11 +520,15 @@ public partial class ControlPanel_product_ProductAdd : HHPage, ICallbackEventHan
             switch (status)
             {
                 case DataActionStatus.UnknownFailure:
-                    throw new HHException(ExceptionType.Failed, "修改产品失败，请联系管理员！");
+                    //throw new HHException(ExceptionType.Failed, "修改产品失败，请联系管理员！");
+                    mbMessage.ShowMsg("修改产品失败，请联系管理员！", Color.Red);
+                    break;
                 case DataActionStatus.Success:
                 default:
                     this.mvProductAdd.SetActiveView(vwProductCategoies);
-                    throw new HHException(ExceptionType.Success, "修改产品信息成功！");
+                    //throw new HHException(ExceptionType.Success, "修改产品信息成功！");
+                    mbMessage.ShowMsg("修改产品信息成功！", Color.Gray);
+                    break;
             }
         }
     }

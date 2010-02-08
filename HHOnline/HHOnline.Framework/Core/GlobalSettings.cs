@@ -41,6 +41,41 @@ namespace HHOnline.Framework
         }
         #endregion
 
+        #region -Filter RichText-
+        public static readonly string RichTextWarningMessage = "警告：文本中包含浏览器不能正确显示的内容。";
+        private static string sRichTextTipMessage = "<h3><span style='color: #ff0000'>！！！" + RichTextWarningMessage + "！！！</span></h3><h4>&nbsp;</h4><h4><span style='color: #0000ff'>请按以下步骤进行处理后，重新进行文本内容添加：</span></h4><h4><span style='color: #0000ff'>1. 打开<a href='http://ckeditor.com/demo' target='_blank'>http://ckeditor.com/demo</a>，清除CKEditor页面文本框中的内容。</span></h4><h4><span style='color: #0000ff'>2. 将华宏在线的原始文本内容粘贴到CKEditor页面的文本框中；如果字体过大，请全选并设定字体大小为12号。</span></h4><h4><span style='color: #0000ff'>3. 复制调整后的页面内容，重新粘贴到华宏在线的当前页面，替换当前的警告和操作提示信息。</span></h4>";
+        /// <summary>
+        /// 过滤富文本中包含的特殊Word内容
+        /// </summary>
+        /// <param name="content">原始的RichText内容</param>
+        /// <returns>有效内容返回，无效内容返回提示</returns>
+        public static string FilterRichText(string content)
+        {
+            string[] filterWords = new string[]{
+                "<w:WordDocument>",
+                "<![endif]-->",
+                "</object>"
+            };
+
+            bool isValid = true;
+            for (int i = 0; i < filterWords.Length; i++)
+            {
+                if (0 > content.IndexOf(filterWords[i]))
+                    continue;
+                else
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (true == isValid)
+                return content;
+            else
+                return sRichTextTipMessage;
+        }
+        #endregion
+
         #region -Helper Method-
         /// <summary>
         /// 判断文本是否为空

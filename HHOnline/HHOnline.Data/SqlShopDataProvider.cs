@@ -481,7 +481,8 @@ namespace HHOnline.Data
                     new ELParameter("@ProductContent",DbType.String,product.ProductContent),
                     new ELParameter("@BrandID",DbType.Int32,DataHelper.IntOrNull(product.BrandID)),
                     new ELParameter("@ProductKeywords",DbType.String,product.ProductKeywords),
-                    new ELParameter("@ProductStatus",DbType.Int32,product.ProductStatus),
+                    /*new ELParameter("@ProductStatus",DbType.Int32,product.ProductStatus),*/
+                    new ELParameter("@ProductStatus",DbType.Int32,(string.IsNullOrEmpty(product.ProductContent) || 0 > product.ProductContent.IndexOf(GlobalSettings.RichTextWarningMessage) ? product.ProductStatus : ComponentStatus.Disabled/*停用产品*/)),
                     new ELParameter("@DisplayOrder",DbType.Int32,product.DisplayOrder),
                     new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
                     new ELParameter("@PropertyNames",DbType.String,product.GetSerializerData().Keys),
@@ -520,7 +521,8 @@ namespace HHOnline.Data
                     new ELParameter("@ProductContent",DbType.String,product.ProductContent),
                     new ELParameter("@BrandID",DbType.Int32,DataHelper.IntOrNull(product.BrandID)),
                     new ELParameter("@ProductKeywords",DbType.String,product.ProductKeywords),
-                    new ELParameter("@ProductStatus",DbType.Int32,product.ProductStatus),
+                    /*new ELParameter("@ProductStatus",DbType.Int32,product.ProductStatus),*/
+                    new ELParameter("@ProductStatus",DbType.Int32,(string.IsNullOrEmpty(product.ProductContent) || 0 > product.ProductContent.IndexOf(GlobalSettings.RichTextWarningMessage) ? product.ProductStatus : ComponentStatus.Disabled/*停用产品*/)),
                     new ELParameter("@DisplayOrder",DbType.Int32,product.DisplayOrder),
                     new ELParameter("@Operator",DbType.Int32,GlobalSettings.GetCurrentUser().UserID),
                     new ELParameter("@PropertyNames",DbType.String,product.GetSerializerData().Keys),
