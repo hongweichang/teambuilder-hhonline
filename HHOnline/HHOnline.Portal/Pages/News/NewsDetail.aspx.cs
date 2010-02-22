@@ -61,6 +61,7 @@ public partial class News_NewsDetail : HHPage
 
                     // 获取所有产品
                     ProductQuery pq = new ProductQuery();
+                    pq.HasPublished = true;
                     List<Product> products = Products.GetProductList(pq);
                     List<ReplaceKeyValue> rkvs = new List<ReplaceKeyValue>();
 
