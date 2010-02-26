@@ -81,26 +81,11 @@
     <br />
     <div id="cmContainer">
     <hc:ExtensionGridView runat="server" ID="egvProducts" OnRowDataBound="egvProducts_RowDataBound"
-        OnRowDeleting="egvProducts_RowDeleting" OnRowUpdating="egvProducts_RowUpdating"
+        OnRowDeleting="egvProducts_RowDeleting" OnRowUpdating="egvProducts_RowUpdating" AllowPaging="true"
         OnRowCommand="egvProducts_RowCommand" OnPageIndexChanging="egvProducts_PageIndexChanging"
         PageSize="10" SkinID="DefaultView" AutoGenerateColumns="False" DataKeyNames="ProductID">
         <Columns>
-            <asp:TemplateField>
-                <HeaderStyle Width="20" />
-                <HeaderTemplate>
-                    <input type="checkbox" id="chkSelAll" title="选择/取消选择全部" />
-                </HeaderTemplate>
-                <ItemTemplate>
-                    <input type="checkbox" name="chkSelProduct" title="选择" value='<%# Eval("ProductID") %>' />
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="图片">
-                <HeaderStyle Width="50" />
-                <ItemTemplate>
-                    <asp:Image ID="ProductPicture" Style="border: double 3px #7d9edb;" Width="40" Height="40"
-                        runat="server" />
-                </ItemTemplate>
-            </asp:TemplateField>
+           
             <asp:BoundField HeaderText="名称" DataField="ProductName"  DataFormatString="{0:S40}" ItemStyle-Width="500"/>
             <asp:BoundField HeaderText="品牌" DataField="BrandName" />
             <asp:BoundField HeaderText="发布" DataField="ProductStatus" DataFormatString="{0:G}" ItemStyle-Width="40" />

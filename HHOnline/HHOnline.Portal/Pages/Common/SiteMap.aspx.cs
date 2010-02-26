@@ -62,7 +62,7 @@ public partial class Pages_Common_SiteMap : System.Web.UI.Page
         {
             sbItems.AppendFormat("<li><a href=\"http://www.ehuaho.com/pages/view.aspx?product-product&ID={0}\" target=\"_blank\" title=\"{2}\">{1}</a></li>",
                 GlobalSettings.Encrypt(item.ProductID.ToString()),
-                GlobalSettings.SubString(item.ProductName, 10),
+                GlobalSettings.SubString(item.ProductName, 17),
                 item.ProductName);
         }
         ltProduct.Text = sbItems.ToString();

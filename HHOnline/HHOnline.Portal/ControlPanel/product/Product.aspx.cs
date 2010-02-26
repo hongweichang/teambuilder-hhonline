@@ -172,8 +172,8 @@ public partial class ControlPanel_Product_Product : HHPage
             }
         }
 
-        query.PageSize = this.egvProducts.PageSize;
-        query.PageIndex = this.egvProducts.PageIndex;
+        query.PageSize = int.MaxValue;
+        query.PageIndex = 0;
         query.ProductOrderBy = ProductOrderBy.DataCreated;
         query.SortOrder = SortOrder.Descending;
         List<Product> products = Products.GetProducts(query).Records;

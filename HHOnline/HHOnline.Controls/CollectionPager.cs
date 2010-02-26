@@ -1762,15 +1762,15 @@ namespace HHOnline.Controls
 			else if(newQueryStringValue.Trim()!="")
 			{
 				//QueryString DOES NOT CONTAIN the Key... and DOES NOT HAVE other key/value pairs.
-				if(httpRequest.QueryString.Count==0)
-				{
-					NewURL += string.Format("?{0}={1}", queryStringKey, newQueryStringValue);
-				}
-					//QueryString DOES NOT CONTAIN the Key... and HAS other key/value pairs.
-				else
-				{
-					NewURL += string.Format("&{0}={1}", queryStringKey, newQueryStringValue);
-				}
+                if (httpRequest.QueryString.Count == 0 && NewURL.IndexOf('?') < 0)
+                {
+                    NewURL += string.Format("?{0}={1}", queryStringKey, newQueryStringValue);
+                }
+                //QueryString DOES NOT CONTAIN the Key... and HAS other key/value pairs.
+                else
+                {
+                    NewURL += string.Format("&{0}={1}", queryStringKey, newQueryStringValue);
+                }
 			}
 			return NewURL;
 		}

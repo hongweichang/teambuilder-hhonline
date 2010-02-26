@@ -65,5 +65,5 @@
         </ItemTemplate>
     </asp:DataList>
 </div>
-<hc:CollectionPager ID="cpProduct" runat="server"></hc:CollectionPager>
+<hc:CollectionPager ID="cpProduct" runat="server" MaxPages="10000"></hc:CollectionPager>
 </div>

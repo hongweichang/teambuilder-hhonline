@@ -112,6 +112,8 @@
             font-size: 14px;
             font-weight: bold;
         }
+        ul.productlayout li
+        {width:200px;}
         div.hackbox
         {
             clear: both;
@@ -240,7 +242,7 @@
         <tr>
             <td height="50" style="border: #e0e0e0 1px solid;">
                 <div class="listcallingsort">
-                    <ul class="callinglayout">
+                    <ul class="callinglayout productlayout">
                         <asp:Literal runat="server" ID="ltProduct"></asp:Literal>
                     </ul>
                 </div>
